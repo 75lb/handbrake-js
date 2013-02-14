@@ -1,0 +1,16 @@
+{
+  "name": "handbrake-js",
+  "version": "0.0.1",
+  "description": "A Node.js wrapper for Handbrake",
+  "main": "./lib/handbrake.js",
+  "scripts": {
+    "test": "mocha --reporter spec test/*.js"
+  },
+  "repository": "",
+  "author": "Lloyd Brookes",
+  "license": "MIT",
+  "devDependencies": {
+      "mocha": "~1.7",
+      "sinon": "~1.5.2"
+  }
+}
