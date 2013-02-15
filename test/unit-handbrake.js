@@ -47,9 +47,7 @@ describe("handbrake", function(){
         describe("run()", function(){
 
             it("run(args) should return an instance of HandbrakeProcess", function(){
-                var handle = handbrake.run({
-                    preset: "test"
-                });
+                var handle = handbrake.run({ preset: "test" });
 
                 assert.ok(handle instanceof handbrake.HandbrakeProcess);
             });
@@ -124,7 +122,7 @@ describe("handbrake", function(){
             assert.ok(eventFired);
         });
     
-        it("should fire 'success' if ChildProcess completes", function(){
+        it("should fire 'complete' if ChildProcess completes", function(){
             var eventFired = false;
 
             handbrake.run()
@@ -136,7 +134,7 @@ describe("handbrake", function(){
             assert.ok(eventFired);
         });
         
-        it("should fire 'progress' while ChildProcess encodes", function(){
+        it("should fire ('progress', progress) as ChildProcess encodes", function(){
             var progressData;
             
             handbrake.run()

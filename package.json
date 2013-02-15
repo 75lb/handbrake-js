@@ -1,16 +1,20 @@
 {
   "name": "handbrake-js",
+  "author": "Lloyd Brookes",
   "version": "0.0.1",
-  "description": "A Node.js wrapper for Handbrake",
+  "description": "A self-sufficient, cross-platform Node.js wrapper for Handbrake",
+  "license": "MIT",
   "main": "./lib/handbrake.js",
+  "bin": "cli.js",
   "scripts": {
     "test": "mocha --reporter spec test/*.js",
     "ubuntu-setup": "scripts/ubuntu-setup.sh",
     "postinstall": "node scripts/install-handbrakeCLI.js"
   },
-  "repository": "",
-  "author": "Lloyd Brookes",
-  "license": "MIT",
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/75lb/handbrake-js.git"
+  },
   "dependencies": {
       "fs-extra": "~0.3.2",
       "request": "~2.12.0",
