@@ -2,7 +2,7 @@
   "name": "handbrake-js",
   "author": "Lloyd Brookes",
   "version": "0.0.1",
-  "description": "A self-sufficient, cross-platform Node.js wrapper for Handbrake",
+  "description": "An npm package for HandbrakeCLI, add encoding capability to your Node project.",
   "license": "MIT",
   "main": "./lib/handbrake.js",
   "bin": "cli.js",
@@ -11,17 +11,15 @@
     "ubuntu-setup": "scripts/ubuntu-setup.sh",
     "postinstall": "node scripts/install-handbrakeCLI.js"
   },
-  "repository": {
-      "type": "git",
-      "url": "https://github.com/75lb/handbrake-js.git"
-  },
+  "repository": "https://github.com/75lb/handbrake-js.git",
   "dependencies": {
-      "fs-extra": "~0.3.2",
-      "request": "~2.12.0",
-      "unzip": "~0.1.0"
+    "fs-extra": "~0.3.2",
+    "request": "~2.12.0",
+    "unzip": "~0.1.0",
+    "nature": "0.0.1"
   },
   "devDependencies": {
-      "mocha": "~1.7",
-      "sinon": "~1.5.2"
+    "mocha": "~1.7",
+    "sinon": "~1.5.2"
   }
 }

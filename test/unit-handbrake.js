@@ -70,7 +70,7 @@ describe("handbrake", function(){
         it("should fire 'output' on ChildProcess stdout data", function(){
             handbrake.run()
                 .on("output", function(data){
-                    assert.strictEqual(data, "test data", data);
+                    assert.strictEqual(data, "test data");
                 });
                     
             mockHandle.stdout.emit("data", "test data");
