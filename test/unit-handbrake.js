@@ -113,7 +113,6 @@ describe("handbrake", function(){
             handle.on("error", function(){
                 eventFired = true;
             });
-            l(handle._events);
             mockHandle.emit("exit", 1);
                     
             assert.ok(eventFired);
