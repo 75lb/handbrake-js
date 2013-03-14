@@ -1,7 +1,7 @@
 {
   "name": "handbrake-js",
   "author": "Lloyd Brookes",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "An npm package for HandbrakeCLI, add encoding capability to your Node project.",
   "license": "MIT",
   "main": "./lib/handbrake.js",
@@ -13,13 +13,12 @@
   },
   "repository": "https://github.com/75lb/handbrake-js.git",
   "dependencies": {
-    "fs-extra": "~0.3.2",
-    "request": "~2.12.0",
-    "unzip": "~0.1.0",
-    "nature": "0.0.1"
+    "fs-extra": "~0.5",
+    "request": "~2.16",
+    "unzip": "~0.1",
+    "nature": "~0.0.1"
   },
   "devDependencies": {
-    "mocha": "~1.7",
-    "sinon": "~1.5.2"
+    "mocha": ">=1.7"
   }
 }

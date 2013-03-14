@@ -22,4 +22,7 @@ handbrake.run(process.argv)
     })
     .on("complete", function(){ log("complete\n"); })
     .on("terminated", function(){ log("terminated\n"); })
-    .on("error", log);
+    .on("error", function(err){
+        log(err);
+        log("\n");
+    });

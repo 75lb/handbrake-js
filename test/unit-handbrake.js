@@ -1,14 +1,20 @@
 var assert = require("assert"),
     path = require("path"),
+    util = require("util"),
     EventEmitter = require("events").EventEmitter,
-    Stream = require("stream"),
-    sinon = require("sinon"),
+    Stream = require("stream").Duplex,
+    // sinon = require("sinon"),
     handbrake = require("../lib/handbrake");
 
+function l(msg){
+    console.log.apply(null, Array.prototype.slice.call(arguments));
+}
+
 describe("handbrake", function(){
-    var mock_child_process, mockHandle;
+    var mock_child_process;
     
     function ChildProcess(){
+        EventEmitter.call(this);
         this.stdin = new ReadableStream();
         this.stdout = new ReadableStream();
         this.stderr = new ReadableStream();
@@ -16,32 +22,27 @@ describe("handbrake", function(){
             this.emit("exit", 0, "SIGTERM");
         }
     }
-    ChildProcess.prototype = new EventEmitter();
+    util.inherits(ChildProcess, EventEmitter);
 
     function ReadableStream(){
+        EventEmitter.call(this);
         this.setEncoding = function(){};
     }
-    ReadableStream.prototype = new Stream();
-
+    util.inherits(ReadableStream, EventEmitter);
+    
     mock_child_process = { 
-        spawn: function(){},
         exec: function(cmd, callback){
             callback(null, "test", "test");
         }
     };
-    
-    handbrake._inject({
-        cp: mock_child_process
-    });
-    
-    beforeEach(function(){
-        mockHandle = new ChildProcess();
-        sinon.stub(mock_child_process, "spawn").returns(mockHandle);
-    });
-    
-    afterEach(function(){
-        mock_child_process.spawn.restore();
-    });
+    handbrake._inject(mock_child_process);
+
+    function getHandle(){
+        var handle = new ChildProcess();
+        mock_child_process.spawn = function(){ return handle; };
+        return handle;
+    }
+    getHandle();
     
     describe("methods:", function(){
         describe("run()", function(){
@@ -68,24 +69,31 @@ describe("handbrake", function(){
     describe("HandbrakeProcess events: ", function(){
         
         it("should fire 'output' on ChildProcess stdout data", function(){
+            var mockHandle = getHandle();
+            var dataReceived = "";
             handbrake.run()
                 .on("output", function(data){
-                    assert.strictEqual(data, "test data");
+                    dataReceived = data; 
                 });
                     
             mockHandle.stdout.emit("data", "test data");
+            assert.strictEqual(dataReceived, "test data");
         });
 
         it("should fire 'output' on ChildProcess stderr data", function(){
+            var mockHandle = getHandle();
+            var dataReceived = "";
             handbrake.run()
                 .on("output", function(data){
-                    assert.strictEqual(data, "test data", data);
+                    dataReceived = data; 
                 });
                     
             mockHandle.stderr.emit("data", "test data");
+            assert.strictEqual(dataReceived, "test data");
         });
 
         it("should fire 'terminated' on killing ChildProcess", function(){
+            var mockHandle = getHandle();
             var eventFired = false;
 
             handbrake.run()
@@ -98,18 +106,21 @@ describe("handbrake", function(){
         });
 
         it("should fire 'error' on ChildProcess exit with non-zero code", function(){
+            var mockHandle = getHandle();
             var eventFired = false;
 
-            handbrake.run()
-                .on("error", function(){
-                    eventFired = true;
-                });
+            var handle = handbrake.run();
+            handle.on("error", function(){
+                eventFired = true;
+            });
+            l(handle._events);
             mockHandle.emit("exit", 1);
                     
             assert.ok(eventFired);
         });
 
         it("should fire 'error' if ChildProcess outputs 'no title found'", function(){
+            var mockHandle = getHandle();
             var eventFired = false;
 
             handbrake.run()
@@ -123,6 +134,7 @@ describe("handbrake", function(){
         });
     
         it("should fire 'complete' if ChildProcess completes", function(){
+            var mockHandle = getHandle();
             var eventFired = false;
 
             handbrake.run()
@@ -135,6 +147,7 @@ describe("handbrake", function(){
         });
         
         it("should fire ('progress', progress) as ChildProcess encodes", function(){
+            var mockHandle = getHandle();
             var progressData;
             
             handbrake.run()
