@@ -1,24 +1,19 @@
-Handbrake.js
+handbrake-js
 ============
-A reliable, self-sufficient, cross-platform wrapper for [HandbrakeCLI](https://trac.handbrake.fr/wiki/CLIGuide) designed to enable video encoding in Node.js projects. 
+A reliable, self-sufficient, cross-platform npm package for [HandbrakeCLI](https://trac.handbrake.fr/wiki/CLIGuide) designed to bless Node.js projects with video encoding skills.
 
-HandbrakeCLI installation
--------------------------
-The correct version of HandbrakeCLI for your platform will be downloaded and installed automatically on installation, except for Ubuntu users who should run 
+Installation
+------------
 
-    $ sudo npm -g run-script veelo ubuntu-setup
+    $ npm install handbrake-js
+
+On **Windows** and **Mac OSX** the above command will install handbrake-js and the correct version of HandbrakeCLI for your platform. **Ubuntu** users should additionally run:
+
+    $ sudo npm -g run-script handbrake-js ubuntu-setup
 
 Use as a library
 --------------------
-**Installation** 
-
-Within your project directory run:
-
-    $ npm install handbrake-js --save
-
-**Usage**
-
-There are two ways to invoke `run`. Method one involves listening for events: 
+Handbrake-js has a single method ("run"). There are two ways invoke it, one involves listening for events: 
 
     var handbrake = require("handbrake-js");
     
@@ -43,12 +38,12 @@ The second method is to pass an `onComplete` callback. It's more convenient for 
         console.log(stdout);
     });
     
-For use from the command line
+Use from the command line
 -----------------------------
-run:
+If you installed `handbrake-js` globally, using:
 
-    $ npm install -g handbrake-js
+    $ sudo npm install -g handbrake-js
 
-usage: 
+then you can encode from the command line:
 
     $ handbrake-js --input "Ballroom Bangra.avi" --output "Ballroom Bangra.mp4" --preset Normal
