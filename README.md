@@ -14,7 +14,11 @@ On **Windows** and **Mac OSX** the above command will install handbrake-js and t
 
 Use as a library
 --------------------
-Handbrake-js has a single method ("run"). There are two ways invoke it, one involves listening for events: 
+Handbrake-js has a single method: run.
+
+### handbrake.run(handbrakeOptions)
+
+There are two ways to invoke run(), the first returns an event emitter. This approach gives you the output as it happens. 
 
     var handbrake = require("handbrake-js");
     
@@ -33,6 +37,8 @@ Handbrake-js has a single method ("run"). There are two ways invoke it, one invo
             console.log("Encode complete"); 
         });
 
+### handbrake.run(handbrakeOptions, onComplete)
+
 The second method is to pass an `onComplete` callback. It's more convenient for short duration tasks: 
 
     handbrake.run({ preset-list: true }, function(stdout, stderr){
@@ -48,3 +54,7 @@ If you installed `handbrake-js` globally, using:
 then you can encode from the command line:
 
     $ handbrake-js --input "Ballroom Bangra.avi" --output "Ballroom Bangra.mp4" --preset Normal
+
+Help
+----
+See [here](https://trac.handbrake.fr/wiki/CLIGuide) for the full list of Handbrake options.
