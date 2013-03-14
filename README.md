@@ -1,14 +1,14 @@
 [![Build Status](https://travis-ci.org/75lb/handbrake-js.png?branch=master)](https://travis-ci.org/75lb/handbrake-js)
 handbrake-js
 ============
-A reliable, self-sufficient, cross-platform npm package for [HandbrakeCLI](https://trac.handbrake.fr/wiki/CLIGuide) designed to bless Node.js projects with video encoding skills.
+A reliable, self-sufficient, cross-platform npm package for [HandbrakeCLI](https://trac.handbrake.fr/wiki/CLIGuide) designed to bless Node.js projects with video encoding.
 
 Installation
 ------------
 ```sh
 $ npm install handbrake-js
 ```
-On **Windows** and **Mac OSX** the above command will install handbrake-js and the correct version of HandbrakeCLI for your platform. **Ubuntu** users should additionally run:
+On **Windows** and **Mac OSX** the above command will install handbrake-js *and* the correct HandbrakeCLI binary for your platform. **Ubuntu** users should additionally run:
 ```sh
 $ sudo npm -g run-script handbrake-js ubuntu-setup
 ```
@@ -16,7 +16,7 @@ Use as a library
 --------------------
 Handbrake-js has a single method: run.
 ### handbrake.run(handbrakeOptions)
-There are two ways to invoke run(), the first returns an event emitter. This approach gives you the output as it happens. 
+There are two ways to invoke run(), the first returns an event emitter. This approach emits output as it happens. 
 ```javascript
 var handbrake = require("handbrake-js");
     
