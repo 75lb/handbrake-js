@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/75lb/handbrake-js.png?branch=master)](https://travis-ci.org/75lb/handbrake-js)
 handbrake-js
 ============
-A reliable, self-sufficient, cross-platform npm package for [HandbrakeCLI](https://trac.handbrake.fr/wiki/CLIGuide) designed to bless Node.js projects with video encoding.
+A cross-platform npm distribution for [HandbrakeCLI](https://trac.handbrake.fr/wiki/CLIGuide) designed for command line or library use.
 
 Installation
 ------------
