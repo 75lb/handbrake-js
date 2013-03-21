@@ -1,7 +1,7 @@
 {
   "name": "handbrake-js",
   "author": "Lloyd Brookes",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A cross-platform npm distribution for HandbrakeCLI designed for command line or library use.",
   "license": "MIT",
   "main": "./lib/handbrake.js",
@@ -34,6 +34,6 @@
     "nature": "~0.0.1"
   },
   "devDependencies": {
-    "mocha": ">=1.7"
+    "mocha": "~1.8"
   }
 }
