@@ -42,15 +42,16 @@ describe("handbrake", function(){
         mock_child_process.spawn = function(){ return handle; };
         return handle;
     }
-    getHandle();
     
     describe("methods:", function(){
         describe("run()", function(){
 
             it("run(args) should return an instance of HandbrakeProcess", function(){
+                var mockHandle = getHandle();
                 var handle = handbrake.run({ preset: "test" });
 
                 assert.ok(handle instanceof handbrake.HandbrakeProcess);
+                mockHandle.emit("exit", 0);
             });
             
             it("run(args, onComplete) should call onComplete(stdout, stderr)", function(){
@@ -78,6 +79,7 @@ describe("handbrake", function(){
                     
             mockHandle.stdout.emit("data", "test data");
             assert.strictEqual(dataReceived, "test data");
+            mockHandle.emit("exit", 0);
         });
 
         it("should fire 'output' on ChildProcess stderr data", function(){
@@ -90,6 +92,7 @@ describe("handbrake", function(){
                     
             mockHandle.stderr.emit("data", "test data");
             assert.strictEqual(dataReceived, "test data");
+            mockHandle.emit("exit", 0);
         });
 
         it("should fire 'terminated' on killing ChildProcess", function(){
@@ -160,7 +163,70 @@ describe("handbrake", function(){
                fps: 127.14,
                avgFps: 134.42,
                eta: "00h13m19s"
-            });         
+            });
+            mockHandle.emit("exit", 0);
         });
     });    
+    
+    describe("regressions", function(){
+        it("should not warn about excess process.on listeners", function(){
+            var mockHandle = getHandle();
+            handbrake.run();
+            mockHandle.emit("exit", 0);
+
+            var mockHandle = getHandle();
+            handbrake.run();
+            mockHandle.emit("exit", 0);
+
+            var mockHandle = getHandle();
+            handbrake.run();
+            mockHandle.emit("exit", 0);
+
+            var mockHandle = getHandle();
+            handbrake.run();
+            mockHandle.emit("exit", 0);
+
+            var mockHandle = getHandle();
+            handbrake.run();
+            mockHandle.emit("exit", 0);
+
+            var mockHandle = getHandle();
+            handbrake.run();
+            mockHandle.emit("exit", 0);
+
+            var mockHandle = getHandle();
+            handbrake.run();
+            mockHandle.emit("exit", 0);
+
+            var mockHandle = getHandle();
+            handbrake.run();
+            mockHandle.emit("exit", 0);
+
+            var mockHandle = getHandle();
+            handbrake.run();
+            mockHandle.emit("exit", 0);
+
+            var mockHandle = getHandle();
+            handbrake.run();
+            mockHandle.emit("exit", 0);
+
+            var mockHandle = getHandle();
+            handbrake.run();
+            mockHandle.emit("exit", 0);
+
+            var mockHandle = getHandle();
+            handbrake.run();
+            mockHandle.emit("exit", 0);
+
+            var mockHandle = getHandle();
+            handbrake.run();
+            mockHandle.emit("exit", 0);
+
+            var mockHandle = getHandle();
+            handbrake.run();
+            mockHandle.emit("exit", 0);
+            
+            assert.ok(!process._events.SIGINT || !process._events.SIGINT.warned);
+        })
+    });
 });
