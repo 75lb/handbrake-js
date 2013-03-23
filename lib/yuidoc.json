@@ -1,0 +1,6 @@
+{
+    "name": "handbrake-js",
+    "options": {
+        "linkNatives": "true"
+    }
+}

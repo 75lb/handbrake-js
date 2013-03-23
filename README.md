@@ -26,7 +26,7 @@ var options = {
     preset: "Normal"
 };
 
-handbrakeCLI.run(options)
+handbrake.run(options)
     .on("output", console.log);
     .on("progress", function(encode){
         console.log(encode.percentComplete);
@@ -49,7 +49,7 @@ If you installed `handbrake-js` globally, using:
 $ sudo npm install -g handbrake-js
 ```
 
-then you can encode from the command line:
+then you can encode from the command line using all the usual [Handbrake Options](https://trac.handbrake.fr/wiki/CLIGuide):
 ```sh
 $ handbrake-js --input "Ballroom Bangra.avi" --output "Ballroom Bangra.mp4" --preset Normal
 ```
