@@ -3,17 +3,13 @@ handbrake-js
 ============
 A cross-platform npm distribution for [HandbrakeCLI](https://trac.handbrake.fr/wiki/CLIGuide) designed for command line or library use.
 
-Installation
-------------
+Use as a library
+----------------
+### Install
 ```sh
 $ npm install handbrake-js
 ```
-On **Windows** and **Mac OSX** the above command will install handbrake-js *and* the correct HandbrakeCLI binary for your platform. **Ubuntu** users should additionally run:
-```sh
-$ sudo npm -g run-script handbrake-js ubuntu-setup
-```
-Use as a library
---------------------
+
 Handbrake-js has a single method: run.
 ### handbrake.run(handbrakeOptions)
 There are two ways to invoke run(), the first returns an EventEmitter enabling you to catch [events](http://75lb.github.com/handbrake-js/classes/HandbrakeProcess.html) as they happen.
@@ -44,7 +40,7 @@ handbrake.run({ preset-list: true }, function(stdout, stderr){
 ```
 Use from the command line
 -----------------------------
-If you installed `handbrake-js` globally, using:
+###Install
 ```sh
 $ sudo npm install -g handbrake-js
 ```
@@ -52,6 +48,13 @@ $ sudo npm install -g handbrake-js
 then you can encode from the command line using all the usual [Handbrake Options](https://trac.handbrake.fr/wiki/CLIGuide):
 ```sh
 $ handbrake-js --input "Ballroom Bangra.avi" --output "Ballroom Bangra.mp4" --preset Normal
+```
+
+HandbrakeCLI installation
+-------------------------
+On **Windows** and **Mac OSX** installing handbrake-js automatically installs the correct HandbrakeCLI binary for your platform. **Ubuntu** users should additionally run:
+```sh
+$ sudo npm -g run-script handbrake-js ubuntu-setup
 ```
 
 API Documentation
