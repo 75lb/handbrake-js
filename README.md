@@ -16,7 +16,7 @@ Use as a library
 --------------------
 Handbrake-js has a single method: run.
 ### handbrake.run(handbrakeOptions)
-There are two ways to invoke run(), the first returns an event emitter. This approach emits output as it happens. 
+There are two ways to invoke run(), the first returns an EventEmitter enabling you to catch [events](http://75lb.github.com/handbrake-js/classes/HandbrakeProcess.html) as they happen.
 ```javascript
 var handbrake = require("handbrake-js");
     
@@ -53,6 +53,11 @@ then you can encode from the command line using all the usual [Handbrake Options
 ```sh
 $ handbrake-js --input "Ballroom Bangra.avi" --output "Ballroom Bangra.mp4" --preset Normal
 ```
-Help
-----
+
+API Documentation
+-----------------
+For more detail on handbrake-js, see the [API docs](http://75lb.github.com/handbrake-js/classes/handbrake-js.html#method_run). 
+
+HandbrakeCLI Documentation
+--------------------------
 See [here](https://trac.handbrake.fr/wiki/CLIGuide) for the full list of Handbrake options.
