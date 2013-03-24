@@ -3,16 +3,20 @@ handbrake-js
 ============
 A cross-platform npm distribution for [HandbrakeCLI](https://trac.handbrake.fr/wiki/CLIGuide) designed for command line or library use.
 
-Use as a library
-----------------
-### Install
+As a library
+============
+Install
+-------
 ```sh
 $ npm install handbrake-js
 ```
 
-Handbrake-js has a single method: run.
-### handbrake.run(handbrakeOptions)
-There are two ways to invoke run(), the first returns an EventEmitter enabling you to catch [events](http://75lb.github.com/handbrake-js/classes/HandbrakeProcess.html) as they happen.
+Usage
+-----
+Handbrake-js has a single method: `run`. There are two ways to invoke it.
+
+###handbrake.run(handbrakeOptions)
+Returns an EventEmitter enabling you to catch [events](http://75lb.github.com/handbrake-js/classes/HandbrakeProcess.html) as they happen.
 ```javascript
 var handbrake = require("handbrake-js");
     
@@ -38,29 +42,27 @@ handbrake.run({ preset-list: true }, function(stdout, stderr){
     console.log(stdout);
 });
 ```
-Use from the command line
------------------------------
-###Install
+As a command line tool
+======================
+Install
+-------
 ```sh
 $ sudo npm install -g handbrake-js
 ```
-
-then you can encode from the command line using all the usual [Handbrake Options](https://trac.handbrake.fr/wiki/CLIGuide):
+Usage
+-----
+Call `handbrake-js` as you would HandbrakeCLI, using all the usual [Options](https://trac.handbrake.fr/wiki/CLIGuide):
 ```sh
 $ handbrake-js --input "Ballroom Bangra.avi" --output "Ballroom Bangra.mp4" --preset Normal
 ```
 
 HandbrakeCLI installation
--------------------------
+=========================
 On **Windows** and **Mac OSX** installing handbrake-js automatically installs the correct HandbrakeCLI binary for your platform. **Ubuntu** users should additionally run:
 ```sh
 $ sudo npm -g run-script handbrake-js ubuntu-setup
 ```
 
-API Documentation
------------------
-For more detail on handbrake-js, see the [API docs](http://75lb.github.com/handbrake-js/classes/handbrake-js.html#method_run). 
-
-HandbrakeCLI Documentation
---------------------------
-See [here](https://trac.handbrake.fr/wiki/CLIGuide) for the full list of Handbrake options.
+Documentation
+=============
+For more detail on handbrake-js, see the [API docs](http://75lb.github.com/handbrake-js/classes/handbrake-js.html#method_run). For the full list of HandbrakeCLI options, see [here](https://trac.handbrake.fr/wiki/CLIGuide).
