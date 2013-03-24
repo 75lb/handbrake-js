@@ -66,3 +66,14 @@ $ sudo npm -g run-script handbrake-js ubuntu-setup
 Documentation
 =============
 For more detail on handbrake-js, see the [API docs](http://75lb.github.com/handbrake-js/classes/handbrake-js.html#method_run). For the full list of HandbrakeCLI options, see [here](https://trac.handbrake.fr/wiki/CLIGuide).
+
+Contributing
+============
+Fork the project then run:
+```sh
+$ git clone <your fork>
+$ cd handbrake-js
+$ npm link
+$ <write some code>
+$ npm test
+```
