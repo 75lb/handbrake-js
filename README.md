@@ -51,7 +51,7 @@ $ sudo npm install -g handbrake-js
 ```
 Usage
 -----
-Call `handbrake-js` as you would HandbrakeCLI, using all the usual [Options](https://trac.handbrake.fr/wiki/CLIGuide):
+Call `handbrake-js` as you would HandbrakeCLI, using all the usual [options](https://trac.handbrake.fr/wiki/CLIGuide):
 ```sh
 $ handbrake-js --input "Ballroom Bangra.avi" --output "Ballroom Bangra.mp4" --preset Normal
 ```
