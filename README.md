@@ -74,6 +74,6 @@ Fork the project then run:
 $ git clone <your fork>
 $ cd handbrake-js
 $ npm link
-$ <write some code>
+$ <hack the code>
 $ npm test
 ```
