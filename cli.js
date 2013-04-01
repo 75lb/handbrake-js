@@ -5,8 +5,8 @@ var handbrake = require("./lib/handbrake"),
 
 process.argv.splice(0, 2);
 
-function log(){ 
-    process.stdout.write(util.format.apply(this, Array.prototype.slice.call(arguments)));
+function log(){
+    console.log.apply(this, Array.prototype.slice.call(arguments));
 }
 
 handbrake.run(process.argv)
@@ -22,7 +22,4 @@ handbrake.run(process.argv)
     })
     .on("complete", function(){ log("complete\n"); })
     .on("terminated", function(){ log("terminated\n"); })
-    .on("error", function(err){
-        log(err);
-        log("\n");
-    });
+    .on("error", log);
