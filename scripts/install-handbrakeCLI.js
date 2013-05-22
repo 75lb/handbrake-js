@@ -7,19 +7,19 @@ var request = require("request"),
     fs = require("fs-extra"),
     path = require("path"),
     win32 = {
-        url: "http://sourceforge.net/projects/handbrake/files/0.9.8/HandBrake-0.9.8-i686-Win_CLI.zip/download",
+        url: "http://sourceforge.net/projects/handbrake/files/0.9.9/HandBrake-0.9.9-i686-Win_CLI.zip/download",
         archive: "win.zip",
         copyFrom: "unzipped/HandBrakeCLI.exe",
         copyTo: "bin/HandbrakeCLIx32.exe"
     },
     win64 = {
-        url: "http://sourceforge.net/projects/handbrake/files/0.9.8/HandBrake-0.9.8-x86_64-Win_CLI.zip/download",
+        url: "http://sourceforge.net/projects/handbrake/files/0.9.9/HandBrake-0.9.9-x86_64-Win_CLI.zip/download",
         archive: "win.zip",
         copyFrom: "unzipped/HandBrakeCLI.exe",
         copyTo: "bin/HandbrakeCLIx64.exe"
     },
     mac = {
-        url: "http://sourceforge.net/projects/handbrake/files/0.9.8/HandBrake-0.9.8-MacOSX.6_CLI_x86_64.dmg/download",
+        url:"http://sourceforge.net/projects/handbrake/files/0.9.9/HandBrake-0.9.9-MacOSX.6_CLI_x86_64.dmg/download",
         archive: "mac.dmg",
         copyFrom: "HandbrakeCLI", 
         copyTo: "bin/HandbrakeCLI"
