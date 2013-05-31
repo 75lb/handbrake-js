@@ -77,3 +77,4 @@ $ npm link
 $ <hack the code>
 $ npm test
 ```
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/22acb2c5591fafaadb7be7a16870c144 "githalytics.com")](http://githalytics.com/75lb/handbrake-js)
