@@ -13,7 +13,6 @@ describe("handbrake", function(){
     var mock_child_process;
     
     function ChildProcess(){
-        EventEmitter.call(this);
         this.stdin = new ReadableStream();
         this.stdout = new ReadableStream();
         this.stderr = new ReadableStream();
@@ -24,14 +23,15 @@ describe("handbrake", function(){
     util.inherits(ChildProcess, EventEmitter);
 
     function ReadableStream(){
-        EventEmitter.call(this);
         this.setEncoding = function(){};
     }
     util.inherits(ReadableStream, EventEmitter);
     
     mock_child_process = { 
         exec: function(cmd, callback){
-            callback(null, "test", "test");
+            process.nextTick(function(){
+                callback(null, "test", "test");
+            });
         }
     };
     handbrake._inject(mock_child_process);
@@ -53,22 +53,19 @@ describe("handbrake", function(){
                 mockHandle.emit("exit", 0);
             });
             
-            it("run(args, onComplete) should call onComplete(stdout, stderr)", function(){
-                var returnedStdout, returnedStderr;
+            it("run(args, onComplete) should call onComplete(stdout, stderr) async", function(done){
                 handbrake.run({ preset: "test" }, function(stdout, stderr){
-                    returnedStdout = stdout;
-                    returnedStderr = stderr;
-                });
-                
-                assert.strictEqual(returnedStdout, "test");
-                assert.strictEqual(returnedStderr, "test");
+                    assert.strictEqual(stdout, "test");
+                    assert.strictEqual(stderr, "test");
+                    done();
+                });                
             });
         });
     });
     
     describe("HandbrakeProcess events: ", function(){
         
-        it("should fire 'output' on ChildProcess stdout data", function(){
+        it("should emit 'output' on ChildProcess stdout 'data'", function(){
             var mockHandle = getHandle();
             var dataReceived = "";
             handbrake.run()
@@ -81,7 +78,7 @@ describe("handbrake", function(){
             mockHandle.emit("exit", 0);
         });
 
-        it("should fire 'output' on ChildProcess stderr data", function(){
+        it("should emit 'output' on ChildProcess stderr 'data'", function(){
             var mockHandle = getHandle();
             var dataReceived = "";
             handbrake.run()
