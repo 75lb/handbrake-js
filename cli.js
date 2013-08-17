@@ -13,16 +13,16 @@ function red(txt){
 handbrake.create()
     .on("output", log)
     .on("progress", function(progress){
-        var full = "encode: %d\% complete [%d fps, %d average fps, eta: %s]",
-            short = "encode: %d\% complete";
+        // log(progress);
+        var full = "%s: %s\% complete [%s fps, %s average fps, eta: %s]",
+            short = "%s: %s\% complete";
         if(progress.fps){
-            log(full, progress.percentComplete, progress.fps, progress.avgFps, progress.eta);
+            log(full, progress.task, progress.percentComplete, progress.fps, progress.avgFps, progress.eta);
         } else {
-            log(short, progress.percentComplete);
+            log(short, progress.task, progress.percentComplete);
         }
     })
-    .on("complete", function(){ log("complete"); })
-    .on("terminated", function(){ log("terminated"); })
+    .on("terminated", function(){ log(red("terminated")); })
     .on("error", function(err){
         log(red(err.message));
     })
