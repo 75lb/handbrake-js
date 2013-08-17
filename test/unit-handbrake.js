@@ -3,7 +3,6 @@ var assert = require("assert"),
     util = require("util"),
     EventEmitter = require("events").EventEmitter,
     Stream = require("stream").Duplex,
-    // sinon = require("sinon"),
     handbrake = require("../lib/handbrake");
 
 function l(msg){
