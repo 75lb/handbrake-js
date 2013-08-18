@@ -44,7 +44,7 @@ describe("handbrake", function(){
     
     describe("methods:", function(){
         describe("spawn()", function(){
-            it.only("spawn(args) should return an instance of HandbrakeProcess", function(){
+            it("spawn(args) should return an instance of HandbrakeProcess", function(){
                 var mockHandle = getHandle();
                 var handle = handbrake.spawn({ preset: "test" });
 
