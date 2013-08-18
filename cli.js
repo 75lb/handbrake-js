@@ -2,18 +2,16 @@
 "use strict";
 
 var handbrake = require("./lib/handbrake"),
-    util = require("util");
-
-var log = console.log;
+    util = require("util"),
+    log = console.log;
 
 function red(txt){
     return "\x1b[31m" + txt + "\x1b[0m";
 }
 
-handbrake.create()
+handbrake.spawn(process.argv)
     .on("output", log)
     .on("progress", function(progress){
-        // log(progress);
         var full = "%s: %s\% complete [%s fps, %s average fps, eta: %s]",
             short = "%s: %s\% complete";
         if(progress.fps){
@@ -26,5 +24,4 @@ handbrake.create()
     .on("error", function(err){
         log(red(err.message));
     })
-    .on("invalid", log)
-    .run(process.argv);
+    .on("invalid", log);

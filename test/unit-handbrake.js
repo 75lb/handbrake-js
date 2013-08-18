@@ -43,45 +43,48 @@ describe("handbrake", function(){
     }
     
     describe("methods:", function(){
-        describe("run()", function(){
-
-            it("run(args) should return an instance of HandbrakeProcess", function(){
+        describe("spawn()", function(){
+            it.only("spawn(args) should return an instance of HandbrakeProcess", function(){
                 var mockHandle = getHandle();
-                var handle = handbrake.run({ preset: "test" });
+                var handle = handbrake.spawn({ preset: "test" });
 
                 assert.ok(handle instanceof handbrake.HandbrakeProcess);
                 mockHandle.emit("exit", 0);
             });
-            
-            it("run(args, onComplete) should call onComplete(stdout, stderr) async", function(done){
-                handbrake.run({ preset: "test" }, function(stdout, stderr){
+        });
+        describe("exec()", function(){
+            it("exec(args, callback) should call callback(err, stdout, stderr) async", function(done){
+                handbrake.exec({ preset: "test" }, function(err, stdout, stderr){
                     assert.strictEqual(stdout, "test");
                     assert.strictEqual(stderr, "test");
                     done();
-                });                
+                });
             });
         });
     });
     
     describe("HandbrakeProcess events: ", function(){
         
-        it("should emit 'output' on ChildProcess stdout 'data'", function(){
+        it("should emit 'output' on ChildProcess stdout 'data'", function(done){
             var mockHandle = getHandle();
             var dataReceived = "";
-            handbrake.run()
+            handbrake.spawn()
                 .on("output", function(data){
                     dataReceived = data; 
+                    assert.strictEqual(dataReceived, "test data");
+                    done();
                 });
-                    
-            mockHandle.stdout.emit("data", "test data");
-            assert.strictEqual(dataReceived, "test data");
-            mockHandle.emit("exit", 0);
+            
+            process.nextTick(function(){
+                mockHandle.stdout.emit("data", "test data");
+                mockHandle.emit("exit", 0);
+            })
         });
 
         it("should emit 'output' on ChildProcess stderr 'data'", function(){
             var mockHandle = getHandle();
             var dataReceived = "";
-            handbrake.run()
+            handbrake.spawn()
                 .on("output", function(data){
                     dataReceived = data; 
                 });
@@ -95,7 +98,7 @@ describe("handbrake", function(){
             var mockHandle = getHandle();
             var eventFired = false;
 
-            handbrake.run()
+            handbrake.spawn()
                 .on("terminated", function(){
                     eventFired = true;
                 });
@@ -108,7 +111,7 @@ describe("handbrake", function(){
             var mockHandle = getHandle();
             var eventFired = false;
 
-            var handle = handbrake.run();
+            var handle = handbrake.spawn();
             handle.on("error", function(){
                 eventFired = true;
             });
@@ -121,7 +124,7 @@ describe("handbrake", function(){
             var mockHandle = getHandle();
             var eventFired = false;
 
-            handbrake.run()
+            handbrake.spawn()
                 .on("error", function(){
                     eventFired = true;
                 });
@@ -135,7 +138,7 @@ describe("handbrake", function(){
             var mockHandle = getHandle();
             var eventFired = false;
 
-            handbrake.run()
+            handbrake.spawn()
                 .on("complete", function(){
                     eventFired = true;
                 });
@@ -148,7 +151,7 @@ describe("handbrake", function(){
             var mockHandle = getHandle();
             var progressData;
             
-            handbrake.run()
+            handbrake.spawn()
                 .on("progress", function(progress){
                     progressData = progress;
                 });
@@ -158,7 +161,8 @@ describe("handbrake", function(){
                percentComplete: 0.59,
                fps: 127.14,
                avgFps: 134.42,
-               eta: "00h13m19s"
+               eta: "00h13m19s",
+               task: "Encoding"
             });
             mockHandle.emit("exit", 0);
         });
@@ -167,59 +171,59 @@ describe("handbrake", function(){
     describe("regressions", function(){
         it("should not warn about excess process.on listeners", function(){
             var mockHandle = getHandle();
-            handbrake.run();
+            handbrake.spawn();
             mockHandle.emit("exit", 0);
 
             var mockHandle = getHandle();
-            handbrake.run();
+            handbrake.spawn();
             mockHandle.emit("exit", 0);
 
             var mockHandle = getHandle();
-            handbrake.run();
+            handbrake.spawn();
             mockHandle.emit("exit", 0);
 
             var mockHandle = getHandle();
-            handbrake.run();
+            handbrake.spawn();
             mockHandle.emit("exit", 0);
 
             var mockHandle = getHandle();
-            handbrake.run();
+            handbrake.spawn();
             mockHandle.emit("exit", 0);
 
             var mockHandle = getHandle();
-            handbrake.run();
+            handbrake.spawn();
             mockHandle.emit("exit", 0);
 
             var mockHandle = getHandle();
-            handbrake.run();
+            handbrake.spawn();
             mockHandle.emit("exit", 0);
 
             var mockHandle = getHandle();
-            handbrake.run();
+            handbrake.spawn();
             mockHandle.emit("exit", 0);
 
             var mockHandle = getHandle();
-            handbrake.run();
+            handbrake.spawn();
             mockHandle.emit("exit", 0);
 
             var mockHandle = getHandle();
-            handbrake.run();
+            handbrake.spawn();
             mockHandle.emit("exit", 0);
 
             var mockHandle = getHandle();
-            handbrake.run();
+            handbrake.spawn();
             mockHandle.emit("exit", 0);
 
             var mockHandle = getHandle();
-            handbrake.run();
+            handbrake.spawn();
             mockHandle.emit("exit", 0);
 
             var mockHandle = getHandle();
-            handbrake.run();
+            handbrake.spawn();
             mockHandle.emit("exit", 0);
 
             var mockHandle = getHandle();
-            handbrake.run();
+            handbrake.spawn();
             mockHandle.emit("exit", 0);
             
             assert.ok(!process._events.SIGINT || !process._events.SIGINT.warned);
