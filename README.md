@@ -39,30 +39,60 @@ $ npm install handbrake-js
 API Documentation
 =================
 
-###handbrake.run(handbrakeOptions)
-Returns an EventEmitter enabling you to catch [events](http://75lb.github.com/handbrake-js/classes/HandbrakeProcess.html) as they happen.
-```javascript
-var handbrake = require("handbrake-js");
-    
-var options = {
-    input: "Eight Miles High.mov",
-    output: "Eight Miles High.m4v",
-    preset: "Normal"
-};
+##Methods
 
-handbrake.run(options)
-    .on("output", console.log);
-    .on("progress", function(encode){
-        console.log(encode.percentComplete);
-    })
-    .on("complete", function(){ 
-        console.log("Encode complete"); 
+###exec
+
+Runs HandbrakeCLI with the supplied [options](https://trac.handbrake.fr/wiki/CLIGuide) calling the supplied callback on completion. The exec method is best suited for short duration tasks when you can wait until completion for the output.
+
+####Parameters
+*   options _Object|Thing|Array_
+
+    [Options](https://trac.handbrake.fr/wiki/CLIGuide) to pass directly to HandbrakeCLI
+    
+*   onComplete _Function_
+
+    If passed, `onComplete(err, stdout, stderr)` will be called on completion, `stdout` and `stderr` being strings containing the HandbrakeCLI output.
+    
+####Example
+            
+    handbrake.exec({ preset-list: true }, function(err, stdout, stderr){
+        if (err) throw err;
+        console.log(stdout);
     });
-```
-### handbrake.run(handbrakeOptions, onComplete)
-The second method is to pass an `onComplete` callback. It's more convenient for short duration tasks: 
-```javascript
-handbrake.run({ preset-list: true }, function(stdout, stderr){
-    console.log(stdout);
-});
-```
+
+###spawn
+
+Spawns a HandbrakeCLI process with the supplied [options](https://trac.handbrake.fr/wiki/CLIGuide), returning a handle on the running process.
+
+####Parameters
+*   options _Object|Thing|Array_
+
+    [Options](https://trac.handbrake.fr/wiki/CLIGuide) to pass directly to HandbrakeCLI
+    
+
+**Returns**: HandbrakeProcess  
+A handle on which you can listen for events on the Handbrake process.
+
+####Example
+
+    var handbrake = require("handbrake-js");
+    
+    var options = {
+        input: "Eight Miles High.mov",
+        output: "Eight Miles High.m4v",
+        preset: "Normal"
+    };
+
+    handbrake.spawn(options)
+        .on("error", function(err){
+            console.log("ERROR: " + err.message);
+        })
+        .on("output", console.log);
+        .on("progress", function(progress){
+            console.log(progress.task + ": " + progress.percentComplete);
+        })
+        .on("complete", function(){ 
+            console.log("Done!"); 
+        });
+
