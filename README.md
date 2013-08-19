@@ -5,13 +5,6 @@ handbrake-js
 ============
 A cross-platform npm distribution for [HandbrakeCLI](https://trac.handbrake.fr/wiki/CLIGuide) (v0.9.9) designed for command line or library use.
 
-HandbrakeCLI installation
-=========================
-On **Windows** and **Mac OSX** installing handbrake-js automatically installs the correct HandbrakeCLI binary for your platform. **Ubuntu** users should additionally run:
-```sh
-$ sudo npm -g run-script handbrake-js ubuntu-setup
-```
-
 As a command line tool
 ======================
 Install
@@ -19,7 +12,7 @@ Install
 ```sh
 $ npm install -g handbrake-js
 ```
-** Mac / Linux users may need to run the above with `sudo` **
+*Mac / Linux users may need to run the above with `sudo`*
 
 Usage
 -----
@@ -36,6 +29,13 @@ Install
 $ npm install handbrake-js
 ```
 
+HandbrakeCLI installation
+=========================
+On **Windows** and **Mac OSX** installing handbrake-js automatically installs the correct HandbrakeCLI binary for your platform. **Ubuntu** users should additionally run:
+```sh
+$ sudo npm -g run-script handbrake-js ubuntu-setup
+```
+
 API Documentation
 =================
 
@@ -43,10 +43,10 @@ API Documentation
 
 ###exec
 
-Runs HandbrakeCLI with the supplied [options](https://trac.handbrake.fr/wiki/CLIGuide) calling the supplied callback on completion. The exec method is best suited for short duration tasks when you can wait until completion for the output.
+Runs HandbrakeCLI with the supplied [options](https://trac.handbrake.fr/wiki/CLIGuide) calling the supplied callback on completion. The exec method is best suited for short duration tasks where you can wait until completion for the output.
 
 ####Parameters
-*   options _Object|Thing|Array_
+*   options _Object | Thing | Array_
 
     [Options](https://trac.handbrake.fr/wiki/CLIGuide) to pass directly to HandbrakeCLI
     
@@ -55,18 +55,20 @@ Runs HandbrakeCLI with the supplied [options](https://trac.handbrake.fr/wiki/CLI
     If passed, `onComplete(err, stdout, stderr)` will be called on completion, `stdout` and `stderr` being strings containing the HandbrakeCLI output.
     
 ####Example
-            
-    handbrake.exec({ preset-list: true }, function(err, stdout, stderr){
-        if (err) throw err;
-        console.log(stdout);
-    });
+
+```js    
+handbrake.exec({ preset-list: true }, function(err, stdout, stderr){
+    if (err) throw err;
+    console.log(stdout);
+});
+```
 
 ###spawn
 
 Spawns a HandbrakeCLI process with the supplied [options](https://trac.handbrake.fr/wiki/CLIGuide), returning a handle on the running process.
 
 ####Parameters
-*   options _Object|Thing|Array_
+*   options _Object | Thing | Array_
 
     [Options](https://trac.handbrake.fr/wiki/CLIGuide) to pass directly to HandbrakeCLI
     
@@ -76,23 +78,24 @@ A handle on which you can listen for events on the Handbrake process.
 
 ####Example
 
-    var handbrake = require("handbrake-js");
-    
-    var options = {
-        input: "Eight Miles High.mov",
-        output: "Eight Miles High.m4v",
-        preset: "Normal"
-    };
+```js
+var handbrake = require("handbrake-js");
 
-    handbrake.spawn(options)
-        .on("error", function(err){
-            console.log("ERROR: " + err.message);
-        })
-        .on("output", console.log);
-        .on("progress", function(progress){
-            console.log(progress.task + ": " + progress.percentComplete);
-        })
-        .on("complete", function(){ 
-            console.log("Done!"); 
-        });
+var options = {
+    input: "Eight Miles High.mov",
+    output: "Eight Miles High.m4v",
+    preset: "Normal"
+};
 
+handbrake.spawn(options)
+    .on("error", function(err){
+        console.log("ERROR: " + err.message);
+    })
+    .on("output", console.log);
+    .on("progress", function(progress){
+        console.log(progress.task + ": " + progress.percentComplete);
+    })
+    .on("complete", function(){ 
+        console.log("Done!"); 
+    });
+```
