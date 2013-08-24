@@ -92,12 +92,27 @@ switch(process.platform){
         break;
 }
 
-function go(install){
-    downloadFile(install.url, install.archive, function(){
+function go(installation){            
+    if (fs.existsSync(installation.copyTo)){
+        exec(installation.copyTo + " --update", function(err, stdout, stderr){
+            if (err) throw err;
+            if (/Your version of HandBrake is up to date/.test(stderr)){
+                console.log("You already have the latest HandbrakeCLI installed");
+            } else {
+                install(installation);
+            }
+        });
+    } else {
+        install(installation);
+    }
+}
+
+function install(installation){
+    downloadFile(installation.url, installation.archive, function(){
         mkdir("bin");
-        extractFile(install.archive, install.copyFrom, install.copyTo, function(){
+        extractFile(installation.archive, installation.copyFrom, installation.copyTo, function(){
             console.log("HandbrakeCLI installation complete");
-            fs.unlink(install.archive);
+            fs.unlink(installation.archive);
         });
     });
 }
