@@ -92,8 +92,8 @@ switch(process.platform){
         break;
 }
 
-function go(installation){            
-    if (fs.existsSync(installation.copyTo)){
+function go(installation){
+    if (fs.existsSync(path.resolve(__dirname, "..", installation.copyTo))){
         exec(installation.copyTo + " --update", function(err, stdout, stderr){
             if (err) throw err;
             if (/Your version of HandBrake is up to date/.test(stderr)){
