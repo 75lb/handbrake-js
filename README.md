@@ -26,7 +26,7 @@ As a library
 Install
 -------
 ```sh
-$ npm install handbrake-js
+$ npm install handbrake-js --save
 ```
 
 HandbrakeCLI installation
@@ -56,7 +56,9 @@ Runs HandbrakeCLI with the supplied [options](https://trac.handbrake.fr/wiki/CLI
     
 ####Example
 
-```js    
+```js
+var handbrake = require("handbrake-js");
+
 handbrake.exec({ preset-list: true }, function(err, stdout, stderr){
     if (err) throw err;
     console.log(stdout);
