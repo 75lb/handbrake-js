@@ -1,8 +1,8 @@
 {
   "name": "handbrake-js",
   "author": "Lloyd Brookes",
-  "version": "0.1.3",
-  "description": "A cross-platform npm distribution for HandbrakeCLI designed for command line and/or library use.",
+  "version": "0.1.4",
+  "description": "An npm distribution of HandbrakeCLI for command line or library use",
   "license": "MIT",
   "main": "./lib/handbrake.js",
   "bin": "cli.js",

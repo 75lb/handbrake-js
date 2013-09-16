@@ -3,11 +3,8 @@ var assert = require("assert"),
     util = require("util"),
     EventEmitter = require("events").EventEmitter,
     Stream = require("stream").Duplex,
-    handbrake = require("../lib/handbrake");
-
-function l(msg){
-    console.log.apply(null, Array.prototype.slice.call(arguments));
-}
+    handbrake = require("../lib/handbrake"),
+    l = console.log;
 
 describe("handbrake", function(){
     var mock_child_process;
@@ -154,7 +151,9 @@ describe("handbrake", function(){
                        fps: 127.14,
                        avgFps: 134.42,
                        eta: "00h13m19s",
-                       task: "Encoding"
+                       task: "Encoding",
+                       taskNumber: 1,
+                       taskCount: 1
                     });
                     done();
                 });

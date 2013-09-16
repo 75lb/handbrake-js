@@ -12,12 +12,16 @@ function red(txt){
 handbrake.spawn(process.argv)
     .on("output", log)
     .on("progress", function(progress){
-        var full = "%s: %s\% complete [%s fps, %s average fps, eta: %s]",
-            short = "%s: %s\% complete";
+        var full = "Task %d of %d, %s: %s\% complete [%s fps, %s average fps, eta: %s]",
+            short = "Task %d of %d, %s: %s\% complete";
         if(progress.fps){
-            log(full, progress.task, progress.percentComplete, progress.fps, progress.avgFps, progress.eta);
+            log(
+                full, progress.taskNumber, progress.taskCount,
+                progress.task, progress.percentComplete, progress.fps, 
+                progress.avgFps, progress.eta
+            );
         } else {
-            log(short, progress.task, progress.percentComplete);
+            log(short, progress.taskNumber, progress.taskCount, progress.task, progress.percentComplete);
         }
     })
     .on("terminated", function(){ log(red("terminated")); })
