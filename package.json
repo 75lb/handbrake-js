@@ -5,7 +5,7 @@
   "description": "An npm distribution of HandbrakeCLI for command line or library use",
   "license": "MIT",
   "main": "./lib/handbrake.js",
-  "bin": "cli.js",
+  "bin": { "handbrake": "cli.js"},
   "keywords": [
     "handbrake",
     "handbraker",
