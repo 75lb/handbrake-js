@@ -36,6 +36,9 @@
     "nature": "~0.1.0"
   },
   "devDependencies": {
-    "mocha": "~1.8"
+    "mocha": "~1.8",
+    "grunt": "~0.4.2",
+    "grunt-boil": "~0.4.1",
+    "yuidoc2md": "~0.2.4"
   }
 }
