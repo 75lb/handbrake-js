@@ -116,6 +116,26 @@ Fired at regular intervals passing progress information
 *   progress _Object_
 
     
+    
+    * percentComplete _Number_
+    
+    Percentage complete
+    
+    * fps _Number_
+    
+    Frames per second
+    
+    * avgFps _Number_
+    
+    Average frames per second
+    
+    * eta _String_
+    
+    Estimated time until completion
+    
+    * task _String_
+    
+    Task description, e.g. "Encoding", "Scanning" etc.
 
 
 ###output
@@ -153,5 +173,6 @@ An options [Thing](https://github.com/75lb/nature) describing all valid Handbrak
 
 
 [![NPM](https://nodei.co/npm/handbrake-js.png?downloads=true&stars=true)](https://nodei.co/npm/handbrake-js/)
+
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/75lb/handbrake-js/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 [![githalytics.com alpha](https://cruel-carlota.pagodabox.com/22acb2c5591fafaadb7be7a16870c144 "githalytics.com")](http://githalytics.com/75lb/handbrake-js)
