@@ -36,6 +36,8 @@ On **Windows** and **Mac OSX** installing handbrake-js automatically installs th
 $ sudo npm -g run-script handbrake-js ubuntu-setup
 ```
 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
 API Documentation
 =================
 #handbrake-js
@@ -114,28 +116,11 @@ Fired at regular intervals passing progress information
 
 **Params**:  
 *   progress _Object_
-
-    
-    
-    * percentComplete _Number_
-    
-    Percentage complete
-    
-    * fps _Number_
-    
-    Frames per second
-    
-    * avgFps _Number_
-    
-    Average frames per second
-    
-    * eta _String_
-    
-    Estimated time until completion
-    
-    * task _String_
-    
-    Task description, e.g. "Encoding", "Scanning" etc.
+    *percentComplete _Number_ Percentage complete
+    *fps _Number_ Frames per second
+    *avgFps _Number_ Average frames per second
+    *eta _String_ Estimated time until completion
+    *task _String_ Task description, e.g. "Encoding", "Scanning" etc.
 
 
 ###output
@@ -144,8 +129,6 @@ Passes the standard HandbrakeCLI output
 
 **Params**:  
 *   output _String_
-
-    
 
 
 ###terminated
@@ -158,8 +141,6 @@ Fired if either HandbrakeCLI crashed or ran successfully but failed to find a va
 
 **Params**:  
 *   error _Error_
-
-    
 
 
 ###complete
