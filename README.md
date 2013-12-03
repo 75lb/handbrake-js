@@ -67,12 +67,6 @@ handbrake.exec({ preset-list: true }, function(err, stdout, stderr){
 });
 ```
 
-#HandbrakeProcess
-
-A handle on the Handbrake encoding process, used to catch and respond to run-time events.
-
-##Methods
-
 ###spawn
 
 Spawns a HandbrakeCLI process with the supplied [options](https://trac.handbrake.fr/wiki/CLIGuide), returning a handle on the running process.
@@ -107,6 +101,10 @@ handbrake.spawn(options)
         console.log("Done!"); 
     });
 ```
+
+#HandbrakeProcess
+
+A handle on the Handbrake encoding process, used to catch and respond to run-time events.
 
 ##Events
 
@@ -147,6 +145,10 @@ Fired if either HandbrakeCLI crashed or ran successfully but failed to find a va
 ###complete
 
 Fired on completion of a successful encode
+
+#HandbrakeOptions
+
+An options [Thing](https://github.com/75lb/nature) describing all valid Handbrake option names, types and values.
 
 
 
