@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/75lb/handbrake-js.png?branch=master)](https://travis-ci.org/75lb/handbrake-js)
-[![NPM version](https://badge.fury.io/js/handbrake-js.png)](http://badge.fury.io/js/handbrake-js)
 [![Dependency Status](https://david-dm.org/75lb/handbrake-js.png)](https://david-dm.org/75lb/handbrake-js)
 ![Analytics](https://ga-beacon.appspot.com/UA-27725889-6/handbrake-js/README.md?pixel)
+
 ***Under construction***
 
 handbrake-js
@@ -154,9 +154,4 @@ Fired on completion of a successful encode
 
 An options [Thing](https://github.com/75lb/nature) describing all valid Handbrake option names, types and values.
 
-
-
-[![NPM](https://nodei.co/npm/handbrake-js.png?downloads=true&stars=true)](https://nodei.co/npm/handbrake-js/)
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/75lb/handbrake-js/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/22acb2c5591fafaadb7be7a16870c144 "githalytics.com")](http://githalytics.com/75lb/handbrake-js)
+[![NPM](https://nodei.co/npm-dl/handbrake-js.png?months=3)](https://nodei.co/npm/handbrake-js/)
