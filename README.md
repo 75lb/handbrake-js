@@ -1,5 +1,8 @@
 [![Build Status](https://travis-ci.org/75lb/handbrake-js.png?branch=master)](https://travis-ci.org/75lb/handbrake-js)
 [![NPM version](https://badge.fury.io/js/handbrake-js.png)](http://badge.fury.io/js/handbrake-js)
+[![Dependency Status](https://david-dm.org/75lb/handbrake-js.png)](https://david-dm.org/75lb/handbrake-js)
+![Analytics](https://ga-beacon.appspot.com/UA-27725889-6/handbrake-js/README.md?pixel)
+***Under construction***
 
 handbrake-js
 ============

@@ -4,14 +4,12 @@ module.exports = function(grunt){
     grunt.initConfig({
         boil: {
             readme: {
-                options: {
+                create: { 
+                    filename: "README.md",
+                    templateFile: "boil/readme.hbs",
                     templateData: {
                         APIdocs: yuidoc2md.getMarkdown("lib/handbrake.js")
                     }
-                },
-                create: { 
-                    name: "README.md",
-                    content: grunt.file.read("boil/readme.hbs")
                 }
             }
         }
