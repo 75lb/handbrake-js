@@ -3,8 +3,6 @@
 [![Dependency Status](https://david-dm.org/75lb/handbrake-js.png)](https://david-dm.org/75lb/handbrake-js)
 ![Analytics](https://ga-beacon.appspot.com/UA-27725889-6/handbrake-js/README.md?pixel)
 
-***Under construction***
-
 handbrake-js
 ============
 A cross-platform npm distribution for [HandbrakeCLI](https://trac.handbrake.fr/wiki/CLIGuide) (v0.9.9) designed for command line or library use.
