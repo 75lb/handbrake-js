@@ -45,7 +45,4 @@ handbrake.spawn(process.argv)
 
 var notifications = setInterval(function(){
     timeForANotification = true;
-}, 1000 * 60 * 2);
-
-
-// presets
+}, 1000 * 60 * 3);
