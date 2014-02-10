@@ -1,7 +1,7 @@
 {
   "name": "handbrake-js",
   "author": "Lloyd Brookes",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "An npm distribution of HandbrakeCLI for command line or library use",
   "license": "MIT",
   "main": "./lib/handbrake.js",
