@@ -7,8 +7,8 @@ handbrake-js
 ============
 A cross-platform npm distribution for [HandbrakeCLI](https://trac.handbrake.fr/wiki/CLIGuide) (v0.9.9) designed for command line or library use.
 
-As a command line tool
-======================
+Command line use
+================
 Install
 -------
 ```sh
@@ -21,6 +21,14 @@ Usage
 Call `handbrake` as you would HandbrakeCLI, using all the usual [options](https://trac.handbrake.fr/wiki/CLIGuide):
 ```sh
 $ handbrake --input "Ballroom Bangra.avi" --output "Ballroom Bangra.mp4" --preset Normal
+```
+
+Notifications
+-------------
+During long-running encodes, Mac users can receive system notifications displaying current progress. To enable this, install [terminal-notifier](https://github.com/alloy/terminal-notifier) using [homebrew](http://brew.sh):
+
+```sh
+$ brew install terminal-notifier
 ```
 
 As a library

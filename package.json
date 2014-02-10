@@ -33,10 +33,11 @@
     "fs-extra": "~0.8",
     "request": "~2.33",
     "unzip": "~0.1",
-    "nature": "~0.2.0"
+    "nature": "~0.3.0",
+    "wodge": "~0.1.5"
   },
   "devDependencies": {
-    "mocha": "~1.8",
+    "mocha": "~1.17",
     "grunt": "~0.4.2",
     "grunt-boil": "~0.5.0",
     "yuidoc2md": "~0.2.4"
