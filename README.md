@@ -25,7 +25,7 @@ $ handbrake --input "Ballroom Bangra.avi" --output "Ballroom Bangra.mp4" --prese
 
 Notifications
 -------------
-During long-running encodes, Mac users can receive system notifications displaying current progress. To enable this, install [terminal-notifier](https://github.com/alloy/terminal-notifier) using [homebrew](http://brew.sh):
+During long-running encodes, Mac users can receive system notifications displaying current progress every three minutes. To enable this, install [terminal-notifier](https://github.com/alloy/terminal-notifier) using [homebrew](http://brew.sh):
 
 ```sh
 $ brew install terminal-notifier
