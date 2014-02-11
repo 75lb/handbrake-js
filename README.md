@@ -11,6 +11,8 @@ Command line use
 ================
 Install
 -------
+Install [Node.js](http://nodejs.org), then run
+
 ```sh
 $ npm install -g handbrake-js
 ```
