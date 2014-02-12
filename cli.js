@@ -59,7 +59,10 @@ handbrake.spawn(process.argv)
         clearInterval(notifications);
         console.red.log(err.message);
     })
-    .on("invalid", console.log)
+    .on("invalid", function(msg){
+        clearInterval(notifications);
+        console.red.log(msg);
+    })
     .on("complete", function(){
         clearInterval(notifications);
     });
