@@ -1,8 +1,8 @@
 #!/usr/bin/env node
+"use strict";
 
 var request = require("request"),
     unzip = require("unzip"),
-    util = require("util"),
     exec = require("child_process").exec,
     fs = require("fs-extra"),
     path = require("path"),
@@ -28,7 +28,7 @@ var request = require("request"),
 function mkdir(dirName){
     if (!fs.existsSync(dirName)){
         fs.mkdirSync(dirName);
-    };
+    }
 }
 
 function downloadFile(from, to, done){
@@ -38,9 +38,7 @@ function downloadFile(from, to, done){
 
     req.pipe(download);
 
-    download.on("close", function(){
-        done();
-    });    
+    download.on("close", done);    
 }
 
 function extractFile(archive, copyFrom, copyTo, done){
@@ -61,8 +59,8 @@ function extractFile(archive, copyFrom, copyTo, done){
         fs.createReadStream(archive).pipe(unzipped);
 
     } else if (archive.indexOf(".dmg") > 0){
-        cmd = "hdiutil attach " + archive;
-        exec(cmd, function(err, stdout, stderr){
+        var cmd = "hdiutil attach " + archive;
+        exec(cmd, function(err, stdout){
             if (err) throw err;
             var match = stdout.match(/^(\/dev\/\w+)\b.*(\/Volumes\/.*)$/m);
             if (match) {
@@ -70,26 +68,27 @@ function extractFile(archive, copyFrom, copyTo, done){
                     mountPath = match[2];
                 copyFrom = path.join(mountPath, copyFrom);
                 var source = fs.createReadStream(copyFrom),
-                    dest = fs.createWriteStream(copyTo, { mode: 0755});
+                    dest = fs.createWriteStream(copyTo, { mode: 0755 });
                 dest.on("close", function(){
-                    exec("hdiutil detach " + devicePath, function(err, out, err){
+                    exec("hdiutil detach " + devicePath, function(err){
                         if (err) throw err;
                         done();
                     });
-                })
+                });
                 source.pipe(dest);
             }
         });
     }
 }
 
-switch(process.platform){
-    case "darwin":
-        go(mac);
-        break;
-    case "win32":
-        go(process.arch == "x64" ? win64 : win32);
-        break;
+function install(installation){
+    downloadFile(installation.url, installation.archive, function(){
+        mkdir("bin");
+        extractFile(installation.archive, installation.copyFrom, installation.copyTo, function(){
+            console.log("HandbrakeCLI installation complete");
+            fs.unlink(installation.archive);
+        });
+    });
 }
 
 function go(installation){
@@ -107,12 +106,11 @@ function go(installation){
     }
 }
 
-function install(installation){
-    downloadFile(installation.url, installation.archive, function(){
-        mkdir("bin");
-        extractFile(installation.archive, installation.copyFrom, installation.copyTo, function(){
-            console.log("HandbrakeCLI installation complete");
-            fs.unlink(installation.archive);
-        });
-    });
+switch(process.platform){
+    case "darwin":
+        go(mac);
+        break;
+    case "win32":
+        go(process.arch === "x64" ? win64 : win32);
+        break;
 }
