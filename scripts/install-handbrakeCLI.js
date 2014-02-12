@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-"use strict";
 
 var request = require("request"),
     unzip = require("unzip"),
@@ -9,13 +8,13 @@ var request = require("request"),
     win32 = {
         url: "http://sourceforge.net/projects/handbrake/files/0.9.9/HandBrake-0.9.9-i686-Win_CLI.zip/download",
         archive: "win.zip",
-        copyFrom: "unzipped/HandBrakeCLI.exe",
-        copyTo: "bin/HandbrakeCLIx32.exe"
+        copyFrom: path.join("unzipped", "HandBrakeCLI.exe"),
+        copyTo: path.join("bin", "HandbrakeCLIx32.exe")
     },
     win64 = {
         url: "http://sourceforge.net/projects/handbrake/files/0.9.9/HandBrake-0.9.9-x86_64-Win_CLI.zip/download",
         archive: "win.zip",
-        copyFrom: "unzipped/HandBrakeCLI.exe",
+        copyFrom: path.join("unzipped", "HandBrakeCLI.exe"),
         copyTo: "bin/HandbrakeCLIx64.exe"
     },
     mac = {

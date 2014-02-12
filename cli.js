@@ -1,18 +1,22 @@
 #!/usr/bin/env node
 "use strict";
 
+require("more-console");
 var handbrake = require("./lib/handbrake"),
     spawn = require("child_process").spawn,
-    w = require("wodge"),
     util = require("util"),
-    log = console.log,
     notificationTime = false,
     notificationsEnabled = true;
+
+var notifications = setInterval(function(){
+    notificationTime = true;
+}, 1000 * 60 * 3);
 
 function notify(title, message){
     spawn("terminal-notifier", [ "-title", title, "-message", message ])
         .on("error", function(err){
             notificationsEnabled = false;
+            clearInterval(notifications);
         });
 }
 
@@ -20,46 +24,42 @@ function progressEvent(progress){
     var full = "Task %d of %d, %s: %s% complete [%s fps, %s average fps, eta: %s]",
         short = "Task %d of %d, %s: %s% complete";
     if(progress.fps){
-        log(
+        console.log(
             full, progress.taskNumber, progress.taskCount,
-            progress.task, progress.percentComplete, progress.fps, 
+            progress.task, progress.percentComplete, progress.fps,
             progress.avgFps, progress.eta
         );
     } else {
-        log(short, progress.taskNumber, progress.taskCount, progress.task, progress.percentComplete);
+        console.log(short, progress.taskNumber, progress.taskCount, progress.task, progress.percentComplete);
     }
-    
+
     if (notificationTime && notificationsEnabled){
         notify(
-            this.config.input, 
+            this.config.input,
             util.format(
-                "%s% complete [%s fps, %s avg fps, %s remaining]", 
-                progress.percentComplete, 
-                progress.fps, 
-                progress.avgFps, 
+                "%s% complete [%s fps, %s avg fps, %s remaining]",
+                progress.percentComplete,
+                progress.fps,
+                progress.avgFps,
                 progress.eta
             )
         );
         notificationTime = false;
-    }        
+    }
 }
 
-var notifications = setInterval(function(){
-    notificationTime = true;
-}, 1000 * 60 * 3);
-
 handbrake.spawn(process.argv)
-    .on("output", log)
+    .on("output", console.log)
     .on("progress", progressEvent)
-    .on("terminated", function(){ 
+    .on("terminated", function(){
         clearInterval(notifications);
-        log(w.red("terminated")); 
+        console.red.log("terminated");
     })
     .on("error", function(err){
         clearInterval(notifications);
-        log(w.red(err.message));
+        console.red.log(err.message);
     })
-    .on("invalid", log)
+    .on("invalid", console.log)
     .on("complete", function(){
         clearInterval(notifications);
     });
