@@ -4,20 +4,24 @@
 require("more-console");
 var handbrake = require("./lib/handbrake"),
     spawn = require("child_process").spawn,
-    util = require("util"),
-    notificationTime = false,
-    notificationsEnabled = true;
+    util = require("util");
 
-var notifications = setInterval(function(){
-    notificationTime = true;
-}, 1000 * 60 * 3);
-
-function notify(title, message){
-    spawn("terminal-notifier", [ "-title", title, "-message", message ])
-        .on("error", function(err){
-            notificationsEnabled = false;
-            clearInterval(notifications);
-        });
+var notification = {
+    time: false,
+    enabled: true,
+    loop: setInterval(function(){
+        notification.time = true;
+    }, 1000 * 60 * 3),
+    stop: function(){
+        clearInterval(notification.loop);
+    },
+    send: function notify(title, message){
+        spawn("terminal-notifier", [ "-title", title, "-message", message ])
+            .on("error", function(err){
+                notification.enabled = false;
+                notification.stop();
+            });
+    }
 }
 
 function progressEvent(progress){
@@ -33,7 +37,7 @@ function progressEvent(progress){
         console.log(short, progress.taskNumber, progress.taskCount, progress.task, progress.percentComplete);
     }
 
-    if (notificationTime && notificationsEnabled){
+    if (notification.time && notification.enabled){
         notify(
             this.config.input,
             util.format(
@@ -44,7 +48,7 @@ function progressEvent(progress){
                 progress.eta
             )
         );
-        notificationTime = false;
+        notification.time = false;
     }
 }
 
@@ -52,17 +56,17 @@ handbrake.spawn(process.argv)
     .on("output", console.log)
     .on("progress", progressEvent)
     .on("terminated", function(){
-        clearInterval(notifications);
+        notification.stop();
         console.red.log("terminated");
     })
     .on("error", function(err){
-        clearInterval(notifications);
+        notification.stop();
         console.red.log(err.message);
     })
     .on("invalid", function(msg){
-        clearInterval(notifications);
+        notification.stop();
         console.red.log(msg);
     })
     .on("complete", function(){
-        clearInterval(notifications);
+        notification.stop();
     });
