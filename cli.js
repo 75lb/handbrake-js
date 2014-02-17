@@ -7,23 +7,26 @@ var handbrake = require("./lib/handbrake"),
     util = require("util");
 
 var notification = {
+    intervalTimePeriod: 1000 * 60 * 3,
     time: false,
     enabled: true,
-    loop: setInterval(function(){
-        notification.time = true;
-    }, 1000 * 60 * 3),
+    start: function(){
+        this.loop = setInterval(function(){
+            notification.time = true;
+        }, this.intervalTimePeriod);
+    },
     stop: function(){
-        clearInterval(notification.loop);
+        clearInterval(this.loop);
     },
     send: function(title, message){
-        if (notification.time && notification.enabled){
+        if (this.time && this.enabled){
             spawn("terminal-notifier", [ "-title", title, "-message", message ])
                 .on("error", function(err){
                     notification.enabled = false;
                     notification.stop();
                 });
         }
-        notification.time = false;
+        this.time = false;
     }
 }
 
@@ -70,3 +73,5 @@ handbrake.spawn(process.argv)
     .on("complete", function(){
         notification.stop();
     });
+
+notification.start();
