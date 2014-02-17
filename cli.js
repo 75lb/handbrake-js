@@ -15,12 +15,15 @@ var notification = {
     stop: function(){
         clearInterval(notification.loop);
     },
-    send: function notify(title, message){
-        spawn("terminal-notifier", [ "-title", title, "-message", message ])
-            .on("error", function(err){
-                notification.enabled = false;
-                notification.stop();
-            });
+    send: function(title, message){
+        if (notification.time && notification.enabled){
+            spawn("terminal-notifier", [ "-title", title, "-message", message ])
+                .on("error", function(err){
+                    notification.enabled = false;
+                    notification.stop();
+                });
+        }
+        notification.time = false;
     }
 }
 
@@ -37,19 +40,16 @@ function progressEvent(progress){
         console.log(short, progress.taskNumber, progress.taskCount, progress.task, progress.percentComplete);
     }
 
-    if (notification.time && notification.enabled){
-        notify(
-            this.config.input,
-            util.format(
-                "%s% complete [%s fps, %s avg fps, %s remaining]",
-                progress.percentComplete,
-                progress.fps,
-                progress.avgFps,
-                progress.eta
-            )
-        );
-        notification.time = false;
-    }
+    notification.send(
+        this.config.input,
+        util.format(
+            "%s% complete [%s fps, %s avg fps, %s remaining]",
+            progress.percentComplete,
+            progress.fps,
+            progress.avgFps,
+            progress.eta
+        )
+    );
 }
 
 handbrake.spawn(process.argv)
