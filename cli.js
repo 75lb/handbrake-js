@@ -55,8 +55,7 @@ function progressEvent(progress){
     );
 }
 
-handbrake.spawn(process.argv)
-    .on("output", console.log)
+var handle = handbrake.spawn(process.argv)
     .on("progress", progressEvent)
     .on("terminated", function(){
         notification.stop();
@@ -73,5 +72,6 @@ handbrake.spawn(process.argv)
     .on("complete", function(){
         notification.stop();
     });
+handle.outputStream.pipe(process.stdout);
 
 notification.start();
