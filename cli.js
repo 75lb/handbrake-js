@@ -21,14 +21,14 @@ var notification = {
     send: function(title, message){
         if (this.time && this.enabled){
             spawn("terminal-notifier", [ "-title", title, "-message", message ])
-                .on("error", function(err){
+                .on("error", function(){
                     notification.enabled = false;
                     notification.stop();
                 });
         }
         this.time = false;
     }
-}
+};
 
 function progressEvent(progress){
     var full = "Task %d of %d, %s: %s% complete [%s fps, %s average fps, eta: %s]",
@@ -55,7 +55,7 @@ function progressEvent(progress){
     );
 }
 
-var handle = handbrake.spawn(process.argv)
+handbrake.spawn(process.argv)
     .on("progress", progressEvent)
     .on("terminated", function(){
         notification.stop();
@@ -71,7 +71,7 @@ var handle = handbrake.spawn(process.argv)
     })
     .on("complete", function(){
         notification.stop();
-    });
-handle.outputStream.pipe(process.stdout);
+    })
+    .outputStream.pipe(process.stdout);
 
 notification.start();
