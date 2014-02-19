@@ -30,7 +30,7 @@
   "repository": "https://github.com/75lb/handbrake-js.git",
   "dependencies": {
     "fs-extra": "~0.8",
-    "request": "~2.33",
+    "request": "~2.34",
     "unzip": "~0.1",
     "nature": "~0.3.0",
     "more-console": "~0.1.0"
