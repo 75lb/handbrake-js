@@ -3,19 +3,41 @@
 <head>
 </head>
 <body>
+  
+  <table>
+    <tr>
+      <th>Task</th><th>% Complete</th><th>FPS</th><th>Avg FPS</th><th>ETA</th>
+    </tr>
+    <tr>
+      <td id="task"></td><td id="percent"></td><td id="fps"></td><td id="aFps"></td><td id="eta"></td>
+    </tr>
+  </table>
 
-<script>
-var socket = new WebSocket("ws://localhost:4444");
-socket.onerror = function(err){
-  console.log("error", err);
-};
-socket.onopen = function(){
-  console.log("OPEN");
-};
-socket.onmessage = function(e){
-  console.log(e.data);
-};
-window.s = socket;
-</script>    
+  <pre id="log"></pre>
+
+  <script>
+  var $ = document.querySelector.bind(document);
+  var socket = new WebSocket("ws://localhost:4444");
+  socket.onerror = function(err){
+    console.log("error", err);
+  };
+  socket.onopen = function(){
+    console.log("OPEN");
+  };
+  socket.onmessage = function(e){
+    var data = JSON.parse(e.data);
+    if (data.info) {
+      $("#log").textContent += data.info + "\n";
+    }
+    if (data.progress){
+      var p = data.progress;
+      $("#task").textContent = p.taskNumber + " of " + p.taskCount;
+      $("#percent").textContent = p.percentComplete;
+      $("#fps").textContent = p.fps;
+      $("#aFps").textContent = p.avgFps;
+      $("#eta").textContent = p.eta;
+    }
+  };
+  </script>    
 </body>
 </html>

@@ -3,13 +3,13 @@ Usage:
 $ node ws.js <any video file>
 */
 
-var WsStream = new require("ws-stream"),
+var WsServer = new require("ws-stream"),
     fs = require("fs"),
     handbrake = require("../");
 
-var wsStream = new WsStream({ port: 4444 });
+var wsServer = new WsServer({ port: 4444 });
 
-wsStream.on("connect", function(){
+wsServer.on("connect", function(stream){
     var handle = handbrake.spawn({ input: process.argv[2], output: "output.mp4" });
-    handle.outputStream.pipe(wsStream);
+    handle.outputStream.pipe(stream);
 });
