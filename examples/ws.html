@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+
+<script>
+var socket = new WebSocket("ws://localhost:4444");
+socket.onerror = function(err){
+  console.log("error", err);
+};
+socket.onopen = function(){
+  console.log("OPEN");
+};
+socket.onmessage = function(e){
+  console.log(e.data);
+};
+window.s = socket;
+</script>    
+</body>
+</html>

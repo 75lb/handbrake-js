@@ -72,6 +72,6 @@ handbrake.spawn(process.argv)
     .on("complete", function(){
         notification.stop();
     })
-    .outputStream.pipe(process.stdout);
+    .on("output", console.log);
 
 notification.start();
