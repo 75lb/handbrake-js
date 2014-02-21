@@ -1,7 +1,7 @@
 {
   "name": "handbrake-js",
   "author": "Lloyd Brookes",
-  "version": "0.3.0-alpha",
+  "version": "0.3.0-alpha.2",
   "description": "An alternative, cross-platform distrubution of HandbrakeCLI (v0.9.9) adding Javascript and improved command-line interfaces.",
   "main": "./lib/handbrake.js",
   "bin": {
