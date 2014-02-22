@@ -4,7 +4,11 @@
   <meta charset="utf8">
 </head>
 <body>
-  
+  <h1>Simple web client</h1>
+  <p>
+    Demonstrating the handbrake-js Streaming API
+    <input id="submit" type="submit" value="Start an encode">
+  </p>
   <table>
     <tr>
       <th>Task</th><th>% Complete</th><th>FPS</th><th>Avg FPS</th><th>ETA</th>
@@ -17,8 +21,9 @@
   <pre id="log"></pre>
 
   <script>
-  var $ = document.querySelector.bind(document);
-  var socket = new WebSocket("ws://localhost:4444");
+  var $ = document.querySelector.bind(document),
+      socket = new WebSocket("ws://localhost:4444");
+      
   socket.onerror = function(err){
     console.log("error", err);
   };
@@ -26,19 +31,30 @@
     console.log("OPEN");
   };
   socket.onmessage = function(e){
-    var data = JSON.parse(e.data);
-    if (data.info) {
-      $("#log").textContent += data.info + "\n";
-    }
-    if (data.progress){
-      var p = data.progress;
-      $("#task").textContent = p.taskNumber + " of " + p.taskCount;
-      $("#percent").textContent = p.percentComplete;
-      $("#fps").textContent = p.fps;
-      $("#aFps").textContent = p.avgFps;
-      $("#eta").textContent = p.eta;
+    try {
+      var data = JSON.parse(e.data);
+      if (data.info) {
+        $("#log").textContent += data.info + "\n";
+      }
+      if (data.progress){
+        var p = data.progress;
+        $("#task").textContent = p.taskNumber + " of " + p.taskCount;
+        $("#percent").textContent = p.percentComplete;
+        $("#fps").textContent = p.fps;
+        $("#aFps").textContent = p.avgFps;
+        $("#eta").textContent = p.eta;
+      }
+    } catch(e){
+      console.dir(e.data);
     }
   };
-  </script>    
+  
+  $("#submit").onclick = function(e){
+    socket.send(JSON.stringify({ 
+      input: "demo.mkv", output: "demo.mp4", preset: "Normal" 
+    }));
+  }
+  window.s = socket;
+  </script>
 </body>
 </html>
