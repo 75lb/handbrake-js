@@ -5,7 +5,7 @@
 </head>
 <body>
   <h1>Example websocket client</h1>
-  <p>Demonstrating comms via the handbrake-js Streaming API</p>
+  <p>Demonstrating the handbrake-js Streaming API. Run the server-side script (<code>$ node examples/ws.js</code>) then click one of the folowing actions:</p>
   
   <h2>Simple encode</h2>
   <p>send options<code>{ input: "demo.mkv", output: "demo.mp4", preset: "Normal" }</code> <input id="encode" type="button" value="Send"></p>
@@ -41,7 +41,7 @@
     if (!socket || (socket && socket.readyState !== 1)){
       socket = new WebSocket("ws://localhost:4444");
       socket.onerror = function(err){
-        alert("Connection failed");
+        alert("Connection failed. Is the server available?");
       };
       socket.onopen = function(){
         open();
