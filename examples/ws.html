@@ -4,11 +4,19 @@
   <meta charset="utf8">
 </head>
 <body>
-  <h1>Simple web client</h1>
-  <p>
-    Demonstrating the handbrake-js Streaming API
-    <input id="submit" type="submit" value="Start an encode">
-  </p>
+  <h1>Example websocket client</h1>
+  <p>Demonstrating comms via the handbrake-js Streaming API</p>
+  
+  <h2>Simple encode</h2>
+  <p>send options<code>{ input: "demo.mkv", output: "demo.mp4", preset: "Normal" }</code> <input id="encode" type="button" value="Send"></p>
+
+  <h2>Show help</h2>
+  <p>send options<code>{ help: true }</code> <input id="help" type="button" value="Send"></p>
+
+  <h2>Show Presets</h2>
+  <p>send options<code>{ preset-list: true }</code> <input id="presets" type="button" value="Send"></p>
+  
+  <h2>Handbrake-js output</h2>
   <table>
     <tr>
       <th>Task</th><th>% Complete</th><th>FPS</th><th>Avg FPS</th><th>ETA</th>
@@ -22,37 +30,80 @@
 
   <script>
   var $ = document.querySelector.bind(document),
-      socket = new WebSocket("ws://localhost:4444");
+      socket;
       
-  socket.onerror = function(err){
-    console.log("error", err);
-  };
-  socket.onopen = function(){
-    console.log("OPEN");
-  };
-  socket.onmessage = function(e){
-    try {
-      var data = JSON.parse(e.data);
-      if (data.info) {
-        $("#log").textContent += data.info + "\n";
-      }
-      if (data.progress){
-        var p = data.progress;
-        $("#task").textContent = p.taskNumber + " of " + p.taskCount;
-        $("#percent").textContent = p.percentComplete;
-        $("#fps").textContent = p.fps;
-        $("#aFps").textContent = p.avgFps;
-        $("#eta").textContent = p.eta;
-      }
-    } catch(e){
-      console.dir(e.data);
-    }
-  };
+  function log(text){
+    if (text === "") $("#log").textContent = "";
+    $("#log").textContent += text.trim() + "\n";
+  }
   
-  $("#submit").onclick = function(e){
-    socket.send(JSON.stringify({ 
-      input: "demo.mkv", output: "demo.mp4", preset: "Normal" 
-    }));
+  function connectToServer(open){
+    if (!socket || (socket && socket.readyState !== 1)){
+      socket = new WebSocket("ws://localhost:4444");
+      socket.onerror = function(err){
+        alert("Connection failed");
+      };
+      socket.onopen = function(){
+        open();
+      };
+      socket.onmessage = function(e){
+        try {
+          console.dir(e.data);
+          var data = JSON.parse(e.data);
+          if (data.info) {
+            log(data.info);
+          }
+          if (data.progress){
+            var p = data.progress;
+            $("#task").textContent = p.taskNumber + " of " + p.taskCount;
+            $("#percent").textContent = p.percentComplete;
+            $("#fps").textContent = p.fps;
+            $("#aFps").textContent = p.avgFps;
+            $("#eta").textContent = p.eta;
+          }
+        } catch(e){
+          console.dir(e.data);
+        }
+      };
+    } else {
+      open();
+    }
+  }
+  
+  
+  $("#encode").onclick = function(e){
+    try{
+      log("");
+      connectToServer(function(){
+        socket.send(JSON.stringify({ 
+          input: "demo.mkv", output: "demo.mp4", preset: "Normal" 
+        }));
+      });
+    } catch(err){
+      alert(err.message);
+    }
+  }
+
+  $("#help").onclick = function(e){
+    try{
+      log("");
+      connectToServer(function(){
+        socket.send(JSON.stringify({ help: true }));
+      });
+    } catch(err){
+      alert(err.message);
+    }
+  }
+
+  $("#presets").onclick = function(e){
+    try{
+      log("");
+      connectToServer(function(){
+        socket.send(JSON.stringify({ "preset-list": true }));
+      });
+    } catch(err){
+      alert(err.message);
+    }
   }
   window.s = socket;
   </script>

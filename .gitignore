@@ -1,4 +1,3 @@
 node_modules
 bin
-out
-yuidoc2md
+examples/demo.mp4
