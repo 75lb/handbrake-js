@@ -27,7 +27,7 @@ wsServer.on("connection", function(websocket){
                     .on("invalid", function(msg){
                         console.log(msg);
                     })
-                    .outputStream.pipe(websocket);
+                    .outputStream.pipe(websocket, { end: false });
             } catch(e){}
         }
     });
