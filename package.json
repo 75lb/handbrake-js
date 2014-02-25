@@ -33,7 +33,7 @@
     "request": "~2.34",
     "unzip": "~0.1",
     "nature": "~0.3.0",
-    "more-console": "~0.1.0"
+    "console-dope": "~0.1.0"
   },
   "devDependencies": {
     "mocha": "~1.17",
