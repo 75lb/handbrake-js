@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 "use strict";
 
-require("more-console");
+require("console-dope");
 var handbrake = require("./lib/handbrake"),
     spawn = require("child_process").spawn,
     util = require("util");
@@ -30,7 +30,7 @@ var notification = {
     }
 };
 
-function progressEvent(progress){
+function onProgress(progress){
     var full = "Task %d of %d, %s: %s% complete [%s fps, %s average fps, eta: %s]",
         short = "Task %d of %d, %s: %s% complete";
     if(progress.fps){
@@ -56,7 +56,7 @@ function progressEvent(progress){
 }
 
 handbrake.spawn(process.argv)
-    .on("progress", progressEvent)
+    .on("progress", onProgress)
     .on("terminated", function(){
         notification.stop();
         console.red.log("terminated");
