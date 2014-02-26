@@ -25,7 +25,7 @@ wsServer.on("connection", function(websocket){
             try{
                 var options = JSON.parse(chunk.toString());
                 process.chdir(__dirname);
-                options.input = process.argv[2] || options.input;
+                if (options.input) options.input = process.argv[2] || options.input;
                 handbrake.spawn(options)
                     .on("terminated", function(){
                         console.log("terminated");
