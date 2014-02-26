@@ -1,3 +1,11 @@
+/*
+Usage:
+$ node ws-server.js
+
+Or you can supply an --input video to encode, overriding that sent by ws-client.html (demo.mkv)
+$ node ws-server.js ~/Movies/Something.mov
+*/
+
 var WsServer = new require("ws-server"),
     handbrake = require("../");
 
@@ -17,6 +25,7 @@ wsServer.on("connection", function(websocket){
             try{
                 var options = JSON.parse(chunk.toString());
                 process.chdir(__dirname);
+                options.input = process.argv[2] || options.input;
                 handbrake.spawn(options)
                     .on("terminated", function(){
                         console.log("terminated");
