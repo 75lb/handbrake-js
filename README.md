@@ -5,7 +5,7 @@
 
 handbrake-js
 ============
-Handbrake-js is an alternative, cross-platform distrubution of [HandbrakeCLI](https://trac.handbrake.fr/wiki/CLIGuide) (v0.9.9) adding Javascript and improved command-line interfaces.
+Handbrake-js is an alternative, cross-platform distrubution of [HandbrakeCLI](https://trac.handbrake.fr/wiki/CLIGuide) (v0.9.9) adding Javascript, streaming and improved command-line interfaces.
 
 Command line use
 ================

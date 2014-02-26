@@ -57,6 +57,9 @@ function onProgress(progress){
 
 handbrake.spawn(process.argv)
     .on("progress", onProgress)
+    .on("muxing", function(){
+        console.log("Muxing...");
+    })
     .on("terminated", function(){
         notification.stop();
         console.red.log("terminated");
