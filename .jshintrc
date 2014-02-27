@@ -5,7 +5,6 @@
     "globals": { "describe" : false, "it": false, "beforeEach": false },
     "globalstrict": false,
     "indent": 4,
-    "latedef": true,
     "laxbreak": true,
     "maxparams": 3,
     "multistr": true,
