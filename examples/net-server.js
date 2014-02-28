@@ -1,12 +1,9 @@
 var net = require("net"),
     handbrake = require("../"),
-    monitor = require("../lib/monitor");
+    monitor = require("stream-monitor");
 
 net.createServer()
     .on("connection", function(socket){
-        var handbrakeStream = handbrake.createStream();
-        // monitor(handbrakeStream);
-        // monitor(socket);
-        socket.pipe(handbrakeStream).pipe(socket);
+        socket.pipe(handbrake.createStream()).pipe(socket);
     })
     .listen(3338);

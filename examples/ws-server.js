@@ -6,8 +6,9 @@ Or you can supply an --input video to encode, overriding that sent by ws-client.
 $ node ws-server.js ~/Movies/Something.mov
 */
 
-var WsServer = new require("ws-server"),
-    handbrake = require("../");
+var WsServer = require("ws-server"),
+    handbrake = require("../"),
+    monitor = require("stream-monitor");
 
 /*
 Launch a websocket server on port 4444. 
@@ -19,25 +20,7 @@ When a client connects, listen for the websocket to become readable then pass th
 options to Handbrake. Pipe the handbrake outputStream back to the client via the websocket. 
 */
 wsServer.on("connection", function(websocket){
-    websocket.on("readable", function(){
-        var chunk;
-        while((chunk = this.read()) !== null){
-            try{
-                var options = JSON.parse(chunk.toString());
-                process.chdir(__dirname);
-                if (options.input) options.input = process.argv[2] || options.input;
-                handbrake.spawn(options)
-                    .on("terminated", function(){
-                        console.log("terminated");
-                    })
-                    .on("error", function(err){
-                        console.log(err.message);
-                    })
-                    .on("invalid", function(msg){
-                        console.log(msg);
-                    })
-                    .outputStream.pipe(websocket, { end: false });
-            } catch(e){}
-        }
-    });
+    var h = handbrake.createStream();
+    websocket.name = "websocket"; monitor(websocket); monitor(h);
+    websocket.pipe(h).pipe(websocket, { end: false });
 });
