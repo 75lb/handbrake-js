@@ -29,83 +29,58 @@
   <pre id="log"></pre>
 
   <script>
-  var $ = document.querySelector.bind(document),
-      socket;
+  var $ = document.querySelector.bind(document);
       
   function log(text){
     if (text === "") $("#log").textContent = "";
     $("#log").textContent += text + "\n";
   }
   
-  function connectToServer(open){
-    if (!socket || (socket && socket.readyState !== 1)){
-      socket = new WebSocket("ws://localhost:4444");
-      socket.onerror = function(err){
-        alert("Connection failed. Is the server available?");
-      };
-      socket.onopen = function(){
-        open();
-      };
-      socket.onmessage = function(e){
-        try {
-          console.dir(e.data);
-          var data = JSON.parse(e.data);
-          if (data.info) {
-            log(data.info);
-          }
-          if (data.progress){
-            var p = data.progress;
-            $("#task").textContent = p.taskNumber + " of " + p.taskCount;
-            $("#percent").textContent = p.percentComplete;
-            $("#fps").textContent = p.fps;
-            $("#aFps").textContent = p.avgFps;
-            $("#eta").textContent = p.eta;
-          }
-        } catch(e){
-          console.dir(e.data);
+  function runCommand(command){
+    log("");
+    command = JSON.stringify(command);
+    
+    var socket = new WebSocket("ws://localhost:4444");
+    socket.onerror = function(err){
+      alert("Connection failed. Is the server available?");
+    };
+    socket.onopen = function(){
+      console.log(command)
+      this.send(command);
+    };
+    socket.onmessage = function(e){
+      try {
+        var data = JSON.parse(e.data);
+        if (data.info) {
+          log(data.info);
         }
-      };
-    } else {
-      open();
-    }
+        if (data.progress){
+          var p = data.progress;
+          $("#task").textContent = p.taskNumber + " of " + p.taskCount;
+          $("#percent").textContent = p.percentComplete;
+          $("#fps").textContent = p.fps;
+          $("#aFps").textContent = p.avgFps;
+          $("#eta").textContent = p.eta;
+        }
+      } catch(err){
+        console.log(err);
+        console.dir(e.data);
+      }
+    };
   }
   
   
   $("#encode").onclick = function(e){
-    try{
-      log("");
-      connectToServer(function(){
-        socket.send(JSON.stringify({ 
-          input: "demo.mkv", output: "demo.mp4", preset: "Normal" 
-        }));
-      });
-    } catch(err){
-      alert(err.message);
-    }
-  }
+    runCommand({ input: "demo.mkv", output: "demo.mp4", preset: "Normal" });
+  };
 
   $("#help").onclick = function(e){
-    try{
-      log("");
-      connectToServer(function(){
-        socket.send(JSON.stringify({ help: true }));
-      });
-    } catch(err){
-      alert(err.message);
-    }
-  }
+    runCommand({ help: true });
+  };
 
   $("#presets").onclick = function(e){
-    try{
-      log("");
-      connectToServer(function(){
-        socket.send(JSON.stringify({ "preset-list": true }));
-      });
-    } catch(err){
-      alert(err.message);
-    }
-  }
-  window.s = socket;
+    runCommand({ "preset-list": true });
+  };
   </script>
 </body>
 </html>
