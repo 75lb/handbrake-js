@@ -39,7 +39,6 @@
     "mocha": "~1.17",
     "grunt": "~0.4.2",
     "grunt-boil": "~0.6.0",
-    "yuidoc2md": "~0.2.4",
-    "ws-server": "~0.1.0"
+    "yuidoc2md": "~0.2.4"
   }
 }
