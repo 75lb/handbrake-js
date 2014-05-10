@@ -13,6 +13,7 @@
     "transcode",
     "video"
   ],
+  "engines": { "node": ">=0.10.0" },
   "scripts": {
     "test": "tape test/*.js",
     "ubuntu-setup": "scripts/ubuntu-setup.sh",
