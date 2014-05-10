@@ -7,6 +7,7 @@ function MockChildProcess(){
     this.stdout = new Readable();
     this.stdout._read = function(){};
     this.stderr = new Readable();
+    this.stderr._read = function(){};
 }
 util.inherits(MockChildProcess, EventEmitter);
 
