@@ -17,17 +17,17 @@
   "scripts": {
     "test": "tape test/*.js",
     "ubuntu-setup": "scripts/ubuntu-setup.sh",
-    "postinstall": "node scripts/install-handbrakeCLI.js"
+    "postinstall": "node scripts/install-handbrakeCLI.js",
+    "lint": "jshint lib/*.js examples/*.js scripts/*.js cli/*.js test/*.js; echo"
   },
   "repository": "https://github.com/75lb/handbrake-js.git",
   "dependencies": {
-    "fs-extra": "~0.8",
-    "request": "~2.34",
-    "unzip": "~0.1",
-    "nature": "~0.4.0",
     "console-dope": "~0.3.0",
-    "notification-dope": "~0.0.0"
+    "more-fs": "~0.3.0",
+    "nature": "~0.4.0",
+    "notification-dope": "~0.0.0",
+    "request": "~2.34",
+    "unzip": "~0.1"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }

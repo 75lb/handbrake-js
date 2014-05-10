@@ -1,34 +1,34 @@
 #!/usr/bin/env node
-
+"use strict";
 var request = require("request"),
     unzip = require("unzip"),
     exec = require("child_process").exec,
-    fs = require("fs-extra"),
-    path = require("path"),
-    win32 = {
-        url: "http://sourceforge.net/projects/handbrake/files/0.9.9/HandBrake-0.9.9-i686-Win_CLI.zip/download",
-        archive: "win.zip",
-        copyFrom: path.join("unzipped", "HandBrakeCLI.exe"),
-        copyTo: path.join("bin", "HandbrakeCLIx32.exe")
-    },
-    win64 = {
-        url: "http://sourceforge.net/projects/handbrake/files/0.9.9/HandBrake-0.9.9-x86_64-Win_CLI.zip/download",
-        archive: "win.zip",
-        copyFrom: path.join("unzipped", "HandBrakeCLI.exe"),
-        copyTo: "bin/HandbrakeCLIx64.exe"
-    },
-    mac = {
-        url:"http://sourceforge.net/projects/handbrake/files/0.9.9/HandBrake-0.9.9-MacOSX.6_CLI_x86_64.dmg/download",
-        archive: "mac.dmg",
-        copyFrom: "HandbrakeCLI", 
-        copyTo: "bin/HandbrakeCLI"
-    };
+    util = require("util"),
+    fs = require("fs"),
+    mfs = require("more-fs"),
+    path = require("path");
+    
+    
+var downloadPath = "http://sourceforge.net/projects/handbrake/files/0.9.9/HandBrake-0.9.9-%s/download";
 
-function mkdir(dirName){
-    if (!fs.existsSync(dirName)){
-        fs.mkdirSync(dirName);
-    }
-}
+var win32 = {
+    url: util.format(downloadPath, "i686-Win_CLI.zip"),
+    archive: "win.zip",
+    copyFrom: path.join("unzipped", "HandBrakeCLI.exe"),
+    copyTo: path.join("bin", "HandbrakeCLI.exe")
+};
+var win64 = {
+    url: util.format(downloadPath, "x86_64-Win_CLI.zip"),
+    archive: "win.zip",
+    copyFrom: path.join("unzipped", "HandBrakeCLI.exe"),
+    copyTo: "bin/HandbrakeCLI.exe"
+};
+var mac = {
+    url: util.format(downloadPath, "MacOSX.6_CLI_x86_64.dmg"),
+    archive: "mac.dmg",
+    copyFrom: "HandbrakeCLI", 
+    copyTo: "bin/HandbrakeCLI"
+};
 
 function downloadFile(from, to, done){
     console.log("fetching: " + from);
@@ -43,13 +43,13 @@ function downloadFile(from, to, done){
 function extractFile(archive, copyFrom, copyTo, done){
     console.log("extracting: " + copyFrom);
     if (archive.indexOf(".zip") > 0){
-        mkdir("unzipped");
+        mfs.mkdir("unzipped");
         var unzipped = unzip.Extract({ path: "unzipped" });
         unzipped.on("close", function(){
             var source = fs.createReadStream(copyFrom),
                 dest = fs.createWriteStream(copyTo);
             dest.on("close", function(){
-                fs.remove("unzipped");
+                mfs.rmdir("unzipped");
                 done();
             });
             source.pipe(dest);
@@ -67,7 +67,7 @@ function extractFile(archive, copyFrom, copyTo, done){
                     mountPath = match[2];
                 copyFrom = path.join(mountPath, copyFrom);
                 var source = fs.createReadStream(copyFrom),
-                    dest = fs.createWriteStream(copyTo, { mode: 0755 });
+                    dest = fs.createWriteStream(copyTo, { mode: parseInt(755, 8) });
                 dest.on("close", function(){
                     exec("hdiutil detach " + devicePath, function(err){
                         if (err) throw err;
@@ -82,7 +82,7 @@ function extractFile(archive, copyFrom, copyTo, done){
 
 function install(installation){
     downloadFile(installation.url, installation.archive, function(){
-        mkdir("bin");
+        mfs.mkdir("bin");
         extractFile(installation.archive, installation.copyFrom, installation.copyTo, function(){
             console.log("HandbrakeCLI installation complete");
             fs.unlink(installation.archive);
