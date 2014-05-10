@@ -5,7 +5,7 @@
   "description": "An alternative, cross-platform distrubution of HandbrakeCLI (v0.9.9) adding javascript, streaming and improved command-line interfaces.",
   "main": "./lib/handbrake.js",
   "bin": {
-    "handbrake": "cli.js"
+    "handbrake": "bin/cli.js"
   },
   "keywords": [
     "handbrake",
@@ -29,5 +29,7 @@
     "request": "~2.34",
     "unzip": "~0.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "tape": "^2.12.3"
+  }
 }

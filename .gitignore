@@ -1,4 +1,3 @@
 node_modules
 bin
-examples/demo.mp4
-examples/test*
+test/video/tmp-*
