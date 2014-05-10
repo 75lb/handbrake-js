@@ -9,7 +9,6 @@
   },
   "keywords": [
     "handbrake",
-    "batch",
     "encode",
     "transcode",
     "video"
@@ -18,7 +17,7 @@
     "test": "tape test/*.js",
     "ubuntu-setup": "scripts/ubuntu-setup.sh",
     "postinstall": "node scripts/install-handbrakeCLI.js",
-    "lint": "jshint lib/*.js examples/*.js scripts/*.js cli/*.js test/*.js; echo"
+    "lint": "jshint lib/*.js examples/*.js scripts/*.js bin/*.js test/*.js; echo"
   },
   "repository": "https://github.com/75lb/handbrake-js.git",
   "dependencies": {
