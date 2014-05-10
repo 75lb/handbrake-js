@@ -1,6 +1,7 @@
-[![NPM version](https://badge.fury.io/js/handbrake-js.png)](http://badge.fury.io/js/handbrake-js)
+[![view on npm](http://img.shields.io/npm/v/handbrake-js.svg)](https://www.npmjs.org/package/handbrake-js)
+![npm module downloads per month](http://img.shields.io/npm/dm/handbrake-js.svg)
 [![Build Status](https://travis-ci.org/75lb/handbrake-js.png?branch=master)](https://travis-ci.org/75lb/handbrake-js)
-[![Dependency Status](https://david-dm.org/75lb/handbrake-js.png)](https://david-dm.org/75lb/handbrake-js)
+[![Dependency Status](https://david-dm.org/75lb/handbrake-js.svg)](https://david-dm.org/75lb/handbrake-js)
 ![Analytics](https://ga-beacon.appspot.com/UA-27725889-6/handbrake-js/README.md?pixel)
 
 handbrake-js
@@ -169,5 +170,3 @@ Fired on completion of a successful encode
 #HandbrakeOptions
 
 An options [Thing](https://github.com/75lb/nature) describing all valid Handbrake option names, types and values.
-
-[![NPM](https://nodei.co/npm-dl/handbrake-js.png?months=3)](https://nodei.co/npm/handbrake-js/)

@@ -3,7 +3,7 @@
 
 require("console-dope");
 var handbrake = require("./lib/handbrake"),
-    spawn = require("child_process").spawn,
+    Notification = require("notification-dope"),
     util = require("util");
 
 var notification = {
@@ -20,11 +20,11 @@ var notification = {
     },
     send: function(title, message){
         if (this.time && this.enabled){
-            spawn("terminal-notifier", [ "-title", title, "-message", message ])
-                .on("error", function(){
-                    notification.enabled = false;
-                    notification.stop();
-                });
+            var n = new Notification({ title: title, message: message });
+            n.on("error", function(){
+                notification.enabled = false;
+                notification.stop();
+            });
         }
         this.time = false;
     }

@@ -1,6 +1,5 @@
 var WsServer = require("ws-server"),
-    handbrake = require("../"),
-    monitor = require("stream-monitor");
+    handbrake = require("../");
 
 /*
 Launch a websocket server on port 4444. 
