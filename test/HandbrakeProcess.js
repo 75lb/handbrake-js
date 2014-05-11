@@ -70,3 +70,25 @@ test("HandbrakeProcess, complete event", function(t){
 
     mockCp.lastHandle.emit("exit", 0);
 });
+
+test("HandbrakeProcess, output event (stdout)", function(t){
+    handbrake._inject({ cp: mockCp });
+    t.plan(1);
+    var handbrakeProcess = handbrake.spawn({ input: "blah", output: "blah" });
+    handbrakeProcess.on("output", function(output){
+        t.equal(output, "clive, yeah?")
+    });
+
+    mockCp.lastHandle.stdout.emit("data", "clive, yeah?");
+});
+
+test("HandbrakeProcess, output event (stderr)", function(t){
+    handbrake._inject({ cp: mockCp });
+    t.plan(1);
+    var handbrakeProcess = handbrake.spawn({ input: "blah", output: "blah" });
+    handbrakeProcess.on("output", function(output){
+        t.equal(output, "clive, yeah?")
+    });
+
+    mockCp.lastHandle.stderr.emit("data", "clive, yeah?");
+});
