@@ -59,3 +59,14 @@ test("HandbrakeProcess, progress event: muxing", function(t){
 
     mockCp.lastHandle.stdout.emit("data", "\rMuxing: this may take awhile...");
 });
+
+test("HandbrakeProcess, complete event", function(t){
+    handbrake._inject({ cp: mockCp });
+    t.plan(1);
+    var handbrakeProcess = handbrake.spawn({ input: "blah", output: "blah" });
+    handbrakeProcess.on("complete", function(){
+        t.pass();
+    });
+
+    mockCp.lastHandle.emit("exit", 0);
+});
