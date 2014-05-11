@@ -3,6 +3,18 @@ var test = require("tape"),
     handbrake = require("../lib/handbrake"),
     mockCp = require("./mock/child_process");
 
+test("HandbrakeProcess, start event", function(t){
+    handbrake._inject({ cp: mockCp });
+    t.plan(1);
+    var handbrakeProcess = handbrake.spawn({ input: "blah", output: "blah" });
+    handbrakeProcess.on("start", function(){
+        t.pass();
+    });
+
+    mockCp.lastHandle.stdout.emit("data", "\rEncoding: task 1 of 1, 1.23 %");
+    mockCp.lastHandle.stdout.emit("data", "\rEncoding: task 1 of 1, 3.31 %");
+});
+
 test("HandbrakeProcess, progress event: encoding (short)", function(t){
     handbrake._inject({ cp: mockCp });
     t.plan(1);
