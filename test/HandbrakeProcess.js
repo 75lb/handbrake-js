@@ -3,9 +3,8 @@ var test = require("tape"),
     handbrake = require("../lib/handbrake"),
     mock_cp = require("./mock/child_process");
 
-handbrake._inject(mock_cp);
-
 test("HandbrakeProcess, progress event: encoding (short)", function(t){
+    handbrake._inject({ cp: mock_cp });
     t.plan(1);
     var handbrakeProcess = handbrake.spawn({ input: "blah", output: "blah" });
     handbrakeProcess.on("progress", function(progress){
@@ -24,6 +23,7 @@ test("HandbrakeProcess, progress event: encoding (short)", function(t){
 });
 
 test("HandbrakeProcess, progress event: encoding (long)", function(t){
+    handbrake._inject({ cp: mock_cp });
     t.plan(1);
     var handbrakeProcess = handbrake.spawn({ input: "blah", output: "blah" });
     handbrakeProcess.on("progress", function(progress){
@@ -42,6 +42,7 @@ test("HandbrakeProcess, progress event: encoding (long)", function(t){
 });
 
 test("HandbrakeProcess, progress event: muxing", function(t){
+    handbrake._inject({ cp: mock_cp });
     t.plan(1);
     var handbrakeProcess = handbrake.spawn({ input: "blah", output: "blah" });
     handbrakeProcess.on("progress", function(progress){
