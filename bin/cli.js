@@ -17,7 +17,7 @@ function onProgress(progress){
     dope.column(42).write(progress.eta);
 }
 
-if (handbrake.input && handbrake.output){
+if (handbrakeOptions.input && handbrakeOptions.output){
     var handbrakeProcess = handbrake.spawn(handbrakeOptions)
         .on("error", function(err){
             dope.red.log(err);
@@ -35,7 +35,7 @@ if (handbrake.input && handbrake.output){
         handbrakeProcess.on("progress", onProgress)
     }
 } else {
+    var handbrakeProcess = handbrake.spawn({ help: true })
     handbrakeProcess.on("output", dope.write);
-    handbrake.spawn({ help: true });
 }
 
