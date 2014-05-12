@@ -6,54 +6,31 @@
 
 handbrake-js
 ============
-Handbrake-js is an alternative, cross-platform distrubution of [HandbrakeCLI](https://trac.handbrake.fr/wiki/CLIGuide) (v0.9.9) adding Javascript, streaming and improved command-line interfaces.
+Handbrake-js is a [node.js](http://nodejs.org) module wrapping [Handbrake](http://handbrake.fr) (v0.9.9) with a Javascript API, documented below. It's primary purpose is to bring video transcoding to your app.
 
-Command line use
-================
-Install
--------
-Install [Node.js](http://nodejs.org), then run
-
-```sh
-$ npm install -g handbrake-js
-```
-*Mac / Linux users may need to run the above with `sudo`*
-
-Usage
------
-Call `handbrake` as you would HandbrakeCLI, using all the usual [options](https://trac.handbrake.fr/wiki/CLIGuide):
-```sh
-$ handbrake --input "Ballroom Bangra.avi" --output "Ballroom Bangra.mp4" --preset Normal
-```
-
-Notifications
--------------
-During long-running encodes, Mac users can receive system notifications every three minutes displaying current progress. To enable this, ensure [terminal-notifier](https://github.com/alloy/terminal-notifier) is installed. 
-
-**Install via [homebrew](http://brew.sh):**
-
-```sh
-$ brew install terminal-notifier
-```
-
-**Install via [RubyGems](http://rubygems.org):**
-```sh
-$ [sudo] gem install terminal-notifier
-```
-
-As a library
+Installation
 ============
-Install
--------
+All 3rd party dependencies, including HandbrakeCLI itself, are installed automatically. The only system requirement is [node.js](http://nodejs.org), which you should install first.
+
+*Mac / Linux users may need to run either of the following commands with `sudo`*.
+
+As a library 
+------------
+Move into your project directory then run: 
 ```sh
 $ npm install handbrake-js --save
 ```
 
-HandbrakeCLI installation
-=========================
-On **Windows** and **Mac OSX** installing handbrake-js automatically installs the correct HandbrakeCLI binary for your platform. **Ubuntu** users should additionally run:
+As a command-line app
+---------------------
+From any directory run the following:
 ```sh
-$ sudo npm -g run-script handbrake-js ubuntu-setup
+$ npm install -g handbrake-js
+```
+
+Now, you can call `handbrake` as you would HandbrakeCLI, using all the usual [options](https://trac.handbrake.fr/wiki/CLIGuide). This command will transcode an AVI to the more universal H.264 (mp4):
+```sh
+$ handbrake --input "some episode.avi" --output "some episode.mp4" --preset Normal
 ```
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
