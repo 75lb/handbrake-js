@@ -3,10 +3,7 @@
 
 var dope = require("console-dope"),
     handbrakeJs = require("../lib/handbrake-js"),
-    HandbrakeOptions = require("../lib/HandbrakeOptions"),
-    util = require("util"),
-    fs = require("fs"),
-    path = require("fs");
+    HandbrakeOptions = require("../lib/HandbrakeOptions");
 
 var handbrakeOptions = new HandbrakeOptions();
 try {
@@ -26,7 +23,7 @@ function onProgress(progress){
 function onError(err){
     dope.red.error(err);
     process.exit(1);
-};
+}
 
 if (handbrakeOptions.input && handbrakeOptions.output){
     var handbrake = handbrakeJs.spawn(handbrakeOptions)
@@ -41,10 +38,10 @@ if (handbrakeOptions.input && handbrakeOptions.output){
         handbrake.on("start", function(){
             dope.bold.log("Task      % done     FPS       Avg FPS   ETA");
         });
-        handbrake.on("progress", onProgress)
+        handbrake.on("progress", onProgress);
     }
 } else {
-    var handbrake = handbrakeJs.spawn(handbrakeOptions)
+    handbrakeJs.spawn(handbrakeOptions)
         .on("error", onError)
         .on("output", dope.write);
 }

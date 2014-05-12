@@ -92,7 +92,7 @@ test("HandbrakeProcess, output event (stdout)", function(t){
     t.plan(1);
     var handbrake = handbrakeJs.spawn({ input: "blah", output: "blah" }, { cp: mockCp });
     handbrake.on("output", function(output){
-        t.equal(output, "clive, yeah?")
+        t.equal(output, "clive, yeah?");
     });
 
     process.nextTick(function(){
@@ -104,7 +104,7 @@ test("HandbrakeProcess, output event (stderr)", function(t){
     t.plan(1);
     var handbrake = handbrakeJs.spawn({ input: "blah", output: "blah" }, { cp: mockCp });
     handbrake.on("output", function(output){
-        t.equal(output, "clive, yeah?", output)
+        t.equal(output, "clive, yeah?", output);
     });
 
     process.nextTick(function(){
