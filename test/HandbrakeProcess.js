@@ -24,9 +24,9 @@ test("HandbrakeProcess, progress event: encoding (short)", function(t){
             taskNumber: 1,
             taskCount: 1,
             percentComplete: 1.23,
-            fps: null,
-            avgFps: null,
-            eta: null,
+            fps: 0,
+            avgFps: 0,
+            eta: "",
             task: "Encoding"
         });
     });
@@ -59,12 +59,12 @@ test("HandbrakeProcess, progress event: muxing", function(t){
     var handbrakeProcess = handbrake.spawn({ input: "blah", output: "blah" });
     handbrakeProcess.on("progress", function(progress){
         t.deepEqual(progress, {
-            taskNumber: null,
-            taskCount: null,
-            percentComplete: null,
-            fps: null,
-            avgFps: null,
-            eta: null,
+            taskNumber: 0,
+            taskCount: 0,
+            percentComplete: 0,
+            fps: 0,
+            avgFps: 0,
+            eta: "",
             task: "Muxing"
         });
     });
