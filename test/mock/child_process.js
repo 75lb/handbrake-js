@@ -4,6 +4,7 @@ var util = require("util"),
     Readable = require("stream").Readable;
 
 exports.spawn = spawn;
+exports.lastHandle = null;
 
 function MockChildProcess(){
     this.stdout = new Readable();

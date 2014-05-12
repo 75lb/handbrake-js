@@ -2,9 +2,11 @@
 "use strict";
 
 var dope = require("console-dope"),
-    handbrake = require("../lib/handbrake-js"),
+    handbrakeJs = require("../lib/handbrake-js"),
     HandbrakeOptions = require("../lib/HandbrakeOptions"),
-    util = require("util");
+    util = require("util"),
+    fs = require("fs"),
+    path = require("fs");
 
 var handbrakeOptions = new HandbrakeOptions();
 handbrakeOptions.set(process.argv);
@@ -18,7 +20,7 @@ function onProgress(progress){
 }
 
 if (handbrakeOptions.input && handbrakeOptions.output){
-    var handbrakeProcess = handbrake.spawn(handbrakeOptions)
+    var handbrake = handbrakeJs.spawn(handbrakeOptions)
         .on("error", function(err){
             dope.red.log(err);
         })
@@ -27,15 +29,15 @@ if (handbrakeOptions.input && handbrakeOptions.output){
         });
     
     if (handbrakeOptions.verbose){
-        handbrakeProcess.on("output", dope.write);
+        handbrake.on("output", dope.write);
     } else {
-        handbrakeProcess.on("start", function(){
+        handbrake.on("start", function(){
             dope.bold.log("Task      % done     FPS       Avg FPS   ETA");
         });    
-        handbrakeProcess.on("progress", onProgress)
+        handbrake.on("progress", onProgress)
     }
 } else {
-    var handbrakeProcess = handbrake.spawn({ help: true })
-    handbrakeProcess.on("output", dope.write);
+    var handbrake = handbrakeJs.spawn({ help: true })
+    handbrake.on("output", dope.write);
 }
 

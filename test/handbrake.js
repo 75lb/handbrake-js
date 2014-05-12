@@ -1,23 +1,25 @@
 "use strict";
 var test = require("tape"),
-    handbrake = require("../lib/handbrake-js"),
+    handbrakeJs = require("../lib/handbrake-js"),
     mockCp = require("./mock/child_process");
 
-test("HandbrakeProcess, start event", function(t){
+test("Handbrake, start event", function(t){
     t.plan(1);
-    var handbrakeProcess = handbrake.spawn({ input: "blah", output: "blah" }, { cp: mockCp });
-    handbrakeProcess.on("start", function(){
+    var handbrake = handbrakeJs.spawn({ input: "blah", output: "blah" }, { cp: mockCp });
+    handbrake.on("start", function(){
         t.pass();
     });
 
-    mockCp.lastHandle.stdout.emit("data", "\rEncoding: task 1 of 1, 1.23 %");
-    mockCp.lastHandle.stdout.emit("data", "\rEncoding: task 1 of 1, 3.31 %");
+    process.nextTick(function(){
+        mockCp.lastHandle.stdout.emit("data", "\rEncoding: task 1 of 1, 1.23 %");
+        mockCp.lastHandle.stdout.emit("data", "\rEncoding: task 1 of 1, 3.31 %");
+    });
 });
 
-test("HandbrakeProcess, progress event: encoding (short)", function(t){
+test("Handbrake, progress event: encoding (short)", function(t){
     t.plan(1);
-    var handbrakeProcess = handbrake.spawn({ input: "blah", output: "blah" }, { cp: mockCp });
-    handbrakeProcess.on("progress", function(progress){
+    var handbrake = handbrakeJs.spawn({ input: "blah", output: "blah" }, { cp: mockCp });
+    handbrake.on("progress", function(progress){
         t.deepEqual(progress, {
             taskNumber: 1,
             taskCount: 1,
@@ -29,14 +31,15 @@ test("HandbrakeProcess, progress event: encoding (short)", function(t){
         });
     });
 
-    mockCp.lastHandle.stdout.emit("data", "\rEncoding: task 1 of 1, 1.23 %");
+    process.nextTick(function(){
+        mockCp.lastHandle.stdout.emit("data", "\rEncoding: task 1 of 1, 1.23 %");
+    });
 });
 
 test("HandbrakeProcess, progress event: encoding (long)", function(t){
-    handbrake.HandbrakeProcess._inject({ cp: mockCp });
     t.plan(1);
-    var handbrakeProcess = handbrake.spawn({ input: "blah", output: "blah" });
-    handbrakeProcess.on("progress", function(progress){
+    var handbrake = handbrakeJs.spawn({ input: "blah", output: "blah" }, { cp: mockCp });
+    handbrake.on("progress", function(progress){
         t.deepEqual(progress, {
             taskNumber: 1,
             taskCount: 1,
@@ -48,14 +51,15 @@ test("HandbrakeProcess, progress event: encoding (long)", function(t){
         });
     });
 
-    mockCp.lastHandle.stdout.emit("data", "\rEncoding: task 1 of 1, 45.46 % (105.33 fps, avg 106.58 fps, ETA 00h00m05s)");
+    process.nextTick(function(){
+        mockCp.lastHandle.stdout.emit("data", "\rEncoding: task 1 of 1, 45.46 % (105.33 fps, avg 106.58 fps, ETA 00h00m05s)");
+    });
 });
 
 test("HandbrakeProcess, progress event: muxing", function(t){
-    handbrake.HandbrakeProcess._inject({ cp: mockCp });
     t.plan(1);
-    var handbrakeProcess = handbrake.spawn({ input: "blah", output: "blah" });
-    handbrakeProcess.on("progress", function(progress){
+    var handbrake = handbrakeJs.spawn({ input: "blah", output: "blah" }, { cp: mockCp });
+    handbrake.on("progress", function(progress){
         t.deepEqual(progress, {
             taskNumber: 0,
             taskCount: 0,
@@ -67,38 +71,43 @@ test("HandbrakeProcess, progress event: muxing", function(t){
         });
     });
 
-    mockCp.lastHandle.stdout.emit("data", "\rMuxing: this may take awhile...");
+    process.nextTick(function(){
+        mockCp.lastHandle.stdout.emit("data", "\rMuxing: this may take awhile...");
+    });
 });
 
 test("HandbrakeProcess, complete event", function(t){
-    handbrake.HandbrakeProcess._inject({ cp: mockCp });
     t.plan(1);
-    var handbrakeProcess = handbrake.spawn({ input: "blah", output: "blah" });
-    handbrakeProcess.on("complete", function(){
+    var handbrake = handbrakeJs.spawn({ input: "blah", output: "blah" }, { cp: mockCp });
+    handbrake.on("complete", function(){
         t.pass();
     });
 
-    mockCp.lastHandle.emit("exit", 0);
+    process.nextTick(function(){
+        mockCp.lastHandle.emit("exit", 0);
+    });
 });
 
 test("HandbrakeProcess, output event (stdout)", function(t){
-    handbrake.HandbrakeProcess._inject({ cp: mockCp });
     t.plan(1);
-    var handbrakeProcess = handbrake.spawn({ input: "blah", output: "blah" });
-    handbrakeProcess.on("output", function(output){
+    var handbrake = handbrakeJs.spawn({ input: "blah", output: "blah" }, { cp: mockCp });
+    handbrake.on("output", function(output){
         t.equal(output, "clive, yeah?")
     });
 
-    mockCp.lastHandle.stdout.emit("data", "clive, yeah?");
+    process.nextTick(function(){
+        mockCp.lastHandle.stdout.emit("data", "clive, yeah?");
+    });
 });
 
 test("HandbrakeProcess, output event (stderr)", function(t){
-    handbrake.HandbrakeProcess._inject({ cp: mockCp });
     t.plan(1);
-    var handbrakeProcess = handbrake.spawn({ input: "blah", output: "blah" });
-    handbrakeProcess.on("output", function(output){
+    var handbrake = handbrakeJs.spawn({ input: "blah", output: "blah" }, { cp: mockCp });
+    handbrake.on("output", function(output){
         t.equal(output, "clive, yeah?", output)
     });
 
-    mockCp.lastHandle.stderr.emit("data", "clive, yeah?");
+    process.nextTick(function(){
+        mockCp.lastHandle.stderr.emit("data", "clive, yeah?");
+    });
 });

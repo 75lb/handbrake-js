@@ -1,14 +1,16 @@
 "use strict";
 var test = require("tape"),
-    handbrake = require("../lib/handbrake-js"),
+    handbrakeJs = require("../lib/handbrake-js"),
     mockCp = require("./mock/child_process");
 
 test("error handling: HandbrakeCLI not found", function(t){
-    handbrake._inject({ HandbrakeCLIPath: "broken/path" });
     t.plan(1);
 
-    var handbrakeProcess = handbrake.spawn({ input: "blah", output: "blah" });
-    handbrakeProcess.on("error", function(err){
+    var handbrake = handbrakeJs.spawn(
+        { input: "blah", output: "blah" }, 
+        { HandbrakeCLIPath: "broken/path" }
+    );
+    handbrake.on("error", function(err){
         t.deepEqual(err, {
             name: "HandbrakeCLINotFound",
             message: "HandbrakeCLI application not found",
@@ -22,11 +24,10 @@ test("error handling: HandbrakeCLI not found", function(t){
 });
 
 test("error handling: HandbrakeCLIError", function(t){
-    handbrake._inject({ cp: mockCp });
     t.plan(1);
 
-    var handbrakeProcess = handbrake.spawn({ input: "blah", output: "blah" });
-    handbrakeProcess.on("error", function(err){
+    var handbrake = handbrakeJs.spawn({ input: "blah", output: "blah" }, { cp: mockCp });
+    handbrake.on("error", function(err){
         t.deepEqual(err, {
             name: "HandbrakeCLIError",
             message: "Handbrake failed with error code: 13",
@@ -36,15 +37,16 @@ test("error handling: HandbrakeCLIError", function(t){
         });
     });
 
-    mockCp.lastHandle.emit("exit", 13);
+    process.nextTick(function(){
+        mockCp.lastHandle.emit("exit", 13);
+    });
 });
 
 test("error handling: NoTitleFound error", function(t){
-    handbrake._inject({ cp: mockCp });
     t.plan(1);
 
-    var handbrakeProcess = handbrake.spawn({ input: "blah", output: "blah" });
-    handbrakeProcess.on("error", function(err){
+    var handbrake = handbrakeJs.spawn({ input: "blah", output: "blah" }, { cp: mockCp });
+    handbrake.on("error", function(err){
         t.deepEqual(err, {
             name: "NoTitleFound",
             message: "Encode failed, not a video file",
@@ -52,18 +54,20 @@ test("error handling: NoTitleFound error", function(t){
             output: "blah.No title found.blah."
         });
     });
-    mockCp.lastHandle.stdout.emit("data", "blah.");
-    mockCp.lastHandle.stdout.emit("data", "No title found.");
-    mockCp.lastHandle.stdout.emit("data", "blah.");
-    mockCp.lastHandle.emit("exit", 0);
+
+    process.nextTick(function(){
+        mockCp.lastHandle.stdout.emit("data", "blah.");
+        mockCp.lastHandle.stdout.emit("data", "No title found.");
+        mockCp.lastHandle.stdout.emit("data", "blah.");
+        mockCp.lastHandle.emit("exit", 0);
+    });
 });
 
 test("error handling: SegFault", function(t){
-    handbrake._inject({ cp: mockCp });
     t.plan(1);
 
-    var handbrakeProcess = handbrake.spawn({ input: "blah", output: "blah" });
-    handbrakeProcess.on("error", function(err){
+    var handbrake = handbrakeJs.spawn({ input: "blah", output: "blah" }, { cp: mockCp });
+    handbrake.on("error", function(err){
         t.deepEqual(err, {
             name: "HandbrakeCLICrash",
             message: "HandbrakeCLI crashed (Segmentation fault)",
@@ -71,5 +75,7 @@ test("error handling: SegFault", function(t){
             output: ""
         });
     });
-    mockCp.lastHandle.emit("exit", null);
+    process.nextTick(function(){
+        mockCp.lastHandle.emit("exit", null);
+    });
 });
