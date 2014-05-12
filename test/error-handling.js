@@ -13,7 +13,7 @@ test("error handling: HandbrakeCLI not found", function(t){
     handbrake.on("error", function(err){
         t.deepEqual(err, {
             name: "HandbrakeCLINotFound",
-            message: "HandbrakeCLI application not found",
+            message: "HandbrakeCLI application not found: broken/path",
             HandbrakeCLIPath: "broken/path",
             errno: "ENOENT",
             spawnmessage: "spawn ENOENT",
