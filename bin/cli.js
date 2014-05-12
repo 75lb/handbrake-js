@@ -9,7 +9,11 @@ var dope = require("console-dope"),
     path = require("fs");
 
 var handbrakeOptions = new HandbrakeOptions();
-handbrakeOptions.set(process.argv);
+try {
+    handbrakeOptions.set(process.argv);
+} catch(err){
+    onError(err);
+}
 
 function onProgress(progress){
     dope.column(1).write(progress.task + "  ");
