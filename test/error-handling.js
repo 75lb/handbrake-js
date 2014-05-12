@@ -1,6 +1,6 @@
 "use strict";
 var test = require("tape"),
-    handbrake = require("../lib/handbrake"),
+    handbrake = require("../lib/handbrake-js"),
     mockCp = require("./mock/child_process");
 
 test("error handling: HandbrakeCLI not found", function(t){

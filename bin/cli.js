@@ -2,7 +2,7 @@
 "use strict";
 
 var dope = require("console-dope"),
-    handbrake = require("../lib/handbrake"),
+    handbrake = require("../lib/handbrake-js"),
     HandbrakeOptions = require("../lib/HandbrakeOptions"),
     util = require("util");
 
