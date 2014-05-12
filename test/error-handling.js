@@ -76,3 +76,17 @@ test("error handling: SegFault", function(t){
         mockCp.lastHandle.emit("exit", null);
     });
 });
+
+test("error handling: Invalid option", function(t){
+    t.plan(1);
+
+    var handbrake = handbrakeJs.spawn({ aksfnkasn: true }, { cp: mockCp });
+    handbrake.on("error", function(err){
+        t.deepEqual(err, {
+            name: "InvalidOption",
+            message: "invalid property: aksfnkasn",
+            options: { },
+            output: ""
+        });
+    });
+});
