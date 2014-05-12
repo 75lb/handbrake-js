@@ -19,11 +19,13 @@ function onProgress(progress){
     dope.column(42).write(progress.eta);
 }
 
+function onError(err){
+    dope.red.log(err);
+};
+
 if (handbrakeOptions.input && handbrakeOptions.output){
     var handbrake = handbrakeJs.spawn(handbrakeOptions)
-        .on("error", function(err){
-            dope.red.log(err);
-        })
+        .on("error", onError)
         .on("complete", function(){
             dope.log();
         });
@@ -38,6 +40,7 @@ if (handbrakeOptions.input && handbrakeOptions.output){
     }
 } else {
     var handbrake = handbrakeJs.spawn({ help: true })
-    handbrake.on("output", dope.write);
+        .on("error", onError)
+        .on("output", dope.write);
 }
 
