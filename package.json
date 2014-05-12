@@ -16,8 +16,8 @@
   "engines": { "node": ">=0.10.0" },
   "scripts": {
     "test": "tape test/*.js",
-    "ubuntu-setup": "./scripts/ubuntu-setup.sh",
-    "postinstall": "./scripts/install-handbrakeCLI.js",
+    "ubuntu-setup": "./scripts/install-ubuntu.sh",
+    "postinstall": "./scripts/install-mac-win.js || ./scripts/install-ubuntu.sh",
     "lint": "jshint lib/*.js scripts/*.js bin/*.js test/*.js; echo"
   },
   "repository": "https://github.com/75lb/handbrake-js.git",

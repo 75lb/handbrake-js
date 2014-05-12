@@ -6,9 +6,13 @@ var request = require("request"),
     util = require("util"),
     fs = require("fs"),
     mfs = require("more-fs"),
-    path = require("path");
-    
-    
+    path = require("path"),
+    os = require("os");
+
+if (!(os.platform() === "darwin" || os.platform() === "win")){
+    process.exit(1);
+}
+
 var downloadPath = "http://sourceforge.net/projects/handbrake/files/0.9.9/HandBrake-0.9.9-%s/download";
 
 var win32 = {
@@ -26,7 +30,7 @@ var win64 = {
 var mac = {
     url: util.format(downloadPath, "MacOSX.6_CLI_x86_64.dmg"),
     archive: "mac.dmg",
-    copyFrom: "HandbrakeCLI", 
+    copyFrom: "HandbrakeCLI",
     copyTo: "bin/HandbrakeCLI"
 };
 
@@ -37,7 +41,7 @@ function downloadFile(from, to, done){
 
     req.pipe(download);
 
-    download.on("close", done);    
+    download.on("close", done);
 }
 
 function extractFile(archive, copyFrom, copyTo, done){
