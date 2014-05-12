@@ -7,10 +7,12 @@ var request = require("request"),
     fs = require("fs"),
     mfs = require("more-fs"),
     path = require("path"),
-    os = require("os");
+    os = require("os"),
+    cp = require("child_process");
 
-if (!(os.platform() === "darwin" || os.platform() === "win")){
-    process.exit(1);
+if (os.platform() === "linux"){
+    cp.spawn(__dirname + "/install-ubuntu.sh", { stdio: "inherit" });
+    return;
 }
 
 var downloadPath = "http://sourceforge.net/projects/handbrake/files/0.9.9/HandBrake-0.9.9-%s/download";
