@@ -49,12 +49,12 @@ test("error handling: NoTitleFound error", function(t){
             name: "NoTitleFound",
             message: "Encode failed, not a video file",
             options: { input: "blah", output: "blah" },
-            output: "blah\nNo title found.\nblah\n"
+            output: "blah.No title found.blah."
         });
     });
-    mockCp.lastHandle.stdout.emit("data", "blah\n");
-    mockCp.lastHandle.stdout.emit("data", "No title found.\n");
-    mockCp.lastHandle.stdout.emit("data", "blah\n");
+    mockCp.lastHandle.stdout.emit("data", "blah.");
+    mockCp.lastHandle.stdout.emit("data", "No title found.");
+    mockCp.lastHandle.stdout.emit("data", "blah.");
     mockCp.lastHandle.emit("exit", 0);
 });
 

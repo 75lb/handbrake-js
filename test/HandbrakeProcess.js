@@ -99,7 +99,7 @@ test("HandbrakeProcess, output event (stderr)", function(t){
     t.plan(1);
     var handbrakeProcess = handbrake.spawn({ input: "blah", output: "blah" });
     handbrakeProcess.on("output", function(output){
-        t.equal(output, "clive, yeah?")
+        t.equal(output, "clive, yeah?", output)
     });
 
     mockCp.lastHandle.stderr.emit("data", "clive, yeah?");

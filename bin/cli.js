@@ -29,4 +29,4 @@ handbrake.spawn(process.argv)
     .on("complete", function(){
         dope.log();
     })
-    .on("output", dope.write);
+    .on("output", dope.log);
