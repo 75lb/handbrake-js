@@ -3,12 +3,9 @@ var test = require("tape"),
     cp = require("child_process"),
     fs = require("fs");
 
-// also travis should test installation script
-
 test("cli: no args", function(t){
     t.plan(1);
-    cp.exec("handbrake", function(err, stdout, stderr){
-        // console.dir(err)
+    cp.exec("./bin/cli.js", function(err, stdout, stderr){
         if (err) {
             t.fail(err.message);
         } else {
