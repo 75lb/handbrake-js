@@ -1,6 +1,7 @@
 "use strict";
 var test = require("tape"),
-    cp = require("child_process");
+    cp = require("child_process"),
+    fs = require("fs");
 
 // also travis should test installation script
 
@@ -18,7 +19,12 @@ test("cli: no args", function(t){
 
 test("cli: simple encode", function(t){
     t.plan(1);
-    cp.exec("mkdir tmp; handbrake -i test/video/demo.mkv -o tmp/test.mp4 ", function(err, stdout, stderr){
+    try {
+        fs.mkdirSync("tmp");
+    } catch(err){
+        // dir already exists
+    }
+    cp.exec("handbrake -i test/video/demo.mkv -o tmp/test.mp4 ", function(err, stdout, stderr){
         if (err) {
             t.fail(err.message);
         } else {
