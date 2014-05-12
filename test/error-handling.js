@@ -4,22 +4,19 @@ var test = require("tape"),
     mockCp = require("./mock/child_process");
 
 test("error handling: HandbrakeCLI not found", function(t){
-    t.plan(1);
+    t.plan(6);
 
     var handbrake = handbrakeJs.spawn(
         { input: "blah", output: "blah" }, 
         { HandbrakeCLIPath: "broken/path" }
     );
     handbrake.on("error", function(err){
-        t.deepEqual(err, {
-            name: "HandbrakeCLINotFound",
-            message: "HandbrakeCLI application not found: broken/path",
-            HandbrakeCLIPath: "broken/path",
-            errno: "ENOENT",
-            spawnmessage: "spawn ENOENT",
-            options: { input: "blah", output: "blah" },
-            output: ""
-        });
+        t.equal(err.name, "HandbrakeCLINotFound");
+        t.equal(err.message, "HandbrakeCLI application not found: broken/path");
+        t.equal(err.HandbrakeCLIPath, "broken/path");
+        t.equal(err.errno, "ENOENT");
+        t.equal(err.spawnmessage, "spawn ENOENT");
+        t.deepEqual(err.options, { input: "blah", output: "blah" });
     });
 });
 

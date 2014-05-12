@@ -20,7 +20,8 @@ function onProgress(progress){
 }
 
 function onError(err){
-    dope.red.log(err);
+    dope.red.error(err);
+    process.exit(1);
 };
 
 if (handbrakeOptions.input && handbrakeOptions.output){

@@ -7,7 +7,7 @@ test("cli: no args", function(t){
     t.plan(1);
     cp.exec("./bin/cli.js", function(err, stdout, stderr){
         if (err) {
-            t.fail(err.message);
+            t.fail(stderr);
         } else {
             t.pass();
         }
@@ -23,7 +23,7 @@ test("cli: simple encode", function(t){
     }
     cp.exec("./bin/cli.js -i test/video/demo.mkv -o tmp/test.mp4 ", function(err, stdout, stderr){
         if (err) {
-            t.fail(err.message);
+            t.fail(stderr);
         } else {
             t.pass();
         }
