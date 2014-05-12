@@ -3,7 +3,7 @@ var handbrakeJs = require(".."),
 
 var options = {
     input: path.join(__dirname, "..", "test", "video", "demo.mkv"),
-    output: "output.mp4",
+    output: "output.mp4"
 };
 
 handbrakeJs.spawn(options)
