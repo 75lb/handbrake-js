@@ -30,17 +30,17 @@ if (handbrakeOptions.input && handbrakeOptions.output){
         .on("complete", function(){
             dope.log();
         });
-    
+
     if (handbrakeOptions.verbose){
         handbrake.on("output", dope.write);
     } else {
         handbrake.on("start", function(){
             dope.bold.log("Task      % done     FPS       Avg FPS   ETA");
-        });    
+        });
         handbrake.on("progress", onProgress)
     }
 } else {
-    var handbrake = handbrakeJs.spawn({ help: true })
+    var handbrake = handbrakeJs.spawn(handbrakeOptions)
         .on("error", onError)
         .on("output", dope.write);
 }
