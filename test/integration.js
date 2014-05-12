@@ -5,7 +5,7 @@ var test = require("tape"),
 
 test("cli: no args", function(t){
     t.plan(1);
-    cp.exec("./bin/cli.js", function(err, stdout, stderr){
+    cp.exec("node bin/cli.js", function(err, stdout, stderr){
         if (err) {
             t.fail(stderr);
         } else {
@@ -21,7 +21,7 @@ test("cli: simple encode", function(t){
     } catch(err){
         // dir already exists
     }
-    cp.exec("./bin/cli.js -i test/video/demo.mkv -o tmp/test.mp4 ", function(err, stdout, stderr){
+    cp.exec("node bin/cli.js -i test/video/demo.mkv -o tmp/test.mp4 ", function(err, stdout, stderr){
         if (err) {
             t.fail(stderr);
         } else {
