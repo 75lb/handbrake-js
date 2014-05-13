@@ -167,51 +167,6 @@
             }
         }
     ],
-    "properties": [
-        {
-            "name": "spawn",
-            "access": "",
-            "virtual": false,
-            "description": "handbrake-js package API",
-            "type": ""
-        }
-    ],
-    "functions": [
-        {
-            "name": "spawn",
-            "access": "",
-            "virtual": false,
-            "description": "Spawns a HandbrakeCLI process with the supplied [options](https://trac.handbrake.fr/wiki/CLIGuide), returning an instance of `Handbrake` which you can monitor for events.\n\nAll errors are delivered via the \"error\" event.",
-            "parameters": [
-                {
-                    "name": null,
-                    "type": [
-                        "Object",
-                        "Array"
-                    ],
-                    "description": "[Options](https://trac.handbrake.fr/wiki/CLIGuide) to pass directly to HandbrakeCLI",
-                    "default": "",
-                    "optional": "",
-                    "nullable": ""
-                },
-                {
-                    "name": "mocks",
-                    "type": "Object",
-                    "description": "Optional mock objects, for testing",
-                    "default": "",
-                    "optional": true,
-                    "nullable": ""
-                }
-            ],
-            "examples": [
-                "var handbrakeJs = require(\"handbrake-js\");\n\nhandbrakeJs.spawn(options)\n    .on(\"error\", console.error)\n    .on(\"output\", console.log);"
-            ],
-            "returns": {
-                "type": "Handbrake",
-                "description": "A handle on which you can listen for events on the Handbrake process."
-            }
-        }
-    ],
     "namespaces": [
         {
             "name": "progress",
