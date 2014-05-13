@@ -42,3 +42,27 @@ $ handbrake --input "some episode.avi" --output "some episode.mp4" --preset Norm
 API Documentation
 =================
 
+handbrakeJs.spawn(options)
+--------------------------
+
+##spawn
+Spawns a HandbrakeCLI process with the supplied [options](https://trac.handbrake.fr/wiki/CLIGuide), returning an instance of `Handbrake` which you can monitor for events.
+
+All errors are delivered via the "error" event.
+
+###Parameters
+ {Object,Array} - [Options](https://trac.handbrake.fr/wiki/CLIGuide) to pass directly to HandbrakeCLI  
+mocks {Object} - Optional mock objects, for testing *optional*  
+
+**Returns** Handbrake A handle on which you can listen for events on the Handbrake process.
+
+###Example
+```js
+var handbrakeJs = require("handbrake-js");
+
+handbrakeJs.spawn(options)
+    .on("error", console.error)
+    .on("output", console.log);
+```
+
+
