@@ -93,8 +93,10 @@ the options HandbrakeCLI was spawned with
 
 
 ###event: "progress"
-Fired at regular intervals passing progress information. Passes a `progress` object which looks like:
+Fired at regular intervals passing a `progress` object containing:
 
+- taskNumber `Number` current task index
+- taskCount `Number` total tasks in the queue
 - percentComplete `Number`
 - fps `Number` Frames per second
 - avgFps `Number` Average frames per second
@@ -102,11 +104,10 @@ Fired at regular intervals passing progress information. Passes a `progress` obj
 - task `String` Task description, either "Encoding" or "Muxing"
 
 ###event: "output"
-output buffered as-is in allOutput
+An aggregate of `stdout` and `stderr` output from the underlying HandbrakeCLI process.
 
 ###event: "error"
-Details of all operational exceptions are delivered via this event.
-There are four classes of error
+All operational exceptions are delivered via this event. Emits one of five types of `Error` instance: 
 
 - HandbrakeCLINotFound
 - HandbrakeCLIError
@@ -114,12 +115,11 @@ There are four classes of error
 - HandbrakeCLICrash
 - InvalidOption
 
-- error `Error`   
-
 ###event: "complete"
-Fired on completion of a successful encode
+Fired on successful completion
 
 ###event: "start"
-fired when progress begins
+Fired when encoding begins
+
 
 
