@@ -57,6 +57,7 @@ Handbrake for node.js.
 ###hbjs.spawn(options, [mocks])
 Spawns a HandbrakeCLI process with the supplied [options](https://trac.handbrake.fr/wiki/CLIGuide), returning an instance of `Handbrake` on which you can listen for events.
 
+
 - options `Object | Array` [Options](https://trac.handbrake.fr/wiki/CLIGuide) to pass directly to HandbrakeCLI  
 - mocks `Object` Optional mock objects, for testing  
 
@@ -77,33 +78,32 @@ handbrakeJs.spawn(options)
 ##class: Handbrake
 A thin wrapper on the handbrakeCLI child_process handle
 
-**Extends**: EventEmitter
+**Extends**: `EventEmitter`
 
 
 
 ###handbrake.allOutput
-all handbrakeCLI output
+A `String` containing all handbrakeCLI output
 ###handbrake.inProgress
-true when encoding
+`true` while encoding
 ###handbrake.options
-the options to encode with
-
-
-###handbrake.run()
-begin the encode.. attach desired listeners before running
-
-
-
-**Returns**: this
-
+the options HandbrakeCLI was spawned with
 
 
 
 
 ###event: "progress"
-Fired at regular intervals passing progress information
+Fired at regular intervals passing progress information. Passes a `progress` object which looks like:
+
+- percentComplete `Number`
+- fps `Number` Frames per second
+- avgFps `Number` Average frames per second
+- eta `String` Estimated time until completion
+- task `String` Task description, either "Encoding" or "Muxing"
+
 ###event: "output"
-output buffered as-is in allOutput, trimmed before delivery to caller.
+output buffered as-is in allOutput
+
 ###event: "error"
 Details of all operational exceptions are delivered via this event.
 There are four classes of error
@@ -113,8 +113,13 @@ There are four classes of error
 - NoTitleFound
 - HandbrakeCLICrash
 - InvalidOption
+
+- error `Error`   
+
 ###event: "complete"
 Fired on completion of a successful encode
+
 ###event: "start"
 fired when progress begins
+
 
