@@ -92,6 +92,9 @@ the options HandbrakeCLI was spawned with
 
 
 
+###event: "start"
+Fired when encoding begins
+
 ###event: "progress"
 Fired at regular intervals passing a `progress` object containing:
 
@@ -117,9 +120,6 @@ All operational exceptions are delivered via this event. Emits one of five types
 
 ###event: "complete"
 Fired on successful completion
-
-###event: "start"
-Fired when encoding begins
 
 
 
