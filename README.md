@@ -5,7 +5,7 @@
 ![Analytics](https://ga-beacon.appspot.com/UA-27725889-6/handbrake-js/README.md?pixel)
 
 #handbrake-js
-Handbrake-js is [Handbrake](http://handbrake.fr) for [node.js](http://nodejs.org). Funnily enough.
+Handbrake-js is [Handbrake](http://handbrake.fr) for [node.js](http://nodejs.org). Funnily enough. It aspires to provide a lean and stable foundation for building video transcoding software.
 
 Tested on Mac OSX, Ubuntu 14, Windows XP, Windows 8.1.
 
@@ -51,7 +51,7 @@ $ handbrake --input "some episode.avi" --output "some episode.mp4" --preset Norm
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 #API Documentation
-handbrake-js package API
+Handbrake for node.js.
 
 
 ###hbjs.spawn(options, [mocks])
@@ -61,10 +61,10 @@ Spawns a HandbrakeCLI process with the supplied [options](https://trac.handbrake
 - mocks `Object` Optional mock objects, for testing  
 
 
-**Returns**: HandbrakeA handle on which you can listen for events on the Handbrake process.
+**Returns**: A `Handbrake` instance on which you can listen for events.
 
 
-###Examples
+####Examples
 ```js
 var handbrakeJs = require("handbrake-js");
 
@@ -99,4 +99,22 @@ begin the encode.. attach desired listeners before running
 
 
 
+
+###event: "progress"
+Fired at regular intervals passing progress information
+###event: "output"
+output buffered as-is in allOutput, trimmed before delivery to caller.
+###event: "error"
+Details of all operational exceptions are delivered via this event.
+There are four classes of error
+
+- HandbrakeCLINotFound
+- HandbrakeCLIError
+- NoTitleFound
+- HandbrakeCLICrash
+- InvalidOption
+###event: "complete"
+Fired on completion of a successful encode
+###event: "start"
+fired when progress begins
 

@@ -3,7 +3,7 @@ var test = require("tape"),
     handbrakeJs = require("../lib/handbrake-js"),
     mockCp = require("./mock/child_process");
 
-test("error handling: HandbrakeCLI not found", function(t){
+test("exception handling: HandbrakeCLI not found", function(t){
     t.plan(6);
 
     var handbrake = handbrakeJs.spawn(
@@ -20,7 +20,7 @@ test("error handling: HandbrakeCLI not found", function(t){
     });
 });
 
-test("error handling: HandbrakeCLIError", function(t){
+test("exception handling: HandbrakeCLIError", function(t){
     t.plan(1);
 
     var handbrake = handbrakeJs.spawn({ input: "blah", output: "blah" }, { cp: mockCp });
@@ -39,7 +39,7 @@ test("error handling: HandbrakeCLIError", function(t){
     });
 });
 
-test("error handling: NoTitleFound error", function(t){
+test("exception handling: NoTitleFound error", function(t){
     t.plan(1);
 
     var handbrake = handbrakeJs.spawn({ input: "blah", output: "blah" }, { cp: mockCp });
@@ -60,7 +60,7 @@ test("error handling: NoTitleFound error", function(t){
     });
 });
 
-test("error handling: SegFault", function(t){
+test("exception handling: SegFault", function(t){
     t.plan(1);
 
     var handbrake = handbrakeJs.spawn({ input: "blah", output: "blah" }, { cp: mockCp });
@@ -77,7 +77,7 @@ test("error handling: SegFault", function(t){
     });
 });
 
-test("error handling: Invalid option", function(t){
+test("exception handling: Invalid option", function(t){
     t.plan(1);
 
     var handbrake = handbrakeJs.spawn({ aksfnkasn: true }, { cp: mockCp });
