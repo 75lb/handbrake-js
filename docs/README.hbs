@@ -51,26 +51,13 @@ $ handbrake --input "some episode.avi" --output "some episode.mp4" --preset Norm
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 #API Documentation
-{{#each (where this kind="module")}}{{{description}}}
-{{/each}}
+{{>module name="handbrake-js" jsdocdata=this}}
 
-{{>functions jsdocdata=this memberof="module:handbrake-js" namePrefix="hbjs"}}
+{{>functions memberof="module:handbrake-js" namePrefix="hbjs" jsdocdata=this}}
 
+{{>class name="Handbrake" jsdocdata=this}}
 
-##class: Handbrake
-{{#findWhere this kind="class" name="Handbrake"}}{{{classdesc}}}
+{{>members of="Handbrake" namePrefix="handbrake" jsdocdata=this}}
 
-Extends: {{{join augments ", "}}}
-{{/findWhere}}
+{{>functions memberof="Handbrake" namePrefix="handbrake" jsdocdata=this}}
 
-{{#each (where this memberof="Handbrake" kind="member")}}###handbrake.{{{name}}}
-{{{description}}}
-{{/each}}
-
-{{#each (where this memberof="Handbrake" kind="function")}}###handbrake.{{{name}}}({{join (pluck params "name") ", "}})
-{{{description}}}
-{{#each params}}{{{name}}} { {{~{join type.names "|"}~}} } - {{{description}}}  
-{{/each}}
-###Examples
-{{#each examples}}{{{this}}}{{/each}}
-{{/each}}

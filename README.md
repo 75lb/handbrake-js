@@ -56,8 +56,12 @@ handbrake-js package API
 
 ###hbjs.spawn(options, mocks)
 Spawns a HandbrakeCLI process with the supplied [options](https://trac.handbrake.fr/wiki/CLIGuide), returning an instance of `Handbrake` on which you can listen for events.
-options {Object|Array} - [Options](https://trac.handbrake.fr/wiki/CLIGuide) to pass directly to HandbrakeCLI  
-mocks {Object} - mocks - Optional mock objects, for testing  
+
+**options** {Object | Array} - [Options](https://trac.handbrake.fr/wiki/CLIGuide) to pass directly to HandbrakeCLI  
+**mocks** {Object} - Optional mock objects, for testing  
+
+
+**Returns**: HandbrakeA handle on which you can listen for events on the Handbrake process.
 
 
 ###Examples
@@ -68,12 +72,11 @@ handbrakeJs.spawn(options)
     .on("output", console.log);
 
 
-
-
 ##class: Handbrake
 A thin wrapper on the handbrakeCLI child_process handle
 
-Extends: EventEmitter
+**Extends**: EventEmitter
+
 
 
 ###handbrake.allOutput
@@ -87,6 +90,12 @@ the options to encode with
 ###handbrake.run()
 begin the encode.. attach desired listeners before running
 
-###Examples
+
+
+**Returns**: this
+
+
+
+
 
 
