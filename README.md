@@ -5,7 +5,7 @@
 ![Analytics](https://ga-beacon.appspot.com/UA-27725889-6/handbrake-js/README.md?pixel)
 
 #handbrake-js
-Handbrake-js is a [node.js](http://nodejs.org) module wrapping [Handbrake](http://handbrake.fr) (v0.9.9) with a Javascript API, documented below.
+Handbrake-js is [Handbrake](http://handbrake.fr) for [node.js](http://nodejs.org). Funnily enough.
 
 Tested on Mac OSX, Ubuntu 14, Windows XP, Windows 8.1.
 
@@ -57,8 +57,8 @@ handbrake-js package API
 ###hbjs.spawn(options, mocks)
 Spawns a HandbrakeCLI process with the supplied [options](https://trac.handbrake.fr/wiki/CLIGuide), returning an instance of `Handbrake` on which you can listen for events.
 
-**options** {Object | Array} - [Options](https://trac.handbrake.fr/wiki/CLIGuide) to pass directly to HandbrakeCLI  
-**mocks** {Object} - Optional mock objects, for testing  
+**options** `Object | Array` - [Options](https://trac.handbrake.fr/wiki/CLIGuide) to pass directly to HandbrakeCLI  
+**mocks** `Object` - Optional mock objects, for testing  
 
 
 **Returns**: HandbrakeA handle on which you can listen for events on the Handbrake process.
@@ -93,7 +93,6 @@ begin the encode.. attach desired listeners before running
 
 
 **Returns**: this
-
 
 
 

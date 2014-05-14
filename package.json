@@ -2,7 +2,7 @@
   "name": "handbrake-js",
   "author": "Lloyd Brookes",
   "version": "1.0.0-alpha.3",
-  "description": "Video transcoding for node.js",
+  "description": "Handbrake for node.js. Brings video encoding.",
   "main": "./lib/handbrake-js.js",
   "bin": {
     "handbrake": "bin/cli.js"
