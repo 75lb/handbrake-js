@@ -20,7 +20,8 @@
     "test": "tape test/*.js",
     "ubuntu-setup": "./scripts/install-ubuntu.sh",
     "postinstall": "node scripts/install.js",
-    "lint": "jshint lib/*.js scripts/*.js bin/*.js test/*.js; echo"
+    "lint": "jshint lib/*.js scripts/*.js bin/*.js test/*.js; echo",
+    "boil": "baldrick --do tmp/balders.sh --when lib/*.js docs/*.hbs ../handlebars-array/lib/*.js ../jsdoc-to-markdown/jsdoc-template/publish.js ../jsdoc-to-markdown/lib/*.js ../jsdoc-to-markdown/partials/*.hbs --change"
   },
   "repository": "https://github.com/75lb/handbrake-js.git",
   "dependencies": {

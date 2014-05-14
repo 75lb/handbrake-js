@@ -1,5 +1,5 @@
 [![view on npm](http://img.shields.io/npm/v/handbrake-js.svg)](https://www.npmjs.org/package/handbrake-js)
-![npm module downloads per month](http://img.shields.io/npm/dm/handbrake-js.svg)
+[![npm module downloads per month](http://img.shields.io/npm/dm/handbrake-js.svg)](https://www.npmjs.org/package/handbrake-js)
 [![Build Status](https://travis-ci.org/75lb/handbrake-js.svg?branch=master)](https://travis-ci.org/75lb/handbrake-js)
 [![Dependency Status](https://david-dm.org/75lb/handbrake-js.svg)](https://david-dm.org/75lb/handbrake-js)
 ![Analytics](https://ga-beacon.appspot.com/UA-27725889-6/handbrake-js/README.md?pixel)
@@ -54,7 +54,7 @@ $ handbrake --input "some episode.avi" --output "some episode.mp4" --preset Norm
 handbrake-js package API
 
 
-###hbjs.spawn(options, mocks)
+###hbjs.spawn(options, [mocks])
 Spawns a HandbrakeCLI process with the supplied [options](https://trac.handbrake.fr/wiki/CLIGuide), returning an instance of `Handbrake` on which you can listen for events.
 
 - options `Object | Array` [Options](https://trac.handbrake.fr/wiki/CLIGuide) to pass directly to HandbrakeCLI  
@@ -65,11 +65,13 @@ Spawns a HandbrakeCLI process with the supplied [options](https://trac.handbrake
 
 
 ###Examples
+```js
 var handbrakeJs = require("handbrake-js");
 
 handbrakeJs.spawn(options)
     .on("error", console.error)
     .on("output", console.log);
+```
 
 
 ##class: Handbrake
