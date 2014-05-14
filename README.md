@@ -6,7 +6,7 @@
 
 handbrake-js
 ============
-Handbrake-js is a [node.js](http://nodejs.org) module wrapping [Handbrake](http://handbrake.fr) (v0.9.9) with a Javascript API, documented below. It's primary purpose is to bring video transcoding to your app.
+Handbrake-js is a [node.js](http://nodejs.org) module wrapping [Handbrake](http://handbrake.fr) (v0.9.9) with a Javascript API, documented below.
 
 Tested on Mac OSX, Ubuntu 14, Windows XP, Windows 8.1.
 
@@ -16,14 +16,26 @@ System Requirements
 -------------------
 Just [node.js](http://nodejs.org). Every else is installed automatically.
 
-*Mac / Linux users may need to run either of the following commands with `sudo`*.
-
 As a library 
 ------------
 Move into your project directory then run: 
 ```sh
 $ npm install handbrake-js --save
 ```
+*Mac / Linux users may need to run with `sudo`*.
+
+Now you can being encoding from your app. 
+
+```js
+var hbjs = require("handbrake-js");
+
+hbjs.spawn({ input: "dope shit.avi", output: "dope shit.m4v" })
+  .on("error", handleError)
+  .on("progress", function(progress){
+    console.log("Percent complete: %s, ETA: %s", progress.percentComplete, progress.eta);
+  });
+```
+
 
 As a command-line app
 ---------------------
@@ -31,6 +43,7 @@ From any directory run the following:
 ```sh
 $ npm install -g handbrake-js
 ```
+*Mac / Linux users may need to run with `sudo`*.
 
 Now, you can call `handbrake` as you would HandbrakeCLI, using all the usual [options](https://trac.handbrake.fr/wiki/CLIGuide). This command will transcode an AVI to the more universal H.264 (mp4):
 ```sh
