@@ -5,7 +5,7 @@
 ![Analytics](https://ga-beacon.appspot.com/UA-27725889-6/handbrake-js/README.md?pixel)
 
 #handbrake-js
-Handbrake-js is [Handbrake](http://handbrake.fr) for [node.js](http://nodejs.org). Funnily enough. It aspires to provide a lean and stable foundation for building video transcoding software.
+Handbrake-js is [Handbrake](http://handbrake.fr) for [node.js](http://nodejs.org), funnily enough. It aspires to provide a lean and stable foundation for building video transcoding software.
 
 Tested on Mac OSX, Ubuntu 14, Windows XP, Windows 8.1.
 
@@ -44,9 +44,11 @@ $ npm install -g handbrake-js
 ```
 *Mac / Linux users may need to run with `sudo`*.
 
-Now, you can call `handbrake` as you would HandbrakeCLI, using all the usual [options](https://trac.handbrake.fr/wiki/CLIGuide). This command will transcode an AVI to the more universal H.264 (mp4):
+Now, you can call `handbrake` as you would HandbrakeCLI, using all the usual [options](https://trac.handbrake.fr/wiki/CLIGuide). By default, just statistics are output, passing `--verbose` prints the raw HandbrakeCLI output. This command will transcode an AVI to the more universal H.264 (mp4):
 ```sh
 $ handbrake --input "some episode.avi" --output "some episode.mp4" --preset Normal
+Task      % done     FPS       Avg FPS   ETA
+Encoding  1.07       131.76    158.12    00h21m11s
 ```
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
