@@ -4,20 +4,16 @@
 [![Dependency Status](https://david-dm.org/75lb/handbrake-js.svg)](https://david-dm.org/75lb/handbrake-js)
 ![Analytics](https://ga-beacon.appspot.com/UA-27725889-6/handbrake-js/README.md?pixel)
 
-handbrake-js
-============
+#handbrake-js
 Handbrake-js is a [node.js](http://nodejs.org) module wrapping [Handbrake](http://handbrake.fr) (v0.9.9) with a Javascript API, documented below.
 
 Tested on Mac OSX, Ubuntu 14, Windows XP, Windows 8.1.
 
-Installation
-============
-System Requirements
--------------------
+##Installation
+###System Requirements
 Just [node.js](http://nodejs.org). Every else is installed automatically.
 
-As a library 
-------------
+###As a library 
 Move into your project directory then run: 
 ```sh
 $ npm install handbrake-js --save
@@ -41,10 +37,7 @@ hbjs.spawn({ input: "dope shit.avi", output: "dope shit.m4v", preset: "Android" 
     );
   });
 ```
-
-
-As a command-line app
----------------------
+###As a command-line app
 From any directory run the following:
 ```sh
 $ npm install -g handbrake-js
