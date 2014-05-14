@@ -25,9 +25,9 @@ Now you can begin encoding from your app.
 ```js
 var hbjs = require("handbrake-js");
 
-hbjs.spawn({ input: "dope shit.avi", output: "dope shit.m4v", preset: "Android" })
+hbjs.spawn({ input: "dope shit.avi", output: "dope shit.m4v" })
   .on("error", function(err){
-    // handle exception (invalid user input, no video found etc)
+    // invalid user input, no video found etc
   })
   .on("progress", function(progress){
     console.log(
