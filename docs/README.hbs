@@ -50,25 +50,27 @@ $ handbrake --input "some episode.avi" --output "some episode.mp4" --preset Norm
 ```
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-
-{{#each (where this kind="module")}}
-#{{name}} API Documentation
-{{{description}}}
+#API Documentation
+{{#each (where this kind="module")}}{{{description}}}
 {{/each}}
 
-{{#each (where this memberof="module:handbrake-js")}}
-###hbjs.{{{name}}}({{join (pluck params "name") ", "}})
-{{{description}}}
-
-{{#each params}}{{{name}}} { {{{join type.names "|"}}} } - {{{description}}}
-{{/each}}
-{{/each}}
+{{>functions jsdocdata=this memberof="module:handbrake-js" namePrefix="hbjs"}}
 
 
 ##class: Handbrake
-{{#each (where this memberof="Handbrake" kind="function")}}
-##hbjs.{{{name}}}({{join (pluck params "name") ", "}})
+{{#findWhere this kind="class" name="Handbrake"}}{{{classdesc}}}
+
+Extends: {{{join augments ", "}}}
+{{/findWhere}}
+
+{{#each (where this memberof="Handbrake" kind="member")}}###handbrake.{{{name}}}
 {{{description}}}
-{{#each params}}{{{name}}} { {{{join type.names "|"}}} } - {{{description}}}
 {{/each}}
+
+{{#each (where this memberof="Handbrake" kind="function")}}###handbrake.{{{name}}}({{join (pluck params "name") ", "}})
+{{{description}}}
+{{#each params}}{{{name}}} { {{~{join type.names "|"}~}} } - {{{description}}}  
+{{/each}}
+###Examples
+{{#each examples}}{{{this}}}{{/each}}
 {{/each}}

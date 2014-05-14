@@ -50,27 +50,43 @@ $ handbrake --input "some episode.avi" --output "some episode.mp4" --preset Norm
 ```
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-
-
-#handbrake-js API Documentation
+#API Documentation
 handbrake-js package API
 
 
-
 ###hbjs.spawn(options, mocks)
-Spawns a HandbrakeCLI process with the supplied [options](https://trac.handbrake.fr/wiki/CLIGuide), returning an instance of `Handbrake` which you can monitor for events.
+Spawns a HandbrakeCLI process with the supplied [options](https://trac.handbrake.fr/wiki/CLIGuide), returning an instance of `Handbrake` on which you can listen for events.
+options {Object|Array} - [Options](https://trac.handbrake.fr/wiki/CLIGuide) to pass directly to HandbrakeCLI  
+mocks {Object} - mocks - Optional mock objects, for testing  
 
-All errors are delivered via the "error" event.
 
-options { Object|Array } - [Options](https://trac.handbrake.fr/wiki/CLIGuide) to pass directly to HandbrakeCLI
-mocks { Object } - mocks - Optional mock objects, for testing
+###Examples
+var handbrakeJs = require("handbrake-js");
+
+handbrakeJs.spawn(options)
+    .on("error", console.error)
+    .on("output", console.log);
 
 
 
 
 ##class: Handbrake
+A thin wrapper on the handbrakeCLI child_process handle
 
-##hbjs.run()
+Extends: EventEmitter
+
+
+###handbrake.allOutput
+all handbrakeCLI output
+###handbrake.inProgress
+true when encoding
+###handbrake.options
+the options to encode with
+
+
+###handbrake.run()
 begin the encode.. attach desired listeners before running
+
+###Examples
 
 
