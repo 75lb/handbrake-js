@@ -40,10 +40,23 @@ $ handbrake --input "some episode.avi" --output "some episode.mp4" --preset Norm
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 {{#each (where this kind="module")}}
-#{{name}}
+#{{name}} API Documentation
 {{{description}}}
 {{/each}}
 
 {{#each (where this memberof="module:handbrake-js")}}
-{{name}}
+###hbjs.{{{name}}}({{join (pluck params "name") ", "}})
+{{{description}}}
+
+{{#each params}}{{{name}}} { {{{join type.names "|"}}} } - {{{description}}}
+{{/each}}
+{{/each}}
+
+
+##class: Handbrake
+{{#each (where this memberof="Handbrake" kind="function")}}
+##hbjs.{{{name}}}({{join (pluck params "name") ", "}})
+{{{description}}}
+{{#each params}}{{{name}}} { {{{join type.names "|"}}} } - {{{description}}}
+{{/each}}
 {{/each}}
