@@ -86,8 +86,6 @@ A thin wrapper on the handbrakeCLI child_process handle
 
 ###handbrake.allOutput
 A `String` containing all handbrakeCLI output
-###handbrake.inProgress
-`true` while encoding
 ###handbrake.options
 the options HandbrakeCLI was spawned with
 
