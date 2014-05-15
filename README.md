@@ -93,7 +93,10 @@ the options HandbrakeCLI was spawned with
 
 
 ###event: "start"
-Fired when encoding begins
+Fired as HandbrakeCLI is launched. Nothing has happened yet.
+
+###event: "begin"
+Fired when encoding begins. If you're expecting an encode and this never fired, something went wrong.
 
 ###event: "progress"
 Fired at regular intervals passing a `progress` object containing:
@@ -118,8 +121,11 @@ All operational exceptions are delivered via this event. Emits one of five types
 - HandbrakeCLICrash
 - InvalidOption
 
+###event: "end"
+Fired on successful completion of an encoding task. Always follows a `begin` event, with some `progress` in between.
+
 ###event: "complete"
-Fired on successful completion
+Fired when HandbrakeCLI ended cleanly. This doesn't necessarily mean your encode completed as planned..
 
 
 
