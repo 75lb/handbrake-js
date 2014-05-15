@@ -3,6 +3,7 @@
   "author": "Lloyd Brookes <75pound@gmail.com>",
   "version": "1.0.0-alpha.8",
   "description": "Handbrake for node.js. Brings video encoding.",
+  "repository": "https://github.com/75lb/handbrake-js.git",
   "main": "./lib/handbrake-js.js",
   "bin": {
     "handbrake": "bin/cli.js"
@@ -23,12 +24,10 @@
   ],
   "scripts": {
     "test": "tape test/*.js",
-    "ubuntu-setup": "./scripts/install-ubuntu.sh",
     "postinstall": "node scripts/install.js",
     "lint": "jshint lib/*.js scripts/*.js bin/*.js test/*.js; echo",
-    "boil": "baldrick --do tmp/balders.sh --when lib/*.js docs/*.hbs ../handlebars-array/lib/*.js ../jsdoc-to-markdown/jsdoc-template/publish.js ../jsdoc-to-markdown/lib/*.js ../jsdoc-to-markdown/partials/*.hbs --change"
+    "docs": "baldrick --do 'jsdoc2md -t docs/README.hbs lib/*.js > README.md' --when lib/*.js docs/*.hbs --change"
   },
-  "repository": "https://github.com/75lb/handbrake-js.git",
   "dependencies": {
     "console-dope": "~0.3.0",
     "more-fs": "~0.3.0",
