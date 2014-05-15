@@ -1,7 +1,7 @@
 {
   "name": "handbrake-js",
   "author": "Lloyd Brookes <75pound@gmail.com>",
-  "version": "1.0.0-alpha.7",
+  "version": "1.0.0-alpha.8",
   "description": "Handbrake for node.js. Brings video encoding.",
   "main": "./lib/handbrake-js.js",
   "bin": {
@@ -16,7 +16,11 @@
   "engines": {
     "node": ">=0.10.0"
   },
-  "files": ["bin/cli.js", "lib", "scripts"],
+  "files": [
+    "bin/cli.js",
+    "lib",
+    "scripts"
+  ],
   "scripts": {
     "test": "tape test/*.js",
     "ubuntu-setup": "./scripts/install-ubuntu.sh",
