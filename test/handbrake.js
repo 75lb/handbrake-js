@@ -56,6 +56,28 @@ test("HandbrakeProcess, progress event: encoding (long)", function(t){
     });
 });
 
+test("HandbrakeProcess, progress event: fragmented", function(t){
+    t.plan(1);
+    var handbrake = handbrakeJs.spawn({ input: "blah", output: "blah" }, { cp: mockCp });
+    handbrake.on("progress", function(progress){
+        t.deepEqual(progress, {
+            taskNumber: 1,
+            taskCount: 1,
+            percentComplete: 45.46,
+            fps: 105.33,
+            avgFps: 106.58,
+            eta: "00h00m05s",
+            task: "Encoding"
+        });
+    });
+
+    process.nextTick(function(){
+        mockCp.lastHandle.stdout.emit("data", "\r");
+        mockCp.lastHandle.stdout.emit("data", "Encoding: task 1 of 1");
+        mockCp.lastHandle.stdout.emit("data", ", 45.46 % (105.33 fps, avg 106.58 fps, ETA 00h00m05s)");
+    });
+});
+
 test("HandbrakeProcess, progress event: muxing", function(t){
     t.plan(1);
     var handbrake = handbrakeJs.spawn({ input: "blah", output: "blah" }, { cp: mockCp });
