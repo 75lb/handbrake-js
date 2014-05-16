@@ -1,4 +1,4 @@
-var handbrakeJs = require(".."),
+var hbjs = require(".."),
     path = require("path");
 
 var options = {
@@ -6,6 +6,6 @@ var options = {
     output: "output.mp4"
 };
 
-handbrakeJs.spawn(options)
+hbjs.spawn(options)
     .on("error", console.error)
     .on("output", console.log);

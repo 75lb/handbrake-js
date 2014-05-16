@@ -2,7 +2,7 @@
 "use strict";
 
 var dope = require("console-dope"),
-    handbrakeJs = require("../lib/handbrake-js"),
+    hbjs = require("../lib/handbrake-js"),
     HandbrakeOptions = require("../lib/HandbrakeOptions");
 
 var handbrakeOptions = new HandbrakeOptions();
@@ -26,23 +26,25 @@ function onError(err){
 }
 
 if (handbrakeOptions.input && handbrakeOptions.output){
-    var handbrake = handbrakeJs.spawn(handbrakeOptions)
+    var handbrake = hbjs.spawn(handbrakeOptions)
         .on("error", onError)
-        .on("complete", function(){
-            dope.log();
-        });
+        .on("complete", dope.log);
 
     if (handbrakeOptions.verbose){
         handbrake.on("output", dope.write);
     } else {
-        handbrake.on("start", function(){
-            dope.bold.log("Task      % done     FPS       Avg FPS   ETA");
-        });
-        handbrake.on("progress", onProgress);
+        handbrake
+            .on("begin", function(){
+                dope.bold.log("Task      % done     FPS       Avg FPS   ETA");
+                this.began = true;
+            })
+            .on("progress", onProgress)
+            .on("complete", function(){
+                if (!this.began) dope.error(this.output);
+            });
     }
 } else {
-    handbrakeJs.spawn(handbrakeOptions)
+    hbjs.spawn(handbrakeOptions)
         .on("error", onError)
         .on("output", dope.write);
 }
-
