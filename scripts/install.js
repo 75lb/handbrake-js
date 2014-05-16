@@ -87,13 +87,6 @@ function install(installation){
         extractFile(installation.archive, installation.copyFrom, installation.copyTo, function(){
             console.log("HandbrakeCLI installation complete");
             fs.unlink(installation.archive);
-            
-            if (os.platform() === "linux"){
-                console.log("Linux users, handbrake-cli must be installed separately as the root user.")
-                console.log("If required, this command will install it: ")
-                console.log("sudo npm run ubuntu-setup");
-                return;
-            }
         });
     });
 }
@@ -119,5 +112,17 @@ switch(process.platform){
         break;
     case "win32":
         go(process.arch === "x64" ? win64 : win32);
+        break;
+    case "linux":
+        var msg =
+        "Linux users\n\
+        ============\n\
+        handbrake-cli must be installed separately as the root user.\n\
+        Ubuntu users can do this using the following command:\n\
+        $ sudo npm run ubuntu-setup\n\
+        \n\
+        For all issues regarding installation of HandbrakeCLI on Linux, consult the Handbrake website:\n\
+        http://handbrake.fr";
+        console.log(msg);
         break;
 }
