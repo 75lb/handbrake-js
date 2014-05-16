@@ -7,7 +7,7 @@ test("exception handling: HandbrakeCLI not found", function(t){
     t.plan(6);
 
     var handbrake = handbrakeJs.spawn(
-        { input: "blah", output: "blah" }, 
+        { input: "in", output: "out" }, 
         { HandbrakeCLIPath: "broken/path" }
     );
     handbrake.on("error", function(err){
@@ -16,20 +16,20 @@ test("exception handling: HandbrakeCLI not found", function(t){
         t.equal(err.HandbrakeCLIPath, "broken/path");
         t.equal(err.errno, "ENOENT");
         t.equal(err.spawnmessage, "spawn ENOENT");
-        t.deepEqual(err.options, { input: "blah", output: "blah" });
+        t.deepEqual(err.options, { input: "in", output: "out" });
     });
 });
 
 test("exception handling: HandbrakeCLIError", function(t){
     t.plan(1);
 
-    var handbrake = handbrakeJs.spawn({ input: "blah", output: "blah" }, { cp: mockCp });
+    var handbrake = handbrakeJs.spawn({ input: "in", output: "out" }, { cp: mockCp });
     handbrake.on("error", function(err){
         t.deepEqual(err, {
             name: "HandbrakeCLIError",
             message: "Handbrake failed with error code: 13",
             errno: 13,
-            options: { input: "blah", output: "blah" },
+            options: { input: "in", output: "out" },
             output: ""
         });
     });
@@ -42,12 +42,12 @@ test("exception handling: HandbrakeCLIError", function(t){
 test("exception handling: NoTitleFound error", function(t){
     t.plan(1);
 
-    var handbrake = handbrakeJs.spawn({ input: "blah", output: "blah" }, { cp: mockCp });
+    var handbrake = handbrakeJs.spawn({ input: "in", output: "out" }, { cp: mockCp });
     handbrake.on("error", function(err){
         t.deepEqual(err, {
             name: "NoTitleFound",
             message: "Encode failed, not a video file",
-            options: { input: "blah", output: "blah" },
+            options: { input: "in", output: "out" },
             output: "blah.No title found.blah."
         });
     });
@@ -63,12 +63,12 @@ test("exception handling: NoTitleFound error", function(t){
 test("exception handling: SegFault", function(t){
     t.plan(1);
 
-    var handbrake = handbrakeJs.spawn({ input: "blah", output: "blah" }, { cp: mockCp });
+    var handbrake = handbrakeJs.spawn({ input: "in", output: "out" }, { cp: mockCp });
     handbrake.on("error", function(err){
         t.deepEqual(err, {
             name: "HandbrakeCLICrash",
             message: "HandbrakeCLI crashed (Segmentation fault)",
-            options: { input: "blah", output: "blah" },
+            options: { input: "in", output: "out" },
             output: ""
         });
     });
