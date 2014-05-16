@@ -25,6 +25,7 @@
   "scripts": {
     "test": "tape test/*.js",
     "postinstall": "node scripts/install.js",
+    "ubuntu-setup": "node scripts/install-ubuntu.sh",
     "lint": "jshint lib/*.js scripts/*.js bin/*.js test/*.js; echo",
     "docs": "jsdoc2md -t docs/README.hbs lib/*.js > README.md",
     "watch": "baldrick --do 'jsdoc2md -t docs/README.hbs lib/*.js > README.md' --when lib/*.js docs/*.hbs --change"

@@ -10,11 +10,6 @@ var request = require("request"),
     os = require("os"),
     cp = require("child_process");
 
-if (os.platform() === "linux"){
-    cp.spawn(__dirname + "/install-ubuntu.sh", { stdio: "inherit" });
-    return;
-}
-
 var downloadPath = "http://sourceforge.net/projects/handbrake/files/0.9.9/HandBrake-0.9.9-%s/download";
 
 var win32 = {
@@ -92,6 +87,13 @@ function install(installation){
         extractFile(installation.archive, installation.copyFrom, installation.copyTo, function(){
             console.log("HandbrakeCLI installation complete");
             fs.unlink(installation.archive);
+            
+            if (os.platform() === "linux"){
+                console.log("Linux users, handbrake-cli must be installed separately as the root user.")
+                console.log("If required, this command will install it: ")
+                console.log("sudo npm run ubuntu-setup");
+                return;
+            }
         });
     });
 }
