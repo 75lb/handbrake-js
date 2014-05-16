@@ -67,14 +67,14 @@ Spawns a HandbrakeCLI process with the supplied [options](https://trac.handbrake
 - mocks `Object` Optional mock objects, for testing  
 
 
-**Returns**: A `Handbrake` instance on which you can listen for events.
+**Returns**: A `Handbrake` instance
 
 
 ####Examples
 ```js
-var handbrakeJs = require("handbrake-js");
+var hbjs = require("handbrake-js");
 
-handbrakeJs.spawn(options)
+hbjs.spawn(options)
     .on("error", console.error)
     .on("output", console.log);
 ```
@@ -116,19 +116,19 @@ Fired at regular intervals passing a `progress` object containing:
 An aggregate of `stdout` and `stderr` output from the underlying HandbrakeCLI process.
 
 ###event: "error"
-All operational exceptions are delivered via this event. Emits one of five types of `Error` instance: 
+All operational exceptions are delivered via this event. Passes an `Error` instance, the `name` value of which will be one of: 
 
 - HandbrakeCLINotFound
 - HandbrakeCLIError
 - NoTitleFound
 - HandbrakeCLICrash
-- InvalidOption
+- ValidationError
 
 ###event: "end"
 Fired on successful completion of an encoding task. Always follows a `begin` event, with some `progress` in between.
 
 ###event: "complete"
-Fired when HandbrakeCLI ended cleanly. This doesn't necessarily mean your encode completed as planned..
+Fired when HandbrakeCLI exited cleanly. This does not necessarily mean your encode completed as planned..
 
 
 
