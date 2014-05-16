@@ -77,7 +77,7 @@ test("exception handling: SegFault", function(t){
     });
 });
 
-test("exception handling: Invalid option", function(t){
+test("validation: Invalid option", function(t){
     t.plan(1);
 
     var handbrake = handbrakeJs.spawn({ aksfnkasn: true }, { cp: mockCp });
@@ -89,4 +89,18 @@ test("exception handling: Invalid option", function(t){
             output: ""
         });
     });
+});
+
+test("validation: input === output", function(t){
+    t.plan(1);
+
+    handbrakeJs.spawn({ input: "blah", output: "blah" }, { cp: mockCp })
+        .on("error", function(err){
+            t.deepEqual(err, {
+                name: "ValidationError",
+                message: "input and output paths are the same",
+                options: { input: "blah", output: "blah" },
+                output: ""
+            });
+        });
 });
