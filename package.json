@@ -34,7 +34,7 @@
     "console-dope": "~0.3.0",
     "more-fs": "~0.3.0",
     "nature": "~0.4.0",
-    "request": "~2.34",
+    "request": "^2.34",
     "unzip": "~0.1"
   },
   "devDependencies": {
