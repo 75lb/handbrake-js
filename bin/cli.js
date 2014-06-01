@@ -2,15 +2,10 @@
 "use strict";
 
 var dope = require("console-dope"),
-    hbjs = require("../lib/handbrake-js"),
-    HandbrakeOptions = require("../lib/HandbrakeOptions");
+    cliArgs = require("command-line-args"),
+    hbjs = require("../lib/handbrake-js");
 
-var handbrakeOptions = new HandbrakeOptions();
-try {
-    handbrakeOptions.set(process.argv);
-} catch(err){
-    onError(err);
-}
+var handbrakeOptions = cliArgs(hbjs.cliOptions).parse().handbrake;
 
 function onProgress(progress){
     dope.column(1).write(progress.task + "  ");
