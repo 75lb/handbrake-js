@@ -6,6 +6,8 @@ var options = {
     output: "output.mp4"
 };
 
-hbjs.spawn(options)
-    .on("error", console.error)
-    .on("output", console.log);
+hbjs.exec(options, function(err, stdout, stderr){
+    if (err) throw err;
+    console.log("STDERR:", stderr);
+    console.log("STDOUT:", stdout);
+});
