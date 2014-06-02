@@ -1,7 +1,8 @@
 "use strict";
 var test = require("tape"),
     cp = require("child_process"),
-    fs = require("fs");
+    fs = require("fs"),
+    hbjs = require("../lib/handbrake-js");
 
 test("cli: --preset-list", function(t){
     t.plan(1);
@@ -25,6 +26,17 @@ test("cli: simple encode", function(t){
         if (err) {
             t.fail(stderr);
         } else {
+            t.pass();
+        }
+    });
+});
+
+test("exec: --preset-list", function(t){
+    t.plan(1);
+    hbjs.exec({ "preset-list": true }, function(err, stdout, stderr){
+        if (err) {
+            t.fail(stderr);
+        } else if (/Devices/.test(stdout)){
             t.pass();
         }
     });

@@ -1,11 +1,11 @@
 "use strict";
 var test = require("tape"),
-    handbrakeJs = require("../lib/handbrake-js"),
+    hbjs = require("../lib/handbrake-js"),
     mockCp = require("./mock/child_process");
 
 test("Handbrake, start event", function(t){
     t.plan(1);
-    var handbrake = handbrakeJs.spawn({ input: "in", output: "out" }, { cp: mockCp });
+    var handbrake = hbjs.spawn({ input: "in", output: "out" }, { cp: mockCp });
     handbrake.on("start", function(){
         t.pass();
     });
@@ -18,7 +18,7 @@ test("Handbrake, start event", function(t){
 
 test("Handbrake, begin event", function(t){
     t.plan(1);
-    var handbrake = handbrakeJs.spawn({ input: "in", output: "out" }, { cp: mockCp });
+    var handbrake = hbjs.spawn({ input: "in", output: "out" }, { cp: mockCp });
     handbrake.on("begin", function(){
         t.pass();
     });
@@ -31,7 +31,7 @@ test("Handbrake, begin event", function(t){
 
 test("Handbrake, progress event: encoding (short)", function(t){
     t.plan(2);
-    var handbrake = handbrakeJs.spawn({ input: "in", output: "out" }, { cp: mockCp });
+    var handbrake = hbjs.spawn({ input: "in", output: "out" }, { cp: mockCp });
     handbrake.on("progress", function(progress){
         t.deepEqual(progress, {
             taskNumber: 1,
@@ -52,7 +52,7 @@ test("Handbrake, progress event: encoding (short)", function(t){
 
 test("HandbrakeProcess, progress event: encoding (long)", function(t){
     t.plan(2);
-    var handbrake = handbrakeJs.spawn({ input: "in", output: "out" }, { cp: mockCp });
+    var handbrake = hbjs.spawn({ input: "in", output: "out" }, { cp: mockCp });
     handbrake.on("progress", function(progress){
         t.deepEqual(progress, {
             taskNumber: 1,
@@ -73,7 +73,7 @@ test("HandbrakeProcess, progress event: encoding (long)", function(t){
 
 test("HandbrakeProcess, progress event: fragmented", function(t){
     t.plan(1);
-    var handbrake = handbrakeJs.spawn({ input: "in", output: "out" }, { cp: mockCp });
+    var handbrake = hbjs.spawn({ input: "in", output: "out" }, { cp: mockCp });
     handbrake.on("progress", function(progress){
         t.deepEqual(progress, {
             taskNumber: 1,
@@ -95,7 +95,7 @@ test("HandbrakeProcess, progress event: fragmented", function(t){
 
 test("HandbrakeProcess, progress event: muxing", function(t){
     t.plan(1);
-    var handbrake = handbrakeJs.spawn({ input: "in", output: "out" }, { cp: mockCp });
+    var handbrake = hbjs.spawn({ input: "in", output: "out" }, { cp: mockCp });
     handbrake.on("progress", function(progress){
         t.deepEqual(progress, {
             taskNumber: 0,
@@ -115,7 +115,7 @@ test("HandbrakeProcess, progress event: muxing", function(t){
 
 test("HandbrakeProcess, end event (without encode)", function(t){
     t.plan(1);
-    var handbrake = handbrakeJs.spawn({ help: true }, { cp: mockCp });
+    var handbrake = hbjs.spawn({ help: true }, { cp: mockCp });
     handbrake.on("end", function(){
         t.fail();
     });
@@ -128,7 +128,7 @@ test("HandbrakeProcess, end event (without encode)", function(t){
 
 test("HandbrakeProcess, end event (with encode)", function(t){
     t.plan(1);
-    var handbrake = handbrakeJs.spawn({ help: true }, { cp: mockCp });
+    var handbrake = hbjs.spawn({ help: true }, { cp: mockCp });
     handbrake.on("end", function(){
         t.pass();
     });
@@ -141,7 +141,7 @@ test("HandbrakeProcess, end event (with encode)", function(t){
 
 test("HandbrakeProcess, complete event", function(t){
     t.plan(1);
-    var handbrake = handbrakeJs.spawn({ input: "in", output: "out" }, { cp: mockCp });
+    var handbrake = hbjs.spawn({ input: "in", output: "out" }, { cp: mockCp });
     handbrake.on("complete", function(){
         t.pass();
     });
@@ -153,7 +153,7 @@ test("HandbrakeProcess, complete event", function(t){
 
 test("HandbrakeProcess, output event (stdout)", function(t){
     t.plan(1);
-    var handbrake = handbrakeJs.spawn({ input: "in", output: "out" }, { cp: mockCp });
+    var handbrake = hbjs.spawn({ input: "in", output: "out" }, { cp: mockCp });
     handbrake.on("output", function(output){
         t.equal(output, "clive, yeah?");
     });
@@ -165,7 +165,7 @@ test("HandbrakeProcess, output event (stdout)", function(t){
 
 test("HandbrakeProcess, output event (stderr)", function(t){
     t.plan(1);
-    var handbrake = handbrakeJs.spawn({ input: "in", output: "out" }, { cp: mockCp });
+    var handbrake = hbjs.spawn({ input: "in", output: "out" }, { cp: mockCp });
     handbrake.on("output", function(output){
         t.equal(output, "clive, yeah?", output);
     });
