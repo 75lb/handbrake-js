@@ -107,7 +107,7 @@ hbjs.exec({ preset-list: true }, function(err, stdout, stderr){
 
 
 ##class: Handbrake
-A thin wrapper on the handbrakeCLI child_process handle
+A thin wrapper on the handbrakeCLI child_process handle. An instance of this class is returned by `hbjs.spawn()`.
 
 **Extends**: `EventEmitter`
 
