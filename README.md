@@ -103,6 +103,7 @@ var handbrake = require("handbrake-js");
 handbrake.exec({ preset-list: true }, function(err, stdout, stderr){
     if (err) throw err;
     console.log(stdout);
+```
 });
 ```
 ```
