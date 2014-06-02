@@ -85,6 +85,27 @@ hbjs.spawn(options)
     .on("error", console.error)
     .on("output", console.log);
 ```
+###hbjs.exec(options, [onComplete])
+Runs HandbrakeCLI with the supplied [options](https://trac.handbrake.fr/wiki/CLIGuide) calling the supplied callback on completion. The exec method is best suited for short duration tasks where you can wait until completion for the output.
+
+
+- options `Object` [Options](https://trac.handbrake.fr/wiki/CLIGuide) to pass directly to HandbrakeCLI  
+- onComplete `function` If passed, `onComplete(err, stdout, stderr)` will be called on completion, `stdout` and `stderr` being strings containing the HandbrakeCLI output.  
+
+
+
+
+####Examples
+```js
+```js
+var handbrake = require("handbrake-js");
+
+handbrake.exec({ preset-list: true }, function(err, stdout, stderr){
+    if (err) throw err;
+    console.log(stdout);
+});
+```
+```
 
 
 ##class: Handbrake
@@ -97,7 +118,7 @@ A thin wrapper on the handbrakeCLI child_process handle
 ###handbrake.output
 A `String` containing all handbrakeCLI output
 ###handbrake.options
-the options HandbrakeCLI was spawned with
+the options HandbrakeCLI will be spawned with
 
 
 
@@ -123,7 +144,7 @@ Fired at regular intervals passing a `progress` object containing:
 An aggregate of `stdout` and `stderr` output from the underlying HandbrakeCLI process.
 
 ###event: "error"
-All operational exceptions are delivered via this event. Passes an `Error` instance, the `name` value of which will be one of: 
+All operational exceptions are delivered via this event. Passes an `Error` instance, the `name` value of which will be one of:
 
 - HandbrakeCLINotFound
 - HandbrakeCLIError

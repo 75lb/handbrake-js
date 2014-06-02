@@ -6,9 +6,7 @@ var request = require("request"),
     util = require("util"),
     fs = require("fs"),
     mfs = require("more-fs"),
-    path = require("path"),
-    os = require("os"),
-    cp = require("child_process");
+    path = require("path");
 
 var downloadPath = "http://sourceforge.net/projects/handbrake/files/0.9.9/HandBrake-0.9.9-%s/download";
 
