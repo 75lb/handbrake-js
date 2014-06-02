@@ -97,15 +97,12 @@ Runs HandbrakeCLI with the supplied [options](https://trac.handbrake.fr/wiki/CLI
 
 ####Examples
 ```js
-```js
 var handbrake = require("handbrake-js");
 
 handbrake.exec({ preset-list: true }, function(err, stdout, stderr){
     if (err) throw err;
     console.log(stdout);
-```
 });
-```
 ```
 
 
