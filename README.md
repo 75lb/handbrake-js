@@ -61,17 +61,23 @@ Task      % done     FPS       Avg FPS   ETA
 Encoding  1.07       131.76    158.12    00h21m11s
 ```
 
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 #handbrake-js API
 Handbrake for node.js.
 
+####Examples
+```js
+var hbjs = require("handbrake-js");
+```
 
 
 
 
 
-###handbrake-js.spawn(options)
+
+
+
+###hbjs.spawn(options)
 Spawns a HandbrakeCLI process with the supplied [options](https://trac.handbrake.fr/wiki/CLIGuide), returning an instance of `Handbrake` on which you can listen for events.
 
 
@@ -91,7 +97,7 @@ hbjs.spawn(options)
 ```
 
 
-###handbrake-js.exec(options, [onComplete])
+###hbjs.exec(options, [onComplete])
 Runs HandbrakeCLI with the supplied [options](https://trac.handbrake.fr/wiki/CLIGuide) calling the supplied callback on completion. The exec method is best suited for short duration tasks where you can wait until completion for the output.
 
 
@@ -123,11 +129,11 @@ A thin wrapper on the handbrakeCLI child_process handle. An instance of this cla
 
 
 
-###Handbrake.output
+###handbrake.output
 A `String` containing all handbrakeCLI output
 
 
-###Handbrake.options
+###handbrake.options
 the options HandbrakeCLI will be spawned with
 
 
