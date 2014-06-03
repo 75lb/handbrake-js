@@ -62,16 +62,20 @@ Encoding  1.07       131.76    158.12    00h21m11s
 ```
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-#API Documentation
+
+#handbrake-js API
 Handbrake for node.js.
 
 
-###hbjs.spawn(options, [mocks])
+
+
+
+
+###handbrake-js.spawn(options)
 Spawns a HandbrakeCLI process with the supplied [options](https://trac.handbrake.fr/wiki/CLIGuide), returning an instance of `Handbrake` on which you can listen for events.
 
 
 - options `Object | Array` [Options](https://trac.handbrake.fr/wiki/CLIGuide) to pass directly to HandbrakeCLI  
-- mocks `Object` Optional mock objects, for testing  
 
 
 **Returns**: A `Handbrake` instance
@@ -85,7 +89,9 @@ hbjs.spawn(options)
     .on("error", console.error)
     .on("output", console.log);
 ```
-###hbjs.exec(options, [onComplete])
+
+
+###handbrake-js.exec(options, [onComplete])
 Runs HandbrakeCLI with the supplied [options](https://trac.handbrake.fr/wiki/CLIGuide) calling the supplied callback on completion. The exec method is best suited for short duration tasks where you can wait until completion for the output.
 
 
@@ -106,6 +112,9 @@ hbjs.exec({ preset-list: true }, function(err, stdout, stderr){
 ```
 
 
+
+
+
 ##class: Handbrake
 A thin wrapper on the handbrakeCLI child_process handle. An instance of this class is returned by `hbjs.spawn()`.
 
@@ -113,10 +122,17 @@ A thin wrapper on the handbrakeCLI child_process handle. An instance of this cla
 
 
 
-###handbrake.output
+
+###Handbrake.output
 A `String` containing all handbrakeCLI output
-###handbrake.options
+
+
+###Handbrake.options
 the options HandbrakeCLI will be spawned with
+
+
+
+
 
 
 
@@ -124,8 +140,12 @@ the options HandbrakeCLI will be spawned with
 ###event: "start"
 Fired as HandbrakeCLI is launched. Nothing has happened yet.
 
+
+
 ###event: "begin"
 Fired when encoding begins. If you're expecting an encode and this never fired, something went wrong.
+
+
 
 ###event: "progress"
 Fired at regular intervals passing a `progress` object containing:
@@ -138,8 +158,12 @@ Fired at regular intervals passing a `progress` object containing:
 - eta `String` Estimated time until completion
 - task `String` Task description, either "Encoding" or "Muxing"
 
+
+
 ###event: "output"
 An aggregate of `stdout` and `stderr` output from the underlying HandbrakeCLI process.
+
+
 
 ###event: "error"
 All operational exceptions are delivered via this event. Passes an `Error` instance, the `name` value of which will be one of:
@@ -150,11 +174,19 @@ All operational exceptions are delivered via this event. Passes an `Error` insta
 - HandbrakeCLICrash
 - ValidationError
 
+
+
 ###event: "end"
 Fired on successful completion of an encoding task. Always follows a `begin` event, with some `progress` in between.
 
+
+
 ###event: "complete"
 Fired when HandbrakeCLI exited cleanly. This does not necessarily mean your encode completed as planned..
+
+
+
+
 
 
 
