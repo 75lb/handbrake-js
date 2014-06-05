@@ -61,11 +61,12 @@ Task      % done     FPS       Avg FPS   ETA
 Encoding  1.07       131.76    158.12    00h21m11s
 ```
 
+#API Reference
 
-#handbrake-js API
+#handbrake-js
 Handbrake for node.js.
 
-####Examples
+####Example
 ```js
 var hbjs = require("handbrake-js");
 ```
@@ -74,9 +75,20 @@ var hbjs = require("handbrake-js");
 
 
 
+* handbrake-js
+  * [spawn(options)](#module_handbrake-js.spawn)
+  * [exec(options, [onComplete])](#module_handbrake-js.exec)
+  * [Class: Handbrake](#module_handbrake-js.Handbrake)
+  
 
 
 
+
+
+
+
+
+<a name="module_handbrake-js.spawn"></a>
 ###hbjs.spawn(options)
 Spawns a HandbrakeCLI process with the supplied [options](https://trac.handbrake.fr/wiki/CLIGuide), returning an instance of `Handbrake` on which you can listen for events.
 
@@ -86,8 +98,7 @@ Spawns a HandbrakeCLI process with the supplied [options](https://trac.handbrake
 
 **Returns**: A `Handbrake` instance
 
-
-####Examples
+####Example
 ```js
 var hbjs = require("handbrake-js");
 
@@ -97,17 +108,19 @@ hbjs.spawn(options)
 ```
 
 
+
+<a name="module_handbrake-js.exec"></a>
 ###hbjs.exec(options, [onComplete])
 Runs HandbrakeCLI with the supplied [options](https://trac.handbrake.fr/wiki/CLIGuide) calling the supplied callback on completion. The exec method is best suited for short duration tasks where you can wait until completion for the output.
 
 
 - options `Object` [Options](https://trac.handbrake.fr/wiki/CLIGuide) to pass directly to HandbrakeCLI  
-- onComplete `function` If passed, `onComplete(err, stdout, stderr)` will be called on completion, `stdout` and `stderr` being strings containing the HandbrakeCLI output.  
+- [onComplete] `function` If passed, `onComplete(err, stdout, stderr)` will be called on completion, `stdout` and `stderr` being strings containing the HandbrakeCLI output.  
 
 
 
 
-####Examples
+####Example
 ```js
 var hbjs = require("handbrake-js");
 
@@ -121,6 +134,8 @@ hbjs.exec({ preset-list: true }, function(err, stdout, stderr){
 
 
 
+
+<a name="module_handbrake-js.Handbrake"></a>
 ##class: Handbrake
 A thin wrapper on the handbrakeCLI child_process handle. An instance of this class is returned by `hbjs.spawn()`.
 
@@ -129,10 +144,15 @@ A thin wrapper on the handbrakeCLI child_process handle. An instance of this cla
 
 
 
+
+
+
+<a name="module_handbrake-js.Handbrake#output"></a>
 ###handbrake.output
 A `String` containing all handbrakeCLI output
 
 
+<a name="module_handbrake-js.Handbrake#options"></a>
 ###handbrake.options
 the options HandbrakeCLI will be spawned with
 
@@ -189,6 +209,8 @@ Fired on successful completion of an encoding task. Always follows a `begin` eve
 
 ###event: "complete"
 Fired when HandbrakeCLI exited cleanly. This does not necessarily mean your encode completed as planned..
+
+
 
 
 
