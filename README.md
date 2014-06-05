@@ -63,7 +63,7 @@ Encoding  1.07       131.76    158.12    00h21m11s
 
 #API Reference
 
-#handbrake-js
+
 Handbrake for node.js.
 
 ####Example
@@ -73,14 +73,10 @@ var hbjs = require("handbrake-js");
 
 
 
-
-
-* handbrake-js
-  * [spawn(options)](#module_handbrake-js.spawn)
-  * [exec(options, [onComplete])](#module_handbrake-js.exec)
-  * [Class: Handbrake](#module_handbrake-js.Handbrake)
-  
-
+**Contents**
+* [spawn(options)](#module_handbrake-js.spawn)
+* [exec(options, [onComplete])](#module_handbrake-js.exec)
+* [Class: Handbrake](#module_handbrake-js.Handbrake)
 
 
 
@@ -209,8 +205,6 @@ Fired on successful completion of an encoding task. Always follows a `begin` eve
 
 ###event: "complete"
 Fired when HandbrakeCLI exited cleanly. This does not necessarily mean your encode completed as planned..
-
-
 
 
 
