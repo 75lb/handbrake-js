@@ -15,7 +15,7 @@ Handbrake-js is [Handbrake](http://handbrake.fr) for [node.js](http://nodejs.org
 
 
 ### Compatible Platforms
-Tested on Mac OSX, Ubuntu 14, Windows XP, Windows 8.1.
+Tested on Mac OSX, Ubuntu 14, Windows XP, Windows 7 and Windows 8.1.
 
 **Ubuntu 14.04 notice**: Transcoding to MP4 fails on Ubuntu since 14.04 [for this reason](https://forum.handbrake.fr/viewtopic.php?f=13&t=30044).
 
