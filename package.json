@@ -33,7 +33,7 @@
   "dependencies": {
     "command-line-args": "~0.2.0",
     "console-dope": "~0.3.0",
-    "more-fs": "~0.3.0",
+    "more-fs": "~0.4.0",
     "object-to-spawn-args": "~0.1",
     "request": "^2.34",
     "unzip": "~0.1"
