@@ -62,38 +62,27 @@ Encoding  1.07       131.76    158.12    00h21m11s
 ```
 
 #API Reference
-
-
+<a name="module_handbrake-js"></a>
 Handbrake for node.js.
 
+  
 ####Example
 ```js
 var hbjs = require("handbrake-js");
 ```
-
-
-
 **Contents**
 * [spawn(options)](#module_handbrake-js.spawn)
 * [exec(options, [onComplete])](#module_handbrake-js.exec)
 * [Class: Handbrake](#module_handbrake-js.Handbrake)
 
-
-
-
-
-
-
 <a name="module_handbrake-js.spawn"></a>
 ###hbjs.spawn(options)
-Spawns a HandbrakeCLI process with the supplied [options](https://trac.handbrake.fr/wiki/CLIGuide), returning an instance of `Handbrake` on which you can listen for events.
+Spawns a HandbrakeCLI process with the supplied [options](https://trac.handbrake.fr/wiki/CLIGuide#options), returning an instance of `Handbrake` on which you can listen for events.
 
 
-- options `Object | Array` [Options](https://trac.handbrake.fr/wiki/CLIGuide) to pass directly to HandbrakeCLI  
+- options `Object | Array` - [Options](https://trac.handbrake.fr/wiki/CLIGuide#options) to pass directly to HandbrakeCLI
 
-
-**Returns**: A `Handbrake` instance
-
+**Returns**: [Handbrake](#module_handbrake-js.Handbrake) - A `Handbrake` instance  
 ####Example
 ```js
 var hbjs = require("handbrake-js");
@@ -102,19 +91,13 @@ hbjs.spawn(options)
     .on("error", console.error)
     .on("output", console.log);
 ```
-
-
-
 <a name="module_handbrake-js.exec"></a>
 ###hbjs.exec(options, [onComplete])
-Runs HandbrakeCLI with the supplied [options](https://trac.handbrake.fr/wiki/CLIGuide) calling the supplied callback on completion. The exec method is best suited for short duration tasks where you can wait until completion for the output.
+Runs HandbrakeCLI with the supplied [options](https://trac.handbrake.fr/wiki/CLIGuide#options) calling the supplied callback on completion. The exec method is best suited for short duration tasks where you can wait until completion for the output.
 
 
-- options `Object` [Options](https://trac.handbrake.fr/wiki/CLIGuide) to pass directly to HandbrakeCLI  
-- [onComplete] `function` If passed, `onComplete(err, stdout, stderr)` will be called on completion, `stdout` and `stderr` being strings containing the HandbrakeCLI output.  
-
-
-
+- options `Object` - [Options](https://trac.handbrake.fr/wiki/CLIGuide#options) to pass directly to HandbrakeCLI
+- [onComplete] `function` - If passed, `onComplete(err, stdout, stderr)` will be called on completion, `stdout` and `stderr` being strings containing the HandbrakeCLI output.
 
 ####Example
 ```js
@@ -125,49 +108,28 @@ hbjs.exec({ preset-list: true }, function(err, stdout, stderr){
     console.log(stdout);
 });
 ```
-
-
-
-
-
-
 <a name="module_handbrake-js.Handbrake"></a>
+
 ##class: Handbrake
 A thin wrapper on the handbrakeCLI child_process handle. An instance of this class is returned by `hbjs.spawn()`.
 
-**Extends**: `EventEmitter`
-
-
-
-
-
-
-
+**Extends**: `EventEmitter`  
+**Scope**: inner class of [handbrake-js](#module_handbrake-js)  
 <a name="module_handbrake-js.Handbrake#output"></a>
 ###handbrake.output
 A `String` containing all handbrakeCLI output
 
-
+  
 <a name="module_handbrake-js.Handbrake#options"></a>
 ###handbrake.options
 the options HandbrakeCLI will be spawned with
 
-
-
-
-
-
-
-
+  
 ###event: "start"
 Fired as HandbrakeCLI is launched. Nothing has happened yet.
 
-
-
 ###event: "begin"
 Fired when encoding begins. If you're expecting an encode and this never fired, something went wrong.
-
-
 
 ###event: "progress"
 Fired at regular intervals passing a `progress` object containing:
@@ -180,12 +142,8 @@ Fired at regular intervals passing a `progress` object containing:
 - eta `String` Estimated time until completion
 - task `String` Task description, either "Encoding" or "Muxing"
 
-
-
 ###event: "output"
 An aggregate of `stdout` and `stderr` output from the underlying HandbrakeCLI process.
-
-
 
 ###event: "error"
 All operational exceptions are delivered via this event. Passes an `Error` instance, the `name` value of which will be one of:
@@ -196,19 +154,9 @@ All operational exceptions are delivered via this event. Passes an `Error` insta
 - HandbrakeCLICrash
 - ValidationError
 
-
-
 ###event: "end"
 Fired on successful completion of an encoding task. Always follows a `begin` event, with some `progress` in between.
 
-
-
 ###event: "complete"
 Fired when HandbrakeCLI exited cleanly. This does not necessarily mean your encode completed as planned..
-
-
-
-
-
-
 
