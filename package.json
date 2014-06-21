@@ -31,7 +31,7 @@
     "watch": "baldrick --do 'jsdoc2md -t jsdoc2md/README.hbs lib/*.js > README.md' --when lib/*.js jsdoc2md/*.hbs --change"
   },
   "dependencies": {
-    "command-line-args": "~0.2.0",
+    "command-line-args": "~0.3.0",
     "console-dope": "~0.3.0",
     "more-fs": "~0.4.0",
     "object-to-spawn-args": "~0.1",
@@ -39,6 +39,7 @@
     "unzip": "~0.1"
   },
   "devDependencies": {
+    "jsdoc-to-markdown": "^0.2.1",
     "tape": "^2.12.3"
   }
 }
