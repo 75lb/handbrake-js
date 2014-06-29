@@ -139,12 +139,15 @@ A `String` containing all handbrakeCLI output
 the options HandbrakeCLI will be spawned with
 
   
+<a name="module_handbrake-js.Handbrake#event_start"></a>
 ###event: "start"
 Fired as HandbrakeCLI is launched. Nothing has happened yet.
 
+<a name="module_handbrake-js.Handbrake#event_begin"></a>
 ###event: "begin"
 Fired when encoding begins. If you're expecting an encode and this never fired, something went wrong.
 
+<a name="module_handbrake-js.Handbrake#event_progress"></a>
 ###event: "progress"
 Fired at regular intervals passing a `progress` object containing:
 
@@ -156,9 +159,11 @@ Fired at regular intervals passing a `progress` object containing:
 - eta `String` Estimated time until completion
 - task `String` Task description, either "Encoding" or "Muxing"
 
+<a name="module_handbrake-js.Handbrake#event_output"></a>
 ###event: "output"
 An aggregate of `stdout` and `stderr` output from the underlying HandbrakeCLI process.
 
+<a name="module_handbrake-js.Handbrake#event_error"></a>
 ###event: "error"
 All operational exceptions are delivered via this event. Passes an `Error` instance, the `name` value of which will be one of:
 
@@ -168,9 +173,11 @@ All operational exceptions are delivered via this event. Passes an `Error` insta
 - HandbrakeCLICrash
 - ValidationError
 
+<a name="module_handbrake-js.Handbrake#event_end"></a>
 ###event: "end"
 Fired on successful completion of an encoding task. Always follows a `begin` event, with some `progress` in between.
 
+<a name="module_handbrake-js.Handbrake#event_complete"></a>
 ###event: "complete"
 Fired when HandbrakeCLI exited cleanly. This does not necessarily mean your encode completed as planned..
 
