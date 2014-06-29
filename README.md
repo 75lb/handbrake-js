@@ -63,27 +63,29 @@ Encoding  1.07       131.76    158.12    00h21m11s
 
 #API Reference
 <a name="module_handbrake-js"></a>
+
 Handbrake for node.js.
 
   
-####Example
+**Example**  
 ```js
 var hbjs = require("handbrake-js");
 ```
-**Contents**
+**Symbols**  
+
 * [spawn(options)](#module_handbrake-js.spawn)
 * [exec(options, [onComplete])](#module_handbrake-js.exec)
-* [Class: Handbrake](#module_handbrake-js.Handbrake)
 
 <a name="module_handbrake-js.spawn"></a>
 ###hbjs.spawn(options)
 Spawns a HandbrakeCLI process with the supplied [options](https://trac.handbrake.fr/wiki/CLIGuide#options), returning an instance of `Handbrake` on which you can listen for events.
 
+**Params**
 
-- options `Object | Array` - [Options](https://trac.handbrake.fr/wiki/CLIGuide#options) to pass directly to HandbrakeCLI
+- options `Object` | `Array` - [Options](https://trac.handbrake.fr/wiki/CLIGuide#options) to pass directly to HandbrakeCLI
 
 **Returns**: [Handbrake](#module_handbrake-js.Handbrake) - A `Handbrake` instance  
-####Example
+**Example**  
 ```js
 var hbjs = require("handbrake-js");
 
@@ -95,11 +97,12 @@ hbjs.spawn(options)
 ###hbjs.exec(options, [onComplete])
 Runs HandbrakeCLI with the supplied [options](https://trac.handbrake.fr/wiki/CLIGuide#options) calling the supplied callback on completion. The exec method is best suited for short duration tasks where you can wait until completion for the output.
 
+**Params**
 
 - options `Object` - [Options](https://trac.handbrake.fr/wiki/CLIGuide#options) to pass directly to HandbrakeCLI
 - [onComplete] `function` - If passed, `onComplete(err, stdout, stderr)` will be called on completion, `stdout` and `stderr` being strings containing the HandbrakeCLI output.
 
-####Example
+**Example**  
 ```js
 var hbjs = require("handbrake-js");
 
