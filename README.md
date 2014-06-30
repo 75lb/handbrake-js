@@ -113,7 +113,7 @@ hbjs.exec({ preset-list: true }, function(err, stdout, stderr){
 ```
 <a name="module_handbrake-js.Handbrake"></a>
 
-##\~class: Handbrake
+###\~class: Handbrake
 A thin wrapper on the handbrakeCLI child_process handle. An instance of this class is returned by `hbjs.spawn()`.
 
 **Extends**: `EventEmitter`  
@@ -130,25 +130,25 @@ A thin wrapper on the handbrakeCLI child_process handle. An instance of this cla
   * [event: "complete"](#module_handbrake-js.Handbrake#event_complete)
 
 <a name="module_handbrake-js.Handbrake#output"></a>
-###handbrake.output
+####handbrake.output
 A `String` containing all handbrakeCLI output
 
   
 <a name="module_handbrake-js.Handbrake#options"></a>
-###handbrake.options
+####handbrake.options
 the options HandbrakeCLI will be spawned with
 
   
 <a name="module_handbrake-js.Handbrake#event_start"></a>
-###event: "start"
+####event: "start"
 Fired as HandbrakeCLI is launched. Nothing has happened yet.
 
 <a name="module_handbrake-js.Handbrake#event_begin"></a>
-###event: "begin"
+####event: "begin"
 Fired when encoding begins. If you're expecting an encode and this never fired, something went wrong.
 
 <a name="module_handbrake-js.Handbrake#event_progress"></a>
-###event: "progress"
+####event: "progress"
 Fired at regular intervals passing a `progress` object containing:
 
 - taskNumber `Number` current task index
@@ -160,11 +160,11 @@ Fired at regular intervals passing a `progress` object containing:
 - task `String` Task description, either "Encoding" or "Muxing"
 
 <a name="module_handbrake-js.Handbrake#event_output"></a>
-###event: "output"
+####event: "output"
 An aggregate of `stdout` and `stderr` output from the underlying HandbrakeCLI process.
 
 <a name="module_handbrake-js.Handbrake#event_error"></a>
-###event: "error"
+####event: "error"
 All operational exceptions are delivered via this event. Passes an `Error` instance, the `name` value of which will be one of:
 
 - HandbrakeCLINotFound
@@ -174,10 +174,10 @@ All operational exceptions are delivered via this event. Passes an `Error` insta
 - ValidationError
 
 <a name="module_handbrake-js.Handbrake#event_end"></a>
-###event: "end"
+####event: "end"
 Fired on successful completion of an encoding task. Always follows a `begin` event, with some `progress` in between.
 
 <a name="module_handbrake-js.Handbrake#event_complete"></a>
-###event: "complete"
+####event: "complete"
 Fired when HandbrakeCLI exited cleanly. This does not necessarily mean your encode completed as planned..
 
