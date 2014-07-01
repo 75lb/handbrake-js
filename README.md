@@ -72,9 +72,18 @@ Handbrake for node.js.
 var hbjs = require("handbrake-js");
 ```
 **Symbols**  
-  * [hbjs.spawn(options)](#module_handbrake-js.spawn)
-  * [hbjs.exec(options, [onComplete])](#module_handbrake-js.exec)
-  * [\~class: Handbrake](#module_handbrake-js.Handbrake)
+* [hbjs.spawn(options)](#module_handbrake-js.spawn)
+* [hbjs.exec(options, [onComplete])](#module_handbrake-js.exec)
+* [class: \~hbjs.Handbrake](#module_handbrake-js.Handbrake)
+  * [handbrake.output](#module_handbrake-js.Handbrake#output)
+  * [handbrake.options](#module_handbrake-js.Handbrake#options)
+  * [event: "start"](#module_handbrake-js.Handbrake#event_start)
+  * [event: "begin"](#module_handbrake-js.Handbrake#event_begin)
+  * [event: "progress"](#module_handbrake-js.Handbrake#event_progress)
+  * [event: "output"](#module_handbrake-js.Handbrake#event_output)
+  * [event: "error"](#module_handbrake-js.Handbrake#event_error)
+  * [event: "end"](#module_handbrake-js.Handbrake#event_end)
+  * [event: "complete"](#module_handbrake-js.Handbrake#event_complete)
 
 <a name="module_handbrake-js.spawn"></a>
 ###hbjs.spawn(options)
@@ -113,7 +122,7 @@ hbjs.exec({ preset-list: true }, function(err, stdout, stderr){
 ```
 <a name="module_handbrake-js.Handbrake"></a>
 
-###\~class: Handbrake
+###class: \~hbjs.Handbrake
 A thin wrapper on the handbrakeCLI child_process handle. An instance of this class is returned by `hbjs.spawn()`.
 
 **Extends**: `EventEmitter`  
