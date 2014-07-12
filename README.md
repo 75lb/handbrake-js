@@ -87,7 +87,7 @@ var hbjs = require("handbrake-js");
 
 <a name="module_handbrake-js.cliOptions"></a>
 ##hbjs.cliOptions
-[Command-line-args](https://github.com/75lb/command-line-args) option definitions, useful if building a CLI.
+[Command-line-args](https://github.com/75lb/command-line-args) option definitions, useful when building a CLI.
 
 **Type**: `array`  
 <a name="module_handbrake-js.spawn"></a>
