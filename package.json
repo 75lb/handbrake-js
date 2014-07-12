@@ -39,7 +39,7 @@
     "unzip": "~0.1"
   },
   "devDependencies": {
-    "jsdoc-to-markdown": "^0.2.1",
+    "jsdoc-to-markdown": "^0.4.0",
     "tape": "^2.12.3"
   }
 }

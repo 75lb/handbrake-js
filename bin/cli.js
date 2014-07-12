@@ -5,7 +5,12 @@ var dope = require("console-dope"),
     cliArgs = require("command-line-args"),
     hbjs = require("../lib/handbrake-js");
 
-var handbrakeOptions = cliArgs(hbjs.cliOptions).parse().handbrake;
+var cli = cliArgs(hbjs.cliOptions);
+try {
+    var handbrakeOptions = cli.parse().handbrake;
+} catch(err){
+    halt(err);
+}
 
 function onProgress(progress){
     dope.column(1).write(progress.task + "  ");
@@ -15,14 +20,15 @@ function onProgress(progress){
     dope.column(42).write(progress.eta);
 }
 
-function onError(err){
+function halt(err){
     dope.red.error(err);
     process.exit(1);
 }
 
+/* user intends to encode, so attach progress reporter (unless --verbose was passed) */
 if (handbrakeOptions.input && handbrakeOptions.output){
     var handbrake = hbjs.spawn(handbrakeOptions)
-        .on("error", onError)
+        .on("error", halt)
         .on("complete", dope.log);
 
     if (handbrakeOptions.verbose){
@@ -38,8 +44,9 @@ if (handbrakeOptions.input && handbrakeOptions.output){
                 if (!this.began) dope.error(this.output);
             });
     }
+    
 } else {
     hbjs.spawn(handbrakeOptions)
-        .on("error", onError)
+        .on("error", halt)
         .on("output", dope.write);
 }
