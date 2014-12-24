@@ -68,6 +68,24 @@ Handbrake for node.js.
 ```js
 var hbjs = require("handbrake-js");
 ```
+
+* [handbrake-js](#module_handbrake-js)
+  * [class: ~Handbrake](#module_handbrake-js..Handbrake)
+    * _instance_
+      * [.output](#module_handbrake-js..Handbrake#output) → <code>string</code>
+      * [.options](#module_handbrake-js..Handbrake#options) → <code>object</code>
+    * _events_
+      * ["start"](#module_handbrake-js..Handbrake#event_start)
+      * ["begin"](#module_handbrake-js..Handbrake#event_begin)
+      * ["progress" (progress)](#module_handbrake-js..Handbrake#event_progress)
+      * ["output" (output)](#module_handbrake-js..Handbrake#event_output)
+      * ["error" (error)](#module_handbrake-js..Handbrake#event_error)
+      * ["end"](#module_handbrake-js..Handbrake#event_end)
+      * ["complete"](#module_handbrake-js..Handbrake#event_complete)
+  * [.spawn(options)](#module_handbrake-js.spawn) ⇒ <code>[Handbrake](#module_handbrake-js..Handbrake)</code>
+  * [.exec(options, [onComplete])](#module_handbrake-js.exec)
+  * [.cliOptions](#module_handbrake-js.cliOptions) → <code>array</code>
+
 <a name="module_handbrake-js..Handbrake"></a>
 ###class: hbjs~Handbrake
 A thin wrapper on the handbrakeCLI child_process handle. An instance of this class is returned by `hbjs.spawn()`.
