@@ -5,7 +5,7 @@
 ![Analytics](https://ga-beacon.appspot.com/UA-27725889-6/handbrake-js/README.md?pixel)
 
 #handbrake-js
-Handbrake-js is [Handbrake](http://handbrake.fr) for [node.js](http://nodejs.org), funnily enough. It aspires to do two things:
+Handbrake-js is [Handbrake](http://handbrake.fr) (v0.9.8) for [node.js](http://nodejs.org), funnily enough. It aspires to do two things:
 
 1. provide a lean and stable foundation for building video transcoding software in node.js
 2. enhance the vanilla HandbrakeCLI command-line experience with some new features: 
@@ -74,7 +74,7 @@ A thin wrapper on the handbrakeCLI child_process handle. An instance of this cla
 
 **Extends:** `EventEmitter`  
 **Scope**: inner class of <code>[handbrake-js](#module_handbrake-js)</code>  
-**Emits**: event:start, module:handbrake-js~Handbrake#event:progress, module:handbrake-js~Handbrake#event:begin, module:handbrake-js~Handbrake#event:end, event:complete
+**Emits**: <code>event:start</code>, <code>[progress](#module_handbrake-js..Handbrake#event_progress)</code>, <code>[begin](#module_handbrake-js..Handbrake#event_begin)</code>, <code>[end](#module_handbrake-js..Handbrake#event_end)</code>, <code>event:complete</code>
 
 * [class: ~Handbrake](#module_handbrake-js..Handbrake)
   * _instance_
@@ -149,7 +149,7 @@ Spawns a HandbrakeCLI process with the supplied [options](https://trac.handbrake
 
 | Param | Type | Description |
 | ----- | ---- | ----------- |
-| options | <code>Object</code> \| <code>Array</code> | [Options](https://trac.handbrake.fr/wiki/CLIGuide#options) to pass directly to HandbrakeCLI |
+| options | <code>Object</code> | [Options](https://trac.handbrake.fr/wiki/CLIGuide#options) to pass directly to HandbrakeCLI |
 
 **Example**  
 ```js
