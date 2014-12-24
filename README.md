@@ -92,7 +92,7 @@ A thin wrapper on the handbrakeCLI child_process handle. An instance of this cla
 
 **Extends:** `EventEmitter`  
 **Scope**: inner class of <code>[handbrake-js](#module_handbrake-js)</code>  
-**Emits**: <code>event:start</code>, <code>[progress](#module_handbrake-js..Handbrake#event_progress)</code>, <code>[begin](#module_handbrake-js..Handbrake#event_begin)</code>, <code>[end](#module_handbrake-js..Handbrake#event_end)</code>, <code>event:complete</code>
+**Emits**: <code>[start](#module_handbrake-js..Handbrake#event_start)</code>, <code>[begin](#module_handbrake-js..Handbrake#event_begin)</code>, <code>[progress](#module_handbrake-js..Handbrake#event_progress)</code>, <code>[output](#module_handbrake-js..Handbrake#event_output)</code>, <code>[error](#module_handbrake-js..Handbrake#event_error)</code>, <code>[end](#module_handbrake-js..Handbrake#event_end)</code>, <code>[complete](#module_handbrake-js..Handbrake#event_complete)</code>
 
 * [class: ~Handbrake](#module_handbrake-js..Handbrake)
   * _instance_
