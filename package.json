@@ -40,6 +40,6 @@
   },
   "devDependencies": {
     "jsdoc-to-markdown": "~0.5.0",
-    "tape": "^2.12.3"
+    "tape": "^3"
   }
 }
