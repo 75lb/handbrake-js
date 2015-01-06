@@ -27,7 +27,7 @@
     "postinstall": "node scripts/install.js",
     "ubuntu-setup": "./scripts/install-ubuntu.sh",
     "lint": "jshint lib/*.js scripts/*.js bin/*.js test/*.js; echo",
-    "docs": "jsdoc2md -t jsdoc2md/README.hbs lib/*.js > README.md; echo",
+    "docs": "jsdoc2md -t jsdoc2md/README.hbs --separators lib/*.js > README.md; echo",
     "watch": "baldrick --do 'jsdoc2md -t jsdoc2md/README.hbs lib/*.js > README.md' --when lib/*.js jsdoc2md/*.hbs --change"
   },
   "dependencies": {
