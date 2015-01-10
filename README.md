@@ -121,7 +121,7 @@ hbjs.exec({ preset-list: true }, function(err, stdout, stderr){
 ```
 <a name="module_handbrake-js..Handbrake"></a>
 ###class: hbjs~Handbrake ⇐ <code>[EventEmitter](http://nodejs.org/api/events.html)</code>
-A thin wrapper on the handbrakeCLI child_process handle. An instance of this class is returned by [module:handbrake-js:spawn](module:handbrake-js:spawn).
+A thin wrapper on the handbrakeCLI child_process handle. An instance of this class is returned by [spawn](#module_handbrake-js.spawn).
 
 **Extends:** <code>[EventEmitter](http://nodejs.org/api/events.html)</code>  
 **Emits**: <code>[start](#module_handbrake-js..Handbrake#event_start)</code>, <code>[begin](#module_handbrake-js..Handbrake#event_begin)</code>, <code>[progress](#module_handbrake-js..Handbrake#event_progress)</code>, <code>[output](#module_handbrake-js..Handbrake#event_output)</code>, <code>[error](#module_handbrake-js..Handbrake#event_error)</code>, <code>[end](#module_handbrake-js..Handbrake#event_end)</code>, <code>[complete](#module_handbrake-js..Handbrake#event_complete)</code>  
