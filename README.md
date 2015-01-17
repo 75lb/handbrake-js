@@ -74,8 +74,7 @@ var hbjs = require("handbrake-js");
     * _instance_
       * [.output](#module_handbrake-js..Handbrake#output) → <code>string</code>
       * [.options](#module_handbrake-js..Handbrake#options) → <code>object</code>
-    * _static_
-      * [enum: .eError](#module_handbrake-js..Handbrake.eError)
+      * [enum: .eError](#module_handbrake-js..Handbrake#eError)
     * _events_
       * ["start"](#module_handbrake-js..Handbrake#event_start)
       * ["begin"](#module_handbrake-js..Handbrake#event_begin)
@@ -130,8 +129,7 @@ A handle on the HandbrakeCLI process. Emits events you can monitor to track prog
   * _instance_
     * [.output](#module_handbrake-js..Handbrake#output) → <code>string</code>
     * [.options](#module_handbrake-js..Handbrake#options) → <code>object</code>
-  * _static_
-    * [enum: .eError](#module_handbrake-js..Handbrake.eError)
+    * [enum: .eError](#module_handbrake-js..Handbrake#eError)
   * _events_
     * ["start"](#module_handbrake-js..Handbrake#event_start)
     * ["begin"](#module_handbrake-js..Handbrake#event_begin)
@@ -148,6 +146,19 @@ A `string` containing all handbrakeCLI output
 <a name="module_handbrake-js..Handbrake#options"></a>
 ####handbrake.options → <code>object</code>
 a copy of the options passed to [spawn](#module_handbrake-js.spawn)
+
+<a name="module_handbrake-js..Handbrake#eError"></a>
+####enum: handbrake.eError
+All operational errors are emitted via the [error](#module_handbrake-js..Handbrake#event_error) event.
+
+**Properties**
+
+| Name | Default | Description |
+| ---- | ------- |----------- |
+| VALIDATION | `ValidationError` | Thrown if you accidentally set identical input and output paths (which would clobber the input file), forget to specifiy an output path and other validation errors |
+| INVALID_INPUT | `InvalidInput` | Thrown when the input file specified does not appear to be a video file |
+| OTHER | `Other` | Thrown if Handbrake crashes |
+| NOT_FOUND | `HandbrakeCLINotFound` | Thrown if the installed HandbrakeCLI binary has gone missing.. |
 
 <a name="module_handbrake-js..Handbrake#event_start"></a>
 ####event: "start"
@@ -183,7 +194,7 @@ Fired at regular intervals passing a `progress` object.
 | Param | Type | Description |
 | ----- | ---- | ----------- |
 | error | <code>Error</code> | All operational exceptions are delivered via this event. |
-| error.name | <code>[eError](#module_handbrake-js..Handbrake.eError)</code> | The unique error identifier |
+| error.name | <code>[eError](#module_handbrake-js..Handbrake#eError)</code> | The unique error identifier |
 | error.message | <code>string</code> | Error description |
 | error.errno | <code>string</code> | The HandbrakeCLI return code |
 
@@ -194,18 +205,5 @@ Fired on successful completion of an encoding task. Always follows a [begin](#mo
 <a name="module_handbrake-js..Handbrake#event_complete"></a>
 ####event: "complete"
 Fired when HandbrakeCLI exited cleanly. This does not necessarily mean your encode completed as planned..
-
-<a name="module_handbrake-js..Handbrake.eError"></a>
-####enum: Handbrake.eError
-All operational errors are emitted via the [error](#module_handbrake-js..Handbrake#event_error) event.
-
-**Properties**
-
-| Name | Default | Description |
-| ---- | ------- |----------- |
-| VALIDATION | `ValidationError` | Thrown if you accidentally set identical input and output paths (which would clobber the input file), forget to specifiy an output path and other validation errors |
-| INVALID_INPUT | `InvalidInput` | Thrown when the input file specified does not appear to be a video file |
-| OTHER | `Other` | Thrown if Handbrake crashes |
-| NOT_FOUND | `HandbrakeCLINotFound` | Thrown if the installed HandbrakeCLI binary has gone missing.. |
 
 *documented by [jsdoc-to-markdown](https://github.com/75lb/jsdoc-to-markdown)*.
