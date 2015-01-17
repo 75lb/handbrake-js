@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 "use strict";
 
-var dope = require("console-dope"),
-    cliArgs = require("command-line-args"),
-    hbjs = require("../lib/handbrake-js");
+var dope = require("console-dope");
+var cliArgs = require("command-line-args");
+var hbjs = require("../lib/handbrake-js");
 
 var cli = cliArgs(hbjs.cliOptions);
 try {

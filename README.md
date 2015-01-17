@@ -5,14 +5,12 @@
 ![Analytics](https://ga-beacon.appspot.com/UA-27725889-6/handbrake-js/README.md?pixel)
 
 #handbrake-js
-Handbrake-js is [Handbrake](http://handbrake.fr) (v0.9.8) for [node.js](http://nodejs.org), funnily enough. It aspires to do two things:
+Handbrake-js is [Handbrake](http://handbrake.fr) (v0.10.0) for [node.js](http://nodejs.org), funnily enough. It aspires to do two things:
 
 1. provide a lean and stable foundation for building video transcoding software in node.js
 2. enhance the vanilla HandbrakeCLI command-line experience with some new features: 
    - Cleaner output, live updating statistics
    - Improved user input validation
-   - Clear explainations when user input is invalid
-
 
 ### Compatible Platforms
 Tested on Mac OSX, Ubuntu 14, Windows XP, Windows 7 and Windows 8.1.
@@ -76,6 +74,8 @@ var hbjs = require("handbrake-js");
     * _instance_
       * [.output](#module_handbrake-js..Handbrake#output) → <code>string</code>
       * [.options](#module_handbrake-js..Handbrake#options) → <code>object</code>
+    * _static_
+      * [enum: .eError](#module_handbrake-js..Handbrake.eError)
     * _events_
       * ["start"](#module_handbrake-js..Handbrake#event_start)
       * ["begin"](#module_handbrake-js..Handbrake#event_begin)
@@ -121,7 +121,7 @@ hbjs.exec({ preset-list: true }, function(err, stdout, stderr){
 ```
 <a name="module_handbrake-js..Handbrake"></a>
 ###class: hbjs~Handbrake ⇐ <code>[EventEmitter](http://nodejs.org/api/events.html)</code>
-A thin wrapper on the handbrakeCLI child_process handle. An instance of this class is returned by [spawn](#module_handbrake-js.spawn).
+A handle on the HandbrakeCLI process. Emits events you can monitor to track progress. An instance of this class is returned by [spawn](#module_handbrake-js.spawn).
 
 **Extends:** <code>[EventEmitter](http://nodejs.org/api/events.html)</code>  
 **Emits**: <code>[start](#module_handbrake-js..Handbrake#event_start)</code>, <code>[begin](#module_handbrake-js..Handbrake#event_begin)</code>, <code>[progress](#module_handbrake-js..Handbrake#event_progress)</code>, <code>[output](#module_handbrake-js..Handbrake#event_output)</code>, <code>[error](#module_handbrake-js..Handbrake#event_error)</code>, <code>[end](#module_handbrake-js..Handbrake#event_end)</code>, <code>[complete](#module_handbrake-js..Handbrake#event_complete)</code>  
@@ -130,6 +130,8 @@ A thin wrapper on the handbrakeCLI child_process handle. An instance of this cla
   * _instance_
     * [.output](#module_handbrake-js..Handbrake#output) → <code>string</code>
     * [.options](#module_handbrake-js..Handbrake#options) → <code>object</code>
+  * _static_
+    * [enum: .eError](#module_handbrake-js..Handbrake.eError)
   * _events_
     * ["start"](#module_handbrake-js..Handbrake#event_start)
     * ["begin"](#module_handbrake-js..Handbrake#event_begin)
@@ -141,11 +143,11 @@ A thin wrapper on the handbrakeCLI child_process handle. An instance of this cla
 
 <a name="module_handbrake-js..Handbrake#output"></a>
 ####handbrake.output → <code>string</code>
-A `String` containing all handbrakeCLI output
+A `string` containing all handbrakeCLI output
 
 <a name="module_handbrake-js..Handbrake#options"></a>
 ####handbrake.options → <code>object</code>
-the options HandbrakeCLI was spawned with
+a copy of the options passed to [spawn](#module_handbrake-js.spawn)
 
 <a name="module_handbrake-js..Handbrake#event_start"></a>
 ####event: "start"
@@ -164,7 +166,7 @@ Fired at regular intervals passing a `progress` object.
 | progress | <code>object</code> | details of encode progress |
 | progress.taskNumber | <code>number</code> | current task index |
 | progress.taskCount | <code>number</code> | total tasks in the queue |
-| progress.percentComplete | <code>number</code> |  |
+| progress.percentComplete | <code>number</code> | percent complete |
 | progress.fps | <code>number</code> | Frames per second |
 | progress.avgFps | <code>number</code> | Average frames per second |
 | progress.eta | <code>string</code> | Estimated time until completion |
@@ -181,16 +183,29 @@ Fired at regular intervals passing a `progress` object.
 | Param | Type | Description |
 | ----- | ---- | ----------- |
 | error | <code>Error</code> | All operational exceptions are delivered via this event. |
-| error.name | <code>string</code> | One of `HandbrakeCLINotFound`, `HandbrakeCLIError`, `NoTitleFound`, `HandbrakeCLICrash` or `ValidationError` |
-| error.message | <code>string</code> |  |
-| error.errno | <code>string</code> |  |
+| error.name | <code>[eError](#module_handbrake-js..Handbrake.eError)</code> | The unique error identifier |
+| error.message | <code>string</code> | Error description |
+| error.errno | <code>string</code> | The HandbrakeCLI return code |
 
 <a name="module_handbrake-js..Handbrake#event_end"></a>
 ####event: "end"
-Fired on successful completion of an encoding task. Always follows a `begin` event, with some `progress` in between.
+Fired on successful completion of an encoding task. Always follows a [module:handbrake-js~Handbrake#begin](module:handbrake-js~Handbrake#begin) event, with some [module:handbrake-js~Handbrake#progress](module:handbrake-js~Handbrake#progress) in between.
 
 <a name="module_handbrake-js..Handbrake#event_complete"></a>
 ####event: "complete"
 Fired when HandbrakeCLI exited cleanly. This does not necessarily mean your encode completed as planned..
+
+<a name="module_handbrake-js..Handbrake.eError"></a>
+####enum: Handbrake.eError
+All operational exceptions are emitted via the [module:handbrake-js~Handbrake#error](module:handbrake-js~Handbrake#error) event.
+
+**Properties**
+
+| Name | Type | Default | Description |
+| ---- | ---- | ------- |----------- |
+| VALIDATION |  | `ValidationError` | Thrown if you accidentally set identical input and output paths (which would clobber the input file), forget to specifiy an output path and other validation errors |
+| INVALID_INPUT |  | `InvalidInput` | Thrown when the input file specified does not appear to be a video file |
+| OTHER |  | `Other` | Thrown if Handbrake crashes |
+| NOT_FOUND |  | `HandbrakeCLINotFound` | Thrown if the installed HandbrakeCLI binary has gone missing.. |
 
 *documented by [jsdoc-to-markdown](https://github.com/75lb/jsdoc-to-markdown)*.

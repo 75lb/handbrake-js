@@ -5,14 +5,12 @@
 ![Analytics](https://ga-beacon.appspot.com/UA-27725889-6/handbrake-js/README.md?pixel)
 
 #handbrake-js
-Handbrake-js is [Handbrake](http://handbrake.fr) (v0.9.8) for [node.js](http://nodejs.org), funnily enough. It aspires to do two things:
+Handbrake-js is [Handbrake](http://handbrake.fr) (v0.10.0) for [node.js](http://nodejs.org), funnily enough. It aspires to do two things:
 
 1. provide a lean and stable foundation for building video transcoding software in node.js
 2. enhance the vanilla HandbrakeCLI command-line experience with some new features: 
    - Cleaner output, live updating statistics
    - Improved user input validation
-   - Clear explainations when user input is invalid
-
 
 ### Compatible Platforms
 Tested on Mac OSX, Ubuntu 14, Windows XP, Windows 7 and Windows 8.1.
@@ -63,11 +61,7 @@ Encoding  1.07       131.76    158.12    00h21m11s
 
 #API Reference
 {{#module name="handbrake-js"~}}
-  {{>body~}}
-  {{>member-index~}}
-  {{#if (option "separators")}}* * *
-{{/if~}}
-  {{>members~}}
+{{>docs skip-header=true~}}
 {{/module~}}
 
 *documented by [jsdoc-to-markdown](https://github.com/75lb/jsdoc-to-markdown)*.

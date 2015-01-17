@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 "use strict";
-var request = require("request"),
-    unzip = require("unzip"),
-    exec = require("child_process").exec,
-    util = require("util"),
-    fs = require("fs"),
-    mfs = require("more-fs"),
-    path = require("path");
+var request = require("request");
+var unzip = require("unzip");
+var exec = require("child_process").exec;
+var util = require("util");
+var fs = require("fs");
+var mfs = require("more-fs");
+var path = require("path");
 
-var downloadPath = "http://sourceforge.net/projects/handbrake/files/0.9.9/HandBrake-0.9.9-%s/download";
+var downloadPath = "http://sourceforge.net/projects/handbrake/files/0.10.0/HandBrake-0.10.0-%s/download";
 
 var win32 = {
     url: util.format(downloadPath, "i686-Win_CLI.zip"),
@@ -31,11 +31,10 @@ var mac = {
 
 function downloadFile(from, to, done){
     console.log("fetching: " + from);
-    var req = request(from),
-        download = fs.createWriteStream(to);
+    var req = request(from);
+    var download = fs.createWriteStream(to);
 
     req.pipe(download);
-
     download.on("close", done);
 }
 
@@ -62,11 +61,11 @@ function extractFile(archive, copyFrom, copyTo, done){
             if (err) throw err;
             var match = stdout.match(/^(\/dev\/\w+)\b.*(\/Volumes\/.*)$/m);
             if (match) {
-                var devicePath = match[1],
-                    mountPath = match[2];
+                var devicePath = match[1];
+                var mountPath = match[2];
                 copyFrom = path.join(mountPath, copyFrom);
-                var source = fs.createReadStream(copyFrom),
-                    dest = fs.createWriteStream(copyTo, { mode: parseInt(755, 8) });
+                var source = fs.createReadStream(copyFrom);
+                var dest = fs.createWriteStream(copyTo, { mode: parseInt(755, 8) });
                 dest.on("close", function(){
                     exec("hdiutil detach " + devicePath, function(err){
                         if (err) throw err;
