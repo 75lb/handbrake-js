@@ -53,7 +53,7 @@ $ npm install -g handbrake-js
 *Mac / Linux users may need to run with `sudo`*.
 
 Now, you can call `handbrake` as you would HandbrakeCLI, using all the usual [options](https://trac.handbrake.fr/wiki/CLIGuide). By default, just statistics are output, passing `--verbose` prints the raw HandbrakeCLI output. This command will transcode an AVI to the more universal H.264 (mp4):
-```sh
+```
 $ handbrake --input "some episode.avi" --output "some episode.mp4" --preset Normal
 Task      % done     FPS       Avg FPS   ETA
 Encoding  1.07       131.76    158.12    00h21m11s
@@ -189,7 +189,7 @@ Fired at regular intervals passing a `progress` object.
 
 <a name="module_handbrake-js..Handbrake#event_end"></a>
 ####event: "end"
-Fired on successful completion of an encoding task. Always follows a [module:handbrake-js~Handbrake#begin](module:handbrake-js~Handbrake#begin) event, with some [module:handbrake-js~Handbrake#progress](module:handbrake-js~Handbrake#progress) in between.
+Fired on successful completion of an encoding task. Always follows a [begin](#module_handbrake-js..Handbrake#event_begin) event, with some [progress](#module_handbrake-js..Handbrake#event_progress) in between.
 
 <a name="module_handbrake-js..Handbrake#event_complete"></a>
 ####event: "complete"
@@ -197,15 +197,15 @@ Fired when HandbrakeCLI exited cleanly. This does not necessarily mean your enco
 
 <a name="module_handbrake-js..Handbrake.eError"></a>
 ####enum: Handbrake.eError
-All operational exceptions are emitted via the [module:handbrake-js~Handbrake#error](module:handbrake-js~Handbrake#error) event.
+All operational errors are emitted via the [error](#module_handbrake-js..Handbrake#event_error) event.
 
 **Properties**
 
-| Name | Type | Default | Description |
-| ---- | ---- | ------- |----------- |
-| VALIDATION |  | `ValidationError` | Thrown if you accidentally set identical input and output paths (which would clobber the input file), forget to specifiy an output path and other validation errors |
-| INVALID_INPUT |  | `InvalidInput` | Thrown when the input file specified does not appear to be a video file |
-| OTHER |  | `Other` | Thrown if Handbrake crashes |
-| NOT_FOUND |  | `HandbrakeCLINotFound` | Thrown if the installed HandbrakeCLI binary has gone missing.. |
+| Name | Default | Description |
+| ---- | ------- |----------- |
+| VALIDATION | `ValidationError` | Thrown if you accidentally set identical input and output paths (which would clobber the input file), forget to specifiy an output path and other validation errors |
+| INVALID_INPUT | `InvalidInput` | Thrown when the input file specified does not appear to be a video file |
+| OTHER | `Other` | Thrown if Handbrake crashes |
+| NOT_FOUND | `HandbrakeCLINotFound` | Thrown if the installed HandbrakeCLI binary has gone missing.. |
 
 *documented by [jsdoc-to-markdown](https://github.com/75lb/jsdoc-to-markdown)*.
