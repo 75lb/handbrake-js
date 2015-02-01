@@ -4,7 +4,7 @@
 [![Dependency Status](https://david-dm.org/75lb/handbrake-js.svg)](https://david-dm.org/75lb/handbrake-js)
 ![Analytics](https://ga-beacon.appspot.com/UA-27725889-6/handbrake-js/README.md?pixel)
 
-#handbrake-js
+# handbrake-js
 Handbrake-js is [Handbrake](http://handbrake.fr) (v0.10.0) for [node.js](http://nodejs.org), funnily enough. It aspires to do two things:
 
 1. provide a lean and stable foundation for building video transcoding software in node.js
@@ -17,11 +17,11 @@ Tested on Mac OSX, Ubuntu 14, Windows XP, Windows 7 and Windows 8.1.
 
 **Ubuntu 14.04 notice**: Transcoding to MP4 fails on Ubuntu since 14.04 [for this reason](https://forum.handbrake.fr/viewtopic.php?f=13&t=30044).
 
-##Installation
-###System Requirements
+## Installation
+### System Requirements
 Just [node.js](http://nodejs.org). Every else is installed automatically.
 
-###As a library 
+### As a library 
 Move into your project directory then run: 
 ```sh
 $ npm install handbrake-js --save
@@ -45,7 +45,7 @@ hbjs.spawn({ input: "dope shit.avi", output: "dope shit.m4v" })
     );
   });
 ```
-###As a command-line app
+### As a command-line app
 From any directory run the following:
 ```sh
 $ npm install -g handbrake-js
@@ -59,9 +59,11 @@ Task      % done     FPS       Avg FPS   ETA
 Encoding  1.07       131.76    158.12    00h21m11s
 ```
 
-#API Reference
+# API Reference
 {{#module name="handbrake-js"~}}
 {{>docs skip-header=true~}}
 {{/module~}}
 
 *documented by [jsdoc-to-markdown](https://github.com/75lb/jsdoc-to-markdown)*.
+
+&copy; 2015 Lloyd Brookes 75pound@gmail.com
