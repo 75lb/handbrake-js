@@ -91,17 +91,25 @@ var hbjs = require("handbrake-js");
       * ["complete"](#module_handbrake-js..Handbrake#event_complete)
 
 
--
+* * *
 
 <a name="module_handbrake-js.spawn"></a>
 ### hbjs.spawn(options) ⇒ <code>[Handbrake](#module_handbrake-js..Handbrake)</code>
 Spawns a HandbrakeCLI process with the supplied [options](https://trac.handbrake.fr/wiki/CLIGuide#options), returning an instance of `Handbrake` on which you can listen for events.
 
 **Kind**: static method of <code>[handbrake-js](#module_handbrake-js)</code>  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| options | <code>Object</code> | [Options](https://trac.handbrake.fr/wiki/CLIGuide#options) to pass directly to HandbrakeCLI |
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>options</td><td><code>Object</code></td><td><p><a href="https://trac.handbrake.fr/wiki/CLIGuide#options">Options</a> to pass directly to HandbrakeCLI</p>
+</td>
+    </tr>  </tbody>
+</table>
 
 **Example**  
 ```js
@@ -112,18 +120,28 @@ hbjs.spawn(options)
     .on("output", console.log);
 ```
 
--
+* * *
 
 <a name="module_handbrake-js.exec"></a>
 ### hbjs.exec(options, [onComplete])
 Runs HandbrakeCLI with the supplied [options](https://trac.handbrake.fr/wiki/CLIGuide#options) calling the supplied callback on completion. The exec method is best suited for short duration tasks where you can wait until completion for the output.
 
 **Kind**: static method of <code>[handbrake-js](#module_handbrake-js)</code>  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| options | <code>Object</code> | [Options](https://trac.handbrake.fr/wiki/CLIGuide#options) to pass directly to HandbrakeCLI |
-| [onComplete] | <code>function</code> | If passed, `onComplete(err, stdout, stderr)` will be called on completion, `stdout` and `stderr` being strings containing the HandbrakeCLI output. |
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>options</td><td><code>Object</code></td><td><p><a href="https://trac.handbrake.fr/wiki/CLIGuide#options">Options</a> to pass directly to HandbrakeCLI</p>
+</td>
+    </tr><tr>
+    <td>[onComplete]</td><td><code>function</code></td><td><p>If passed, <code>onComplete(err, stdout, stderr)</code> will be called on completion, <code>stdout</code> and <code>stderr</code> being strings containing the HandbrakeCLI output.</p>
+</td>
+    </tr>  </tbody>
+</table>
 
 **Example**  
 ```js
@@ -135,7 +153,7 @@ hbjs.exec({ preset-list: true }, function(err, stdout, stderr){
 });
 ```
 
--
+* * *
 
 <a name="module_handbrake-js..Handbrake"></a>
 ### hbjs~Handbrake ⇐ <code>[EventEmitter](http://nodejs.org/api/events.html)</code>
@@ -158,7 +176,7 @@ A handle on the HandbrakeCLI process. Emits events you can monitor to track prog
     * ["complete"](#module_handbrake-js..Handbrake#event_complete)
 
 
--
+* * *
 
 <a name="module_handbrake-js..Handbrake#output"></a>
 #### handbrake.output : <code>string</code>
@@ -166,7 +184,7 @@ A `string` containing all handbrakeCLI output
 
 **Kind**: instance property of <code>[Handbrake](#module_handbrake-js..Handbrake)</code>  
 
--
+* * *
 
 <a name="module_handbrake-js..Handbrake#options"></a>
 #### handbrake.options : <code>object</code>
@@ -174,7 +192,7 @@ a copy of the options passed to [spawn](#module_handbrake-js.spawn)
 
 **Kind**: instance property of <code>[Handbrake](#module_handbrake-js..Handbrake)</code>  
 
--
+* * *
 
 <a name="module_handbrake-js..Handbrake#eError"></a>
 #### handbrake.eError
@@ -183,15 +201,26 @@ All operational errors are emitted via the [error](#module_handbrake-js..Handbra
 **Kind**: instance enum property of <code>[Handbrake](#module_handbrake-js..Handbrake)</code>  
 **Properties**
 
-| Name | Default | Description |
-| --- | --- | --- |
-| VALIDATION | <code>ValidationError</code> | Thrown if you accidentally set identical input and output paths (which would clobber the input file), forget to specifiy an output path and other validation errors |
-| INVALID_INPUT | <code>InvalidInput</code> | Thrown when the input file specified does not appear to be a video file |
-| OTHER | <code>Other</code> | Thrown if Handbrake crashes |
-| NOT_FOUND | <code>HandbrakeCLINotFound</code> | Thrown if the installed HandbrakeCLI binary has gone missing.. |
+<table>
+  <thead>
+    <tr>
+      <th>Name</th><th>Default</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>VALIDATION</td><td><code>ValidationError</code></td><td>Thrown if you accidentally set identical input and output paths (which would clobber the input file), forget to specifiy an output path and other validation errors</td>
+    </tr><tr>
+    <td>INVALID_INPUT</td><td><code>InvalidInput</code></td><td>Thrown when the input file specified does not appear to be a video file</td>
+    </tr><tr>
+    <td>OTHER</td><td><code>Other</code></td><td>Thrown if Handbrake crashes</td>
+    </tr><tr>
+    <td>NOT_FOUND</td><td><code>HandbrakeCLINotFound</code></td><td>Thrown if the installed HandbrakeCLI binary has gone missing..</td>
+    </tr>  </tbody>
+</table>
 
 
--
+* * *
 
 <a name="module_handbrake-js..Handbrake#event_start"></a>
 #### "start"
@@ -199,7 +228,7 @@ Fired as HandbrakeCLI is launched. Nothing has happened yet.
 
 **Kind**: event emitted by <code>[Handbrake](#module_handbrake-js..Handbrake)</code>  
 
--
+* * *
 
 <a name="module_handbrake-js..Handbrake#event_begin"></a>
 #### "begin"
@@ -207,52 +236,96 @@ Fired when encoding begins. If you're expecting an encode and this never fired, 
 
 **Kind**: event emitted by <code>[Handbrake](#module_handbrake-js..Handbrake)</code>  
 
--
+* * *
 
 <a name="module_handbrake-js..Handbrake#event_progress"></a>
 #### "progress" (progress)
 Fired at regular intervals passing a `progress` object.
 
 **Kind**: event emitted by <code>[Handbrake](#module_handbrake-js..Handbrake)</code>  
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>progress</td><td><code>object</code></td><td><p>details of encode progress</p>
+</td>
+    </tr><tr>
+    <td>progress.taskNumber</td><td><code>number</code></td><td><p>current task index</p>
+</td>
+    </tr><tr>
+    <td>progress.taskCount</td><td><code>number</code></td><td><p>total tasks in the queue</p>
+</td>
+    </tr><tr>
+    <td>progress.percentComplete</td><td><code>number</code></td><td><p>percent complete</p>
+</td>
+    </tr><tr>
+    <td>progress.fps</td><td><code>number</code></td><td><p>Frames per second</p>
+</td>
+    </tr><tr>
+    <td>progress.avgFps</td><td><code>number</code></td><td><p>Average frames per second</p>
+</td>
+    </tr><tr>
+    <td>progress.eta</td><td><code>string</code></td><td><p>Estimated time until completion</p>
+</td>
+    </tr><tr>
+    <td>progress.task</td><td><code>string</code></td><td><p>Task description, either &quot;Encoding&quot; or &quot;Muxing&quot;</p>
+</td>
+    </tr>  </tbody>
+</table>
 
-| Param | Type | Description |
-| --- | --- | --- |
-| progress | <code>object</code> | details of encode progress |
-| progress.taskNumber | <code>number</code> | current task index |
-| progress.taskCount | <code>number</code> | total tasks in the queue |
-| progress.percentComplete | <code>number</code> | percent complete |
-| progress.fps | <code>number</code> | Frames per second |
-| progress.avgFps | <code>number</code> | Average frames per second |
-| progress.eta | <code>string</code> | Estimated time until completion |
-| progress.task | <code>string</code> | Task description, either "Encoding" or "Muxing" |
 
-
--
+* * *
 
 <a name="module_handbrake-js..Handbrake#event_output"></a>
 #### "output" (output)
 **Kind**: event emitted by <code>[Handbrake](#module_handbrake-js..Handbrake)</code>  
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>output</td><td><code>string</code></td><td><p>An aggregate of <code>stdout</code> and <code>stderr</code> output from the underlying HandbrakeCLI process.</p>
+</td>
+    </tr>  </tbody>
+</table>
 
-| Param | Type | Description |
-| --- | --- | --- |
-| output | <code>string</code> | An aggregate of `stdout` and `stderr` output from the underlying HandbrakeCLI process. |
 
-
--
+* * *
 
 <a name="module_handbrake-js..Handbrake#event_error"></a>
 #### "error" (error)
 **Kind**: event emitted by <code>[Handbrake](#module_handbrake-js..Handbrake)</code>  
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>error</td><td><code>Error</code></td><td><p>All operational exceptions are delivered via this event.</p>
+</td>
+    </tr><tr>
+    <td>error.name</td><td><code><a href="#module_handbrake-js..Handbrake#eError">eError</a></code></td><td><p>The unique error identifier</p>
+</td>
+    </tr><tr>
+    <td>error.message</td><td><code>string</code></td><td><p>Error description</p>
+</td>
+    </tr><tr>
+    <td>error.errno</td><td><code>string</code></td><td><p>The HandbrakeCLI return code</p>
+</td>
+    </tr>  </tbody>
+</table>
 
-| Param | Type | Description |
-| --- | --- | --- |
-| error | <code>Error</code> | All operational exceptions are delivered via this event. |
-| error.name | <code>[eError](#module_handbrake-js..Handbrake#eError)</code> | The unique error identifier |
-| error.message | <code>string</code> | Error description |
-| error.errno | <code>string</code> | The HandbrakeCLI return code |
 
-
--
+* * *
 
 <a name="module_handbrake-js..Handbrake#event_end"></a>
 #### "end"
@@ -260,7 +333,7 @@ Fired on successful completion of an encoding task. Always follows a [begin](#mo
 
 **Kind**: event emitted by <code>[Handbrake](#module_handbrake-js..Handbrake)</code>  
 
--
+* * *
 
 <a name="module_handbrake-js..Handbrake#event_complete"></a>
 #### "complete"
@@ -268,7 +341,7 @@ Fired when HandbrakeCLI exited cleanly. This does not necessarily mean your enco
 
 **Kind**: event emitted by <code>[Handbrake](#module_handbrake-js..Handbrake)</code>  
 
--
+* * *
 
 
 *documented by [jsdoc-to-markdown](https://github.com/75lb/jsdoc-to-markdown)*.
