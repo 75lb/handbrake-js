@@ -1,7 +1,7 @@
 {
   "name": "handbrake-js",
   "author": "Lloyd Brookes <75pound@gmail.com>",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Handbrake for node.js. Brings video encoding.",
   "repository": "https://github.com/75lb/handbrake-js.git",
   "main": "./lib/handbrake-js.js",
@@ -14,7 +14,13 @@
     "encode",
     "transcode",
     "video",
-      "mp4", "m4v", "avi", "h.264", "h.265", "vp8", "mp3"
+    "mp4",
+    "m4v",
+    "avi",
+    "h.264",
+    "h.265",
+    "vp8",
+    "mp3"
   ],
   "engines": {
     "node": ">=0.10.0"
