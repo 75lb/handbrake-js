@@ -35,7 +35,7 @@
     "postinstall": "node scripts/install.js",
     "ubuntu-setup": "./scripts/install-ubuntu.sh",
     "lint": "jshint lib/*.js scripts/*.js bin/*.js test/*.js; echo",
-    "docs": "jsdoc2md -t jsdoc2md/README.hbs --separators lib/*.js > README.md; echo"
+    "docs": "jsdoc2md -t jsdoc2md/README.hbs lib/*.js > README.md; echo"
   },
   "dependencies": {
     "command-line-args": "~0.5.0",
