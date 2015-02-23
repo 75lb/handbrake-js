@@ -13,7 +13,8 @@
     "handbrake",
     "encode",
     "transcode",
-    "video"
+    "video",
+      "mp4", "m4v", "avi", "h.264", "h.265", "vp8", "mp3"
   ],
   "engines": {
     "node": ">=0.10.0"
@@ -28,7 +29,7 @@
     "postinstall": "node scripts/install.js",
     "ubuntu-setup": "./scripts/install-ubuntu.sh",
     "lint": "jshint lib/*.js scripts/*.js bin/*.js test/*.js; echo",
-    "docs": "jsdoc2md -t jsdoc2md/README.hbs lib/*.js > README.md; echo"
+    "docs": "jsdoc2md -t jsdoc2md/README.hbs --separators lib/*.js > README.md; echo"
   },
   "dependencies": {
     "command-line-args": "~0.5.0",
