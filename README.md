@@ -90,6 +90,9 @@ var hbjs = require("handbrake-js");
       * ["end"](#module_handbrake-js..Handbrake#event_end)
       * ["complete"](#module_handbrake-js..Handbrake#event_complete)
 
+
+-
+
 <a name="module_handbrake-js.spawn"></a>
 ### hbjs.spawn(options) ⇒ <code>[Handbrake](#module_handbrake-js..Handbrake)</code>
 Spawns a HandbrakeCLI process with the supplied [options](https://trac.handbrake.fr/wiki/CLIGuide#options), returning an instance of `Handbrake` on which you can listen for events.
