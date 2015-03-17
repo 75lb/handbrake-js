@@ -15,7 +15,7 @@ test("exception handling: HandbrakeCLI not found", function(t){
         t.equal(err.message, "HandbrakeCLI application not found: broken/path");
         t.equal(err.HandbrakeCLIPath, "broken/path");
         t.equal(err.errno, "ENOENT");
-        t.equal(err.spawnmessage, "spawn ENOENT");
+        t.ok(/ENOENT/.test(err.spawnmessage));
         t.deepEqual(err.options, { input: "in", output: "out" });
     });
 });

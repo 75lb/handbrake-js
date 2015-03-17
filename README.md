@@ -5,7 +5,7 @@
 ![Analytics](https://ga-beacon.appspot.com/UA-27725889-6/handbrake-js/README.md?pixel)
 
 # handbrake-js
-Handbrake-js is [Handbrake](http://handbrake.fr) (v0.10.0) for [node.js](http://nodejs.org), funnily enough. It aspires to provide a lean and stable foundation for building video transcoding software in node.js.
+Handbrake-js is [Handbrake](http://handbrake.fr) (v0.10.1) for [node.js](http://nodejs.org), funnily enough. It aspires to provide a lean and stable foundation for building video transcoding software in node.js.
 
 HandBrake is a tool for converting video from nearly any format to a selection of modern, widely supported codecs. It can process most common multimedia files and any DVD or BluRay sources that do not contain any copy protection.
 
@@ -229,6 +229,6 @@ Fired when HandbrakeCLI exited cleanly. This does not necessarily mean your enco
 
 **Kind**: event emitted by <code>[Handbrake](#module_handbrake-js..Handbrake)</code>  
 
-*documented by [jsdoc-to-markdown](https://github.com/75lb/jsdoc-to-markdown)*.
+* * * 
 
-&copy; 2015 Lloyd Brookes 75pound@gmail.com
+&copy; 2015 Lloyd Brookes 75pound@gmail.com. Documented by [jsdoc-to-markdown](https://github.com/75lb/jsdoc-to-markdown).

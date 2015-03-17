@@ -8,7 +8,7 @@ var fs = require("fs");
 var mfs = require("more-fs");
 var path = require("path");
 
-var downloadPath = "http://sourceforge.net/projects/handbrake/files/0.10.0/HandBrake-0.10.0-%s/download";
+var downloadPath = "https://handbrake.fr/rotation.php?file=HandBrake-0.10.1-%s";
 
 var win32 = {
     url: util.format(downloadPath, "i686-Win_CLI.zip"),

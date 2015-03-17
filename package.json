@@ -46,7 +46,6 @@
     "unzip": "~0.1"
   },
   "devDependencies": {
-    "jsdoc-to-markdown": "~0.5.0",
     "tape": "^3"
   }
 }
