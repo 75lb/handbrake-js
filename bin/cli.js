@@ -4,10 +4,11 @@
 var dope = require("console-dope");
 var cliArgs = require("command-line-args");
 var hbjs = require("../lib/handbrake-js");
+var cliOptions = require("../lib/cli-options");
 
-var cli = cliArgs(hbjs.cliOptions);
+var cli = cliArgs(cliOptions);
 try {
-    var handbrakeOptions = cli.parse().handbrake;
+    var handbrakeOptions = cli.parse()._all;
 } catch(err){
     halt(err);
 }
