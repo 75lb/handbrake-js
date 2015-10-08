@@ -34,7 +34,6 @@
     "test": "tape test/*.js",
     "postinstall": "node scripts/install.js",
     "ubuntu-setup": "./scripts/install-ubuntu.sh",
-    "lint": "jshint lib/*.js scripts/*.js bin/*.js test/*.js; echo",
     "docs": "jsdoc2md -t jsdoc2md/README.hbs lib/*.js > README.md; echo"
   },
   "dependencies": {
