@@ -70,7 +70,7 @@ Handbrake for node.js.
 
 **Example**  
 ```js
-var hbjs = require("handbrake-js");
+var hbjs = require("handbrake-js")
 ```
 
 * [handbrake-js](#module_handbrake-js)
@@ -102,11 +102,11 @@ Spawns a HandbrakeCLI process with the supplied [options](https://trac.handbrake
 
 **Example**  
 ```js
-var hbjs = require("handbrake-js");
+var hbjs = require("handbrake-js")
 
 hbjs.spawn(options)
     .on("error", console.error)
-    .on("output", console.log);
+    .on("output", console.log)
 ```
 <a name="module_handbrake-js.exec"></a>
 ### hbjs.exec(options, [onComplete])
@@ -121,12 +121,12 @@ Runs HandbrakeCLI with the supplied [options](https://trac.handbrake.fr/wiki/CLI
 
 **Example**  
 ```js
-var hbjs = require("handbrake-js");
+var hbjs = require("handbrake-js")
 
 hbjs.exec({ preset-list: true }, function(err, stdout, stderr){
-    if (err) throw err;
-    console.log(stdout);
-});
+    if (err) throw err
+    console.log(stdout)
+})
 ```
 <a name="module_handbrake-js..Handbrake"></a>
 ### hbjs~Handbrake ⇐ <code>[EventEmitter](http://nodejs.org/api/events.html)</code>
