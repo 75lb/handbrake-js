@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/75lb/handbrake-js.svg?branch=master)](https://travis-ci.org/75lb/handbrake-js)
 [![Dependency Status](https://david-dm.org/75lb/handbrake-js.svg)](https://david-dm.org/75lb/handbrake-js)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](https://github.com/feross/standard)
+[![Join the chat at https://gitter.im/75lb/handbrake-js](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/75lb/handbrake-js?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 # handbrake-js
 Handbrake-js is [Handbrake](http://handbrake.fr) (v0.10.2) for [node.js](http://nodejs.org), funnily enough. It aspires to provide a lean and stable foundation for building video transcoding software in node.js.
@@ -74,21 +75,21 @@ var hbjs = require("handbrake-js")
 ```
 
 * [handbrake-js](#module_handbrake-js)
-  * _static_
-    * [.spawn(options)](#module_handbrake-js.spawn) ⇒ <code>[Handbrake](#module_handbrake-js..Handbrake)</code>
-    * [.exec(options, [onComplete])](#module_handbrake-js.exec)
-  * _inner_
-    * [~Handbrake](#module_handbrake-js..Handbrake) ⇐ <code>[EventEmitter](http://nodejs.org/api/events.html)</code>
-      * [.output](#module_handbrake-js..Handbrake+output) : <code>string</code>
-      * [.options](#module_handbrake-js..Handbrake+options) : <code>object</code>
-      * [.eError](#module_handbrake-js..Handbrake+eError)
-      * ["start"](#module_handbrake-js..Handbrake+event_start)
-      * ["begin"](#module_handbrake-js..Handbrake+event_begin)
-      * ["progress" (progress)](#module_handbrake-js..Handbrake+event_progress)
-      * ["output" (output)](#module_handbrake-js..Handbrake+event_output)
-      * ["error" (error)](#module_handbrake-js..Handbrake+event_error)
-      * ["end"](#module_handbrake-js..Handbrake+event_end)
-      * ["complete"](#module_handbrake-js..Handbrake+event_complete)
+    * _static_
+        * [.spawn(options)](#module_handbrake-js.spawn) ⇒ <code>[Handbrake](#module_handbrake-js..Handbrake)</code>
+        * [.exec(options, [onComplete])](#module_handbrake-js.exec)
+    * _inner_
+        * [~Handbrake](#module_handbrake-js..Handbrake) ⇐ <code>[EventEmitter](http://nodejs.org/api/events.html)</code>
+            * [.output](#module_handbrake-js..Handbrake+output) : <code>string</code>
+            * [.options](#module_handbrake-js..Handbrake+options) : <code>object</code>
+            * [.eError](#module_handbrake-js..Handbrake+eError)
+            * ["start"](#module_handbrake-js..Handbrake+event_start)
+            * ["begin"](#module_handbrake-js..Handbrake+event_begin)
+            * ["progress" (progress)](#module_handbrake-js..Handbrake+event_progress)
+            * ["output" (output)](#module_handbrake-js..Handbrake+event_output)
+            * ["error" (error)](#module_handbrake-js..Handbrake+event_error)
+            * ["end"](#module_handbrake-js..Handbrake+event_end)
+            * ["complete"](#module_handbrake-js..Handbrake+event_complete)
 
 <a name="module_handbrake-js.spawn"></a>
 ### hbjs.spawn(options) ⇒ <code>[Handbrake](#module_handbrake-js..Handbrake)</code>
@@ -136,17 +137,17 @@ A handle on the HandbrakeCLI process. Emits events you can monitor to track prog
 **Extends:** <code>[EventEmitter](http://nodejs.org/api/events.html)</code>  
 **Emits**: <code>[start](#module_handbrake-js..Handbrake+event_start)</code>, <code>[begin](#module_handbrake-js..Handbrake+event_begin)</code>, <code>[progress](#module_handbrake-js..Handbrake+event_progress)</code>, <code>[output](#module_handbrake-js..Handbrake+event_output)</code>, <code>[error](#module_handbrake-js..Handbrake+event_error)</code>, <code>[end](#module_handbrake-js..Handbrake+event_end)</code>, <code>[complete](#module_handbrake-js..Handbrake+event_complete)</code>  
 
-  * [~Handbrake](#module_handbrake-js..Handbrake) ⇐ <code>[EventEmitter](http://nodejs.org/api/events.html)</code>
-    * [.output](#module_handbrake-js..Handbrake+output) : <code>string</code>
-    * [.options](#module_handbrake-js..Handbrake+options) : <code>object</code>
-    * [.eError](#module_handbrake-js..Handbrake+eError)
-    * ["start"](#module_handbrake-js..Handbrake+event_start)
-    * ["begin"](#module_handbrake-js..Handbrake+event_begin)
-    * ["progress" (progress)](#module_handbrake-js..Handbrake+event_progress)
-    * ["output" (output)](#module_handbrake-js..Handbrake+event_output)
-    * ["error" (error)](#module_handbrake-js..Handbrake+event_error)
-    * ["end"](#module_handbrake-js..Handbrake+event_end)
-    * ["complete"](#module_handbrake-js..Handbrake+event_complete)
+    * [~Handbrake](#module_handbrake-js..Handbrake) ⇐ <code>[EventEmitter](http://nodejs.org/api/events.html)</code>
+        * [.output](#module_handbrake-js..Handbrake+output) : <code>string</code>
+        * [.options](#module_handbrake-js..Handbrake+options) : <code>object</code>
+        * [.eError](#module_handbrake-js..Handbrake+eError)
+        * ["start"](#module_handbrake-js..Handbrake+event_start)
+        * ["begin"](#module_handbrake-js..Handbrake+event_begin)
+        * ["progress" (progress)](#module_handbrake-js..Handbrake+event_progress)
+        * ["output" (output)](#module_handbrake-js..Handbrake+event_output)
+        * ["error" (error)](#module_handbrake-js..Handbrake+event_error)
+        * ["end"](#module_handbrake-js..Handbrake+event_end)
+        * ["complete"](#module_handbrake-js..Handbrake+event_complete)
 
 <a name="module_handbrake-js..Handbrake+output"></a>
 #### handbrake.output : <code>string</code>
