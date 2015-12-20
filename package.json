@@ -40,7 +40,7 @@
     "command-line-args": "^2.1.2",
     "console-dope": "~0.3.0",
     "more-fs": "~0.5.0",
-    "object-to-spawn-args": "~0.1",
+    "object-to-spawn-args": "^1.0.0",
     "request": "^2.34",
     "unzip": "~0.1"
   },
