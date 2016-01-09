@@ -137,17 +137,17 @@ A handle on the HandbrakeCLI process. Emits events you can monitor to track prog
 **Extends:** <code>[EventEmitter](http://nodejs.org/api/events.html)</code>  
 **Emits**: <code>[start](#module_handbrake-js..Handbrake+event_start)</code>, <code>[begin](#module_handbrake-js..Handbrake+event_begin)</code>, <code>[progress](#module_handbrake-js..Handbrake+event_progress)</code>, <code>[output](#module_handbrake-js..Handbrake+event_output)</code>, <code>[error](#module_handbrake-js..Handbrake+event_error)</code>, <code>[end](#module_handbrake-js..Handbrake+event_end)</code>, <code>[complete](#module_handbrake-js..Handbrake+event_complete)</code>  
 
-    * [~Handbrake](#module_handbrake-js..Handbrake) ⇐ <code>[EventEmitter](http://nodejs.org/api/events.html)</code>
-        * [.output](#module_handbrake-js..Handbrake+output) : <code>string</code>
-        * [.options](#module_handbrake-js..Handbrake+options) : <code>object</code>
-        * [.eError](#module_handbrake-js..Handbrake+eError)
-        * ["start"](#module_handbrake-js..Handbrake+event_start)
-        * ["begin"](#module_handbrake-js..Handbrake+event_begin)
-        * ["progress" (progress)](#module_handbrake-js..Handbrake+event_progress)
-        * ["output" (output)](#module_handbrake-js..Handbrake+event_output)
-        * ["error" (error)](#module_handbrake-js..Handbrake+event_error)
-        * ["end"](#module_handbrake-js..Handbrake+event_end)
-        * ["complete"](#module_handbrake-js..Handbrake+event_complete)
+* [~Handbrake](#module_handbrake-js..Handbrake) ⇐ <code>[EventEmitter](http://nodejs.org/api/events.html)</code>
+    * [.output](#module_handbrake-js..Handbrake+output) : <code>string</code>
+    * [.options](#module_handbrake-js..Handbrake+options) : <code>object</code>
+    * [.eError](#module_handbrake-js..Handbrake+eError)
+    * ["start"](#module_handbrake-js..Handbrake+event_start)
+    * ["begin"](#module_handbrake-js..Handbrake+event_begin)
+    * ["progress" (progress)](#module_handbrake-js..Handbrake+event_progress)
+    * ["output" (output)](#module_handbrake-js..Handbrake+event_output)
+    * ["error" (error)](#module_handbrake-js..Handbrake+event_error)
+    * ["end"](#module_handbrake-js..Handbrake+event_end)
+    * ["complete"](#module_handbrake-js..Handbrake+event_complete)
 
 <a name="module_handbrake-js..Handbrake+output"></a>
 #### handbrake.output : <code>string</code>
