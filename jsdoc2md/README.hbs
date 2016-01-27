@@ -6,7 +6,7 @@
 [![Join the chat at https://gitter.im/75lb/handbrake-js](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/75lb/handbrake-js?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 # handbrake-js
-Handbrake-js is [Handbrake](http://handbrake.fr) (v0.10.2) for [node.js](http://nodejs.org), funnily enough. It aspires to provide a lean and stable foundation for building video transcoding software in node.js.
+Handbrake-js is [Handbrake](http://handbrake.fr) (v0.10.3) for [node.js](http://nodejs.org), funnily enough. It aspires to provide a lean and stable foundation for building video transcoding software in node.js.
 
 HandBrake is a tool for converting video from nearly any format to a selection of modern, widely supported codecs. It can process most common multimedia files and any DVD or BluRay sources that do not contain any copy protection.
 
