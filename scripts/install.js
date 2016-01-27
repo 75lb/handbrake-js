@@ -8,22 +8,24 @@ var fs = require('fs')
 var mfs = require('more-fs')
 var path = require('path')
 
-var downloadPath = 'https://handbrake.fr/rotation.php?file=HandBrake-0.10.2-%s'
+var version = '0.10.3'
+var downloadPath = 'http://download.handbrake.fr/releases/%s/HandBrake-%s-%s'
 
 var win32 = {
-  url: util.format(downloadPath, 'i686-Win_CLI.zip'),
+  url: util.format(downloadPath, version, version, 'i686-Win_CLI.zip'),
   archive: 'win.zip',
   copyFrom: path.join('unzipped', 'HandBrakeCLI.exe'),
   copyTo: path.join('bin', 'HandbrakeCLI.exe')
 }
+
 var win64 = {
-  url: util.format(downloadPath, 'x86_64-Win_CLI.zip'),
+  url: util.format(downloadPath, version, version, 'x86_64-Win_CLI.zip'),
   archive: 'win.zip',
   copyFrom: path.join('unzipped', 'HandBrakeCLI.exe'),
   copyTo: 'bin/HandbrakeCLI.exe'
 }
 var mac = {
-  url: util.format(downloadPath, 'MacOSX.6_CLI_x86_64.dmg'),
+  url: util.format(downloadPath, version, version, 'MacOSX.6_CLI_x86_64.dmg'),
   archive: 'mac.dmg',
   copyFrom: 'HandbrakeCLI',
   copyTo: 'bin/HandbrakeCLI'
