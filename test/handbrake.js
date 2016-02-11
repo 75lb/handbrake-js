@@ -2,6 +2,7 @@
 var test = require('tape')
 var hbjs = require('../lib/handbrake-js')
 var mockCp = require('./mock/child_process')
+var patchOptions = require('../lib/patch-options')
 
 test('Handbrake, start event', function (t) {
   t.plan(1)
@@ -173,4 +174,13 @@ test('HandbrakeProcess, output event (stderr)', function (t) {
   process.nextTick(function () {
     mockCp.lastHandle.stderr.emit('data', 'clive, yeah?')
   })
+})
+
+test('patchOptions: needsEqualsSign', function (t) {
+  var definitions = [
+    { name: 'one', type: Number, needsEqualsSign:true }
+  ]
+  var options = { one: '1' }
+  t.deepEqual(patchOptions(definitions, options), { 'one=1': '' })
+  t.end()
 })
