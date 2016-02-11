@@ -12,7 +12,7 @@ test('exception handling: HandbrakeCLI not found', function (t) {
   )
   handbrake.on('error', function (err) {
     t.equal(err.name, 'HandbrakeCLINotFound')
-    t.equal(err.message, 'HandbrakeCLI application not found: broken/path')
+    t.ok(/HandbrakeCLI application not found/.test(err.message))
     t.equal(err.HandbrakeCLIPath, 'broken/path')
     t.equal(err.errno, 'ENOENT')
     t.ok(/ENOENT/.test(err.spawnmessage))

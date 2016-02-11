@@ -26,7 +26,13 @@ Tested on Mac OSX, Ubuntu 14, Windows XP, Windows 7 and Windows 8.1.
 
 ## Installation
 ### System Requirements
-Just [node.js](http://nodejs.org). Every else is installed automatically.
+Just [node.js](http://nodejs.org). On Mac and Windows, every else is installed automatically. However on Linux, you must install HandbrakeCLI manually with these commands:
+
+```
+sudo add-apt-repository --yes ppa:stebbins/handbrake-releases\n\
+sudo apt-get update -qq\n\
+sudo apt-get install -qq handbrake-cli\n\
+```
 
 ### As a library
 Move into your project directory then run:

@@ -108,8 +108,11 @@ var linuxMsg =
 'Linux users\n\
 ============\n\
 handbrake-cli must be installed separately as the root user.\n\
-Ubuntu users can do this using the following command:\n\
-$ sudo npm run ubuntu-setup\n\
+Ubuntu users can do this using the following commands:\n\
+\n\
+add-apt-repository --yes ppa:stebbins/handbrake-releases\n\
+apt-get update -qq\n\
+apt-get install -qq handbrake-cli\n\
 \n\
 For all issues regarding installation of HandbrakeCLI on Linux, consult the Handbrake website:\n\
 http://handbrake.fr'
