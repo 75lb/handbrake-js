@@ -203,7 +203,7 @@ test('patchOptions: needsEqualsSign', function (t) {
   t.end()
 })
 
-test('patchOptions: needsEqualsSign', function (t) {
+test('patchOptions: needsEqualsSign (quotes used too if value is string)', function (t) {
   var definitions = [
     { name: 'markers', type: String, needsEqualsSign:true }
   ]
