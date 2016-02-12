@@ -176,11 +176,47 @@ test('HandbrakeProcess, output event (stderr)', function (t) {
   })
 })
 
-test('patchOptions: needsEqualsSign', function (t) {
+test('patchOptions: needsEqualsSign (number)', function (t) {
   var definitions = [
     { name: 'one', type: Number, needsEqualsSign:true }
   ]
   var options = { one: '1' }
   t.deepEqual(patchOptions(definitions, options), { 'one=1': '' })
+  t.end()
+})
+
+test('patchOptions: needsEqualsSign (number), useQuotesAroundValue', function (t) {
+  var definitions = [
+    { name: 'one', type: Number, needsEqualsSign:true, useQuotesAroundValue: true }
+  ]
+  var options = { one: '1' }
+  t.deepEqual(patchOptions(definitions, options), { 'one="1"': '' })
+  t.end()
+})
+
+test('patchOptions: needsEqualsSign', function (t) {
+  var definitions = [
+    { name: 'markers', type: String, needsEqualsSign:true }
+  ]
+  var options = { markers: '' }
+  t.deepEqual(patchOptions(definitions, options), { 'markers': '' })
+  t.end()
+})
+
+test('patchOptions: needsEqualsSign', function (t) {
+  var definitions = [
+    { name: 'markers', type: String, needsEqualsSign:true }
+  ]
+  var options = { markers: 'file.csv' }
+  t.deepEqual(patchOptions(definitions, options), { 'markers="file.csv"': '' })
+  t.end()
+})
+
+test('patchOptions: needsEqualsSign, useQuotesAroundValue', function (t) {
+  var definitions = [
+    { name: 'markers', type: String, needsEqualsSign:true, useQuotesAroundValue: true }
+  ]
+  var options = { markers: 'file.csv' }
+  t.deepEqual(patchOptions(definitions, options), { 'markers="file.csv"': '' })
   t.end()
 })
