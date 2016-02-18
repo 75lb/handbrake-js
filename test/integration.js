@@ -22,11 +22,11 @@ test('cli: simple encode', function (t) {
   } catch (err) {
     // dir already exists
   }
-  cp.exec('node bin/cli.js -i test/video/demo.mkv -o tmp/test.mp4 ', function (err, stdout, stderr) {
+  cp.exec('node bin/cli.js -i test/video/demo.mkv -o tmp/test.mp4 --rotate 5 -v', function (err, stdout, stderr) {
     if (err) {
       t.fail(stderr)
     } else {
-      t.pass()
+      t.ok(/Rotate \(rotate & flip image axes\) \(5\)/.test(stdout))
     }
   })
 })
