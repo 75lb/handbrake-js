@@ -5,7 +5,6 @@ var unzip = require('unzip')
 var exec = require('child_process').exec
 var util = require('util')
 var fs = require('fs')
-var mfs = require('more-fs')
 var path = require('path')
 
 var version = '0.10.3'
@@ -43,13 +42,13 @@ function downloadFile (from, to, done) {
 function extractFile (archive, copyFrom, copyTo, done) {
   console.log('extracting: ' + copyFrom)
   if (archive.indexOf('.zip') > 0) {
-    mfs.mkdir('unzipped')
+    if (!fs.existsSync('unzipped')) fs.mkdirSync('unzipped')
     var unzipped = unzip.Extract({ path: 'unzipped' })
     unzipped.on('close', function () {
       var source = fs.createReadStream(copyFrom)
       var dest = fs.createWriteStream(copyTo)
       dest.on('close', function () {
-        mfs.rmdir('unzipped')
+        fs.rmdirSync('unzipped')
         done()
       })
       source.pipe(dest)
@@ -81,7 +80,7 @@ function extractFile (archive, copyFrom, copyTo, done) {
 
 function install (installation) {
   downloadFile(installation.url, installation.archive, function () {
-    mfs.mkdir('bin')
+    if (!fs.existsSync('bin')) fs.mkdirSync('bin')
     extractFile(installation.archive, installation.copyFrom, installation.copyTo, function () {
       console.log('HandbrakeCLI installation complete')
       fs.unlink(installation.archive)
