@@ -22,13 +22,13 @@ var win64 = {
   url: util.format(downloadPath, version, version, 'x86_64-Win_CLI.zip'),
   archive: 'win.zip',
   copyFrom: path.join('unzipped', 'HandBrakeCLI.exe'),
-  copyTo: 'bin/HandbrakeCLI.exe'
+  copyTo: path.join('bin', 'HandbrakeCLI.exe')
 }
 var mac = {
   url: util.format(downloadPath, version, version, 'MacOSX.6_CLI_x86_64.dmg'),
   archive: 'mac.dmg',
   copyFrom: 'HandbrakeCLI',
-  copyTo: 'bin/HandbrakeCLI'
+  copyTo: path.join('bin', 'HandbrakeCLI')
 }
 
 function downloadFile (from, to, done) {
