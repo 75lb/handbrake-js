@@ -41,6 +41,7 @@
     "console-dope": "~0.3.6",
     "object-to-spawn-args": "^1.1.0",
     "request": "^2.69",
+    "rimraf": "^2.5.2",
     "unzip": "~0.1"
   },
   "devDependencies": {

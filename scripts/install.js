@@ -6,6 +6,7 @@ var exec = require('child_process').exec
 var util = require('util')
 var fs = require('fs')
 var path = require('path')
+var rimraf = require('rimraf')
 
 var version = '0.10.3'
 var downloadPath = 'http://download.handbrake.fr/releases/%s/HandBrake-%s-%s'
@@ -48,7 +49,7 @@ function extractFile (archive, copyFrom, copyTo, done) {
       var source = fs.createReadStream(copyFrom)
       var dest = fs.createWriteStream(copyTo)
       dest.on('close', function () {
-        fs.rmdirSync('unzipped')
+        rimraf.sync('unzipped')
         done()
       })
       source.pipe(dest)
