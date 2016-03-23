@@ -82,7 +82,7 @@ var hbjs = require("handbrake-js")
 
 * [handbrake-js](#module_handbrake-js)
     * _static_
-        * [.spawn(options)](#module_handbrake-js.spawn) ⇒ <code>[Handbrake](#module_handbrake-js..Handbrake)</code>
+        * [.spawn([options])](#module_handbrake-js.spawn) ⇒ <code>[Handbrake](#module_handbrake-js..Handbrake)</code>
         * [.exec(options, [onComplete])](#module_handbrake-js.exec)
     * _inner_
         * [~Handbrake](#module_handbrake-js..Handbrake) ⇐ <code>[EventEmitter](http://nodejs.org/api/events.html)</code>
@@ -98,14 +98,14 @@ var hbjs = require("handbrake-js")
             * ["complete"](#module_handbrake-js..Handbrake+event_complete)
 
 <a name="module_handbrake-js.spawn"></a>
-### hbjs.spawn(options) ⇒ <code>[Handbrake](#module_handbrake-js..Handbrake)</code>
+### hbjs.spawn([options]) ⇒ <code>[Handbrake](#module_handbrake-js..Handbrake)</code>
 Spawns a HandbrakeCLI process with the supplied [options](https://trac.handbrake.fr/wiki/CLIGuide#options), returning an instance of `Handbrake` on which you can listen for events.
 
 **Kind**: static method of <code>[handbrake-js](#module_handbrake-js)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| options | <code>Object</code> | [Options](https://trac.handbrake.fr/wiki/CLIGuide#options) to pass directly to HandbrakeCLI |
+| [options] | <code>object</code> | [Options](https://trac.handbrake.fr/wiki/CLIGuide#options) to pass directly to HandbrakeCLI |
 
 **Example**  
 ```js
