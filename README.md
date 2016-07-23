@@ -6,7 +6,7 @@
 [![Join the chat at https://gitter.im/75lb/handbrake-js](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/75lb/handbrake-js?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 # handbrake-js
-Handbrake-js is [Handbrake](http://handbrake.fr) (v0.10.3) for [node.js](http://nodejs.org), funnily enough. It aspires to provide a lean and stable foundation for building video transcoding software in node.js.
+Handbrake-js is [Handbrake](http://handbrake.fr) (v0.10.5) for [node.js](http://nodejs.org), funnily enough. It aspires to provide a lean and stable foundation for building video transcoding software in node.js.
 
 HandBrake is a tool for converting video from nearly any format to a selection of modern, widely supported codecs. It can process most common multimedia files and any DVD or BluRay sources that do not contain any copy protection.
 
@@ -98,6 +98,7 @@ var hbjs = require("handbrake-js")
             * ["complete"](#module_handbrake-js..Handbrake+event_complete)
 
 <a name="module_handbrake-js.spawn"></a>
+
 ### hbjs.spawn([options]) ⇒ <code>[Handbrake](#module_handbrake-js..Handbrake)</code>
 Spawns a HandbrakeCLI process with the supplied [options](https://trac.handbrake.fr/wiki/CLIGuide#options), returning an instance of `Handbrake` on which you can listen for events.
 
@@ -116,6 +117,7 @@ hbjs.spawn(options)
     .on("output", console.log)
 ```
 <a name="module_handbrake-js.exec"></a>
+
 ### hbjs.exec(options, [onComplete])
 Runs HandbrakeCLI with the supplied [options](https://trac.handbrake.fr/wiki/CLIGuide#options) calling the supplied callback on completion. The exec method is best suited for short duration tasks where you can wait until completion for the output.
 
@@ -136,6 +138,7 @@ hbjs.exec({ preset-list: true }, function(err, stdout, stderr){
 })
 ```
 <a name="module_handbrake-js..Handbrake"></a>
+
 ### hbjs~Handbrake ⇐ <code>[EventEmitter](http://nodejs.org/api/events.html)</code>
 A handle on the HandbrakeCLI process. Emits events you can monitor to track progress. An instance of this class is returned by [spawn](#module_handbrake-js.spawn).
 
@@ -156,16 +159,19 @@ A handle on the HandbrakeCLI process. Emits events you can monitor to track prog
     * ["complete"](#module_handbrake-js..Handbrake+event_complete)
 
 <a name="module_handbrake-js..Handbrake+output"></a>
+
 #### handbrake.output : <code>string</code>
 A `string` containing all handbrakeCLI output
 
 **Kind**: instance property of <code>[Handbrake](#module_handbrake-js..Handbrake)</code>  
 <a name="module_handbrake-js..Handbrake+options"></a>
+
 #### handbrake.options : <code>object</code>
 a copy of the options passed to [spawn](#module_handbrake-js.spawn)
 
 **Kind**: instance property of <code>[Handbrake](#module_handbrake-js..Handbrake)</code>  
 <a name="module_handbrake-js..Handbrake+eError"></a>
+
 #### handbrake.eError
 All operational errors are emitted via the [error](#module_handbrake-js..Handbrake+event_error) event.
 
@@ -180,16 +186,19 @@ All operational errors are emitted via the [error](#module_handbrake-js..Handbra
 | NOT_FOUND | <code>HandbrakeCLINotFound</code> | Thrown if the installed HandbrakeCLI binary has gone missing.. |
 
 <a name="module_handbrake-js..Handbrake+event_start"></a>
+
 #### "start"
 Fired as HandbrakeCLI is launched. Nothing has happened yet.
 
 **Kind**: event emitted by <code>[Handbrake](#module_handbrake-js..Handbrake)</code>  
 <a name="module_handbrake-js..Handbrake+event_begin"></a>
+
 #### "begin"
 Fired when encoding begins. If you're expecting an encode and this never fired, something went wrong.
 
 **Kind**: event emitted by <code>[Handbrake](#module_handbrake-js..Handbrake)</code>  
 <a name="module_handbrake-js..Handbrake+event_progress"></a>
+
 #### "progress" (progress)
 Fired at regular intervals passing a `progress` object.
 
@@ -207,6 +216,7 @@ Fired at regular intervals passing a `progress` object.
 | progress.task | <code>string</code> | Task description, either "Encoding" or "Muxing" |
 
 <a name="module_handbrake-js..Handbrake+event_output"></a>
+
 #### "output" (output)
 **Kind**: event emitted by <code>[Handbrake](#module_handbrake-js..Handbrake)</code>  
 
@@ -215,6 +225,7 @@ Fired at regular intervals passing a `progress` object.
 | output | <code>string</code> | An aggregate of `stdout` and `stderr` output from the underlying HandbrakeCLI process. |
 
 <a name="module_handbrake-js..Handbrake+event_error"></a>
+
 #### "error" (error)
 **Kind**: event emitted by <code>[Handbrake](#module_handbrake-js..Handbrake)</code>  
 
@@ -226,11 +237,13 @@ Fired at regular intervals passing a `progress` object.
 | error.errno | <code>string</code> | The HandbrakeCLI return code |
 
 <a name="module_handbrake-js..Handbrake+event_end"></a>
+
 #### "end"
 Fired on successful completion of an encoding task. Always follows a [begin](#module_handbrake-js..Handbrake+event_begin) event, with some [progress](#module_handbrake-js..Handbrake+event_progress) in between.
 
 **Kind**: event emitted by <code>[Handbrake](#module_handbrake-js..Handbrake)</code>  
 <a name="module_handbrake-js..Handbrake+event_complete"></a>
+
 #### "complete"
 Fired when HandbrakeCLI exited cleanly. This does not necessarily mean your encode completed as planned..
 

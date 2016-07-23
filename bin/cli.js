@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 'use strict'
 var ansi = require('ansi-escape-sequences')
-var cliArgs = require('command-line-args')
+var commandLineArgs = require('command-line-args')
 var hbjs = require('../lib/handbrake-js')
 var cliOptions = require('../lib/cli-options')
 var util = require('util')
 
-var cli = cliArgs(cliOptions)
+var handbrakeOptions = {}
 try {
-  var handbrakeOptions = cli.parse()._all
+  handbrakeOptions = commandLineArgs(cliOptions)._all
 } catch (err) {
   halt(err)
 }

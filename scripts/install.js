@@ -8,7 +8,7 @@ var fs = require('fs')
 var path = require('path')
 var rimraf = require('rimraf')
 
-var version = '0.10.3'
+var version = '0.10.5'
 var downloadPath = 'http://download.handbrake.fr/releases/%s/HandBrake-%s-%s'
 
 var win32 = {
