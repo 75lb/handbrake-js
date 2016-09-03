@@ -89,6 +89,7 @@ var hbjs = require("handbrake-js")
             * [.output](#module_handbrake-js..Handbrake+output) : <code>string</code>
             * [.options](#module_handbrake-js..Handbrake+options) : <code>object</code>
             * [.eError](#module_handbrake-js..Handbrake+eError)
+            * [.cancel()](#module_handbrake-js..Handbrake+cancel)
             * ["start"](#module_handbrake-js..Handbrake+event_start)
             * ["begin"](#module_handbrake-js..Handbrake+event_begin)
             * ["progress" (progress)](#module_handbrake-js..Handbrake+event_progress)
@@ -96,6 +97,7 @@ var hbjs = require("handbrake-js")
             * ["error" (error)](#module_handbrake-js..Handbrake+event_error)
             * ["end"](#module_handbrake-js..Handbrake+event_end)
             * ["complete"](#module_handbrake-js..Handbrake+event_complete)
+            * ["cancel"](#module_handbrake-js..Handbrake+event_cancel)
 
 <a name="module_handbrake-js.spawn"></a>
 
@@ -144,12 +146,13 @@ A handle on the HandbrakeCLI process. Emits events you can monitor to track prog
 
 **Kind**: inner class of <code>[handbrake-js](#module_handbrake-js)</code>  
 **Extends:** <code>[EventEmitter](http://nodejs.org/api/events.html)</code>  
-**Emits**: <code>[start](#module_handbrake-js..Handbrake+event_start)</code>, <code>[begin](#module_handbrake-js..Handbrake+event_begin)</code>, <code>[progress](#module_handbrake-js..Handbrake+event_progress)</code>, <code>[output](#module_handbrake-js..Handbrake+event_output)</code>, <code>[error](#module_handbrake-js..Handbrake+event_error)</code>, <code>[end](#module_handbrake-js..Handbrake+event_end)</code>, <code>[complete](#module_handbrake-js..Handbrake+event_complete)</code>  
+**Emits**: <code>[start](#module_handbrake-js..Handbrake+event_start)</code>, <code>[begin](#module_handbrake-js..Handbrake+event_begin)</code>, <code>[progress](#module_handbrake-js..Handbrake+event_progress)</code>, <code>[output](#module_handbrake-js..Handbrake+event_output)</code>, <code>[error](#module_handbrake-js..Handbrake+event_error)</code>, <code>[end](#module_handbrake-js..Handbrake+event_end)</code>, <code>[complete](#module_handbrake-js..Handbrake+event_complete)</code>, <code>module:handbrake-js~Handbrake#event:cancelled</code>  
 
 * [~Handbrake](#module_handbrake-js..Handbrake) ⇐ <code>[EventEmitter](http://nodejs.org/api/events.html)</code>
     * [.output](#module_handbrake-js..Handbrake+output) : <code>string</code>
     * [.options](#module_handbrake-js..Handbrake+options) : <code>object</code>
     * [.eError](#module_handbrake-js..Handbrake+eError)
+    * [.cancel()](#module_handbrake-js..Handbrake+cancel)
     * ["start"](#module_handbrake-js..Handbrake+event_start)
     * ["begin"](#module_handbrake-js..Handbrake+event_begin)
     * ["progress" (progress)](#module_handbrake-js..Handbrake+event_progress)
@@ -157,6 +160,7 @@ A handle on the HandbrakeCLI process. Emits events you can monitor to track prog
     * ["error" (error)](#module_handbrake-js..Handbrake+event_error)
     * ["end"](#module_handbrake-js..Handbrake+event_end)
     * ["complete"](#module_handbrake-js..Handbrake+event_complete)
+    * ["cancel"](#module_handbrake-js..Handbrake+event_cancel)
 
 <a name="module_handbrake-js..Handbrake+output"></a>
 
@@ -175,7 +179,7 @@ a copy of the options passed to [spawn](#module_handbrake-js.spawn)
 #### handbrake.eError
 All operational errors are emitted via the [error](#module_handbrake-js..Handbrake+event_error) event.
 
-**Kind**: instance enum property of <code>[Handbrake](#module_handbrake-js..Handbrake)</code>  
+**Kind**: instance enum of <code>[Handbrake](#module_handbrake-js..Handbrake)</code>  
 **Properties**
 
 | Name | Default | Description |
@@ -185,6 +189,12 @@ All operational errors are emitted via the [error](#module_handbrake-js..Handbra
 | OTHER | <code>Other</code> | Thrown if Handbrake crashes |
 | NOT_FOUND | <code>HandbrakeCLINotFound</code> | Thrown if the installed HandbrakeCLI binary has gone missing.. |
 
+<a name="module_handbrake-js..Handbrake+cancel"></a>
+
+#### handbrake.cancel()
+Cancel the encode, kill the underlying HandbrakeCLI process then emit a `cancelled` event.
+
+**Kind**: instance method of <code>[Handbrake](#module_handbrake-js..Handbrake)</code>  
 <a name="module_handbrake-js..Handbrake+event_start"></a>
 
 #### "start"
@@ -239,13 +249,19 @@ Fired at regular intervals passing a `progress` object.
 <a name="module_handbrake-js..Handbrake+event_end"></a>
 
 #### "end"
-Fired on successful completion of an encoding task. Always follows a [begin](#module_handbrake-js..Handbrake+event_begin) event, with some [progress](#module_handbrake-js..Handbrake+event_progress) in between.
+Fired on successful completion of an encoding task. Always follows a [begin](#module_handbrake-js..Handbrake+event_begin) event, with some {@link module:handbrake-js~Handbrake#event:progress} in between.
 
 **Kind**: event emitted by <code>[Handbrake](#module_handbrake-js..Handbrake)</code>  
 <a name="module_handbrake-js..Handbrake+event_complete"></a>
 
 #### "complete"
 Fired when HandbrakeCLI exited cleanly. This does not necessarily mean your encode completed as planned..
+
+**Kind**: event emitted by <code>[Handbrake](#module_handbrake-js..Handbrake)</code>  
+<a name="module_handbrake-js..Handbrake+event_cancel"></a>
+
+#### "cancel"
+If `.cancel()` was called, this event is emitted once the underlying HandbrakeCLI process has closed.
 
 **Kind**: event emitted by <code>[Handbrake](#module_handbrake-js..Handbrake)</code>  
 

@@ -41,3 +41,14 @@ test('exec: --preset-list', function (t) {
     }
   })
 })
+
+test('.cancel()', function (t) {
+  t.plan(1)
+  var handbrake = hbjs.spawn({ input: 'test/video/demo.mkv', output: 'tmp/cancelled.mp4' })
+  handbrake.on('begin', function () {
+    handbrake.cancel()
+  })
+  handbrake.on('cancelled', function () {
+    t.pass('cancelled')
+  })
+})
