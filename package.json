@@ -31,7 +31,7 @@
     "scripts"
   ],
   "scripts": {
-    "test": "tape test/*.js",
+    "test": "test-runner test/*.js",
     "postinstall": "node scripts/install.js",
     "ubuntu-setup": "./scripts/install-ubuntu.sh",
     "docs": "jsdoc2md -t jsdoc2md/README.hbs lib/*.js > README.md; echo"
@@ -45,7 +45,8 @@
     "unzip": "~0.1"
   },
   "devDependencies": {
+    "core-assert": "^0.2.1",
     "jsdoc-to-markdown": "^3.0.0",
-    "tape": "^4.6.3"
+    "test-runner": "^0.3.0"
   }
 }

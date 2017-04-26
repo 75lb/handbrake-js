@@ -1,11 +1,13 @@
 'use strict'
-var test = require('tape')
+var TestRunner = require('test-runner')
 var handbrakeJs = require('../lib/handbrake-js')
 var Handbrake = require('../lib/Handbrake')
 var mockCp = require('./mock/child_process')
+var a = require('core-assert')
 
-test('spawn: correct return type', function (t) {
-  t.plan(1)
+var runner = new TestRunner()
+
+runner.test('spawn: correct return type', function () {
   var handbrake = handbrakeJs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
-  t.ok(handbrake instanceof Handbrake)
+  a.ok(handbrake instanceof Handbrake)
 })
