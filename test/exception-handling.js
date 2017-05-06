@@ -5,6 +5,7 @@ var mockCp = require('./mock/child_process')
 var a = require('core-assert')
 
 var runner = new TestRunner({ sequential: true })
+hbjs._usage.disable()
 
 runner.test('exception handling: HandbrakeCLI not found', function () {
   return new Promise(function (resolve, reject) {

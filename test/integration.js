@@ -7,10 +7,11 @@ var a = require('core-assert')
 var Counter = require('./lib/counter')
 
 var runner = new TestRunner()
+hbjs._usage.disable()
 
 runner.test('cli: --preset-list', function () {
   var counter = Counter.create(1)
-  cp.exec('node bin/cli.js --preset-list', function (err, stdout, stderr) {
+  cp.exec('node bin/cli.js --no-usage-stats --preset-list', function (err, stdout, stderr) {
     if (err) {
       counter.fail(stderr)
     } else {
@@ -27,7 +28,7 @@ runner.test('cli: simple encode', function () {
   } catch (err) {
     // dir already exists
   }
-  cp.exec('node bin/cli.js -i test/video/demo.mkv -o tmp/test.mp4 --rotate 5 -v', function (err, stdout, stderr) {
+  cp.exec('node bin/cli.js --no-usage-stats -i test/video/demo.mkv -o tmp/test.mp4 --rotate 5 -v', function (err, stdout, stderr) {
     if (err) {
       counter.fail(stderr)
     } else {
