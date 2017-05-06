@@ -43,7 +43,7 @@
     "request": "^2.81.0",
     "rimraf": "^2.6.1",
     "unzip": "~0.1",
-    "usage-stats": "^0.8.3"
+    "usage-stats": "^0.8.5"
   },
   "devDependencies": {
     "core-assert": "^0.2.1",
