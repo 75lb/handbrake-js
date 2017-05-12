@@ -44,15 +44,15 @@ $ npm install handbrake-js --save
 Now you can begin encoding from your app.
 
 ```js
-var hbjs = require("handbrake-js");
+var hbjs = require('handbrake-js');
 
-hbjs.spawn({ input: "dope shit.avi", output: "dope shit.m4v" })
-  .on("error", function(err){
+hbjs.spawn({ input: 'something.avi', output: 'something.m4v' })
+  .on('error', function(err){
     // invalid user input, no video found etc
   })
-  .on("progress", function(progress){
+  .on('progress', function(progress){
     console.log(
-      "Percent complete: %s, ETA: %s",
+      'Percent complete: %s, ETA: %s',
       progress.percentComplete,
       progress.eta
     );
@@ -65,9 +65,9 @@ $ npm install -g handbrake-js
 ```
 *Mac / Linux users may need to run with `sudo`*.
 
-Now, you can call `handbrake` as you would HandbrakeCLI, using all the usual [options](https://trac.handbrake.fr/wiki/CLIGuide). By default, just statistics are output, passing `--verbose` prints the raw HandbrakeCLI output. This command will transcode an AVI to the more universal H.264 (mp4):
+Now, you can call `handbrake` as you would HandbrakeCLI, using all the usual [options](https://handbrake.fr/docs/en/latest/cli/cli-guide.html). By default, just statistics are output, passing `--verbose` prints the raw HandbrakeCLI output. This command will transcode an AVI to the more universal H.264 (mp4):
 ```
-$ handbrake --input "some episode.avi" --output "some episode.mp4" --preset Normal
+$ handbrake --input 'some episode.avi' --output 'some episode.mp4' --preset Normal
 Task      % done     FPS       Avg FPS   ETA
 Encoding  1.07       131.76    158.12    00h21m11s
 ```
@@ -77,7 +77,7 @@ Handbrake for node.js.
 
 **Example**  
 ```js
-var hbjs = require("handbrake-js")
+var hbjs = require('handbrake-js')
 ```
 
 * [handbrake-js](#module_handbrake-js)
@@ -102,41 +102,47 @@ var hbjs = require("handbrake-js")
 <a name="module_handbrake-js.spawn"></a>
 
 ### hbjs.spawn([options]) ⇒ [<code>Handbrake</code>](#module_handbrake-js..Handbrake)
-Spawns a HandbrakeCLI process with the supplied [options](https://trac.handbrake.fr/wiki/CLIGuide#options), returning an instance of `Handbrake` on which you can listen for events.
+Spawns a HandbrakeCLI process with the supplied [options](https://handbrake.fr/docs/en/latest/cli/cli-guide.html#options), returning an instance of `Handbrake` on which you can listen for events.
 
 **Kind**: static method of [<code>handbrake-js</code>](#module_handbrake-js)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [options] | <code>object</code> | [Options](https://trac.handbrake.fr/wiki/CLIGuide#options) to pass directly to HandbrakeCLI |
+| [options] | <code>object</code> | [Options](https://handbrake.fr/docs/en/latest/cli/cli-guide.html#options) to pass directly to HandbrakeCLI |
 
 **Example**  
 ```js
-var hbjs = require("handbrake-js")
+var hbjs = require('handbrake-js')
 
+var options = {
+  input: 'something.avi',
+  output: 'something.mp4',
+  preset: 'Normal',
+  rotate: 1
+}
 hbjs.spawn(options)
-    .on("error", console.error)
-    .on("output", console.log)
+  .on('error', console.error)
+  .on('output', console.log)
 ```
 <a name="module_handbrake-js.exec"></a>
 
 ### hbjs.exec(options, [onComplete])
-Runs HandbrakeCLI with the supplied [options](https://trac.handbrake.fr/wiki/CLIGuide#options) calling the supplied callback on completion. The exec method is best suited for short duration tasks where you can wait until completion for the output.
+Runs HandbrakeCLI with the supplied [options](https://handbrake.fr/docs/en/latest/cli/cli-guide.html#options) calling the supplied callback on completion. The exec method is best suited for short duration tasks where you can wait until completion for the output.
 
 **Kind**: static method of [<code>handbrake-js</code>](#module_handbrake-js)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| options | <code>Object</code> | [Options](https://trac.handbrake.fr/wiki/CLIGuide#options) to pass directly to HandbrakeCLI |
+| options | <code>Object</code> | [Options](https://handbrake.fr/docs/en/latest/cli/cli-guide.html#options) to pass directly to HandbrakeCLI |
 | [onComplete] | <code>function</code> | If passed, `onComplete(err, stdout, stderr)` will be called on completion, `stdout` and `stderr` being strings containing the HandbrakeCLI output. |
 
 **Example**  
 ```js
-var hbjs = require("handbrake-js")
+var hbjs = require('handbrake-js')
 
 hbjs.exec({ preset-list: true }, function(err, stdout, stderr){
-    if (err) throw err
-    console.log(stdout)
+  if (err) throw err
+  console.log(stdout)
 })
 ```
 <a name="module_handbrake-js..Handbrake"></a>
