@@ -1,13 +1,12 @@
 #!/usr/bin/env node
-'use strict'
-var ansi = require('ansi-escape-sequences')
-var commandLineArgs = require('command-line-args')
-var hbjs = require('../lib/handbrake-js')
+const ansi = require('ansi-escape-sequences')
+const commandLineArgs = require('command-line-args')
+const hbjs = require('../lib/handbrake-js')
 hbjs._usage.defaults.set('cd4', 'cli')
-var cliOptions = require('../lib/cli-options')
-var util = require('util')
+const cliOptions = require('../lib/cli-options')
+const util = require('util')
 
-var handbrakeOptions = {}
+let handbrakeOptions = {}
 try {
   handbrakeOptions = commandLineArgs(cliOptions)._all
 } catch (err) {
@@ -37,7 +36,7 @@ function halt (err) {
 
 /* user intends to encode, so attach progress reporter (unless --verbose was passed) */
 if (handbrakeOptions.input && handbrakeOptions.output) {
-  var handbrake = hbjs.spawn(handbrakeOptions)
+  const handbrake = hbjs.spawn(handbrakeOptions)
     .on('error', halt)
     .on('complete', console.log.bind(console))
 

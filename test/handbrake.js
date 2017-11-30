@@ -1,16 +1,16 @@
 'use strict'
-var TestRunner = require('test-runner')
-var hbjs = require('../lib/handbrake-js')
-var mockCp = require('./mock/child_process')
-var a = require('core-assert')
-var Counter = require('./lib/counter')
+const TestRunner = require('test-runner')
+const hbjs = require('../lib/handbrake-js')
+const mockCp = require('./mock/child_process')
+const a = require('assert')
+const Counter = require('test-runner-counter')
 
-var runner = new TestRunner({ sequential: false })
+const runner = new TestRunner({ sequential: false })
 hbjs._usage.disable()
 
 runner.test('Handbrake, start event', function () {
-  var handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
-  var counter = Counter.create(1)
+  const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
+  const counter = Counter.create(1)
 
   handbrake.on('start', function () {
     counter.pass()
@@ -25,8 +25,8 @@ runner.test('Handbrake, start event', function () {
 })
 
 runner.test('Handbrake, begin event', function () {
-  var counter = Counter.create(1)
-  var handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
+  const counter = Counter.create(1)
+  const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
   handbrake.on('begin', function () {
     counter.pass()
   })
@@ -40,8 +40,8 @@ runner.test('Handbrake, begin event', function () {
 })
 
 runner.test('Handbrake, progress event: encoding (short)', function () {
-  var counter = Counter.create(2)
-  var handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
+  const counter = Counter.create(2)
+  const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
   handbrake.on('progress', function (progress) {
     a.deepEqual(progress, {
       taskNumber: 1,
@@ -64,8 +64,8 @@ runner.test('Handbrake, progress event: encoding (short)', function () {
 })
 
 runner.test('HandbrakeProcess, progress event: encoding (long)', function () {
-  var counter = Counter.create(2)
-  var handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
+  const counter = Counter.create(2)
+  const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
   handbrake.on('progress', function (progress) {
     a.deepEqual(progress, {
       taskNumber: 1,
@@ -88,8 +88,8 @@ runner.test('HandbrakeProcess, progress event: encoding (long)', function () {
 })
 
 runner.test('HandbrakeProcess, progress event: fragmented', function () {
-  var counter = Counter.create(1)
-  var handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
+  const counter = Counter.create(1)
+  const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
   handbrake.on('progress', function (progress) {
     a.deepEqual(progress, {
       taskNumber: 1,
@@ -113,8 +113,8 @@ runner.test('HandbrakeProcess, progress event: fragmented', function () {
 })
 
 runner.test('HandbrakeProcess, progress event: muxing', function () {
-  var counter = Counter.create(1)
-  var handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
+  const counter = Counter.create(1)
+  const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
   handbrake.on('progress', function (progress) {
     a.deepEqual(progress, {
       taskNumber: 0,
@@ -136,8 +136,8 @@ runner.test('HandbrakeProcess, progress event: muxing', function () {
 })
 
 runner.test('HandbrakeProcess, end event (without encode)', function () {
-  var counter = Counter.create(1)
-  var handbrake = hbjs.spawn({ help: true }, { cp: mockCp })
+  const counter = Counter.create(1)
+  const handbrake = hbjs.spawn({ help: true }, { cp: mockCp })
   handbrake.on('end', function () {
     counter.fail('"end" should not be fired')
   })
@@ -151,8 +151,8 @@ runner.test('HandbrakeProcess, end event (without encode)', function () {
 })
 
 runner.test('HandbrakeProcess, end event (with encode)', function () {
-  var counter = Counter.create(1)
-  var handbrake = hbjs.spawn({ help: true }, { cp: mockCp })
+  const counter = Counter.create(1)
+  const handbrake = hbjs.spawn({ help: true }, { cp: mockCp })
   handbrake.on('end', function () {
     counter.pass()
   })
@@ -166,8 +166,8 @@ runner.test('HandbrakeProcess, end event (with encode)', function () {
 })
 
 runner.test('HandbrakeProcess, complete event', function () {
-  var counter = Counter.create(1)
-  var handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
+  const counter = Counter.create(1)
+  const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
   handbrake.on('complete', function () {
     counter.pass()
   })
@@ -180,8 +180,8 @@ runner.test('HandbrakeProcess, complete event', function () {
 })
 
 runner.test('HandbrakeProcess, output event (stdout)', function () {
-  var counter = Counter.create(1)
-  var handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
+  const counter = Counter.create(1)
+  const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
   handbrake.on('output', function (output) {
     a.strictEqual(output, 'clive, yeah?')
     counter.pass()
@@ -195,8 +195,8 @@ runner.test('HandbrakeProcess, output event (stdout)', function () {
 })
 
 runner.test('HandbrakeProcess, output event (stderr)', function () {
-  var counter = Counter.create(1)
-  var handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
+  const counter = Counter.create(1)
+  const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
   handbrake.on('output', function (output) {
     a.strictEqual(output, 'clive, yeah?', output)
     counter.pass()

@@ -1,15 +1,14 @@
-'use strict'
-var TestRunner = require('test-runner')
-var hbjs = require('../lib/handbrake-js')
-var mockCp = require('./mock/child_process')
-var a = require('core-assert')
+const TestRunner = require('test-runner')
+const hbjs = require('../lib/handbrake-js')
+const mockCp = require('./mock/child_process')
+const a = require('assert')
 
-var runner = new TestRunner({ sequential: true })
+const runner = new TestRunner({ sequential: true })
 hbjs._usage.disable()
 
 runner.test('exception handling: HandbrakeCLI not found', function () {
   return new Promise(function (resolve, reject) {
-    var handbrake = hbjs.spawn(
+    const handbrake = hbjs.spawn(
       { input: 'in', output: 'out' },
       { HandbrakeCLIPath: 'broken/path' }
     )

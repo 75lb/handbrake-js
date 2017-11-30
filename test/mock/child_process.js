@@ -1,18 +1,19 @@
-'use strict'
-var util = require('util')
-var EventEmitter = require('events').EventEmitter
-var Readable = require('stream').Readable
+const util = require('util')
+const EventEmitter = require('events').EventEmitter
+const Readable = require('stream').Readable
 
 exports.spawn = spawn
 exports.lastHandle = null
 
-function MockChildProcess () {
-  this.stdout = new Readable()
-  this.stdout._read = function () {}
-  this.stderr = new Readable()
-  this.stderr._read = function () {}
+class MockChildProcess extends EventEmitter {
+  constructor () {
+    super()
+    this.stdout = new Readable()
+    this.stdout._read = function () {}
+    this.stderr = new Readable()
+    this.stderr._read = function () {}
+  }
 }
-util.inherits(MockChildProcess, EventEmitter)
 
 function spawn () {
   exports.lastHandle = new MockChildProcess()

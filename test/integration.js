@@ -1,16 +1,15 @@
-'use strict'
-var TestRunner = require('test-runner')
-var cp = require('child_process')
-var fs = require('fs')
-var hbjs = require('../lib/handbrake-js')
-var a = require('core-assert')
-var Counter = require('./lib/counter')
+const TestRunner = require('test-runner')
+const cp = require('child_process')
+const fs = require('fs')
+const hbjs = require('../lib/handbrake-js')
+const a = require('assert')
+const Counter = require('test-runner-counter')
 
-var runner = new TestRunner()
+const runner = new TestRunner()
 hbjs._usage.disable()
 
 runner.test('cli: --preset-list', function () {
-  var counter = Counter.create(1)
+  const counter = Counter.create(1)
   cp.exec('node bin/cli.js --no-usage-stats --preset-list', function (err, stdout, stderr) {
     if (err) {
       counter.fail(stderr)
@@ -22,7 +21,7 @@ runner.test('cli: --preset-list', function () {
 })
 
 runner.test('cli: simple encode', function () {
-  var counter = Counter.create(1)
+  const counter = Counter.create(1)
   try {
     fs.mkdirSync('tmp')
   } catch (err) {
@@ -40,7 +39,7 @@ runner.test('cli: simple encode', function () {
 })
 
 runner.test('exec: --preset-list', function () {
-  var counter = Counter.create(1)
+  const counter = Counter.create(1)
   hbjs.exec({ 'preset-list': true }, function (err, stdout, stderr) {
     if (err) {
       counter.fail(stderr)
@@ -52,8 +51,8 @@ runner.test('exec: --preset-list', function () {
 })
 
 runner.test('.cancel()', function () {
-  var counter = Counter.create(1)
-  var handbrake = hbjs.spawn({ input: 'test/video/demo.mkv', output: 'tmp/cancelled.mp4' })
+  const counter = Counter.create(1)
+  const handbrake = hbjs.spawn({ input: 'test/video/demo.mkv', output: 'tmp/cancelled.mp4' })
   handbrake.on('begin', function () {
     handbrake.cancel()
   })
