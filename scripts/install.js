@@ -1,30 +1,29 @@
 #!/usr/bin/env node
-'use strict'
-var request = require('request')
-var unzip = require('unzip')
-var exec = require('child_process').exec
-var util = require('util')
-var fs = require('fs')
-var path = require('path')
-var rimraf = require('rimraf')
+const request = require('request')
+const unzip = require('unzip')
+const exec = require('child_process').exec
+const util = require('util')
+const fs = require('fs')
+const path = require('path')
+const rimraf = require('rimraf')
 
-var version = '0.10.5'
-var downloadPath = 'http://download.handbrake.fr/releases/%s/HandBrake-%s-%s'
+const version = '0.10.5'
+const downloadPath = 'http://download.handbrake.fr/releases/%s/HandBrake-%s-%s'
 
-var win32 = {
+const win32 = {
   url: util.format(downloadPath, version, version, 'i686-Win_CLI.zip'),
   archive: 'win.zip',
   copyFrom: path.join('unzipped', 'HandBrakeCLI.exe'),
   copyTo: path.join('bin', 'HandbrakeCLI.exe')
 }
 
-var win64 = {
+const win64 = {
   url: util.format(downloadPath, version, version, 'x86_64-Win_CLI.zip'),
   archive: 'win.zip',
   copyFrom: path.join('unzipped', 'HandBrakeCLI.exe'),
   copyTo: path.join('bin', 'HandbrakeCLI.exe')
 }
-var mac = {
+const mac = {
   url: util.format(downloadPath, version, version, 'MacOSX.6_CLI_x86_64.dmg'),
   archive: 'mac.dmg',
   copyFrom: 'HandbrakeCLI',
@@ -33,21 +32,17 @@ var mac = {
 
 function downloadFile (from, to, done) {
   console.log('fetching: ' + from)
-  var req = request(from)
-  var download = fs.createWriteStream(to)
-
-  req.pipe(download)
-  download.on('close', done)
+  request(from).pipe(fs.createWriteStream(to)).on('close', done)
 }
 
 function extractFile (archive, copyFrom, copyTo, done) {
   console.log('extracting: ' + copyFrom)
   if (archive.indexOf('.zip') > 0) {
     if (!fs.existsSync('unzipped')) fs.mkdirSync('unzipped')
-    var unzipped = unzip.Extract({ path: 'unzipped' })
+    const unzipped = unzip.Extract({ path: 'unzipped' })
     unzipped.on('close', function () {
-      var source = fs.createReadStream(copyFrom)
-      var dest = fs.createWriteStream(copyTo)
+      const source = fs.createReadStream(copyFrom)
+      const dest = fs.createWriteStream(copyTo)
       dest.on('close', function () {
         rimraf.sync('unzipped')
         done()
@@ -57,16 +52,16 @@ function extractFile (archive, copyFrom, copyTo, done) {
 
     fs.createReadStream(archive).pipe(unzipped)
   } else if (archive.indexOf('.dmg') > 0) {
-    var cmd = 'hdiutil attach ' + archive
+    const cmd = 'hdiutil attach ' + archive
     exec(cmd, function (err, stdout) {
       if (err) throw err
-      var match = stdout.match(/^(\/dev\/\w+)\b.*(\/Volumes\/.*)$/m)
+      const match = stdout.match(/^(\/dev\/\w+)\b.*(\/Volumes\/.*)$/m)
       if (match) {
-        var devicePath = match[1]
-        var mountPath = match[2]
+        const devicePath = match[1]
+        const mountPath = match[2]
         copyFrom = path.join(mountPath, copyFrom)
-        var source = fs.createReadStream(copyFrom)
-        var dest = fs.createWriteStream(copyTo, { mode: parseInt(755, 8) })
+        const source = fs.createReadStream(copyFrom)
+        const dest = fs.createWriteStream(copyTo, { mode: parseInt(755, 8) })
         dest.on('close', function () {
           exec('hdiutil detach ' + devicePath, function (err) {
             if (err) throw err
@@ -84,7 +79,7 @@ function install (installation) {
     if (!fs.existsSync('bin')) fs.mkdirSync('bin')
     extractFile(installation.archive, installation.copyFrom, installation.copyTo, function () {
       console.log('HandbrakeCLI installation complete')
-      fs.unlink(installation.archive)
+      fs.unlinkSync(installation.archive)
     })
   })
 }
@@ -104,7 +99,7 @@ function go (installation) {
   }
 }
 
-var linuxMsg =
+const linuxMsg =
 'Linux users\n\
 ============\n\
 handbrake-cli must be installed separately as the root user.\n\
