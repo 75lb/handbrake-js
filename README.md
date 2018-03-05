@@ -86,8 +86,8 @@ const hbjs = require('handbrake-js')
         * [.exec(options, [onComplete])](#module_handbrake-js.exec)
     * _inner_
         * [~Handbrake](#module_handbrake-js..Handbrake) ⇐ [<code>EventEmitter</code>](http://nodejs.org/api/events.html)
-            * [.output](#module_handbrake-js..Handbrake.Handbrake+output) : <code>string</code>
-            * [.options](#module_handbrake-js..Handbrake.Handbrake+options) : <code>object</code>
+            * [.output](#module_handbrake-js..Handbrake+output) : <code>string</code>
+            * [.options](#module_handbrake-js..Handbrake+options) : <code>object</code>
             * [.eError](#module_handbrake-js..Handbrake+eError)
             * [.cancel()](#module_handbrake-js..Handbrake+cancel)
             * ["start"](#module_handbrake-js..Handbrake+event_start)
@@ -155,8 +155,8 @@ A handle on the HandbrakeCLI process. Emits events you can monitor to track prog
 **Emits**: [<code>start</code>](#module_handbrake-js..Handbrake+event_start), [<code>begin</code>](#module_handbrake-js..Handbrake+event_begin), [<code>progress</code>](#module_handbrake-js..Handbrake+event_progress), [<code>output</code>](#module_handbrake-js..Handbrake+event_output), [<code>error</code>](#module_handbrake-js..Handbrake+event_error), [<code>end</code>](#module_handbrake-js..Handbrake+event_end), [<code>complete</code>](#module_handbrake-js..Handbrake+event_complete), [<code>cancelled</code>](#module_handbrake-js..Handbrake+event_cancelled)  
 
 * [~Handbrake](#module_handbrake-js..Handbrake) ⇐ [<code>EventEmitter</code>](http://nodejs.org/api/events.html)
-    * [.output](#module_handbrake-js..Handbrake.Handbrake+output) : <code>string</code>
-    * [.options](#module_handbrake-js..Handbrake.Handbrake+options) : <code>object</code>
+    * [.output](#module_handbrake-js..Handbrake+output) : <code>string</code>
+    * [.options](#module_handbrake-js..Handbrake+options) : <code>object</code>
     * [.eError](#module_handbrake-js..Handbrake+eError)
     * [.cancel()](#module_handbrake-js..Handbrake+cancel)
     * ["start"](#module_handbrake-js..Handbrake+event_start)
@@ -168,13 +168,13 @@ A handle on the HandbrakeCLI process. Emits events you can monitor to track prog
     * ["complete"](#module_handbrake-js..Handbrake+event_complete)
     * ["cancelled"](#module_handbrake-js..Handbrake+event_cancelled)
 
-<a name="module_handbrake-js..Handbrake.Handbrake+output"></a>
+<a name="module_handbrake-js..Handbrake+output"></a>
 
 #### handbrake.output : <code>string</code>
 A `string` containing all handbrakeCLI output
 
 **Kind**: instance property of [<code>Handbrake</code>](#module_handbrake-js..Handbrake)  
-<a name="module_handbrake-js..Handbrake.Handbrake+options"></a>
+<a name="module_handbrake-js..Handbrake+options"></a>
 
 #### handbrake.options : <code>object</code>
 a copy of the options passed to [spawn](#module_handbrake-js.spawn)

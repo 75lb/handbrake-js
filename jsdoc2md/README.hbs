@@ -44,13 +44,13 @@ $ npm install handbrake-js --save
 Now you can begin encoding from your app.
 
 ```js
-var hbjs = require('handbrake-js');
+const hbjs = require('handbrake-js');
 
 hbjs.spawn({ input: 'something.avi', output: 'something.m4v' })
-  .on('error', function(err){
+  .on('error', err => {
     // invalid user input, no video found etc
   })
-  .on('progress', function(progress){
+  .on('progress', progress => {
     console.log(
       'Percent complete: %s, ETA: %s',
       progress.percentComplete,
