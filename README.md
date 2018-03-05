@@ -6,7 +6,7 @@
 [![Join the chat at https://gitter.im/75lb/handbrake-js](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/75lb/handbrake-js?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 # handbrake-js
-Handbrake-js is [Handbrake](http://handbrake.fr) (v0.10.5) for [node.js](http://nodejs.org), funnily enough. It aspires to provide a lean and stable foundation for building video transcoding software in node.js.
+Handbrake-js is [Handbrake](http://handbrake.fr) (v1.0.7) for [node.js](http://nodejs.org), funnily enough. It aspires to provide a lean and stable foundation for building video transcoding software in node.js.
 
 HandBrake is a tool for converting video from nearly any format to a selection of modern, widely supported codecs. It can process most common multimedia files and any DVD or BluRay sources that do not contain any copy protection.
 
@@ -44,7 +44,7 @@ $ npm install handbrake-js --save
 Now you can begin encoding from your app.
 
 ```js
-const hbjs = require('handbrake-js');
+const hbjs = require('handbrake-js')
 
 hbjs.spawn({ input: 'something.avi', output: 'something.m4v' })
   .on('error', err => {
@@ -55,8 +55,8 @@ hbjs.spawn({ input: 'something.avi', output: 'something.m4v' })
       'Percent complete: %s, ETA: %s',
       progress.percentComplete,
       progress.eta
-    );
-  });
+    )
+  })
 ```
 ### As a command-line app
 From any directory run the following:
@@ -273,4 +273,4 @@ If `.cancel()` was called, this event is emitted once the underlying HandbrakeCL
 
 * * *
 
-&copy; 2013-17 Lloyd Brookes &lt;75pound@gmail.com&gt;. Documented by [jsdoc-to-markdown](https://github.com/75lb/jsdoc-to-markdown).
+&copy; 2013-18 Lloyd Brookes &lt;75pound@gmail.com&gt;. Documented by [jsdoc-to-markdown](https://github.com/75lb/jsdoc-to-markdown).
