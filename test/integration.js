@@ -27,11 +27,11 @@ runner.test('cli: simple encode', function () {
   } catch (err) {
     // dir already exists
   }
-  cp.exec('node bin/cli.js --no-usage-stats -i test/video/demo.mkv -o tmp/test.mp4 --rotate 5 -v', function (err, stdout, stderr) {
+  cp.exec('node bin/cli.js --no-usage-stats -i test/video/demo.mkv -o tmp/test.mp4 --rotate angle=90:hflip=1 -v', function (err, stdout, stderr) {
     if (err) {
       counter.fail(stderr)
     } else {
-      a.ok(/Rotate \(rotate & flip image axes\) \(5\)/.test(stdout))
+      a.ok(/avfilter \(transpose='dir=clock_flip'\)/.test(stdout))
       counter.pass()
     }
   })
@@ -43,7 +43,7 @@ runner.test('exec: --preset-list', function () {
   hbjs.exec({ 'preset-list': true }, function (err, stdout, stderr) {
     if (err) {
       counter.fail(stderr)
-    } else if (/Devices/.test(stdout)) {
+    } else if (/Devices/.test(stderr)) {
       counter.pass()
     }
   })

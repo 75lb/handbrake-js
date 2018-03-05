@@ -7,24 +7,25 @@ const fs = require('fs')
 const path = require('path')
 const rimraf = require('rimraf')
 
-const version = '0.10.5'
-const downloadPath = 'http://download.handbrake.fr/releases/%s/HandBrake-%s-%s'
+const version = '1.0.7'
+const downloadPath = 'http://download.handbrake.fr/releases/%s/HandBrakeCLI-%s%s'
 
 const win32 = {
-  url: util.format(downloadPath, version, version, 'i686-Win_CLI.zip'),
+  url: util.format(downloadPath, version, version, '-win-i686.zip'),
   archive: 'win.zip',
   copyFrom: path.join('unzipped', 'HandBrakeCLI.exe'),
   copyTo: path.join('bin', 'HandbrakeCLI.exe')
 }
 
 const win64 = {
-  url: util.format(downloadPath, version, version, 'x86_64-Win_CLI.zip'),
+  url: util.format(downloadPath, version, version, '-win-x86_64.zip'),
   archive: 'win.zip',
   copyFrom: path.join('unzipped', 'HandBrakeCLI.exe'),
   copyTo: path.join('bin', 'HandbrakeCLI.exe')
 }
+
 const mac = {
-  url: util.format(downloadPath, version, version, 'MacOSX.6_CLI_x86_64.dmg'),
+  url: util.format(downloadPath, version, version, '.dmg'),
   archive: 'mac.dmg',
   copyFrom: 'HandbrakeCLI',
   copyTo: path.join('bin', 'HandbrakeCLI')
@@ -86,9 +87,9 @@ function install (installation) {
 
 function go (installation) {
   if (fs.existsSync(path.resolve(__dirname, '..', installation.copyTo))) {
-    exec(installation.copyTo + ' --update', function (err, stdout, stderr) {
+    exec(installation.copyTo + ' --version', function (err, stdout, stderr) {
       if (err) throw err
-      if (/Your version of HandBrake is up to date/.test(stderr)) {
+      if (stdout.match(version)) {
         console.log('You already have the latest HandbrakeCLI installed')
       } else {
         install(installation)
