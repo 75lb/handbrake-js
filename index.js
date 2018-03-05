@@ -1,15 +1,16 @@
-const Handbrake = require('./Handbrake')
+'use strict'
+const Handbrake = require('./lib/Handbrake')
 const util = require('util')
 const cp = require('child_process')
 const toSpawnArgs = require('object-to-spawn-args')
-const config = require('./config')
-const cliOptions = require('./cli-options')
+const config = require('./lib/config')
+const cliOptions = require('./lib/cli-options')
 const Usage = require('usage-stats')
 const os = require('os')
 
 const usage = exports._usage = new Usage('UA-70853320-7', {
   an: 'handbrake-js',
-  av: require('../package').version
+  av: require('./package').version
 })
 usage.defaults
   .set('cd1', process.version)

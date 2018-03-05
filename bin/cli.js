@@ -1,7 +1,8 @@
 #!/usr/bin/env node
+'use strict'
 const ansi = require('ansi-escape-sequences')
 const commandLineArgs = require('command-line-args')
-const hbjs = require('../lib/handbrake-js')
+const hbjs = require('../')
 hbjs._usage.defaults.set('cd4', 'cli')
 const cliOptions = require('../lib/cli-options')
 const util = require('util')

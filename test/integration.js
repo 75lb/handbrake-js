@@ -1,7 +1,8 @@
+'use strict'
 const TestRunner = require('test-runner')
 const cp = require('child_process')
 const fs = require('fs')
-const hbjs = require('../lib/handbrake-js')
+const hbjs = require('../')
 const a = require('assert')
 const Counter = require('test-runner-counter')
 
