@@ -27,7 +27,8 @@
   "files": [
     "bin/cli.js",
     "lib",
-    "scripts"
+    "scripts",
+    "index.js"
   ],
   "scripts": {
     "test": "test-runner test/*.js",
