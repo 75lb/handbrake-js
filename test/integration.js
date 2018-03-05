@@ -27,7 +27,7 @@ runner.test('cli: simple encode', function () {
   } catch (err) {
     // dir already exists
   }
-  cp.exec('node bin/cli.js --no-usage-stats -i test/video/demo.mkv -o tmp/test.mp4 --rotate \'angle=90:hflip=1\' -v', function (err, stdout, stderr) {
+  cp.exec('node bin/cli.js --no-usage-stats -i test/video/demo.mkv -o tmp/test.mp4 --rotate angle=90:hflip=1 -v', function (err, stdout, stderr) {
     if (err) {
       counter.fail(stderr)
     } else {
