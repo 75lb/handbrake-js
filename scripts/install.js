@@ -87,9 +87,9 @@ function install (installation) {
 
 function go (installation) {
   if (fs.existsSync(path.resolve(__dirname, '..', installation.copyTo))) {
-    exec(installation.copyTo + ' --update', function (err, stdout, stderr) {
+    exec(installation.copyTo + ' --version', function (err, stdout, stderr) {
       if (err) throw err
-      if (/Your version of HandBrake is up to date/.test(stderr)) {
+      if (stdout.match(version)) {
         console.log('You already have the latest HandbrakeCLI installed')
       } else {
         install(installation)
