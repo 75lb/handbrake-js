@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 const request = require('request')
-const unzip = require('unzip')
+const decompress = require('decompress')
 const exec = require('child_process').exec
 const util = require('util')
 const fs = require('fs')
@@ -40,18 +40,16 @@ function extractFile (archive, copyFrom, copyTo, done) {
   console.log('extracting: ' + copyFrom)
   if (archive.indexOf('.zip') > 0) {
     if (!fs.existsSync('unzipped')) fs.mkdirSync('unzipped')
-    const unzipped = unzip.Extract({ path: 'unzipped' })
-    unzipped.on('close', function () {
-      const source = fs.createReadStream(copyFrom)
-      const dest = fs.createWriteStream(copyTo)
-      dest.on('close', function () {
-        rimraf.sync('unzipped')
-        done()
+    decompress(archive, 'unzipped')
+      .then(() => {
+        const source = fs.createReadStream(copyFrom)
+        const dest = fs.createWriteStream(copyTo)
+        dest.on('close', function () {
+          rimraf.sync('unzipped')
+          done()
+        })
+        source.pipe(dest)
       })
-      source.pipe(dest)
-    })
-
-    fs.createReadStream(archive).pipe(unzipped)
   } else if (archive.indexOf('.dmg') > 0) {
     const cmd = 'hdiutil attach ' + archive
     exec(cmd, function (err, stdout) {
