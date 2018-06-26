@@ -7,6 +7,9 @@ const fs = require('fs')
 const path = require('path')
 const rimraf = require('rimraf')
 
+// Fix for node ^8.6.0, ^9.0.0: https://github.com/nodejs/node/issues/16196
+require('tls').DEFAULT_ECDH_CURVE = 'auto';
+
 const version = '1.0.7'
 const downloadPath = 'http://download.handbrake.fr/releases/%s/HandBrakeCLI-%s%s'
 
