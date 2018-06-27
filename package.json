@@ -43,6 +43,7 @@
     "object-to-spawn-args": "^1.1.1",
     "request": "^2.83.0",
     "rimraf": "^2.6.2",
+    "semver": "^5.5.0",
     "usage-stats": "^0.9.4"
   },
   "devDependencies": {

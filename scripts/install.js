@@ -8,7 +8,9 @@ const path = require('path')
 const rimraf = require('rimraf')
 
 // Fix for node ^8.6.0, ^9.0.0: https://github.com/nodejs/node/issues/16196
-require('tls').DEFAULT_ECDH_CURVE = 'auto';
+if (nodeVersionMatches('>=8.6.0 <10.0.0')) {
+  require('tls').DEFAULT_ECDH_CURVE = 'auto';
+}
 
 const version = '1.0.7'
 const downloadPath = 'http://download.handbrake.fr/releases/%s/HandBrakeCLI-%s%s'
@@ -99,6 +101,12 @@ function go (installation) {
   } else {
     install(installation)
   }
+}
+
+function nodeVersionMatches (semverExpression, version) {
+  version = version || require('process').version
+  const semver = require('semver')
+  return semver.satisfies(version, semverExpression)
 }
 
 const linuxMsg =
