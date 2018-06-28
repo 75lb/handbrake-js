@@ -6,6 +6,7 @@ const util = require('util')
 const fs = require('fs')
 const path = require('path')
 const rimraf = require('rimraf')
+const nodeVersionMatches = require('node-version-matches')
 
 // Fix for node ^8.6.0, ^9.0.0: https://github.com/nodejs/node/issues/16196
 if (nodeVersionMatches('>=8.6.0 <10.0.0')) {
@@ -101,12 +102,6 @@ function go (installation) {
   } else {
     install(installation)
   }
-}
-
-function nodeVersionMatches (semverExpression, version) {
-  version = version || require('process').version
-  const semver = require('semver')
-  return semver.satisfies(version, semverExpression)
 }
 
 const linuxMsg =
