@@ -34,7 +34,7 @@
     "test": "test-runner test/*.js",
     "postinstall": "node scripts/install.js",
     "ubuntu-setup": "./scripts/install-ubuntu.sh",
-    "docs": "jsdoc2md -t jsdoc2md/README.hbs lib/*.js > README.md; echo"
+    "docs": "jsdoc2md -t jsdoc2md/README.hbs lib/*.js index.js > README.md; echo"
   },
   "dependencies": {
     "ansi-escape-sequences": "^4.0.0",
