@@ -13,7 +13,7 @@ if (nodeVersionMatches('>=8.6.0 <10.0.0')) {
   require('tls').DEFAULT_ECDH_CURVE = 'auto';
 }
 
-const version = '1.0.7'
+const version = '1.1.2'
 const downloadPath = 'http://download.handbrake.fr/releases/%s/HandBrakeCLI-%s%s'
 
 const win32 = {

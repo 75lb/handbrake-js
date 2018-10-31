@@ -22,7 +22,7 @@
     "mp3"
   ],
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=4.0.0"
   },
   "files": [
     "bin/cli.js",
@@ -42,13 +42,13 @@
     "decompress": "^4.2.0",
     "node-version-matches": "^1.0.0",
     "object-to-spawn-args": "^1.1.1",
-    "request": "^2.87.0",
+    "request": "^2.88.0",
     "rimraf": "^2.6.2",
     "usage-stats": "^0.9.4"
   },
   "devDependencies": {
     "jsdoc-to-markdown": "^4.0.1",
-    "test-runner": "^0.5.0",
+    "test-runner": "^0.5.1",
     "test-runner-counter": "^0.1.2"
   },
   "standard": {
