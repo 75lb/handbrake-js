@@ -3,20 +3,10 @@
 const ansi = require('ansi-escape-sequences')
 const commandLineArgs = require('command-line-args')
 const hbjs = require('../')
-hbjs._usage.defaults.set('cd4', 'cli')
 const cliOptions = require('../lib/cli-options')
 const util = require('util')
 
-let handbrakeOptions = {}
-try {
-  handbrakeOptions = commandLineArgs(cliOptions)._all
-} catch (err) {
-  hbjs._usage.exception({ exd: err.toString() })
-  hbjs._usage.send({ timeout: 3000 })
-    .catch(function () { /* disregard errors */ })
-  halt(err)
-  return
-}
+const handbrakeOptions = commandLineArgs(cliOptions)._all
 
 function column (n, msg) {
   process.stdout.write(ansi.cursor.horizontalAbsolute(n) + msg)

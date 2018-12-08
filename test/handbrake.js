@@ -6,7 +6,6 @@ const a = require('assert')
 const Counter = require('test-runner-counter')
 
 const runner = new TestRunner({ sequential: false })
-hbjs._usage.disable()
 
 runner.test('Handbrake, start event', function () {
   const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })

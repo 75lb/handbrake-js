@@ -1,22 +1,5 @@
 'use strict'
-const Handbrake = require('./lib/Handbrake')
-const util = require('util')
-const cp = require('child_process')
-const toSpawnArgs = require('object-to-spawn-args')
-const config = require('./lib/config')
 const cliOptions = require('./lib/cli-options')
-const Usage = require('usage-stats')
-const os = require('os')
-
-const usage = exports._usage = new Usage('UA-70853320-7', {
-  an: 'handbrake-js',
-  av: require('./package').version
-})
-usage.defaults
-  .set('cd1', process.version)
-  .set('cd2', os.type())
-  .set('cd3', os.release())
-  .set('cd4', 'api')
 
 /**
  * Handbrake for node.js.
@@ -59,8 +42,8 @@ exports.cliOptions = cliOptions
  * ```
  */
 function spawn (options, mocks) {
+  const Handbrake = require('./lib/Handbrake')
   const handbrake = new Handbrake(mocks)
-  screenView('spawn', options)
 
   /* defer so the caller can attach event listers on the returned Handbrake instance first */
   process.nextTick(function () {
@@ -96,27 +79,14 @@ function spawn (options, mocks) {
  * @alias module:handbrake-js.exec
  */
 function exec (options, done) {
-  screenView('exec', options)
+  const util = require('util')
+  const cp = require('child_process')
+  const toSpawnArgs = require('object-to-spawn-args')
+  const config = require('./lib/config')
   const cmd = util.format(
     '"%s" %s',
     config.HandbrakeCLIPath,
     toSpawnArgs(options, { quote: true }).join(' ')
   )
   cp.exec(cmd, done)
-}
-
-function screenView (name, options) {
-  if (options['no-usage-stats']) {
-    /* skip recording stats.. finished with the option, remove it. */
-    delete options['no-usage-stats']
-  } else {
-    usage.screenView(name)
-    for (const prop in options) {
-      if ([ 'input', 'output' ].indexOf(prop) === -1) {
-        usage.event('option', prop, { hitParams: { cd: name } })
-      }
-    }
-    usage.send({ timeout: 3000 })
-      .catch(function () { /* disregard errors */ })
-  }
 }

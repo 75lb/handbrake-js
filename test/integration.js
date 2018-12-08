@@ -7,7 +7,6 @@ const a = require('assert')
 const Counter = require('test-runner-counter')
 
 const runner = new TestRunner()
-hbjs._usage.disable()
 
 runner.test('cli: --preset-list', function () {
   const counter = Counter.create(1)
