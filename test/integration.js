@@ -22,22 +22,24 @@ tom.test('cli: --preset-list', async function () {
 })
 
 tom.test('cli: simple encode', async function () {
-  const events = []
   try {
     fs.mkdirSync('tmp')
   } catch (err) {
     // dir already exists
   }
-  cp.exec('node bin/cli.js -i test/video/demo.mkv -o tmp/test.mp4 --rotate angle=90:hflip=1 -v', function (err, stdout, stderr) {
-    if (err) {
-      events.push('fail')
-    } else {
-      events.push(stdout)
-    }
+  return new Promise((resolve, reject) => {
+    cp.exec('node bin/cli.js -i test/video/demo.mkv -o tmp/test.mp4 --rotate angle=90:hflip=1 -v', function (err, stdout, stderr) {
+      if (err) {
+        reject(err)
+      } else {
+        if (/avfilter \(transpose='dir=clock_flip'\)/.test(stdout)) {
+          resolve()
+        } else {
+          reject(new Error('Incorrect stdout'))
+        }
+      }
+    })
   })
-  await sleep(3000)
-  a.strictEqual(events.length, 1)
-  a.ok(/avfilter \(transpose='dir=clock_flip'\)/.test(events[0]))
 })
 
 tom.test('exec: --preset-list', async function () {
