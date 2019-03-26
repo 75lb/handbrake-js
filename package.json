@@ -37,18 +37,18 @@
     "docs": "jsdoc2md -t jsdoc2md/README.hbs lib/*.js index.js > README.md; echo"
   },
   "dependencies": {
-    "ansi-escape-sequences": "^4.0.1",
-    "command-line-args": "^5.0.2",
+    "ansi-escape-sequences": "^4.1.0",
+    "command-line-args": "^5.1.0",
     "decompress": "^4.2.0",
     "node-version-matches": "^1.0.1",
     "object-to-spawn-args": "^1.1.1",
     "request": "^2.88.0",
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.6.3"
   },
   "devDependencies": {
     "jsdoc-to-markdown": "^4.0.1",
-    "test-runner": "^0.5.1",
-    "test-runner-counter": "^0.1.2"
+    "sleep-anywhere": "^1.1.2",
+    "test-runner": "^0.6.0-14"
   },
   "standard": {
     "envs": [

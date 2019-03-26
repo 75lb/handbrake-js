@@ -10,7 +10,7 @@ const nodeVersionMatches = require('node-version-matches')
 
 // Fix for node ^8.6.0, ^9.0.0: https://github.com/nodejs/node/issues/16196
 if (nodeVersionMatches('>=8.6.0 <10.0.0')) {
-  require('tls').DEFAULT_ECDH_CURVE = 'auto';
+  require('tls').DEFAULT_ECDH_CURVE = 'auto'
 }
 
 const version = '1.1.2'

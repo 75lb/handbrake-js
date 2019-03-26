@@ -1,18 +1,17 @@
-'use strict'
-const TestRunner = require('test-runner')
+const Tom = require('test-runner').Tom
 const hbjs = require('../')
 const mockCp = require('./mock/child_process')
 const a = require('assert')
-const Counter = require('test-runner-counter')
+const sleep = require('sleep-anywhere')
 
-const runner = new TestRunner({ sequential: false })
+const tom = module.exports = new Tom('hbjs.spawn')
 
-runner.test('Handbrake, start event', function () {
+tom.test('start event', async function () {
   const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
-  const counter = Counter.create(1)
+  const events = []
 
   handbrake.on('start', function () {
-    counter.pass()
+    events.push('start')
   })
 
   process.nextTick(function () {
@@ -20,14 +19,15 @@ runner.test('Handbrake, start event', function () {
     mockCp.lastHandle.stdout.emit('data', '\rEncoding: task 1 of 1, 3.31 %')
   })
 
-  return counter.promise
+  await sleep(100)
+  a.deepStrictEqual(events, [ 'start' ])
 })
 
-runner.test('Handbrake, begin event', function () {
-  const counter = Counter.create(1)
+tom.test('begin event', async function () {
+  const events = []
   const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
   handbrake.on('begin', function () {
-    counter.pass()
+    events.push('begin')
   })
 
   process.nextTick(function () {
@@ -35,71 +35,81 @@ runner.test('Handbrake, begin event', function () {
     mockCp.lastHandle.stdout.emit('data', '\rEncoding: task 1 of 1, 3.31 %')
   })
 
-  return counter.promise
+  await sleep(100)
+  a.deepStrictEqual(events, [ 'begin' ])
 })
 
-runner.test('Handbrake, progress event: encoding (short)', function () {
-  const counter = Counter.create(2)
+tom.test('progress event: encoding (short)', async function () {
+  const events = []
   const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
   handbrake.on('progress', function (progress) {
-    a.deepEqual(progress, {
-      taskNumber: 1,
-      taskCount: 1,
-      percentComplete: 1.23,
-      fps: 0,
-      avgFps: 0,
-      eta: '',
-      task: 'Encoding'
-    })
-    counter.pass()
+    events.push(progress)
   })
-
   process.nextTick(function () {
     mockCp.lastHandle.stdout.emit('data', '\rEncoding: task 1 of 1, 1.23 %')
-    mockCp.lastHandle.stdout.emit('data', '\rEncoding: task 1 of 1, 1.23 %')
+    mockCp.lastHandle.stdout.emit('data', '\rEncoding: task 1 of 1, 3.49 %')
   })
-
-  return counter.promise
+  await sleep(100)
+  a.strictEqual(events.length, 2)
+  a.deepStrictEqual(events[0], {
+    taskNumber: 1,
+    taskCount: 1,
+    percentComplete: 1.23,
+    fps: 0,
+    avgFps: 0,
+    eta: '',
+    task: 'Encoding'
+  })
+  a.deepStrictEqual(events[1], {
+    taskNumber: 1,
+    taskCount: 1,
+    percentComplete: 3.49,
+    fps: 0,
+    avgFps: 0,
+    eta: '',
+    task: 'Encoding'
+  })
 })
 
-runner.test('HandbrakeProcess, progress event: encoding (long)', function () {
-  const counter = Counter.create(2)
+tom.test('progress event: encoding (long)', async function () {
+  const events = []
   const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
   handbrake.on('progress', function (progress) {
-    a.deepEqual(progress, {
-      taskNumber: 1,
-      taskCount: 1,
-      percentComplete: 45.46,
-      fps: 105.33,
-      avgFps: 106.58,
-      eta: '00h00m05s',
-      task: 'Encoding'
-    })
-    counter.pass()
+    events.push(progress)
   })
 
   process.nextTick(function () {
     mockCp.lastHandle.stdout.emit('data', '\rEncoding: task 1 of 1, 45.46 % (105.33 fps, avg 106.58 fps, ETA 00h00m05s)')
-    mockCp.lastHandle.stdout.emit('data', '\rEncoding: task 1 of 1, 45.46 % (105.33 fps, avg 106.58 fps, ETA 00h00m05s)')
+    mockCp.lastHandle.stdout.emit('data', '\rEncoding: task 1 of 1, 55.46 % (205.33 fps, avg 106.58 fps, ETA 00h00m05s)')
   })
 
-  return counter.promise
+  await sleep(100)
+  a.strictEqual(events.length, 2)
+  a.deepStrictEqual(events[0], {
+    taskNumber: 1,
+    taskCount: 1,
+    percentComplete: 45.46,
+    fps: 105.33,
+    avgFps: 106.58,
+    eta: '00h00m05s',
+    task: 'Encoding'
+  })
+  a.deepStrictEqual(events[1], {
+    taskNumber: 1,
+    taskCount: 1,
+    percentComplete: 55.46,
+    fps: 205.33,
+    avgFps: 106.58,
+    eta: '00h00m05s',
+    task: 'Encoding'
+  })
 })
 
-runner.test('HandbrakeProcess, progress event: fragmented', function () {
-  const counter = Counter.create(1)
+tom.test('progress event: fragmented', async function () {
+  const events = []
   const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
   handbrake.on('progress', function (progress) {
-    a.deepEqual(progress, {
-      taskNumber: 1,
-      taskCount: 1,
-      percentComplete: 45.46,
-      fps: 105.33,
-      avgFps: 106.58,
-      eta: '00h00m05s',
-      task: 'Encoding'
-    })
-    counter.pass()
+    events.push(progress)
   })
 
   process.nextTick(function () {
@@ -108,14 +118,34 @@ runner.test('HandbrakeProcess, progress event: fragmented', function () {
     mockCp.lastHandle.stdout.emit('data', ', 45.46 % (105.33 fps, avg 106.58 fps, ETA 00h00m05s)')
   })
 
-  return counter.promise
+  await sleep(100)
+  a.deepStrictEqual(events, [
+    {
+      taskNumber: 1,
+      taskCount: 1,
+      percentComplete: 45.46,
+      fps: 105.33,
+      avgFps: 106.58,
+      eta: '00h00m05s',
+      task: 'Encoding'
+    }
+  ])
 })
 
-runner.test('HandbrakeProcess, progress event: muxing', function () {
-  const counter = Counter.create(1)
+tom.test('progress event: muxing', async function () {
+  const events = []
   const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
   handbrake.on('progress', function (progress) {
-    a.deepEqual(progress, {
+    events.push(progress)
+  })
+
+  process.nextTick(function () {
+    mockCp.lastHandle.stdout.emit('data', '\rMuxing: this may take awhile...')
+  })
+
+  await sleep(100)
+  a.deepStrictEqual(events, [
+    {
       taskNumber: 0,
       taskCount: 0,
       percentComplete: 0,
@@ -123,37 +153,31 @@ runner.test('HandbrakeProcess, progress event: muxing', function () {
       avgFps: 0,
       eta: '',
       task: 'Muxing'
-    })
-    counter.pass()
-  })
-
-  process.nextTick(function () {
-    mockCp.lastHandle.stdout.emit('data', '\rMuxing: this may take awhile...')
-  })
-
-  return counter.promise
+    }
+  ])
 })
 
-runner.test('HandbrakeProcess, end event (without encode)', function () {
-  const counter = Counter.create(1)
+tom.test('end event (without encode)', async function () {
+  const events = []
   const handbrake = hbjs.spawn({ help: true }, { cp: mockCp })
   handbrake.on('end', function () {
-    counter.fail('"end" should not be fired')
+    events.push('end should not be fired')
   })
 
   process.nextTick(function () {
     mockCp.lastHandle.emit('exit', 0)
-    counter.pass()
+    events.push('exit')
   })
 
-  return counter.promise
+  await sleep(100)
+  a.deepStrictEqual(events, [ 'exit' ])
 })
 
-runner.test('HandbrakeProcess, end event (with encode)', function () {
-  const counter = Counter.create(1)
+tom.test('end event (with encode)', async function () {
+  const events = []
   const handbrake = hbjs.spawn({ help: true }, { cp: mockCp })
   handbrake.on('end', function () {
-    counter.pass()
+    events.push('end')
   })
 
   process.nextTick(function () {
@@ -161,49 +185,51 @@ runner.test('HandbrakeProcess, end event (with encode)', function () {
     mockCp.lastHandle.emit('exit', 0)
   })
 
-  return counter.promise
+  await sleep(100)
+  a.deepStrictEqual(events, [ 'end' ])
 })
 
-runner.test('HandbrakeProcess, complete event', function () {
-  const counter = Counter.create(1)
+tom.test('complete event', async function () {
+  const events = []
   const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
   handbrake.on('complete', function () {
-    counter.pass()
+    events.push('complete')
   })
 
   process.nextTick(function () {
     mockCp.lastHandle.emit('exit', 0)
   })
 
-  return counter.promise
+  await sleep(100)
+  a.deepStrictEqual(events, [ 'complete' ])
 })
 
-runner.test('HandbrakeProcess, output event (stdout)', function () {
-  const counter = Counter.create(1)
+tom.test('output event (stdout)', async function () {
+  const events = []
   const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
   handbrake.on('output', function (output) {
-    a.strictEqual(output, 'clive, yeah?')
-    counter.pass()
+    events.push(output)
   })
 
   process.nextTick(function () {
     mockCp.lastHandle.stdout.emit('data', 'clive, yeah?')
   })
 
-  return counter.promise
+  await sleep(100)
+  a.deepStrictEqual(events, [ 'clive, yeah?' ])
 })
 
-runner.test('HandbrakeProcess, output event (stderr)', function () {
-  const counter = Counter.create(1)
+tom.test('output event (stderr)', async function () {
+  const events = []
   const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
   handbrake.on('output', function (output) {
-    a.strictEqual(output, 'clive, yeah?', output)
-    counter.pass()
+    events.push(output)
   })
 
   process.nextTick(function () {
     mockCp.lastHandle.stderr.emit('data', 'clive, yeah?')
   })
 
-  return counter.promise
+  await sleep(100)
+  a.deepStrictEqual(events, [ 'clive, yeah?' ])
 })

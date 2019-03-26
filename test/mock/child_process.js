@@ -1,5 +1,3 @@
-'use strict'
-const util = require('util')
 const EventEmitter = require('events').EventEmitter
 const Readable = require('stream').Readable
 
