@@ -273,4 +273,4 @@ If `.cancel()` was called, this event is emitted once the underlying HandbrakeCL
 
 * * *
 
-&copy; 2013-18 Lloyd Brookes &lt;75pound@gmail.com&gt;. Documented by [jsdoc-to-markdown](https://github.com/75lb/jsdoc-to-markdown).
+&copy; 2013-19 Lloyd Brookes &lt;75pound@gmail.com&gt;. Documented by [jsdoc-to-markdown](https://github.com/75lb/jsdoc-to-markdown).

@@ -22,7 +22,7 @@
     "mp3"
   ],
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=8.0.0"
   },
   "files": [
     "bin/cli.js",

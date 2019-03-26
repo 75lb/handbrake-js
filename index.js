@@ -1,4 +1,3 @@
-'use strict'
 const cliOptions = require('./lib/cli-options')
 
 /**
