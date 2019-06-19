@@ -32,16 +32,50 @@ tom.test('validation: input === output', function () {
     hbjs.spawn({ input: 'blah', output: 'blah' }, { cp: mockCp })
       .on('error', function (err) {
         try {
-          a.deepEqual(err, {
-            name: 'ValidationError',
-            message: 'input and output paths are the same',
-            options: { input: 'blah', output: 'blah' },
-            output: ''
-          })
+          a.strictEqual(err.name, 'ValidationError')
+          a.strictEqual(err.message, 'input and output paths are the same')
+          a.strictEqual(err.output, '')
+          a.deepStrictEqual(err.options, { input: 'blah', output: 'blah' })
           resolve()
         } catch (err) {
           reject(err)
         }
       })
+  })
+})
+
+tom.test('invalid preset name', function () {
+  return new Promise(function (resolve, reject) {
+    const options = {
+      input: 'test/video/demo.mkv',
+      output: 'tmp/cancelled.mp4',
+      preset: 'broken'
+    }
+    hbjs.spawn(options).on('error', function (err) {
+      try {
+        a.strictEqual(err.name, 'InvalidPreset')
+        a.ok(/invalid preset/i.test(err.message))
+        resolve()
+      } catch (err) {
+        reject(err)
+      }
+    })
+  })
+})
+
+tom.test('invalid input file', function () {
+  return new Promise(function (resolve, reject) {
+    const options = {
+      input: 'broken',
+      output: 'tmp/cancelled.mp4'
+    }
+    hbjs.spawn(options).on('error', function (err) {
+      try {
+        a.strictEqual(err.name, 'InvalidInput')
+        resolve()
+      } catch (err) {
+        reject(err)
+      }
+    })
   })
 })

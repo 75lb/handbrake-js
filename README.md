@@ -190,10 +190,11 @@ All operational errors are emitted via the [error](#module_handbrake-js..Handbra
 
 | Name | Default | Description |
 | --- | --- | --- |
-| VALIDATION | <code>ValidationError</code> | Thrown if you accidentally set identical input and output paths (which would clobber the input file), forget to specifiy an output path and other validation errors |
-| INVALID_INPUT | <code>InvalidInput</code> | Thrown when the input file specified does not appear to be a video file |
-| OTHER | <code>Other</code> | Thrown if Handbrake crashes |
-| NOT_FOUND | <code>HandbrakeCLINotFound</code> | Thrown if the installed HandbrakeCLI binary has gone missing.. |
+| VALIDATION | <code>ValidationError</code> | Thrown if you accidentally set identical input and output paths (which would clobber the input file), forget to specifiy an output path and other validation errors. |
+| INVALID_INPUT | <code>InvalidInput</code> | Thrown when the input file specified does not appear to be a video file. |
+| INVALID_PRESET | <code>InvalidPreset</code> | Thrown when an invalid preset is specified. |
+| OTHER | <code>Other</code> | Thrown if Handbrake crashes. |
+| NOT_FOUND | <code>HandbrakeCLINotFound</code> | Thrown if the installed HandbrakeCLI binary has gone missing. |
 
 <a name="module_handbrake-js..Handbrake+cancel"></a>
 

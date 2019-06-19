@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "ansi-escape-sequences": "^4.1.0",
-    "command-line-args": "^5.1.0",
+    "command-line-args": "^5.1.1",
     "decompress": "^4.2.0",
     "node-version-matches": "^1.0.1",
     "object-to-spawn-args": "^1.1.1",
@@ -46,9 +46,9 @@
     "rimraf": "^2.6.3"
   },
   "devDependencies": {
-    "jsdoc-to-markdown": "^4.0.1",
+    "jsdoc-to-markdown": "^5.0.0",
     "sleep-anywhere": "^1.1.2",
-    "test-runner": "^0.6.0-14"
+    "test-runner": "^0.6.0"
   },
   "standard": {
     "envs": [
