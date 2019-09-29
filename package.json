@@ -43,10 +43,10 @@
     "node-version-matches": "^1.0.1",
     "object-to-spawn-args": "^1.1.1",
     "request": "^2.88.0",
-    "rimraf": "^2.6.3"
+    "rimraf": "^3.0.0"
   },
   "devDependencies": {
-    "jsdoc-to-markdown": "^5.0.0",
+    "jsdoc-to-markdown": "^5.0.1",
     "sleep-anywhere": "^1.1.2",
     "test-runner": "^0.6.0"
   },
