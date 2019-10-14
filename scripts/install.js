@@ -14,7 +14,7 @@ if (nodeVersionMatches('>=8.6.0 <10.0.0')) {
 }
 
 const version = '1.2.2'
-const downloadPath = 'http://download.handbrake.fr/releases/%s/HandBrakeCLI-%s%s'
+const downloadPath = 'https://github.com/HandBrake/HandBrake/releases/download/%s/HandBrakeCLI-%s%s'
 
 const win32 = {
   url: util.format(downloadPath, version, version, '-win-i686.zip'),
