@@ -17,7 +17,7 @@ const version = '1.2.2'
 const downloadPath = 'https://github.com/HandBrake/HandBrake/releases/download/%s/HandBrakeCLI-%s%s'
 
 const win32 = {
-  url: util.format(downloadPath, version, version, '-win-i686.zip'),
+  url: util.format(downloadPath, version, version, '-win-x86_64.zip'),
   archive: 'win.zip',
   copyFrom: path.join('unzipped', 'HandBrakeCLI.exe'),
   copyTo: path.join('bin', 'HandbrakeCLI.exe')
