@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-'use strict'
 const ansi = require('ansi-escape-sequences')
 const commandLineArgs = require('command-line-args')
 const hbjs = require('../')
