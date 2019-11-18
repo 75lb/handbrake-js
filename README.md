@@ -8,8 +8,7 @@
 ***Upgraders, please read the [release notes](https://github.com/75lb/handbrake-js/releases).***
 
 # handbrake-js
-
-Handbrake-js is [Handbrake](http://handbrake.fr) (v1.2.2) for [node.js](http://nodejs.org), funnily enough. It aspires to provide a lean and stable foundation for building video transcoding software in node.js.
+Handbrake-js is [Handbrake](http://handbrake.fr) (v1.2.2) for [node.js](http://nodejs.org). It aspires to provide a lean and stable foundation for building video transcoding software in node.js.
 
 HandBrake is a tool for converting video from nearly any format to a selection of modern, widely supported codecs. It can process most common multimedia files and any DVD or BluRay sources that do not contain any copy protection.
 
@@ -277,4 +276,4 @@ If `.cancel()` was called, this event is emitted once the underlying HandbrakeCL
 
 * * *
 
-&copy; 2013-19 Lloyd Brookes &lt;75pound@gmail.com&gt;. Documented by [jsdoc-to-markdown](https://github.com/75lb/jsdoc-to-markdown).
+&copy; 2013-19 Lloyd Brookes &lt;75pound@gmail.com&gt;. Also view [the Handbrake licence](https://github.com/HandBrake/HandBrake/blob/master/LICENSE). Documented by [jsdoc-to-markdown](https://github.com/75lb/jsdoc-to-markdown).
