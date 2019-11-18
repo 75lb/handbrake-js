@@ -16,7 +16,7 @@ tom.test('validation: HandbrakeCLI not found', function () {
         a.strictEqual(err.name, 'HandbrakeCLINotFound')
         a.ok(/HandbrakeCLI application not found/.test(err.message))
         a.strictEqual(err.HandbrakeCLIPath, 'broken/path')
-        a.strictEqual(err.errno, 'ENOENT')
+        a.ok(err.errno === 'ENOENT' || err.errno === -2)
         a.ok(/ENOENT/.test(err.spawnmessage))
         a.deepEqual(err.options, { input: 'in', output: 'out' })
         resolve()
