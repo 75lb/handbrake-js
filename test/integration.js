@@ -32,7 +32,8 @@ tom.test('cli: simple encode', async function () {
       if (err) {
         reject(err)
       } else {
-        if (/Rotate \(angle=90:hflip=1\)/.test(stdout)) {
+        /* Handbrake v1.3.0 || Handbrake v1.1.2 (installed on travis) */
+        if (/Rotate \(angle=90:hflip=1\)/.test(stdout) || /dir=clock_flip/.test(stdout)) {
           resolve()
         } else {
           reject(new Error('Incorrect stdout'))
