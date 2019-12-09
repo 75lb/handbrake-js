@@ -55,6 +55,12 @@ tom.test('exec: --preset-list', async function () {
   a.deepStrictEqual(events, ['pass'])
 })
 
+tom.test('run: --version', async function () {
+  const events = []
+  const result = await hbjs.run({ version: true })
+  this.data = result
+})
+
 tom.test('.cancel()', async function () {
   const events = []
   const handbrake = hbjs.spawn({ input: 'test/video/demo.mkv', output: 'tmp/cancelled.mp4' })

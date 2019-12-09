@@ -79,6 +79,19 @@ function exec (options, done) {
   cp.exec(cmd, done)
 }
 
+async function run (options) {
+  return new Promise((resolve, reject) => {
+    exec(options, function (err, stdout, stderr) {
+      if (err) {
+        reject(err)
+      } else {
+        resolve({ stdout, stderr })
+      }
+    })
+  })
+}
+
 exports.spawn = spawn
 exports.exec = exec
+exports.run = run
 exports.cliOptions = require('./lib/cli-options')
