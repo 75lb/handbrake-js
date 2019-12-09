@@ -28,11 +28,11 @@ tom.test('cli: simple encode', async function () {
     // dir already exists
   }
   return new Promise((resolve, reject) => {
-    cp.exec('node bin/cli.js -i test/video/demo.mkv -o tmp/test.mp4 --rotate angle=90:hflip=1 -v', function (err, stdout, stderr) {
+    cp.exec('node bin/cli.js -i test/video/demo.mkv -o tmp/test.mp4 --rotate angle=90:hflip=1 -v', (err, stdout, stderr) => {
       if (err) {
         reject(err)
       } else {
-        if (/avfilter \(transpose='dir=clock_flip'\)/.test(stdout)) {
+        if (/Rotate \(angle=90:hflip=1\)/.test(stdout)) {
           resolve()
         } else {
           reject(new Error('Incorrect stdout'))

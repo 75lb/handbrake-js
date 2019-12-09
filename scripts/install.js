@@ -13,7 +13,7 @@ if (nodeVersionMatches('>=8.6.0 <10.0.0')) {
   require('tls').DEFAULT_ECDH_CURVE = 'auto'
 }
 
-const version = '1.2.2'
+const version = '1.3.0'
 const downloadPath = 'https://github.com/HandBrake/HandBrake/releases/download/%s/HandBrakeCLI-%s%s'
 
 const win32 = {
@@ -104,18 +104,17 @@ function go (installation) {
   }
 }
 
-const linuxMsg =
-'Linux users\n\
-============\n\
-handbrake-cli must be installed separately as the root user.\n\
-Ubuntu users can do this using the following commands:\n\
-\n\
-add-apt-repository --yes ppa:stebbins/handbrake-releases\n\
-apt-get update -qq\n\
-apt-get install -qq handbrake-cli\n\
-\n\
-For all issues regarding installation of HandbrakeCLI on Linux, consult the Handbrake website:\n\
-http://handbrake.fr'
+const linuxMsg = `Linux users
+============
+handbrake-cli must be installed separately as the root user.
+Ubuntu users can do this using the following commands:
+
+add-apt-repository --yes ppa:stebbins/handbrake-releases
+apt-get update -qq
+apt-get install -qq handbrake-cli
+
+For all issues regarding installation of HandbrakeCLI on Linux, consult the Handbrake website:
+http://handbrake.fr`
 
 switch (process.platform) {
   case 'darwin':

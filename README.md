@@ -8,7 +8,7 @@
 ***Upgraders, please read the [release notes](https://github.com/75lb/handbrake-js/releases).***
 
 # handbrake-js
-Handbrake-js is [Handbrake](http://handbrake.fr) (v1.2.2) for [node.js](http://nodejs.org). It aspires to provide a lean and stable foundation for building video transcoding software in node.js.
+Handbrake-js is [Handbrake](http://handbrake.fr) ([v1.3.0](https://github.com/HandBrake/HandBrake/releases/tag/1.3.0)) for [node.js](http://nodejs.org). It aspires to provide a lean and stable foundation for building video transcoding software in node.js.
 
 HandBrake is a tool for converting video from nearly any format to a selection of modern, widely supported codecs. It can process most common multimedia files and any DVD or BluRay sources that do not contain any copy protection.
 
