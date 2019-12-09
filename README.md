@@ -276,6 +276,8 @@ If `.cancel()` was called, this event is emitted once the underlying HandbrakeCL
 
 * * *
 
-&copy; 2013-19 Lloyd Brookes &lt;75pound@gmail.com&gt;. Documented by [jsdoc-to-markdown](https://github.com/75lb/jsdoc-to-markdown).
+&copy; 2013-20 Lloyd Brookes &lt;75pound@gmail.com&gt;.
+
+Tested by [test-runner](https://github.com/test-runner-js/test-runner). Documented by [jsdoc-to-markdown](https://github.com/jsdoc2md/jsdoc-to-markdown).
 
 Handbrake ([Authors](https://github.com/HandBrake/HandBrake/blob/master/AUTHORS.markdown)) is licensed by [GNU General Public License Version 2](https://github.com/HandBrake/HandBrake/blob/master/LICENSE).

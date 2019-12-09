@@ -1,9 +1,9 @@
 const Tom = require('test-runner').Tom
 const hbjs = require('../')
 const mockCp = require('./mock/child_process')
-const a = require('assert')
+const a = require('assert').strict
 
-const tom = module.exports = new Tom('exceptions', { concurrency: 1 })
+const tom = module.exports = new Tom('exceptions', { maxConcurrency: 1 })
 
 tom.test('validation: HandbrakeCLI not found', function () {
   return new Promise(function (resolve, reject) {
@@ -13,9 +13,9 @@ tom.test('validation: HandbrakeCLI not found', function () {
     )
     handbrake.on('error', function (err) {
       try {
-        a.strictEqual(err.name, 'HandbrakeCLINotFound')
+        a.equal(err.name, 'HandbrakeCLINotFound')
         a.ok(/HandbrakeCLI application not found/.test(err.message))
-        a.strictEqual(err.HandbrakeCLIPath, 'broken/path')
+        a.equal(err.HandbrakeCLIPath, 'broken/path')
         a.ok(err.errno === 'ENOENT' || err.errno === -2)
         a.ok(/ENOENT/.test(err.spawnmessage))
         a.deepEqual(err.options, { input: 'in', output: 'out' })
@@ -32,10 +32,10 @@ tom.test('validation: input === output', function () {
     hbjs.spawn({ input: 'blah', output: 'blah' }, { cp: mockCp })
       .on('error', function (err) {
         try {
-          a.strictEqual(err.name, 'ValidationError')
-          a.strictEqual(err.message, 'input and output paths are the same')
-          a.strictEqual(err.output, '')
-          a.deepStrictEqual(err.options, { input: 'blah', output: 'blah' })
+          a.equal(err.name, 'ValidationError')
+          a.equal(err.message, 'input and output paths are the same')
+          a.equal(err.output, '')
+          a.deepEqual(err.options, { input: 'blah', output: 'blah' })
           resolve()
         } catch (err) {
           reject(err)
@@ -53,7 +53,7 @@ tom.test('invalid preset name', function () {
     }
     hbjs.spawn(options).on('error', function (err) {
       try {
-        a.strictEqual(err.name, 'InvalidPreset')
+        a.equal(err.name, 'InvalidPreset')
         a.ok(/invalid preset/i.test(err.message))
         resolve()
       } catch (err) {
@@ -71,7 +71,7 @@ tom.test('invalid input file', function () {
     }
     hbjs.spawn(options).on('error', function (err) {
       try {
-        a.strictEqual(err.name, 'InvalidInput')
+        a.equal(err.name, 'InvalidInput')
         resolve()
       } catch (err) {
         reject(err)

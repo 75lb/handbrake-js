@@ -4,7 +4,7 @@ const mockCp = require('./mock/child_process')
 const a = require('assert')
 const sleep = require('sleep-anywhere')
 
-const tom = module.exports = new Tom('hbjs.spawn')
+const tom = module.exports = new Tom()
 
 tom.test('start event', async function () {
   const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
@@ -20,7 +20,7 @@ tom.test('start event', async function () {
   })
 
   await sleep(100)
-  a.deepStrictEqual(events, [ 'start' ])
+  a.deepStrictEqual(events, ['start'])
 })
 
 tom.test('begin event', async function () {
@@ -36,7 +36,7 @@ tom.test('begin event', async function () {
   })
 
   await sleep(100)
-  a.deepStrictEqual(events, [ 'begin' ])
+  a.deepStrictEqual(events, ['begin'])
 })
 
 tom.test('progress event: encoding (short)', async function () {
@@ -170,7 +170,7 @@ tom.test('end event (without encode)', async function () {
   })
 
   await sleep(100)
-  a.deepStrictEqual(events, [ 'exit' ])
+  a.deepStrictEqual(events, ['exit'])
 })
 
 tom.test('end event (with encode)', async function () {
@@ -186,7 +186,7 @@ tom.test('end event (with encode)', async function () {
   })
 
   await sleep(100)
-  a.deepStrictEqual(events, [ 'end' ])
+  a.deepStrictEqual(events, ['end'])
 })
 
 tom.test('complete event', async function () {
@@ -201,7 +201,7 @@ tom.test('complete event', async function () {
   })
 
   await sleep(100)
-  a.deepStrictEqual(events, [ 'complete' ])
+  a.deepStrictEqual(events, ['complete'])
 })
 
 tom.test('output event (stdout)', async function () {
@@ -216,7 +216,7 @@ tom.test('output event (stdout)', async function () {
   })
 
   await sleep(100)
-  a.deepStrictEqual(events, [ 'clive, yeah?' ])
+  a.deepStrictEqual(events, ['clive, yeah?'])
 })
 
 tom.test('output event (stderr)', async function () {
@@ -231,5 +231,5 @@ tom.test('output event (stderr)', async function () {
   })
 
   await sleep(100)
-  a.deepStrictEqual(events, [ 'clive, yeah?' ])
+  a.deepStrictEqual(events, ['clive, yeah?'])
 })

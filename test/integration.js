@@ -5,7 +5,7 @@ const hbjs = require('../')
 const a = require('assert')
 const sleep = require('sleep-anywhere')
 
-const tom = module.exports = new Tom('integration')
+const tom = module.exports = new Tom()
 
 tom.test('cli: --preset-list', async function () {
   const events = []
@@ -52,7 +52,7 @@ tom.test('exec: --preset-list', async function () {
     }
   })
   await sleep(1000)
-  a.deepStrictEqual(events, [ 'pass' ])
+  a.deepStrictEqual(events, ['pass'])
 })
 
 tom.test('.cancel()', async function () {
@@ -65,7 +65,7 @@ tom.test('.cancel()', async function () {
     events.push('pass')
   })
   await sleep(2000)
-  a.deepStrictEqual(events, [ 'pass' ])
+  a.deepStrictEqual(events, ['pass'])
 })
 
 tom.test('spawn: correct return type', async function () {

@@ -1,5 +1,3 @@
-const cliOptions = require('./lib/cli-options')
-
 /**
  * Handbrake for node.js.
  * @module handbrake-js
@@ -9,15 +7,6 @@ const cliOptions = require('./lib/cli-options')
  * const hbjs = require('handbrake-js')
  * ```
  */
-exports.spawn = spawn
-exports.exec = exec
-
-/**
- * [Command-line-args](https://github.com/75lb/command-line-args) option definitions, useful when building a  * CLI.
- * @type {array}
- * @ignore
- */
-exports.cliOptions = cliOptions
 
 /**
  * Spawns a HandbrakeCLI process with the supplied [options](https://handbrake.fr/docs/en/latest/cli/cli-guide.html#options), returning an instance of `Handbrake` on which you can listen for events.
@@ -89,3 +78,7 @@ function exec (options, done) {
   )
   cp.exec(cmd, done)
 }
+
+exports.spawn = spawn
+exports.exec = exec
+exports.cliOptions = require('./lib/cli-options')

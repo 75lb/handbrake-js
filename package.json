@@ -22,7 +22,7 @@
     "mp3"
   ],
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=10"
   },
   "files": [
     "bin/cli.js",
@@ -34,7 +34,7 @@
     "test": "test-runner test/*.js",
     "postinstall": "node scripts/install.js",
     "ubuntu-setup": "./scripts/install-ubuntu.sh",
-    "docs": "jsdoc2md -t jsdoc2md/README.hbs lib/*.js index.js > README.md; echo"
+    "docs": "jsdoc2md -t README.hbs lib/*.js index.js > README.md"
   },
   "dependencies": {
     "ansi-escape-sequences": "^5.1.2",
@@ -46,9 +46,9 @@
     "rimraf": "^3.0.0"
   },
   "devDependencies": {
-    "jsdoc-to-markdown": "^5.0.2",
+    "jsdoc-to-markdown": "^5.0.3",
     "sleep-anywhere": "^1.1.3",
-    "test-runner": "^0.7.6"
+    "test-runner": "^0.8.9"
   },
   "standard": {
     "envs": [
