@@ -4,7 +4,7 @@ const path = require('path')
 const options = {
   input: path.resolve(__dirname, '../test/video/demo.mkv'),
   output: 'output.mp4',
-  preset: 'Normal'
+  preset: 'Very Fast 480p30'
 }
 
 /*

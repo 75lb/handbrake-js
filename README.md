@@ -86,6 +86,7 @@ const hbjs = require('handbrake-js')
     * _static_
         * [.spawn([options])](#module_handbrake-js.spawn) ⇒ [<code>Handbrake</code>](#module_handbrake-js..Handbrake)
         * [.exec(options, [onComplete])](#module_handbrake-js.exec)
+        * [.run(options)](#module_handbrake-js.run) ⇒ <code>Promise</code>
     * _inner_
         * [~Handbrake](#module_handbrake-js..Handbrake) ⇐ [<code>EventEmitter</code>](http://nodejs.org/api/events.html)
             * [.output](#module_handbrake-js..Handbrake+output) : <code>string</code>
@@ -146,6 +147,29 @@ hbjs.exec({ preset-list: true }, function(err, stdout, stderr){
   if (err) throw err
   console.log(stdout)
 })
+```
+<a name="module_handbrake-js.run"></a>
+
+### hbjs.run(options) ⇒ <code>Promise</code>
+Identical to `hbjs.exec` except it returns a promise, rather than invoke a callback. Use this when you don't need the progress events reported by `hbjs.spawn`. Fulfils with an object containing the output in two properties: `stdout` and `stderr`.
+
+**Kind**: static method of [<code>handbrake-js</code>](#module_handbrake-js)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| options | <code>Object</code> | [Options](https://handbrake.fr/docs/en/latest/cli/cli-guide.html#options) to pass directly to HandbrakeCLI |
+
+**Example**  
+```js
+const hbjs = require('handbrake-js')
+
+async function start () {
+  const result = await hbjs.run({ version: true })
+  console.log(result.stdout)
+  // prints 'HandBrake 1.3.0'
+}
+
+start().catch(console.error)
 ```
 <a name="module_handbrake-js..Handbrake"></a>
 

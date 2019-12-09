@@ -79,6 +79,24 @@ function exec (options, done) {
   cp.exec(cmd, done)
 }
 
+/**
+ * Identical to `hbjs.exec` except it returns a promise, rather than invoke a callback. Use this when you don't need the progress events reported by `hbjs.spawn`. Fulfils with an object containing the output in two properties: `stdout` and `stderr`.
+ * @param options {Object} - [Options](https://handbrake.fr/docs/en/latest/cli/cli-guide.html#options) to pass directly to HandbrakeCLI
+ * @returns {Promise}
+ * @example
+ * ```js
+ * const hbjs = require('handbrake-js')
+ *
+ * async function start () {
+ *   const result = await hbjs.run({ version: true })
+ *   console.log(result.stdout)
+ *   // prints 'HandBrake 1.3.0'
+ * }
+ *
+ * start().catch(console.error)
+ * ```
+ * @alias module:handbrake-js.run
+ */
 async function run (options) {
   return new Promise((resolve, reject) => {
     exec(options, function (err, stdout, stderr) {
