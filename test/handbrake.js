@@ -1,17 +1,17 @@
 const Tom = require('test-runner').Tom
 const hbjs = require('../')
 const mockCp = require('./mock/child_process')
-const a = require('assert')
+const a = require('assert').strict
 const sleep = require('sleep-anywhere')
 
 const tom = module.exports = new Tom()
 
-tom.test('start event', async function () {
+tom.test('start event fires once only', async function () {
   const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
-  const events = []
+  const actuals = []
 
   handbrake.on('start', function () {
-    events.push('start')
+    actuals.push('start')
   })
 
   process.nextTick(function () {
@@ -20,14 +20,14 @@ tom.test('start event', async function () {
   })
 
   await sleep(100)
-  a.deepStrictEqual(events, ['start'])
+  a.deepEqual(actuals, ['start'])
 })
 
 tom.test('begin event', async function () {
-  const events = []
+  const actuals = []
   const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
   handbrake.on('begin', function () {
-    events.push('begin')
+    actuals.push('begin')
   })
 
   process.nextTick(function () {
@@ -36,22 +36,22 @@ tom.test('begin event', async function () {
   })
 
   await sleep(100)
-  a.deepStrictEqual(events, ['begin'])
+  a.deepEqual(actuals, ['begin'])
 })
 
 tom.test('progress event: encoding (short)', async function () {
-  const events = []
+  const actuals = []
   const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
   handbrake.on('progress', function (progress) {
-    events.push(progress)
+    actuals.push(progress)
   })
   process.nextTick(function () {
     mockCp.lastHandle.stdout.emit('data', '\rEncoding: task 1 of 1, 1.23 %')
     mockCp.lastHandle.stdout.emit('data', '\rEncoding: task 1 of 1, 3.49 %')
   })
   await sleep(100)
-  a.strictEqual(events.length, 2)
-  a.deepStrictEqual(events[0], {
+  a.equal(actuals.length, 2)
+  a.deepEqual(actuals[0], {
     taskNumber: 1,
     taskCount: 1,
     percentComplete: 1.23,
@@ -60,7 +60,7 @@ tom.test('progress event: encoding (short)', async function () {
     eta: '',
     task: 'Encoding'
   })
-  a.deepStrictEqual(events[1], {
+  a.deepEqual(actuals[1], {
     taskNumber: 1,
     taskCount: 1,
     percentComplete: 3.49,
@@ -72,10 +72,10 @@ tom.test('progress event: encoding (short)', async function () {
 })
 
 tom.test('progress event: encoding (long)', async function () {
-  const events = []
+  const actuals = []
   const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
   handbrake.on('progress', function (progress) {
-    events.push(progress)
+    actuals.push(progress)
   })
 
   process.nextTick(function () {
@@ -84,8 +84,8 @@ tom.test('progress event: encoding (long)', async function () {
   })
 
   await sleep(100)
-  a.strictEqual(events.length, 2)
-  a.deepStrictEqual(events[0], {
+  a.equal(actuals.length, 2)
+  a.deepEqual(actuals[0], {
     taskNumber: 1,
     taskCount: 1,
     percentComplete: 45.46,
@@ -94,7 +94,7 @@ tom.test('progress event: encoding (long)', async function () {
     eta: '00h00m05s',
     task: 'Encoding'
   })
-  a.deepStrictEqual(events[1], {
+  a.deepEqual(actuals[1], {
     taskNumber: 1,
     taskCount: 1,
     percentComplete: 55.46,
@@ -106,10 +106,10 @@ tom.test('progress event: encoding (long)', async function () {
 })
 
 tom.test('progress event: fragmented', async function () {
-  const events = []
+  const actuals = []
   const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
   handbrake.on('progress', function (progress) {
-    events.push(progress)
+    actuals.push(progress)
   })
 
   process.nextTick(function () {
@@ -119,7 +119,7 @@ tom.test('progress event: fragmented', async function () {
   })
 
   await sleep(100)
-  a.deepStrictEqual(events, [
+  a.deepEqual(actuals, [
     {
       taskNumber: 1,
       taskCount: 1,
@@ -133,10 +133,10 @@ tom.test('progress event: fragmented', async function () {
 })
 
 tom.test('progress event: muxing', async function () {
-  const events = []
+  const actuals = []
   const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
   handbrake.on('progress', function (progress) {
-    events.push(progress)
+    actuals.push(progress)
   })
 
   process.nextTick(function () {
@@ -144,7 +144,7 @@ tom.test('progress event: muxing', async function () {
   })
 
   await sleep(100)
-  a.deepStrictEqual(events, [
+  a.deepEqual(actuals, [
     {
       taskNumber: 0,
       taskCount: 0,
@@ -158,26 +158,26 @@ tom.test('progress event: muxing', async function () {
 })
 
 tom.test('end event (without encode)', async function () {
-  const events = []
+  const actuals = []
   const handbrake = hbjs.spawn({ help: true }, { cp: mockCp })
   handbrake.on('end', function () {
-    events.push('end should not be fired')
+    actuals.push('end should not be fired')
   })
 
   process.nextTick(function () {
     mockCp.lastHandle.emit('exit', 0)
-    events.push('exit')
+    actuals.push('exit')
   })
 
   await sleep(100)
-  a.deepStrictEqual(events, ['exit'])
+  a.deepEqual(actuals, ['exit'])
 })
 
 tom.test('end event (with encode)', async function () {
-  const events = []
+  const actuals = []
   const handbrake = hbjs.spawn({ help: true }, { cp: mockCp })
   handbrake.on('end', function () {
-    events.push('end')
+    actuals.push('end')
   })
 
   process.nextTick(function () {
@@ -186,14 +186,14 @@ tom.test('end event (with encode)', async function () {
   })
 
   await sleep(100)
-  a.deepStrictEqual(events, ['end'])
+  a.deepEqual(actuals, ['end'])
 })
 
 tom.test('complete event', async function () {
-  const events = []
+  const actuals = []
   const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
   handbrake.on('complete', function () {
-    events.push('complete')
+    actuals.push('complete')
   })
 
   process.nextTick(function () {
@@ -201,14 +201,14 @@ tom.test('complete event', async function () {
   })
 
   await sleep(100)
-  a.deepStrictEqual(events, ['complete'])
+  a.deepEqual(actuals, ['complete'])
 })
 
 tom.test('output event (stdout)', async function () {
-  const events = []
+  const actuals = []
   const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
   handbrake.on('output', function (output) {
-    events.push(output)
+    actuals.push(output)
   })
 
   process.nextTick(function () {
@@ -216,14 +216,14 @@ tom.test('output event (stdout)', async function () {
   })
 
   await sleep(100)
-  a.deepStrictEqual(events, ['clive, yeah?'])
+  a.deepEqual(actuals, ['clive, yeah?'])
 })
 
 tom.test('output event (stderr)', async function () {
-  const events = []
+  const actuals = []
   const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
   handbrake.on('output', function (output) {
-    events.push(output)
+    actuals.push(output)
   })
 
   process.nextTick(function () {
@@ -231,5 +231,5 @@ tom.test('output event (stderr)', async function () {
   })
 
   await sleep(100)
-  a.deepStrictEqual(events, ['clive, yeah?'])
+  a.deepEqual(actuals, ['clive, yeah?'])
 })

@@ -8,17 +8,16 @@ const sleep = require('sleep-anywhere')
 const tom = module.exports = new Tom()
 
 tom.test('cli: --preset-list', async function () {
-  const events = []
-  cp.exec('node bin/cli.js --preset-list', function (err, stdout, stderr) {
-    if (err) {
-      events.push('fail')
-    } else {
-      events.push(stdout)
-    }
+  return new Promise((resolve, reject) => {
+    cp.exec('node bin/cli.js --preset-list', function (err, stdout, stderr) {
+      if (err) {
+        reject(err)
+      } else {
+        a.ok(/Legacy/.test(stdout))
+        resolve()
+      }
+    })
   })
-  await sleep(1000)
-  a.strictEqual(events.length, 1)
-  a.ok(/Legacy/.test(events[0]))
 })
 
 tom.test('cli: simple encode', async function () {
@@ -44,16 +43,16 @@ tom.test('cli: simple encode', async function () {
 })
 
 tom.test('exec: --preset-list', async function () {
-  const events = []
-  hbjs.exec({ 'preset-list': true }, function (err, stdout, stderr) {
-    if (err) {
-      events.push('fail')
-    } else if (/Devices/.test(stderr)) {
-      events.push('pass')
-    }
+  return new Promise((resolve, reject) => {
+    hbjs.exec({ 'preset-list': true }, function (err, stdout, stderr) {
+      if (err) {
+        reject(err)
+      } else {
+        a.ok(/Devices/.test(stderr))
+        resolve()
+      }
+    })
   })
-  await sleep(1000)
-  a.deepStrictEqual(events, ['pass'])
 })
 
 tom.test('run: --version', async function () {
@@ -62,18 +61,18 @@ tom.test('run: --version', async function () {
   this.data = result
 })
 
-tom.test('.cancel()', async function () {
-  const events = []
-  const handbrake = hbjs.spawn({ input: 'test/video/demo.mkv', output: 'tmp/cancelled.mp4' })
-  handbrake.on('begin', function () {
-    handbrake.cancel()
+tom.test('.cancel(): must fire cancelled event within 5s', async function () {
+  return new Promise((resolve, reject) => {
+    const events = []
+    const handbrake = hbjs.spawn({ input: 'test/video/demo.mkv', output: 'tmp/cancelled.mp4' })
+    handbrake.on('begin', function () {
+      handbrake.cancel()
+    })
+    handbrake.on('cancelled', function () {
+      resolve()
+    })
   })
-  handbrake.on('cancelled', function () {
-    events.push('pass')
-  })
-  await sleep(2000)
-  a.deepStrictEqual(events, ['pass'])
-})
+}, { timeout: 5000 })
 
 tom.test('spawn: correct return type', async function () {
   const mockCp = require('./mock/child_process')
