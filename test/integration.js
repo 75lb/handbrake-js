@@ -4,12 +4,15 @@ const fs = require('fs')
 const hbjs = require('../')
 const a = require('assert')
 const sleep = require('sleep-anywhere')
+const path = require('path')
 
 const tom = module.exports = new Tom()
 
+const cliPath = path.resolve(__dirname, '../bin/cli.js')
+
 tom.test('cli: --preset-list', async function () {
   return new Promise((resolve, reject) => {
-    cp.exec('node bin/cli.js --preset-list', function (err, stdout, stderr) {
+    cp.exec(`node ${cliPath} --preset-list`, function (err, stdout, stderr) {
       if (err) {
         reject(err)
       } else {
@@ -27,7 +30,9 @@ tom.test('cli: simple encode', async function () {
     // dir already exists
   }
   return new Promise((resolve, reject) => {
-    cp.exec('node bin/cli.js -i test/video/demo.mkv -o tmp/test.mp4 --rotate angle=90:hflip=1 -v', (err, stdout, stderr) => {
+    const inputPath = path.resolve(__dirname, 'video/demo.mkv')
+    const outputPath = path.resolve(__dirname, '../tmp/test.mp4')
+    cp.exec(`node ${cliPath} -i ${inputPath} -o ${outputPath} --rotate angle=90:hflip=1 -v`, (err, stdout, stderr) => {
       if (err) {
         reject(err)
       } else {
@@ -64,7 +69,10 @@ tom.test('run: --version', async function () {
 tom.test('.cancel(): must fire cancelled event within 5s', async function () {
   return new Promise((resolve, reject) => {
     const events = []
-    const handbrake = hbjs.spawn({ input: 'test/video/demo.mkv', output: 'tmp/cancelled.mp4' })
+    const handbrake = hbjs.spawn({
+      input: path.resolve(__dirname, 'video/demo.mkv'),
+      output: path.resolve(__dirname, '../tmp/cancelled.mp4' )
+    })
     handbrake.on('begin', function () {
       handbrake.cancel()
     })

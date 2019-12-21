@@ -3,7 +3,7 @@ const hbjs = require('../')
 const mockCp = require('./mock/child_process')
 const a = require('assert').strict
 
-const tom = module.exports = new Tom('exceptions', { maxConcurrency: 1 })
+const tom = module.exports = new Tom({ maxConcurrency: 1 })
 
 tom.test('validation: HandbrakeCLI not found', function () {
   return new Promise(function (resolve, reject) {
