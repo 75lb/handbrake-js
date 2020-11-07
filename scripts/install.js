@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const request = require('request')
+const fetch = require('node-fetch')
 const decompress = require('decompress')
 const exec = require('child_process').exec
 const util = require('util')
@@ -14,32 +14,18 @@ if (nodeVersionMatches('>=8.6.0 <10.0.0')) {
 }
 
 const version = '1.3.3'
-const downloadPath = 'https://github.com/HandBrake/HandBrake/releases/download/%s/HandBrakeCLI-%s%s'
-
-const win32 = {
-  url: util.format(downloadPath, version, version, '-win-x86_64.zip'),
-  archive: 'win.zip',
-  copyFrom: path.join('unzipped', 'HandBrakeCLI.exe'),
-  copyTo: path.join('bin', 'HandbrakeCLI.exe')
-}
-
-const win64 = {
-  url: util.format(downloadPath, version, version, '-win-x86_64.zip'),
-  archive: 'win.zip',
-  copyFrom: path.join('unzipped', 'HandBrakeCLI.exe'),
-  copyTo: path.join('bin', 'HandbrakeCLI.exe')
-}
-
-const mac = {
-  url: util.format(downloadPath, version, version, '.dmg'),
-  archive: 'mac.dmg',
-  copyFrom: 'HandbrakeCLI',
-  copyTo: path.join('bin', 'HandbrakeCLI')
-}
+const downloadPath = 'https://github.com/HandBrake/HandBrake/releases/download/%s/HandBrxakeCLI-%s%s'
 
 function downloadFile (from, to, done) {
   console.log('fetching: ' + from)
-  request(from).pipe(fs.createWriteStream(to)).on('close', done)
+  fetch(from, { redirect: 'follow' }).then(response => {
+    if (response.ok) {
+      console.log(`Downloading HandbrakeCLI (${Number(response.headers.get('content-length')).toLocaleString()} bytes) `)
+      response.buffer().then(buf => fs.writeFile(to, buf, done))
+    } else {
+      throw new Error(`Failed to download Handbrake: ${response.status} ${response.statusText}`)
+    }
+  })
 }
 
 function extractFile (archive, copyFrom, copyTo, done) {
@@ -104,7 +90,30 @@ function go (installation) {
   }
 }
 
-const linuxMsg = `Linux users
+if (process.platform === 'darwin') {
+  go({
+    url: util.format(downloadPath, version, version, '.dmg'),
+    archive: 'mac.dmg',
+    copyFrom: 'HandbrakeCLI',
+    copyTo: path.join('bin', 'HandbrakeCLI')
+  })
+} else if (process.platform === 'win32') {
+  const win32 = {
+    url: util.format(downloadPath, version, version, '-win-x86_64.zip'),
+    archive: 'win.zip',
+    copyFrom: path.join('unzipped', 'HandBrakeCLI.exe'),
+    copyTo: path.join('bin', 'HandbrakeCLI.exe')
+  }
+
+  const win64 = {
+    url: util.format(downloadPath, version, version, '-win-x86_64.zip'),
+    archive: 'win.zip',
+    copyFrom: path.join('unzipped', 'HandBrakeCLI.exe'),
+    copyTo: path.join('bin', 'HandbrakeCLI.exe')
+  }
+  go(process.arch === 'x64' ? win64 : win32)
+} else if (process.platform === 'linux') {
+  console.log(`Linux users
 ============
 handbrake-cli must be installed separately as the root user.
 Ubuntu users can do this using the following commands:
@@ -114,16 +123,5 @@ apt-get update -qq
 apt-get install -qq handbrake-cli
 
 For all issues regarding installation of HandbrakeCLI on Linux, consult the Handbrake website:
-http://handbrake.fr`
-
-switch (process.platform) {
-  case 'darwin':
-    go(mac)
-    break
-  case 'win32':
-    go(process.arch === 'x64' ? win64 : win32)
-    break
-  case 'linux':
-    console.log(linuxMsg)
-    break
+http://handbrake.fr`)
 }
