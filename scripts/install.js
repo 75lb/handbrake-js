@@ -14,7 +14,7 @@ if (nodeVersionMatches('>=8.6.0 <10.0.0')) {
 }
 
 const version = '1.3.3'
-const downloadPath = 'https://github.com/HandBrake/HandBrake/releases/download/%s/HandBrxakeCLI-%s%s'
+const downloadPath = 'https://github.com/HandBrake/HandBrake/releases/download/%s/HandBrakeCLI-%s%s'
 
 function downloadFile (from, to, done) {
   console.log('fetching: ' + from)
