@@ -112,3 +112,4 @@ async function run (options) {
 }
 
 export { cliOptions, spawn, exec, run }
+export default { cliOptions, spawn, exec, run }

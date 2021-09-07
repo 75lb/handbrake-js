@@ -1,5 +1,7 @@
-const hbjs = require('..')
-const path = require('path')
+import hbjs from 'handbrake-js'
+import path from 'path'
+import currentModulePaths from 'current-module-paths'
+const { __dirname } = currentModulePaths(import.meta.url)
 
 const options = {
   input: path.resolve(__dirname, '../test/video/demo.mkv'),
