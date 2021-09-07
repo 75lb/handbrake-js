@@ -36,7 +36,8 @@
     "index.js"
   ],
   "scripts": {
-    "test": "test-runner test/*.js",
+    "test": "npm run test:ci",
+    "test:ci": "test-runner test/*.js",
     "postinstall": "node scripts/install.js",
     "ubuntu-setup": "./scripts/install-ubuntu.sh",
     "docs": "jsdoc2md -t README.hbs lib/*.js index.js > README.md"
