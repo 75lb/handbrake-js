@@ -1,3 +1,10 @@
+import Handbrake from './lib/Handbrake.js'
+import util from 'util'
+import cp from 'child_process'
+import toSpawnArgs from 'object-to-spawn-args'
+import { HandbrakeCLIPath } from './lib/config.js'
+import cliOptions from './lib/cli-options.js'
+
 /**
  * Handbrake for node.js.
  * @module handbrake-js
@@ -30,7 +37,6 @@
  * ```
  */
 function spawn (options, mocks) {
-  const Handbrake = require('./lib/Handbrake')
   const handbrake = new Handbrake(mocks)
 
   /* defer so the caller can attach event listers on the returned Handbrake instance first */
@@ -67,13 +73,9 @@ function spawn (options, mocks) {
  * @alias module:handbrake-js.exec
  */
 function exec (options, done) {
-  const util = require('util')
-  const cp = require('child_process')
-  const toSpawnArgs = require('object-to-spawn-args')
-  const config = require('./lib/config')
   const cmd = util.format(
     '"%s" %s',
-    config.HandbrakeCLIPath,
+    HandbrakeCLIPath,
     toSpawnArgs(options, { quote: true }).join(' ')
   )
   cp.exec(cmd, done)
@@ -109,7 +111,4 @@ async function run (options) {
   })
 }
 
-exports.spawn = spawn
-exports.exec = exec
-exports.run = run
-exports.cliOptions = require('./lib/cli-options')
+export { cliOptions, spawn, exec, run }

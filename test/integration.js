@@ -1,12 +1,16 @@
-const Tom = require('test-runner').Tom
-const cp = require('child_process')
-const fs = require('fs')
-const hbjs = require('../')
-const a = require('assert')
-const sleep = require('sleep-anywhere')
-const path = require('path')
+import TestRunner from 'test-runner'
+import * as hbjs from 'handbrake-js'
+import * as mockCp from './mock/child_process.js'
+import { strict as a } from 'assert'
+import sleep from 'sleep-anywhere'
+import path from 'path'
+import cp from 'child_process'
+import fs from 'fs'
+import Handbrake from '../lib/Handbrake.js'
+import currentModulePaths from 'current-module-paths'
+const { __dirname } = currentModulePaths(import.meta.url)
 
-const tom = module.exports = new Tom()
+const tom = new TestRunner.Tom()
 
 const cliPath = path.resolve(__dirname, '../bin/cli.js')
 
@@ -83,8 +87,8 @@ tom.test('.cancel(): must fire cancelled event within 5s', async function () {
 }, { timeout: 5000 })
 
 tom.test('spawn: correct return type', async function () {
-  const mockCp = require('./mock/child_process')
-  const Handbrake = require('../lib/Handbrake')
   const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
   a.ok(handbrake instanceof Handbrake)
 })
+
+export default tom

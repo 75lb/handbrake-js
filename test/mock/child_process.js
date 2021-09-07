@@ -1,8 +1,7 @@
-const EventEmitter = require('events').EventEmitter
-const Readable = require('stream').Readable
+import { EventEmitter } from 'events'
+import { Readable } from 'stream'
 
-exports.spawn = spawn
-exports.lastHandle = null
+let lastHandle = null
 
 class MockChildProcess extends EventEmitter {
   constructor () {
@@ -15,6 +14,8 @@ class MockChildProcess extends EventEmitter {
 }
 
 function spawn () {
-  exports.lastHandle = new MockChildProcess()
-  return exports.lastHandle
+  lastHandle = new MockChildProcess()
+  return lastHandle
 }
+
+export { spawn, lastHandle }

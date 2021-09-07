@@ -1,10 +1,10 @@
-const Tom = require('test-runner').Tom
-const hbjs = require('../')
-const mockCp = require('./mock/child_process')
-const a = require('assert').strict
-const sleep = require('sleep-anywhere')
+import TestRunner from 'test-runner'
+import * as hbjs from 'handbrake-js'
+import * as mockCp from './mock/child_process.js'
+import { strict as a } from 'assert'
+import sleep from 'sleep-anywhere'
 
-const tom = module.exports = new Tom()
+const tom = new TestRunner.Tom()
 
 tom.test('start event fires once only', async function () {
   const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
@@ -233,3 +233,5 @@ tom.test('output event (stderr)', async function () {
   await sleep(100)
   a.deepEqual(actuals, ['clive, yeah?'])
 })
+
+export default tom

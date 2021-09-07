@@ -1,17 +1,14 @@
 #!/usr/bin/env node
-const fetch = require('node-fetch')
-const decompress = require('decompress')
-const exec = require('child_process').exec
-const util = require('util')
-const fs = require('fs')
-const path = require('path')
-const rimraf = require('rimraf')
-const nodeVersionMatches = require('node-version-matches')
-
-// Fix for node ^8.6.0, ^9.0.0: https://github.com/nodejs/node/issues/16196
-if (nodeVersionMatches('>=8.6.0 <10.0.0')) {
-  require('tls').DEFAULT_ECDH_CURVE = 'auto'
-}
+import fetch from 'node-fetch'
+import decompress from 'decompress'
+import { exec } from 'child_process'
+import util from 'util'
+import fs from 'fs'
+import path from 'path'
+import rimraf from 'rimraf'
+import nodeVersionMatches from 'node-version-matches'
+import currentModulePaths from 'current-module-paths'
+const { __dirname } = currentModulePaths(import.meta.url)
 
 const version = '1.3.3'
 const downloadPath = 'https://github.com/HandBrake/HandBrake/releases/download/%s/HandBrakeCLI-%s%s'

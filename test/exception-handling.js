@@ -1,9 +1,9 @@
-const Tom = require('test-runner').Tom
-const hbjs = require('../')
-const mockCp = require('./mock/child_process')
-const a = require('assert').strict
+import TestRunner from 'test-runner'
+import * as hbjs from 'handbrake-js'
+import * as mockCp from './mock/child_process.js'
+import { strict as a } from 'assert'
 
-const tom = module.exports = new Tom({ maxConcurrency: 1 })
+const tom = new TestRunner.Tom({ maxConcurrency: 1 })
 
 tom.test('validation: HandbrakeCLI not found', function () {
   return new Promise(function (resolve, reject) {
@@ -79,3 +79,5 @@ tom.test('invalid input file', function () {
     })
   })
 })
+
+export default tom
