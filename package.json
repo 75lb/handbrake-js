@@ -32,12 +32,14 @@
   "files": [
     "bin/cli.js",
     "lib",
+    "dist",
     "scripts",
     "index.js"
   ],
   "scripts": {
-    "test": "npm run test:ci",
+    "test": "npm run dist && npm run test:ci",
     "test:ci": "test-runner test/*.js",
+    "dist": "rollup -c",
     "postinstall": "node scripts/install.js",
     "ubuntu-setup": "./scripts/install-ubuntu.sh",
     "docs": "jsdoc2md -t README.hbs lib/*.js index.js > README.md"
@@ -52,7 +54,10 @@
     "rimraf": "^3.0.2"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^20.0.0",
+    "@rollup/plugin-node-resolve": "^13.0.4",
     "jsdoc-to-markdown": "^7.0.1",
+    "rollup": "^2.56.3",
     "sleep-anywhere": "^2.0.1",
     "test-runner": "^0.9.8"
   },
