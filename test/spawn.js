@@ -258,4 +258,9 @@ tom.test('spawn: correct return type', async function () {
   a.ok(handbrake instanceof Handbrake)
 })
 
+tom.test('Handbrake class: options.HandbrakeCLIPath set correctly', async function () {
+  const handbrake = new Handbrake({ input: 'in', output: 'out', HandbrakeCLIPath: 'one' })
+  a.equal(handbrake.HandbrakeCLIPath, 'one')
+})
+
 export default tom

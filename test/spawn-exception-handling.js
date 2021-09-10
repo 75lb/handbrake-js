@@ -8,8 +8,7 @@ const tom = new TestRunner.Tom({ maxConcurrency: 1 })
 tom.test('validation: HandbrakeCLI not found', function () {
   return new Promise(function (resolve, reject) {
     const handbrake = hbjs.spawn(
-      { input: 'in', output: 'out' },
-      { HandbrakeCLIPath: 'broken/path' }
+      { input: 'in', output: 'out', HandbrakeCLIPath: 'broken/path' }
     )
     handbrake.on('error', function (err) {
       try {
@@ -18,7 +17,7 @@ tom.test('validation: HandbrakeCLI not found', function () {
         a.equal(err.HandbrakeCLIPath, 'broken/path')
         a.ok(err.errno === 'ENOENT' || err.errno === -2)
         a.ok(/ENOENT/.test(err.spawnmessage))
-        a.deepEqual(err.options, { input: 'in', output: 'out' })
+        a.deepEqual(err.options, { input: 'in', output: 'out', HandbrakeCLIPath: 'broken/path' })
         resolve()
       } catch (err) {
         reject(err)

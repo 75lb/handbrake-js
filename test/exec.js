@@ -4,7 +4,7 @@ import { strict as a } from 'assert'
 
 const tom = new TestRunner.Tom()
 
-tom.test('exec: --preset-list', async function () {
+tom.test('--preset-list', async function () {
   return new Promise((resolve, reject) => {
     hbjs.exec({ 'preset-list': true }, function (err, stdout, stderr) {
       if (err) {
@@ -12,6 +12,20 @@ tom.test('exec: --preset-list', async function () {
       } else {
         a.ok(/Devices/.test(stderr))
         resolve()
+      }
+    })
+  })
+})
+
+tom.test('HandbrakeCLIPath', async function () {
+  return new Promise((resolve, reject) => {
+    hbjs.exec({ 'preset-list': true, HandbrakeCLIPath: 'one' }, function (err, stdout, stderr) {
+      if (err) {
+        a.ok(/command not found/.test(err.message))
+        a.equal(err.cmd, '"one" --preset-list --HandbrakeCLIPath "one"')
+        resolve()
+      } else {
+        reject(new Error("Shouldn't reach here"))
       }
     })
   })

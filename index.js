@@ -19,6 +19,7 @@ import cliOptions from './lib/cli-options.js'
  * Spawns a HandbrakeCLI process with the supplied [options](https://handbrake.fr/docs/en/latest/cli/cli-guide.html#options), returning an instance of `Handbrake` on which you can listen for events.
  *
  * @param {object} [options] - [Options](https://handbrake.fr/docs/en/latest/cli/cli-guide.html#options) to pass directly to HandbrakeCLI
+ * @param {string} [options.HandbrakeCLIPath] - Override the built-in `HandbrakeCLI` binary path.
  * @returns {module:handbrake-js~Handbrake}
  * @alias module:handbrake-js.spawn
  * @example
@@ -36,13 +37,12 @@ import cliOptions from './lib/cli-options.js'
  *   .on('output', console.log)
  * ```
  */
-function spawn (options, mocks) {
-  const handbrake = new Handbrake(mocks)
+function spawn (options = {}, mocks) {
+  const handbrake = new Handbrake(options, mocks)
 
   /* defer so the caller can attach event listers on the returned Handbrake instance first */
   process.nextTick(function () {
     try {
-      handbrake.options = options
       handbrake._run()
     } catch (error) {
       const err = new Error()
@@ -59,6 +59,7 @@ function spawn (options, mocks) {
  * Runs HandbrakeCLI with the supplied [options](https://handbrake.fr/docs/en/latest/cli/cli-guide.html#options) calling the supplied callback on completion. The exec method is best suited for short duration tasks where you can wait until completion for the output.
  *
  * @param options {Object} - [Options](https://handbrake.fr/docs/en/latest/cli/cli-guide.html#options) to pass directly to HandbrakeCLI
+ * @param {string} [options.HandbrakeCLIPath] - Override the built-in `HandbrakeCLI` binary path.
  * @param [onComplete] {Function} - If passed, `onComplete(err, stdout, stderr)` will be called on completion, `stdout` and `stderr` being strings containing the HandbrakeCLI output.
  *
  * @example
@@ -72,10 +73,10 @@ function spawn (options, mocks) {
  * ```
  * @alias module:handbrake-js.exec
  */
-function exec (options, done) {
+function exec (options = {}, done) {
   const cmd = util.format(
     '"%s" %s',
-    HandbrakeCLIPath,
+    options.HandbrakeCLIPath || HandbrakeCLIPath,
     toSpawnArgs(options, { quote: true }).join(' ')
   )
   cp.exec(cmd, done)
@@ -84,6 +85,7 @@ function exec (options, done) {
 /**
  * Identical to `hbjs.exec` except it returns a promise, rather than invoke a callback. Use this when you don't need the progress events reported by `hbjs.spawn`. Fulfils with an object containing the output in two properties: `stdout` and `stderr`.
  * @param options {Object} - [Options](https://handbrake.fr/docs/en/latest/cli/cli-guide.html#options) to pass directly to HandbrakeCLI
+ * @param {string} [options.HandbrakeCLIPath] - Override the built-in `HandbrakeCLI` binary path.
  * @returns {Promise}
  * @example
  * ```js
