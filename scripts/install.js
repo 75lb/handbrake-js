@@ -6,7 +6,6 @@ import util from 'util'
 import fs from 'fs'
 import path from 'path'
 import rimraf from 'rimraf'
-import nodeVersionMatches from 'node-version-matches'
 import currentModulePaths from 'current-module-paths'
 const { __dirname } = currentModulePaths(import.meta.url)
 

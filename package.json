@@ -48,7 +48,6 @@
     "current-module-paths": "^1.1.0",
     "decompress": "^4.2.1",
     "node-fetch": "^3.0.0",
-    "node-version-matches": "^3.0.0",
     "object-to-spawn-args": "^2.0.1",
     "rimraf": "^3.0.2"
   },

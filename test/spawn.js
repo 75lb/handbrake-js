@@ -1,8 +1,12 @@
 import TestRunner from 'test-runner'
-import * as hbjs from 'handbrake-js'
+import hbjs from 'handbrake-js'
 import * as mockCp from './mock/child_process.js'
 import { strict as a } from 'assert'
 import sleep from 'sleep-anywhere'
+import Handbrake from '../lib/Handbrake.js'
+import path from 'path'
+import currentModulePaths from 'current-module-paths'
+const { __dirname } = currentModulePaths(import.meta.url)
 
 const tom = new TestRunner.Tom()
 
@@ -212,11 +216,11 @@ tom.test('output event (stdout)', async function () {
   })
 
   process.nextTick(function () {
-    mockCp.lastHandle.stdout.emit('data', 'clive, yeah?')
+    mockCp.lastHandle.stdout.emit('data', 'one')
   })
 
   await sleep(100)
-  a.deepEqual(actuals, ['clive, yeah?'])
+  a.deepEqual(actuals, ['one'])
 })
 
 tom.test('output event (stderr)', async function () {
@@ -227,11 +231,31 @@ tom.test('output event (stderr)', async function () {
   })
 
   process.nextTick(function () {
-    mockCp.lastHandle.stderr.emit('data', 'clive, yeah?')
+    mockCp.lastHandle.stderr.emit('data', 'one')
   })
 
   await sleep(100)
-  a.deepEqual(actuals, ['clive, yeah?'])
+  a.deepEqual(actuals, ['one'])
+})
+
+tom.test('.cancel(): must fire cancelled event within 5s', async function () {
+  return new Promise((resolve, reject) => {
+    const handbrake = hbjs.spawn({
+      input: path.resolve(__dirname, 'video/demo.mkv'),
+      output: path.resolve(__dirname, '../tmp/cancelled.mp4')
+    })
+    handbrake.on('begin', function () {
+      handbrake.cancel()
+    })
+    handbrake.on('cancelled', function () {
+      resolve()
+    })
+  })
+}, { timeout: 5000 })
+
+tom.test('spawn: correct return type', async function () {
+  const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
+  a.ok(handbrake instanceof Handbrake)
 })
 
 export default tom
