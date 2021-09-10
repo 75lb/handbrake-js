@@ -21,7 +21,6 @@ tom.test('HandbrakeCLIPath', async function () {
   return new Promise((resolve, reject) => {
     hbjs.exec({ 'preset-list': true, HandbrakeCLIPath: 'one' }, function (err, stdout, stderr) {
       if (err) {
-        a.ok(/command not found/.test(err.message))
         a.equal(err.cmd, '"one" --preset-list --HandbrakeCLIPath "one"')
         resolve()
       } else {
