@@ -216,8 +216,12 @@ class Handbrake extends events.EventEmitter {
         return
       }
     }
+    
+    /* Ensure the CLI Path is not included into the spawn args when parsed from the options */
+    const spawnOptions = {...this.options};
+    delete spawnOptions.HandbrakeCLIPath;
 
-    const spawnArgs = objectToSpawnArgs(this.options, {
+    const spawnArgs = objectToSpawnArgs(spawnOptions, {
       optionEqualsValue: true,
       optionEqualsValueExclusions: ['preset-import-file', 'preset-import-gui', 'subtitle-burned']
     });
@@ -627,10 +631,14 @@ function spawn (options = {}, mocks) {
  * @alias module:handbrake-js.exec
  */
 function exec (options = {}, done) {
+  /* Ensure the CLI Path is not included into the spawn args when parsed from the options */
+  const spawnOptions = {...options};
+  delete spawnOptions.HandbrakeCLIPath;
+
   const cmd = util__default['default'].format(
     '"%s" %s',
     options.HandbrakeCLIPath || HandbrakeCLIPath,
-    objectToSpawnArgs(options, { quote: true }).join(' ')
+    objectToSpawnArgs(spawnOptions, { quote: true }).join(' ')
   );
   childProcess__default['default'].exec(cmd, done);
 }

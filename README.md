@@ -79,9 +79,7 @@ Encoding  1.07       131.76    158.12    00h21m11s
 Handbrake for node.js.
 
 **Example**  
-```js
-const hbjs = require('handbrake-js')
-```
+```jsconst hbjs = require('handbrake-js')```
 
 * [handbrake-js](#module_handbrake-js)
     * _static_
@@ -116,19 +114,7 @@ Spawns a HandbrakeCLI process with the supplied [options](https://handbrake.fr/d
 | [options.HandbrakeCLIPath] | <code>string</code> | Override the built-in `HandbrakeCLI` binary path. |
 
 **Example**  
-```js
-const hbjs = require('handbrake-js')
-
-const options = {
-  input: 'something.avi',
-  output: 'something.mp4',
-  preset: 'Normal',
-  rotate: 1
-}
-hbjs.spawn(options)
-  .on('error', console.error)
-  .on('output', console.log)
-```
+```jsconst hbjs = require('handbrake-js')const options = {  input: 'something.avi',  output: 'something.mp4',  preset: 'Normal',  rotate: 1}hbjs.spawn(options)  .on('error', console.error)  .on('output', console.log)```
 <a name="module_handbrake-js.exec"></a>
 
 ### hbjs.exec(options, [onComplete])
@@ -143,14 +129,7 @@ Runs HandbrakeCLI with the supplied [options](https://handbrake.fr/docs/en/lates
 | [onComplete] | <code>function</code> | If passed, `onComplete(err, stdout, stderr)` will be called on completion, `stdout` and `stderr` being strings containing the HandbrakeCLI output. |
 
 **Example**  
-```js
-const hbjs = require('handbrake-js')
-
-hbjs.exec({ preset-list: true }, function(err, stdout, stderr){
-  if (err) throw err
-  console.log(stdout)
-})
-```
+```jsconst hbjs = require('handbrake-js')hbjs.exec({ preset-list: true }, function(err, stdout, stderr){  if (err) throw err  console.log(stdout)})```
 <a name="module_handbrake-js.run"></a>
 
 ### hbjs.run(options) ⇒ <code>Promise</code>
@@ -164,17 +143,7 @@ Identical to `hbjs.exec` except it returns a promise, rather than invoke a callb
 | [options.HandbrakeCLIPath] | <code>string</code> | Override the built-in `HandbrakeCLI` binary path. |
 
 **Example**  
-```js
-const hbjs = require('handbrake-js')
-
-async function start () {
-  const result = await hbjs.run({ version: true })
-  console.log(result.stdout)
-  // prints 'HandBrake 1.3.0'
-}
-
-start().catch(console.error)
-```
+```jsconst hbjs = require('handbrake-js')async function start () {  const result = await hbjs.run({ version: true })  console.log(result.stdout)  // prints 'HandBrake 1.3.0'}start().catch(console.error)```
 <a name="module_handbrake-js..Handbrake"></a>
 
 ### handbrake-js~Handbrake ⇐ [<code>EventEmitter</code>](http://nodejs.org/api/events.html)

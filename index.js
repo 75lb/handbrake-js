@@ -74,10 +74,14 @@ function spawn (options = {}, mocks) {
  * @alias module:handbrake-js.exec
  */
 function exec (options = {}, done) {
+  /* Ensure the CLI Path is not included into the spawn args when parsed from the options */
+  const spawnOptions = {...options}
+  delete spawnOptions.HandbrakeCLIPath;
+
   const cmd = util.format(
     '"%s" %s',
     options.HandbrakeCLIPath || HandbrakeCLIPath,
-    toSpawnArgs(options, { quote: true }).join(' ')
+    toSpawnArgs(spawnOptions, { quote: true }).join(' ')
   )
   cp.exec(cmd, done)
 }
