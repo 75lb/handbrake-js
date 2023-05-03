@@ -16,7 +16,7 @@ tom.test('--preset-list', async function () {
       if (err) {
         reject(err)
       } else {
-        a.ok(/Legacy/.test(stdout))
+        a.ok(/General/.test(stdout))
         resolve()
       }
     })

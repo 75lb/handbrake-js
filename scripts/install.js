@@ -9,7 +9,7 @@ import { rimrafSync } from 'rimraf'
 import currentModulePaths from 'current-module-paths'
 const { __dirname } = currentModulePaths(import.meta.url)
 
-const version = '1.3.3'
+const version = '1.6.1'
 const downloadPath = 'https://github.com/HandBrake/HandBrake/releases/download/%s/HandBrakeCLI-%s%s'
 
 function downloadFile (from, to, done) {
