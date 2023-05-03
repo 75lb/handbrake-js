@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12, 14, 16]
+        node-version: [12, 14, 16, 18, 20]
 
     steps:
     - uses: actions/checkout@v2
@@ -25,5 +25,5 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: sudo ./scripts/install-ubuntu.sh
-    - run: npm ci
+    - run: npm install
     - run: npm run test:ci

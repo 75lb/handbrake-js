@@ -45,21 +45,21 @@
     "docs": "jsdoc2md -t README.hbs lib/*.js index.js > README.md"
   },
   "dependencies": {
-    "ansi-escape-sequences": "^6.2.0",
-    "command-line-args": "^5.2.0",
-    "current-module-paths": "^1.1.0",
+    "ansi-escape-sequences": "^6.2.2",
+    "command-line-args": "^5.2.1",
+    "current-module-paths": "^1.1.1",
     "decompress": "^4.2.1",
-    "node-fetch": "^3.0.0",
+    "node-fetch": "^3.3.1",
     "object-to-spawn-args": "^2.0.1",
-    "rimraf": "^3.0.2"
+    "rimraf": "^5.0.0"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^20.0.0",
-    "@rollup/plugin-node-resolve": "^13.0.4",
-    "jsdoc-to-markdown": "^7.0.1",
-    "rollup": "^2.56.3",
-    "sleep-anywhere": "^2.0.1",
-    "test-runner": "^0.9.8"
+    "@rollup/plugin-commonjs": "^24.1.0",
+    "@rollup/plugin-node-resolve": "^15.0.2",
+    "jsdoc-to-markdown": "^8.0.0",
+    "rollup": "^3.21.3",
+    "sleep-anywhere": "^2.1.1",
+    "test-runner": "^0.10.1"
   },
   "standard": {
     "envs": [

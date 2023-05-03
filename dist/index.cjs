@@ -8,29 +8,23 @@ var url = require('url');
 var childProcess = require('child_process');
 var util = require('util');
 
-function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-var path__default = /*#__PURE__*/_interopDefaultLegacy(path);
-var childProcess__default = /*#__PURE__*/_interopDefaultLegacy(childProcess);
-var util__default = /*#__PURE__*/_interopDefaultLegacy(util);
-
 function getModulePaths (fileURL) {
   const __filename = url.fileURLToPath(fileURL);
-  const __dirname = path__default['default'].dirname(__filename);
+  const __dirname = path.dirname(__filename);
   return { __filename, __dirname }
 }
 
-const { __dirname: __dirname$1 } = getModulePaths((typeof document === 'undefined' ? new (require('u' + 'rl').URL)('file:' + __filename).href : (document.currentScript && document.currentScript.src || new URL('index.cjs', document.baseURI).href)));
+const { __dirname: __dirname$1 } = getModulePaths((typeof document === 'undefined' ? require('u' + 'rl').pathToFileURL(__filename).href : (document.currentScript && document.currentScript.src || new URL('index.cjs', document.baseURI).href)));
 
 /* path to the HandbrakeCLI executable downloaded by the install script */
 let HandbrakeCLIPath = null;
 
 switch (process.platform) {
   case 'darwin':
-    HandbrakeCLIPath = path__default['default'].join(__dirname$1, '..', 'bin', 'HandbrakeCLI');
+    HandbrakeCLIPath = path.join(__dirname$1, '..', 'bin', 'HandbrakeCLI');
     break
   case 'win32':
-    HandbrakeCLIPath = path__default['default'].join(__dirname$1, '..', 'bin', 'HandbrakeCLI.exe');
+    HandbrakeCLIPath = path.join(__dirname$1, '..', 'bin', 'HandbrakeCLI.exe');
     break
   case 'linux':
     HandbrakeCLIPath = 'HandBrakeCLI';
@@ -96,6 +90,10 @@ const muxing = {
   }
 };
 
+function getDefaultExportFromCjs (x) {
+	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
+}
+
 /**
  * @module object-to-spawn-args
  */
@@ -150,6 +148,8 @@ function quote (value, toQuote) {
 
 var objectToSpawnArgs = toSpawnArgs;
 
+var toSpawnArgs$1 = /*@__PURE__*/getDefaultExportFromCjs(objectToSpawnArgs);
+
 /**
  * @class
  * @classdesc A handle on the HandbrakeCLI process. Emits events you can monitor to track progress. An instance of this class is returned by {@link module:handbrake-js.spawn}.
@@ -185,7 +185,7 @@ class Handbrake extends events.EventEmitter {
     this.HandbrakeCLIPath = options.HandbrakeCLIPath || HandbrakeCLIPath;
 
     /* for test scripts */
-    this.cp = (mocks && mocks.cp) || childProcess__default['default'];
+    this.cp = (mocks && mocks.cp) || childProcess;
   }
 
   /**
@@ -208,7 +208,7 @@ class Handbrake extends events.EventEmitter {
     let err = new Error();
 
     if (this.options.input !== undefined && this.options.output !== undefined) {
-      const pathsEqual = path__default['default'].resolve(this.options.input) === path__default['default'].resolve(this.options.output);
+      const pathsEqual = path.resolve(this.options.input) === path.resolve(this.options.output);
       if (pathsEqual) {
         err.name = this.eError.VALIDATION;
         err.message = 'input and output paths are the same';
@@ -217,7 +217,7 @@ class Handbrake extends events.EventEmitter {
       }
     }
 
-    const spawnArgs = objectToSpawnArgs(this.options, {
+    const spawnArgs = toSpawnArgs$1(this.options, {
       optionEqualsValue: true,
       optionEqualsValueExclusions: ['preset-import-file', 'preset-import-gui', 'subtitle-burned']
     });
@@ -627,12 +627,12 @@ function spawn (options = {}, mocks) {
  * @alias module:handbrake-js.exec
  */
 function exec (options = {}, done) {
-  const cmd = util__default['default'].format(
+  const cmd = util.format(
     '"%s" %s',
     options.HandbrakeCLIPath || HandbrakeCLIPath,
-    objectToSpawnArgs(options, { quote: true }).join(' ')
+    toSpawnArgs$1(options, { quote: true }).join(' ')
   );
-  childProcess__default['default'].exec(cmd, done);
+  childProcess.exec(cmd, done);
 }
 
 /**
@@ -668,7 +668,7 @@ async function run (options) {
 var index = { cliOptions, spawn, exec, run };
 
 exports.cliOptions = cliOptions;
-exports['default'] = index;
+exports.default = index;
 exports.exec = exec;
 exports.run = run;
 exports.spawn = spawn;

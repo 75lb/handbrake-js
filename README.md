@@ -1,14 +1,14 @@
 [![view on npm](https://badgen.net/npm/v/handbrake-js)](https://www.npmjs.org/package/handbrake-js)
 [![npm module downloads](https://badgen.net/npm/dt/handbrake-js)](https://www.npmjs.org/package/handbrake-js)
-[![Build Status](https://travis-ci.org/75lb/handbrake-js.svg?branch=master)](https://travis-ci.org/75lb/handbrake-js)
 [![Gihub repo dependents](https://badgen.net/github/dependents-repo/75lb/handbrake-js)](https://github.com/75lb/handbrake-js/network/dependents?dependent_type=REPOSITORY)
 [![Gihub package dependents](https://badgen.net/github/dependents-pkg/75lb/handbrake-js)](https://github.com/75lb/handbrake-js/network/dependents?dependent_type=PACKAGE)
+[![Node.js CI](https://github.com/75lb/handbrake-js/actions/workflows/node.js.yml/badge.svg)](https://github.com/75lb/handbrake-js/actions/workflows/node.js.yml)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](https://github.com/feross/standard)
-[![Join the chat at https://gitter.im/75lb/handbrake-js](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/75lb/handbrake-js?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ***Upgraders, please read the [release notes](https://github.com/75lb/handbrake-js/releases).***
 
 # handbrake-js
+
 Handbrake-js is [Handbrake](http://handbrake.fr) ([v1.3.3](https://github.com/HandBrake/HandBrake/releases/tag/1.3.3)) for [node.js](http://nodejs.org). It aspires to provide a lean and stable foundation for building video transcoding software in node.js.
 
 HandBrake is a tool for converting video from nearly any format to a selection of modern, widely supported codecs. It can process most common multimedia files and any DVD or BluRay sources that do not contain any copy protection.
@@ -304,7 +304,7 @@ If `.cancel()` was called, this event is emitted once the underlying HandbrakeCL
 
 * * *
 
-&copy; 2013-21 Lloyd Brookes &lt;75pound@gmail.com&gt;.
+&copy; 2013-23 Lloyd Brookes &lt;75pound@gmail.com&gt;.
 
 Tested by [test-runner](https://github.com/test-runner-js/test-runner). Documented by [jsdoc-to-markdown](https://github.com/jsdoc2md/jsdoc-to-markdown).
 
