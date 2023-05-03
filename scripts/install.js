@@ -5,7 +5,7 @@ import { exec } from 'child_process'
 import util from 'util'
 import fs from 'fs'
 import path from 'path'
-import rimraf from 'rimraf'
+import { rimrafSync } from 'rimraf'
 import currentModulePaths from 'current-module-paths'
 const { __dirname } = currentModulePaths(import.meta.url)
 
@@ -33,7 +33,7 @@ function extractFile (archive, copyFrom, copyTo, done) {
         const source = fs.createReadStream(copyFrom)
         const dest = fs.createWriteStream(copyTo)
         dest.on('close', function () {
-          rimraf.sync('unzipped')
+          rimrafSync('unzipped')
           done()
         })
         source.pipe(dest)
