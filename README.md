@@ -75,6 +75,16 @@ Task      % done     FPS       Avg FPS   ETA
 Encoding  1.07       131.76    158.12    00h21m11s
 ```
 
+## HandbrakeCLI Path
+
+In some situations or environments (e.g. Docker) you may need to specify a custom HandbrakeCLI path. You can either specify the path in an environment variable:
+
+```sh
+HANDBRAKECLI_PATH="./example/HandbrakeCLI"
+```
+
+..or pass `HandbrakeCLIPath` as an option, programmatically. See the API documentation below for instructions. Also, see the [examples folder] for example code.
+
 # API Reference
 Handbrake for node.js.
 
