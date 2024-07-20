@@ -304,7 +304,7 @@ If `.cancel()` was called, this event is emitted once the underlying HandbrakeCL
 
 * * *
 
-&copy; 2013-23 Lloyd Brookes &lt;75pound@gmail.com&gt;.
+&copy; 2013-24 Lloyd Brookes &lt;75pound@gmail.com&gt;.
 
 Tested by [test-runner](https://github.com/test-runner-js/test-runner). Documented by [jsdoc-to-markdown](https://github.com/jsdoc2md/jsdoc-to-markdown).
 

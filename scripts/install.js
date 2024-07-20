@@ -5,7 +5,6 @@ import { exec } from 'child_process'
 import util from 'util'
 import fs from 'fs'
 import path from 'path'
-import { rimrafSync } from 'rimraf'
 import currentModulePaths from 'current-module-paths'
 const { __dirname } = currentModulePaths(import.meta.url)
 
@@ -17,7 +16,7 @@ function downloadFile (from, to, done) {
   fetch(from, { redirect: 'follow' }).then(response => {
     if (response.ok) {
       console.log(`Downloading HandbrakeCLI (${Number(response.headers.get('content-length')).toLocaleString()} bytes) `)
-      response.buffer().then(buf => fs.writeFile(to, buf, done))
+      response.arrayBuffer().then(buf => fs.writeFile(to, Buffer.from(buf), done))
     } else {
       throw new Error(`Failed to download Handbrake: ${response.status} ${response.statusText}`)
     }
@@ -33,7 +32,7 @@ function extractFile (archive, copyFrom, copyTo, done) {
         const source = fs.createReadStream(copyFrom)
         const dest = fs.createWriteStream(copyTo)
         dest.on('close', function () {
-          rimrafSync('unzipped')
+          fs.rmSync('unzipped', { recursive: true })
           done()
         })
         source.pipe(dest)

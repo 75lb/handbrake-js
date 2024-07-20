@@ -3,7 +3,10 @@
   "author": "Lloyd Brookes <75pound@gmail.com>",
   "version": "7.0.0",
   "description": "Handbrake for node.js. Brings video encoding.",
-  "repository": "https://github.com/75lb/handbrake-js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/75lb/handbrake-js.git"
+  },
   "license": "MIT",
   "type": "module",
   "bin": {
@@ -46,20 +49,19 @@
   },
   "dependencies": {
     "ansi-escape-sequences": "^6.2.2",
-    "command-line-args": "^5.2.1",
+    "command-line-args": "^6.0.0",
     "current-module-paths": "^1.1.1",
     "decompress": "^4.2.1",
-    "node-fetch": "^3.3.1",
-    "object-to-spawn-args": "^2.0.1",
-    "rimraf": "^5.0.0"
+    "node-fetch": "^3.3.2",
+    "object-to-spawn-args": "^2.0.1"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^24.1.0",
-    "@rollup/plugin-node-resolve": "^15.0.2",
-    "jsdoc-to-markdown": "^8.0.0",
-    "rollup": "^3.21.3",
+    "@rollup/plugin-commonjs": "^26.0.1",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "jsdoc-to-markdown": "^8.0.2",
+    "rollup": "^4.19.0",
     "sleep-anywhere": "^2.1.1",
-    "test-runner": "^0.10.1"
+    "test-runner": "^0.11.0"
   },
   "standard": {
     "envs": [

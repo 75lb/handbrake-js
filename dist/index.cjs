@@ -8,13 +8,14 @@ var url = require('url');
 var childProcess = require('child_process');
 var util = require('util');
 
+var _documentCurrentScript = typeof document !== 'undefined' ? document.currentScript : null;
 function getModulePaths (fileURL) {
   const __filename = url.fileURLToPath(fileURL);
   const __dirname = path.dirname(__filename);
   return { __filename, __dirname }
 }
 
-const { __dirname: __dirname$1 } = getModulePaths((typeof document === 'undefined' ? require('u' + 'rl').pathToFileURL(__filename).href : (document.currentScript && document.currentScript.src || new URL('index.cjs', document.baseURI).href)));
+const { __dirname: __dirname$1 } = getModulePaths((typeof document === 'undefined' ? require('u' + 'rl').pathToFileURL(__filename).href : (_documentCurrentScript && _documentCurrentScript.src || new URL('index.cjs', document.baseURI).href)));
 
 /* path to the HandbrakeCLI executable downloaded by the install script */
 let HandbrakeCLIPath = null;
