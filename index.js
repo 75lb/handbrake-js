@@ -74,10 +74,14 @@ function spawn (options = {}, mocks) {
  * @alias module:handbrake-js.exec
  */
 function exec (options = {}, done) {
+  const handbrakePath = options.HandbrakeCLIPath || HandbrakeCLIPath
+  const optionsCopy = Object.assign({}, options)
+  /* All options except HandbrakeCLIPath should be passed into the Handbrake command */
+  delete optionsCopy.HandbrakeCLIPath
   const cmd = util.format(
     '"%s" %s',
-    options.HandbrakeCLIPath || HandbrakeCLIPath,
-    toSpawnArgs(options, { quote: true }).join(' ')
+    handbrakePath,
+    toSpawnArgs(optionsCopy, { quote: true }).join(' ')
   )
   cp.exec(cmd, done)
 }

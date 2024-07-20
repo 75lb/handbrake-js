@@ -64,6 +64,10 @@
     "test-runner": "^0.11.0"
   },
   "standard": {
+    "ignore": [
+      "tmp",
+      "dist"
+    ],
     "envs": [
       "node"
     ]

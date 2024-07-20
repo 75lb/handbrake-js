@@ -17,11 +17,11 @@ tom.test('--preset-list', async function () {
   })
 })
 
-tom.test('HandbrakeCLIPath', async function () {
+tom.test('An incorrect HandbrakeCLIPath should fail but not be passed to the exec cmd', async function () {
   return new Promise((resolve, reject) => {
     hbjs.exec({ 'preset-list': true, HandbrakeCLIPath: 'one' }, function (err, stdout, stderr) {
       if (err) {
-        a.equal(err.cmd, '"one" --preset-list --HandbrakeCLIPath "one"')
+        a.equal(err.cmd, '"one" --preset-list')
         resolve()
       } else {
         reject(new Error("Shouldn't reach here"))
