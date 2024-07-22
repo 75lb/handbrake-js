@@ -1,4 +1,3 @@
-import TestRunner from 'test-runner'
 import hbjs from 'handbrake-js'
 import * as mockCp from './mock/child_process.js'
 import { strict as a } from 'assert'
@@ -8,9 +7,9 @@ import path from 'path'
 import currentModulePaths from 'current-module-paths'
 const { __dirname } = currentModulePaths(import.meta.url)
 
-const tom = new TestRunner.Tom()
+const test = new Map()
 
-tom.test('start event fires once only', async function () {
+test.set('start event fires once only', async function () {
   const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
   const actuals = []
 
@@ -27,7 +26,7 @@ tom.test('start event fires once only', async function () {
   a.deepEqual(actuals, ['start'])
 })
 
-tom.test('begin event', async function () {
+test.set('begin event', async function () {
   const actuals = []
   const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
   handbrake.on('begin', function () {
@@ -43,7 +42,7 @@ tom.test('begin event', async function () {
   a.deepEqual(actuals, ['begin'])
 })
 
-tom.test('progress event: encoding (short)', async function () {
+test.set('progress event: encoding (short)', async function () {
   const actuals = []
   const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
   handbrake.on('progress', function (progress) {
@@ -75,7 +74,7 @@ tom.test('progress event: encoding (short)', async function () {
   })
 })
 
-tom.test('progress event: encoding (long)', async function () {
+test.set('progress event: encoding (long)', async function () {
   const actuals = []
   const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
   handbrake.on('progress', function (progress) {
@@ -109,7 +108,7 @@ tom.test('progress event: encoding (long)', async function () {
   })
 })
 
-tom.test('progress event: fragmented', async function () {
+test.set('progress event: fragmented', async function () {
   const actuals = []
   const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
   handbrake.on('progress', function (progress) {
@@ -136,7 +135,7 @@ tom.test('progress event: fragmented', async function () {
   ])
 })
 
-tom.test('progress event: muxing', async function () {
+test.set('progress event: muxing', async function () {
   const actuals = []
   const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
   handbrake.on('progress', function (progress) {
@@ -161,7 +160,7 @@ tom.test('progress event: muxing', async function () {
   ])
 })
 
-tom.test('end event (without encode)', async function () {
+test.set('end event (without encode)', async function () {
   const actuals = []
   const handbrake = hbjs.spawn({ help: true }, { cp: mockCp })
   handbrake.on('end', function () {
@@ -177,7 +176,7 @@ tom.test('end event (without encode)', async function () {
   a.deepEqual(actuals, ['exit'])
 })
 
-tom.test('end event (with encode)', async function () {
+test.set('end event (with encode)', async function () {
   const actuals = []
   const handbrake = hbjs.spawn({ help: true }, { cp: mockCp })
   handbrake.on('end', function () {
@@ -193,7 +192,7 @@ tom.test('end event (with encode)', async function () {
   a.deepEqual(actuals, ['end'])
 })
 
-tom.test('complete event', async function () {
+test.set('complete event', async function () {
   const actuals = []
   const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
   handbrake.on('complete', function () {
@@ -208,7 +207,7 @@ tom.test('complete event', async function () {
   a.deepEqual(actuals, ['complete'])
 })
 
-tom.test('output event (stdout)', async function () {
+test.set('output event (stdout)', async function () {
   const actuals = []
   const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
   handbrake.on('output', function (output) {
@@ -223,7 +222,7 @@ tom.test('output event (stdout)', async function () {
   a.deepEqual(actuals, ['one'])
 })
 
-tom.test('output event (stderr)', async function () {
+test.set('output event (stderr)', async function () {
   const actuals = []
   const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
   handbrake.on('output', function (output) {
@@ -238,7 +237,7 @@ tom.test('output event (stderr)', async function () {
   a.deepEqual(actuals, ['one'])
 })
 
-tom.test('.cancel(): must fire cancelled event within 5s', async function () {
+test.set('.cancel(): must fire cancelled event within 5s', async function () {
   return new Promise((resolve, reject) => {
     const handbrake = hbjs.spawn({
       input: path.resolve(__dirname, 'video/demo.mkv'),
@@ -253,14 +252,14 @@ tom.test('.cancel(): must fire cancelled event within 5s', async function () {
   })
 }, { timeout: 5000 })
 
-tom.test('spawn: correct return type', async function () {
+test.set('spawn: correct return type', async function () {
   const handbrake = hbjs.spawn({ input: 'in', output: 'out' }, { cp: mockCp })
   a.ok(handbrake instanceof Handbrake)
 })
 
-tom.test('Handbrake class: options.HandbrakeCLIPath set correctly', async function () {
+test.set('Handbrake class: options.HandbrakeCLIPath set correctly', async function () {
   const handbrake = new Handbrake({ input: 'in', output: 'out', HandbrakeCLIPath: 'one' })
   a.equal(handbrake.HandbrakeCLIPath, 'one')
 })
 
-export default tom
+export { test }

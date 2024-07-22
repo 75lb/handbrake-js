@@ -1,4 +1,3 @@
-import TestRunner from 'test-runner'
 import { strict as a } from 'assert'
 import path from 'path'
 import cp from 'child_process'
@@ -6,11 +5,10 @@ import fs from 'fs'
 import currentModulePaths from 'current-module-paths'
 const { __dirname } = currentModulePaths(import.meta.url)
 
-const tom = new TestRunner.Tom()
-
+const test = new Map()
 const cliPath = path.resolve(__dirname, '../bin/cli.js')
 
-tom.test('--preset-list', async function () {
+test.set('--preset-list', async function () {
   return new Promise((resolve, reject) => {
     cp.exec(`node ${cliPath} --preset-list`, function (err, stdout, stderr) {
       if (err) {
@@ -23,7 +21,7 @@ tom.test('--preset-list', async function () {
   })
 })
 
-tom.test('simple encode', async function () {
+test.set('simple encode', async function () {
   try {
     fs.mkdirSync('tmp')
   } catch (err) {
@@ -47,4 +45,4 @@ tom.test('simple encode', async function () {
   })
 })
 
-export default tom
+export { test }

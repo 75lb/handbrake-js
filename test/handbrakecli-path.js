@@ -1,13 +1,12 @@
-import TestRunner from 'test-runner'
 import hbjs from 'handbrake-js'
 import { strict as a } from 'assert'
 import path from 'path'
 import fs from 'fs'
 
-const tom = new TestRunner.Tom()
+const test = new Map()
 
 if (process.platform === 'darwin') {
-  tom.before('Copy HandbrakeCLI to a different location', async function() {
+  test.set('Copy HandbrakeCLI to a different location', async function() {
     try {
       fs.mkdirSync('./tmp')
     } catch (err) {
@@ -18,7 +17,7 @@ if (process.platform === 'darwin') {
     fs.cpSync('./bin/HandbrakeCLI', './tmp/HandbrakeCLI')
   })
 
-  tom.test('hbjs:run() - Use custom HandbrakeCLI path', async function () {
+  test.set('hbjs:run() - Use custom HandbrakeCLI path', async function () {
     const options = {
       input: './test/video/demo.mkv',
       output: './tmp/output.mp4',
@@ -32,4 +31,4 @@ if (process.platform === 'darwin') {
 }
 
 
-export default tom
+export { test }

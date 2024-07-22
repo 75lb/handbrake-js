@@ -41,7 +41,7 @@
   ],
   "scripts": {
     "test": "npm run dist && npm run test:ci",
-    "test:ci": "test-runner test/*.js",
+    "test:ci": "nature @nature-zone/minimal-runner test/*.js",
     "dist": "rollup -c",
     "postinstall": "node scripts/install.js",
     "ubuntu-setup": "./scripts/install-ubuntu.sh",
@@ -56,6 +56,7 @@
     "object-to-spawn-args": "^2.0.1"
   },
   "devDependencies": {
+    "@nature-zone/minimal-runner": "^0.1.0",
     "@rollup/plugin-commonjs": "^26.0.1",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "jsdoc-to-markdown": "^8.0.2",

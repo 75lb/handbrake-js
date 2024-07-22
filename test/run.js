@@ -1,14 +1,13 @@
-import TestRunner from 'test-runner'
 import * as hbjs from 'handbrake-js'
 import { strict as a } from 'assert'
 
-const tom = new TestRunner.Tom()
+const test = new Map()
 
-tom.test('run: --version', async function () {
+test.set('run: --version', async function () {
   const result = await hbjs.run({ version: true })
-  this.data = result
+  console.debug('run: --version', result)
   a.ok(result.stdout)
   a.ok(result.stderr)
 })
 
-export default tom
+export { test }
