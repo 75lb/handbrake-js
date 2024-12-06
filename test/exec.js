@@ -1,10 +1,9 @@
-import TestRunner from 'test-runner'
-import * as hbjs from 'handbrake-js'
+import hbjs from 'handbrake-js'
 import { strict as a } from 'assert'
 
-const tom = new TestRunner.Tom()
+const test = new Map()
 
-tom.test('--preset-list', async function () {
+test.set('--preset-list', async function () {
   return new Promise((resolve, reject) => {
     hbjs.exec({ 'preset-list': true }, function (err, stdout, stderr) {
       if (err) {
@@ -17,7 +16,7 @@ tom.test('--preset-list', async function () {
   })
 })
 
-tom.test('An incorrect HandbrakeCLIPath should fail but not be passed to the exec cmd', async function () {
+test.set('An incorrect HandbrakeCLIPath should fail but not be passed to the exec cmd', async function () {
   return new Promise((resolve, reject) => {
     hbjs.exec({ 'preset-list': true, HandbrakeCLIPath: 'one' }, function (err, stdout, stderr) {
       if (err) {
@@ -30,4 +29,4 @@ tom.test('An incorrect HandbrakeCLIPath should fail but not be passed to the exe
   })
 })
 
-export default tom
+export { test }

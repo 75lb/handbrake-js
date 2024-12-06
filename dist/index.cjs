@@ -1,21 +1,14 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', { value: true });
-
 var events = require('events');
 var path = require('path');
-var url = require('url');
+var currentModulePaths = require('current-module-paths');
+var toSpawnArgs = require('object-to-spawn-args');
 var childProcess = require('child_process');
 var util = require('util');
 
 var _documentCurrentScript = typeof document !== 'undefined' ? document.currentScript : null;
-function getModulePaths (fileURL) {
-  const __filename = url.fileURLToPath(fileURL);
-  const __dirname = path.dirname(__filename);
-  return { __filename, __dirname }
-}
-
-const { __dirname: __dirname$1 } = getModulePaths((typeof document === 'undefined' ? require('u' + 'rl').pathToFileURL(__filename).href : (_documentCurrentScript && _documentCurrentScript.src || new URL('index.cjs', document.baseURI).href)));
+const { __dirname: __dirname$1 } = currentModulePaths((typeof document === 'undefined' ? require('u' + 'rl').pathToFileURL(__filename).href : (_documentCurrentScript && _documentCurrentScript.tagName.toUpperCase() === 'SCRIPT' && _documentCurrentScript.src || new URL('index.cjs', document.baseURI).href)));
 
 /* path to the HandbrakeCLI executable downloaded by the install script */
 let HandbrakeCLIPath = null;
@@ -95,66 +88,6 @@ const muxing = {
   }
 };
 
-function getDefaultExportFromCjs (x) {
-	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
-}
-
-/**
- * @module object-to-spawn-args
- */
-
-/**
- * @param {object} - an object specifying the command-line options to set
- * @param [options] {object}
- * @param [options.quote] {boolean} - enquote the option values
- * @param [options.optionEqualsValue] {boolean} - use `--option=value` notation
- */
-function toSpawnArgs (object, options) {
-  options = Object.assign({
-    optionEqualsValueList: [],
-    optionEqualsValueExclusions: [],
-  }, options);
-  const output = [];
-
-  for (const prop in object) {
-    const value = object[prop];
-    if (value !== undefined) {
-      const dash = prop.length === 1 ? '-' : '--';
-      if ((options.optionEqualsValue && !options.optionEqualsValueExclusions.includes(prop)) || options.optionEqualsValueList.includes(prop)) {
-        if (value === true) {
-          output.push(dash + prop);
-        } else {
-          if (Array.isArray(value)) {
-            output.push(dash + prop + '=' + quote(value.join(','), options.quote));
-          } else {
-            output.push(dash + prop + '=' + quote(value, options.quote));
-          }
-        }
-      } else {
-        output.push(dash + prop);
-        if (value !== true) {
-          if (Array.isArray(value)) {
-            value.forEach(function (item) {
-              output.push(quote(item, options.quote));
-            });
-          } else {
-            output.push(quote(value, options.quote));
-          }
-        }
-      }
-    }
-  }
-  return output
-}
-
-function quote (value, toQuote) {
-  return toQuote ? '"' + value + '"' : value
-}
-
-var objectToSpawnArgs = toSpawnArgs;
-
-var toSpawnArgs$1 = /*@__PURE__*/getDefaultExportFromCjs(objectToSpawnArgs);
-
 /**
  * @class
  * @classdesc A handle on the HandbrakeCLI process. Emits events you can monitor to track progress. An instance of this class is returned by {@link module:handbrake-js.spawn}.
@@ -225,7 +158,7 @@ class Handbrake extends events.EventEmitter {
     const optionsCopy = Object.assign({}, this.options);
     /* All options except HandbrakeCLIPath should be passed into the Handbrake command */
     delete optionsCopy.HandbrakeCLIPath;
-    const spawnArgs = toSpawnArgs$1(optionsCopy, {
+    const spawnArgs = toSpawnArgs(optionsCopy, {
       optionEqualsValue: true,
       optionEqualsValueExclusions: ['preset-import-file', 'preset-import-gui', 'subtitle-burned']
     });
@@ -642,7 +575,7 @@ function exec (options = {}, done) {
   const cmd = util.format(
     '"%s" %s',
     handbrakePath,
-    toSpawnArgs$1(optionsCopy, { quote: true }).join(' ')
+    toSpawnArgs(optionsCopy, { quote: true }).join(' ')
   );
   childProcess.exec(cmd, done);
 }
@@ -677,10 +610,7 @@ async function run (options) {
     });
   })
 }
+
 var index = { cliOptions, spawn, exec, run };
 
-exports.cliOptions = cliOptions;
-exports.default = index;
-exports.exec = exec;
-exports.run = run;
-exports.spawn = spawn;
+module.exports = index;

@@ -1,11 +1,10 @@
-import TestRunner from 'test-runner'
-import * as hbjs from 'handbrake-js'
+import hbjs from 'handbrake-js'
 import * as mockCp from './mock/child_process.js'
 import { strict as a } from 'assert'
 
-const tom = new TestRunner.Tom({ maxConcurrency: 1 })
+const test = new Map()
 
-tom.test('validation: HandbrakeCLI not found', function () {
+test.set('validation: HandbrakeCLI not found', function () {
   return new Promise(function (resolve, reject) {
     const handbrake = hbjs.spawn(
       { input: 'in', output: 'out', HandbrakeCLIPath: 'broken/path' }
@@ -26,7 +25,7 @@ tom.test('validation: HandbrakeCLI not found', function () {
   })
 })
 
-tom.test('validation: input === output', function () {
+test.set('validation: input === output', function () {
   return new Promise(function (resolve, reject) {
     hbjs.spawn({ input: 'blah', output: 'blah' }, { cp: mockCp })
       .on('error', function (err) {
@@ -43,7 +42,7 @@ tom.test('validation: input === output', function () {
   })
 })
 
-tom.test('invalid preset name', function () {
+test.set('invalid preset name', function () {
   return new Promise(function (resolve, reject) {
     const options = {
       input: 'test/video/demo.mkv',
@@ -62,7 +61,7 @@ tom.test('invalid preset name', function () {
   })
 })
 
-tom.test('invalid input file', function () {
+test.set('invalid input file', function () {
   return new Promise(function (resolve, reject) {
     const options = {
       input: 'broken',
@@ -79,4 +78,4 @@ tom.test('invalid input file', function () {
   })
 })
 
-export default tom
+export { test }
