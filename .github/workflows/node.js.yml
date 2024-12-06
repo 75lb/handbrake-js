@@ -30,6 +30,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+    - run: sudo ./scripts/install-ubuntu.sh
     - run: npm install
     - run: npm i @75lb/nature
     - run: npm run test:ci
