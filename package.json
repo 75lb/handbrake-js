@@ -1,6 +1,6 @@
 {
   "name": "handbrake-js",
-  "author": "Lloyd Brookes <75pound@gmail.com>",
+  "author": "Lloyd Brookes <opensource@75lb.com>",
   "version": "7.1.0",
   "description": "Handbrake for node.js. Brings video encoding.",
   "repository": {
@@ -41,28 +41,22 @@
   ],
   "scripts": {
     "test": "npm run dist && npm run test:ci",
-    "test:ci": "nature @nature-zone/minimal-runner test/*.js",
-    "dist": "rollup -c",
+    "test:ci": "75lb-nature test-runner test/*.js",
+    "dist": "75lb-nature cjs-build index.js",
     "postinstall": "node scripts/install.js",
     "ubuntu-setup": "./scripts/install-ubuntu.sh",
-    "docs": "jsdoc2md -t README.hbs lib/*.js index.js > README.md"
+    "docs": "75lb-nature jsdoc2md -t README.hbs lib/*.js index.js > README.md"
   },
   "dependencies": {
-    "ansi-escape-sequences": "^6.2.2",
-    "command-line-args": "^6.0.0",
-    "current-module-paths": "^1.1.1",
+    "ansi-escape-sequences": "^6.2.4",
+    "command-line-args": "^6.0.1",
+    "current-module-paths": "^1.1.2",
     "decompress": "^4.2.1",
     "node-fetch": "^3.3.2",
     "object-to-spawn-args": "^2.0.1"
   },
   "devDependencies": {
-    "@nature-zone/minimal-runner": "^0.1.0",
-    "@rollup/plugin-commonjs": "^26.0.1",
-    "@rollup/plugin-node-resolve": "^15.2.3",
-    "jsdoc-to-markdown": "^8.0.2",
-    "rollup": "^4.19.0",
-    "sleep-anywhere": "^2.1.1",
-    "test-runner": "^0.11.0"
+    "sleep-anywhere": "^2.1.2"
   },
   "standard": {
     "ignore": [
@@ -72,5 +66,13 @@
     "envs": [
       "node"
     ]
+  },
+  "peerDependencies": {
+    "@75lb/nature": "latest"
+  },
+  "peerDependenciesMeta": {
+    "@75lb/nature": {
+      "optional": true
+    }
   }
 }

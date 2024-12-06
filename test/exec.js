@@ -1,4 +1,4 @@
-import * as hbjs from 'handbrake-js'
+import hbjs from 'handbrake-js'
 import { strict as a } from 'assert'
 
 const test = new Map()

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import ansi from 'ansi-escape-sequences'
 import commandLineArgs from 'command-line-args'
-import * as hbjs from 'handbrake-js'
+import hbjs from 'handbrake-js'
 import cliOptions from '../lib/cli-options.js'
 import util from 'util'
 

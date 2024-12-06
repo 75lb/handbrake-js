@@ -1,4 +1,4 @@
-import * as hbjs from 'handbrake-js'
+import hbjs from 'handbrake-js'
 import * as mockCp from './mock/child_process.js'
 import { strict as a } from 'assert'
 
