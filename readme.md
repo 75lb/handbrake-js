@@ -29,7 +29,13 @@ Tested on Mac, Ubuntu and Windows.
 
 ### System Requirements
 
-Just [node.js](http://nodejs.org). On Mac and Windows, everything else is installed automatically. However on Ubuntu, you must install HandbrakeCLI manually with this command:
+#### Mac and Windows
+
+Only [node.js](http://nodejs.org) is required, everything else is installed automatically.
+
+#### Linux
+
+On Ubuntu, you must install HandbrakeCLI manually with this command:
 
 ```
 $ sudo apt install handbrake-cli
@@ -37,7 +43,7 @@ $ sudo apt install handbrake-cli
 
 Users of other Linux distros can install the GUI and CLI together using flatpak. Instructions [here](https://handbrake.fr/docs/en/latest/get-handbrake/download-and-install.html).
 
-Once the HandBrakeCLI binary is installed, you might need to specify its path to handbrake-js, see [here](https://github.com/75lb/handbrake-js/tree/master#handbrakecli-path).
+Once the HandBrakeCLI binary is installed, Linux/Docker users might need to specify its path to handbrake-js, see [here](https://github.com/75lb/handbrake-js/tree/master#handbrakecli-path).
 
 ### As a library
 
