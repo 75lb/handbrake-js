@@ -41,7 +41,7 @@
   ],
   "scripts": {
     "test": "npm run dist && npm run test:ci",
-    "test:ci": "75lb-nature test-runner test/*.js",
+    "test:ci": "75lb-nature test-runner test/cli.js test/exec.js test/handbrakecli-path.js test/run.js test/spawn-exception-handling.js test/spawn.js",
     "dist": "75lb-nature cjs-build index.js",
     "postinstall": "node scripts/install.js",
     "ubuntu-setup": "./scripts/install-ubuntu.sh",
