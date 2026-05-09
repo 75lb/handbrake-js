@@ -2,7 +2,7 @@ import hbjs from 'handbrake-js'
 import * as mockCp from './mock/child_process.js'
 import { strict as a } from 'assert'
 import sleep from 'sleep-anywhere'
-import Handbrake from '../lib/Handbrake.js'
+import Handbrake from '../lib/handbrake.js'
 import path from 'path'
 import currentModulePaths from 'current-module-paths'
 const { __dirname } = currentModulePaths(import.meta.url)

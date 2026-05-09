@@ -3,7 +3,6 @@
 [![Gihub repo dependents](https://badgen.net/github/dependents-repo/75lb/handbrake-js)](https://github.com/75lb/handbrake-js/network/dependents?dependent_type=REPOSITORY)
 [![Gihub package dependents](https://badgen.net/github/dependents-pkg/75lb/handbrake-js)](https://github.com/75lb/handbrake-js/network/dependents?dependent_type=PACKAGE)
 [![Node.js CI](https://github.com/75lb/handbrake-js/actions/workflows/node.js.yml/badge.svg)](https://github.com/75lb/handbrake-js/actions/workflows/node.js.yml)
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](https://github.com/feross/standard)
 
 ***Upgraders, please read the [release notes](https://github.com/75lb/handbrake-js/releases).***
 
@@ -31,22 +30,22 @@ Tested on Mac OSX, Ubuntu 14, Windows XP, Windows 7 and Windows 8.1.
 ### System Requirements
 Just [node.js](http://nodejs.org). On Mac and Windows, every else is installed automatically. However on Linux, you must install HandbrakeCLI manually with these commands:
 
-```
+\`\`\`
 sudo add-apt-repository --yes ppa:stebbins/handbrake-releases
 sudo apt-get update -qq
 sudo apt-get install -qq handbrake-cli
-```
+\`\`\`
 
 ### As a library
 Move into your project directory then run:
-```sh
+\`\`\`sh
 $ npm install handbrake-js --save
-```
-*Mac / Linux users may need to run with `sudo`*.
+\`\`\`
+*Mac / Linux users may need to run with \`sudo\`*.
 
 Now you can begin encoding from your app.
 
-```js
+\`\`\`js
 const hbjs = require('handbrake-js')
 
 hbjs.spawn({ input: 'something.avi', output: 'something.m4v' })
@@ -60,43 +59,39 @@ hbjs.spawn({ input: 'something.avi', output: 'something.m4v' })
       progress.eta
     )
   })
-```
+\`\`\`
 ### As a command-line app
 From any directory run the following:
-```sh
+\`\`\`sh
 $ npm install -g handbrake-js
-```
-*Mac / Linux users may need to run with `sudo`*.
+\`\`\`
+*Mac / Linux users may need to run with \`sudo\`*.
 
-Now, you can call `handbrake` as you would HandbrakeCLI, using all the usual [options](https://handbrake.fr/docs/en/latest/cli/cli-guide.html). By default, just statistics are output, passing `--verbose` prints the raw HandbrakeCLI output. This command will transcode an AVI to the more universal H.264 (mp4):
-```
+Now, you can call \`handbrake\` as you would HandbrakeCLI, using all the usual [options](https://handbrake.fr/docs/en/latest/cli/cli-guide.html). By default, just statistics are output, passing \`--verbose\` prints the raw HandbrakeCLI output. This command will transcode an AVI to the more universal H.264 (mp4):
+\`\`\`
 $ handbrake --input 'some episode.avi' --output 'some episode.mp4' --preset Normal
 Task      % done     FPS       Avg FPS   ETA
 Encoding  1.07       131.76    158.12    00h21m11s
-```
+\`\`\`
 
 ## HandbrakeCLI Path
 
 In some situations or environments (e.g. Docker) you may need to specify a custom HandbrakeCLI path. You can either specify the path in an environment variable:
 
-```sh
+\`\`\`sh
 HANDBRAKECLI_PATH="./example/HandbrakeCLI"
-```
+\`\`\`
 
-..or pass `HandbrakeCLIPath` as an option, programmatically. See the API documentation below for instructions. Also, see the [examples folder](https://github.com/75lb/handbrake-js/tree/master/examples) for example code.
+..or pass \`HandbrakeCLIPath\` as an option, programmatically. See the API documentation below for instructions. Also, see the [examples folder](https://github.com/75lb/handbrake-js/tree/master/examples) for example code.
+
+<hr>
 
 # API Reference
-{{#module name="handbrake-js"}}
-{{>body~}}
-{{>member-index~}}
-{{>separator~}}
-{{>members~}}
-{{/module}}
+
+${blocks.map(block => block.content).join('\n\n')}
 
 * * *
 
-&copy; 2013-25 Lloyd Brookes &lt;opensource@75lb.com&gt;.
-
-Tested by [test-runner](https://github.com/test-runner-js/test-runner). Documented by [jsdoc-to-markdown](https://github.com/jsdoc2md/jsdoc-to-markdown).
+&copy; 2013-26 Lloyd Brookes &lt;opensource@75lb.com&gt;.
 
 Handbrake ([Authors](https://github.com/HandBrake/HandBrake/blob/master/AUTHORS.markdown)) is licensed by [GNU General Public License Version 2](https://github.com/HandBrake/HandBrake/blob/master/LICENSE).
