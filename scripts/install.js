@@ -8,7 +8,7 @@ import path from 'path'
 import currentModulePaths from 'current-module-paths'
 const { __dirname } = currentModulePaths(import.meta.url)
 
-const version = '1.6.1'
+const version = '1.11.1'
 const downloadPath = 'https://github.com/HandBrake/HandBrake/releases/download/%s/HandBrakeCLI-%s%s'
 
 function downloadFile (from, to, done) {
@@ -111,12 +111,14 @@ if (process.platform === 'darwin') {
   console.log(`Linux users
 ============
 handbrake-cli must be installed separately as the root user.
-Ubuntu users can do this using the following commands:
+Ubuntu users can do this using the following command:
 
-add-apt-repository --yes ppa:stebbins/handbrake-releases
-apt-get update -qq
-apt-get install -qq handbrake-cli
+$ sudo apt install handbrake-cli
 
-For all issues regarding installation of HandbrakeCLI on Linux, consult the Handbrake website:
-http://handbrake.fr`)
-}
+Users of other Linux distros can install the GUI and CLI together using flatpak. Instructions here:
+https://handbrake.fr/docs/en/latest/get-handbrake/download-and-install.html
+
+Once the HandBrakeCLI binary is installed, you might need to specify its path to handbrake-js:
+https://github.com/75lb/handbrake-js/tree/master#handbrakecli-path
+`
+)}

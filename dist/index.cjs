@@ -89,28 +89,35 @@ const muxing = {
 };
 
 /*☭
-## Handbrake
+## hbjs~Handbrake
 
 A handle on the HandbrakeCLI process. Emits events you can monitor to track progress. An instance of this class is returned by `hbjs.spawn()`.
 
-- **Type:** Class
+- **Type:** Internal Class
 - **Extends:** EventEmitter
 - **Emits:** start, begin, progress, output, error, end, complete, cancelled
 */
 class Handbrake extends events.EventEmitter {
   constructor (options = {}, mocks) {
     super();
-    /**
-     * A `string` containing all handbrakeCLI output
-     * @type {string}
-     */
+    /*☭
+    ### handbrake.output : `string`
+
+    A `string` containing all handbrakeCLI output
+
+    - **Type:** `string`
+    */
     this.output = '';
     /* `true` while encoding  */
     this._inProgress = false;
-    /**
-     * a copy of the options passed to {@link module:handbrake-js.spawn}
-     * @type {object}
-     */
+
+    /*☭
+    ### handbrake.options : `object`
+
+    A copy of the options passed to `hbjs.spawn()`.
+
+    - **Type:** `object`
+    */
     this.options = options;
 
     /* path to the HandbrakeCLI executable downloaded by the install script */
@@ -120,8 +127,12 @@ class Handbrake extends events.EventEmitter {
     this.cp = (mocks && mocks.cp) || childProcess;
   }
 
-  /**
-  * Cancel the encode, kill the underlying HandbrakeCLI process then emit a `cancelled` event.
+  /*☭
+  ### handbrake.cancel() : `void`
+
+  Cancel the encode, kill the underlying HandbrakeCLI process then emit a `cancelled` event.
+
+  - **Type:** Method
   */
   cancel () {
     if (this.handle) {
@@ -248,44 +259,93 @@ class Handbrake extends events.EventEmitter {
     this.handle = handle;
   }
 
-  /**
-  * Fired as HandbrakeCLI is launched. Nothing has happened yet.
-  * @event module:handbrake-js~Handbrake#start
+  /*☭
+  ### "start"
+
+  Fired as HandbrakeCLI is launched. Nothing has happened yet.
+
+  - **Type:** Event
   */
   _emitStart () {
     this.emit('start');
   }
 
-  /**
-  * Fired when encoding begins. If you're expecting an encode and this never fired, something went wrong.
-  * @event module:handbrake-js~Handbrake#begin
+  /*☭
+  ### "begin"
+
+  Fired when encoding begins. If you're expecting an encode and this never fired, something went wrong.
+
+  - **Type:** Event
   */
   _emitBegin () {
     this._inProgress = true;
     this.emit('begin');
   }
 
-  /**
-  * Fired at regular intervals passing a `progress` object.
-  *
-  * @event module:handbrake-js~Handbrake#progress
-  * @param progress {object} - details of encode progress
-  * @param progress.taskNumber {number} - current task index
-  * @param progress.taskCount {number} - total tasks in the queue
-  * @param progress.percentComplete {number} - percent complete
-  * @param progress.fps {number} - Frames per second
-  * @param progress.avgFps {number} - Average frames per second
-  * @param progress.eta {string} - Estimated time until completion
-  * @param progress.task {string} - Task description, either "Encoding" or "Muxing"
+  /*☭
+  ### "progress" (progress)
+
+  Fired at regular intervals passing a `progress` object.
+
+  - **Type:** Event
+
+  ¬
+    Property
+    Type
+    Description
+  ¬
+    progress
+    `object`
+    details of encode progress
+  ¬
+    progress.taskNumber
+    `number`
+    current task index
+  ¬
+    progress.taskCount
+    `number`
+    total tasks in the queue
+  ¬
+    progress.percentComplete
+    `number`
+    percent complete
+  ¬
+    progress.fps
+    `number`
+    Frames per second
+  ¬
+    progress.avgFps
+    `number`
+    Average frames per second
+  ¬
+    progress.eta
+    `string`
+    Estimated time until completion
+  ¬
+    progress.task
+    `string`
+    Task description, either "Encoding" or "Muxing"
+  ¬
   */
   _emitProgress (progress) {
     if (!this._inProgress) this._emitBegin();
     this.emit('progress', progress);
   }
 
-  /**
-  * @event module:handbrake-js~Handbrake#output
-  * @param output {string} - An aggregate of `stdout` and `stderr` output from the underlying HandbrakeCLI process.
+  /*☭
+  ### "output" (output)
+
+  - **Type:** Event
+
+  ¬
+    Property
+    Type
+    Description
+  ¬
+    output
+    `string`
+    An aggregate of `stdout` and `stderr` output from the underlying HandbrakeCLI process.
+  ¬
   */
   _emitOutput (output) {
     this.output += output;
@@ -299,12 +359,32 @@ class Handbrake extends events.EventEmitter {
     }
   }
 
-  /**
-  * @event module:handbrake-js~Handbrake#error
-  * @param error {Error} - All operational exceptions are delivered via this event.
-  * @param error.name {module:handbrake-js~Handbrake#eError} - The unique error identifier
-  * @param error.message {string} - Error description
-  * @param error.errno {string} - The HandbrakeCLI return code
+  /*☭
+  ### "error" (error)
+
+  - **Type:** Event
+
+  ¬
+    Property
+    Type
+    Description
+  ¬
+    error
+    `Error
+    All operational exceptions are delivered via this event.
+  ¬
+    error.name
+    `eError`
+    The unique error identifier
+  ¬
+    error.message
+    `string`
+    Error description
+  ¬
+    error.errno
+    `string`
+    The HandbrakeCLI return code
+  ¬
   */
   _emitError (err) {
     err.output = this.output;
@@ -337,32 +417,36 @@ class Handbrake extends events.EventEmitter {
   }
 }
 
-/**
- * All operational errors are emitted via the {@link module:handbrake-js~Handbrake#event:error} event.
- * @enum
- * @memberof module:handbrake-js
- * @inner
- */
+/*☭
+### handbrake.eError
+
+All operational errors are emitted via the {@link module:handbrake-js~Handbrake#event:error} event.
+
+¬
+  Enum
+  Description
+¬
+  `VALIDATION`
+  Thrown if you accidentally set identical input and output paths (which would clobber the input file), forget to specifiy an output path and other validation errors.
+¬
+  `INVALID_INPUT`
+   Thrown when the input file specified does not appear to be a video file.
+¬
+  `INVALID_PRESET`
+  Thrown when an invalid preset is specified.
+¬
+  `OTHER`
+  Thrown if Handbrake crashes
+¬
+  `NOT_FOUND`
+  Thrown if the installed HandbrakeCLI binary has gone missing
+¬
+*/
 Handbrake.prototype.eError = {
-  /**
-   * Thrown if you accidentally set identical input and output paths (which would clobber the input file), forget to specifiy an output path and other validation errors.
-   */
   VALIDATION: 'ValidationError',
-  /**
-   * Thrown when the input file specified does not appear to be a video file.
-   */
   INVALID_INPUT: 'InvalidInput',
-  /**
-   * Thrown when an invalid preset is specified.
-   */
   INVALID_PRESET: 'InvalidPreset',
-  /**
-   * Thrown if Handbrake crashes.
-   */
   OTHER: 'Other',
-  /**
-   * Thrown if the installed HandbrakeCLI binary has gone missing.
-   */
   NOT_FOUND: 'HandbrakeCLINotFound'
 };
 
@@ -494,14 +578,14 @@ var cliOptions = [
 ];
 
 /*☭
-# handbrake-js
+## handbrake-js
 
 Handbrake for node.js.
 
 - **Type:** Package
-- **Module type:** Supports both JavaScript and CommonJS Modules
-- **Exports:** Multiple individual functions.
-- **Supported runtimes:** NodeJs version >= 14
+- **Module type:** Package exports both JavaScript and CommonJS Modules
+- **Exported features:** Multiple individual functions.
+- **Supported runtimes:** Node.Js version >= 14
 
 #### Example
 
@@ -509,11 +593,32 @@ Handbrake for node.js.
 import hbjs from 'handbrake-js'
 const result = await hbjs.run({ input: 'input.mov', output: 'output.mp4' })
 ```
+
+#### API Surface
+
+* _exported features_
+  * spawn ([options]) : `Handbrake`
+  * exec (options, [onComplete]) : `void`
+  * run (options) : `Promise<{ stdout: string, stderr: string }>`
+* _exposed inner features_
+  * ~Handbrake
+    * .output : `string`
+    * .options : `object`
+    * .eError : `enum`
+    * .cancel() : `void`
+    * "start"
+    * "begin"
+    * "progress" (`progress`)
+    * "output" (`output`)
+    * "error" (`error`)
+    * "end"
+    * "complete"
+    * "cancelled"
 */
 
 
 /*☭
-## hbjs.spawn (options = {}, [mocks]) : `Handbrake`
+### hbjs.spawn (options = {}, [mocks]) : `Handbrake`
 
 Spawns a HandbrakeCLI process with the supplied [options](https://handbrake.fr/docs/en/latest/cli/cli-guide.html#options), returning an instance of `Handbrake` on which you can listen for progress events.
 
@@ -539,14 +644,14 @@ Spawns a HandbrakeCLI process with the supplied [options](https://handbrake.fr/d
 ```js
 import hbjs from 'handbrake-js'
 const options = {
- input: 'something.avi',
- output: 'something.mp4',
- preset: 'Normal',
- rotate: 1
+  input: 'something.avi',
+  output: 'something.mp4',
+  preset: 'Normal',
+  rotate: 1
 }
 hbjs.spawn(options)
- .on('error', console.error)
- .on('output', console.log)
+  .on('error', console.error)
+  .on('output', console.log)
 ```
 */
 
@@ -569,7 +674,7 @@ function spawn (options = {}, mocks) {
 }
 
 /*☭
-## hbjs.exec (options = {}, done)
+### hbjs.exec (options = {}, onComplete) : void
 
 Runs HandbrakeCLI with the supplied [options](https://handbrake.fr/docs/en/latest/cli/cli-guide.html#options) calling the supplied callback on completion. The exec method is best suited for short duration tasks where you can wait until completion for the output.
 
@@ -598,8 +703,8 @@ Runs HandbrakeCLI with the supplied [options](https://handbrake.fr/docs/en/lates
 ```js
 import hbjs from 'handbrake-js'
 hbjs.exec({ preset-list: true }, function(err, stdout, stderr){
- if (err) throw err
- console.log(stdout)
+  if (err) throw err
+  console.log(stdout)
 })
 ```
 */
@@ -617,7 +722,7 @@ function exec (options = {}, done) {
 }
 
 /*☭
-## hbjs.run (options)
+### hbjs.run (options) : Promise<{ stdout: string, stderr: string }>
 
 Identical to `hbjs.exec` except it returns a promise, rather than invoke a callback. Use this when you don't need the progress events reported by `hbjs.spawn`. Fulfils with an object containing the output in two properties: `stdout` and `stderr`.
 
@@ -644,9 +749,9 @@ Identical to `hbjs.exec` except it returns a promise, rather than invoke a callb
 ```js
 import hbjs from 'handbrake-js'
 async function start () {
- const result = await hbjs.run({ version: true })
- console.log(result.stdout)
- // prints 'HandBrake 1.3.0'
+  const result = await hbjs.run({ version: true })
+  console.log(result.stdout)
+  // prints 'HandBrake 1.3.0'
 }
 start().catch(console.error)
 ```

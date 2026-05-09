@@ -125,7 +125,7 @@ const result = await hbjs.run({ input: 'input.mov', output: 'output.mp4' })
     * "complete"
     * "cancelled"
 
-## hbjs.spawn (options = {}, [mocks]) : `Handbrake`
+### hbjs.spawn (options = {}, [mocks]) : `Handbrake`
 
 Spawns a HandbrakeCLI process with the supplied [options](https://handbrake.fr/docs/en/latest/cli/cli-guide.html#options), returning an instance of `Handbrake` on which you can listen for progress events.
 
@@ -153,7 +153,7 @@ hbjs.spawn(options)
   .on('output', console.log)
 ```
 
-## hbjs.exec (options = {}, onComplete) : void
+### hbjs.exec (options = {}, onComplete) : void
 
 Runs HandbrakeCLI with the supplied [options](https://handbrake.fr/docs/en/latest/cli/cli-guide.html#options) calling the supplied callback on completion. The exec method is best suited for short duration tasks where you can wait until completion for the output.
 
@@ -176,7 +176,7 @@ hbjs.exec({ preset-list: true }, function(err, stdout, stderr){
 })
 ```
 
-## hbjs.run (options) : Promise<{ stdout: string, stderr: string }>
+### hbjs.run (options) : Promise<{ stdout: string, stderr: string }>
 
 Identical to `hbjs.exec` except it returns a promise, rather than invoke a callback. Use this when you don't need the progress events reported by `hbjs.spawn`. Fulfils with an object containing the output in two properties: `stdout` and `stderr`.
 
