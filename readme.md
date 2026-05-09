@@ -8,7 +8,7 @@
 
 # handbrake-js
 
-Handbrake-js is [Handbrake](http://handbrake.fr) ([v1.6.1](https://github.com/HandBrake/HandBrake/releases/tag/1.6.1)) for [node.js](http://nodejs.org). It aspires to provide a lean and stable foundation for building video transcoding software in node.js.
+Handbrake-js is [Handbrake](http://handbrake.fr) ([v1.11.1](https://github.com/HandBrake/HandBrake/releases/tag/1.11.1) for [node.js](http://nodejs.org). It aspires to provide a lean and stable foundation for building video transcoding software in node.js.
 
 HandBrake is a tool for converting video from nearly any format to a selection of modern, widely supported codecs. It can process most common multimedia files and any DVD or BluRay sources that do not contain any copy protection.
 
@@ -22,26 +22,30 @@ Outputs:
 [Read more about the features](https://handbrake.fr/features.php).
 
 ### Compatible Platforms
-Tested on Mac OSX, Ubuntu 14, Windows XP, Windows 7 and Windows 8.1.
 
-**Ubuntu 14.04 notice**: Transcoding to MP4 fails on Ubuntu since 14.04 [for this reason](https://forum.handbrake.fr/viewtopic.php?f=13&t=30044).
+Tested on Mac, Ubuntu and Windows XP.
 
 ## Installation
+
 ### System Requirements
-Just [node.js](http://nodejs.org). On Mac and Windows, every else is installed automatically. However on Linux, you must install HandbrakeCLI manually with these commands:
+
+Just [node.js](http://nodejs.org). On Mac and Windows, every else is installed automatically. However on Ubuntu, you must install HandbrakeCLI manually with this command:
 
 ```
-sudo add-apt-repository --yes ppa:stebbins/handbrake-releases
-sudo apt-get update -qq
-sudo apt-get install -qq handbrake-cli
+$ sudo apt install handbrake-cli
 ```
+
+Users of other Linux distros can install the GUI and CLI together using flatpak. Instructions [here](https://handbrake.fr/docs/en/latest/get-handbrake/download-and-install.html).
+
+Once the HandBrakeCLI binary is installed, you might need to specify its path to handbrake-js, see [here](https://github.com/75lb/handbrake-js/tree/master#handbrakecli-path).
 
 ### As a library
+
 Move into your project directory then run:
+
 ```sh
 $ npm install handbrake-js --save
 ```
-*Mac / Linux users may need to run with `sudo`*.
 
 Now you can begin encoding from your app.
 
@@ -60,14 +64,17 @@ hbjs.spawn({ input: 'something.avi', output: 'something.m4v' })
     )
   })
 ```
+
 ### As a command-line app
+
 From any directory run the following:
+
 ```sh
 $ npm install -g handbrake-js
 ```
-*Mac / Linux users may need to run with `sudo`*.
 
 Now, you can call `handbrake` as you would HandbrakeCLI, using all the usual [options](https://handbrake.fr/docs/en/latest/cli/cli-guide.html). By default, just statistics are output, passing `--verbose` prints the raw HandbrakeCLI output. This command will transcode an AVI to the more universal H.264 (mp4):
+
 ```
 $ handbrake --input 'some episode.avi' --output 'some episode.mp4' --preset Normal
 Task      % done     FPS       Avg FPS   ETA
