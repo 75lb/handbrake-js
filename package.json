@@ -1,7 +1,7 @@
 {
   "name": "handbrake-js",
   "author": "Lloyd Brookes <opensource@75lb.com>",
-  "version": "8.0.1",
+  "version": "8.0.2",
   "description": "Handbrake for node.js. Brings video encoding.",
   "repository": {
     "type": "git",
