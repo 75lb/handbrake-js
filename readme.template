@@ -23,13 +23,13 @@ Outputs:
 
 ### Compatible Platforms
 
-Tested on Mac, Ubuntu and Windows XP.
+Tested on Mac, Ubuntu and Windows.
 
 ## Installation
 
 ### System Requirements
 
-Just [node.js](http://nodejs.org). On Mac and Windows, every else is installed automatically. However on Ubuntu, you must install HandbrakeCLI manually with this command:
+Just [node.js](http://nodejs.org). On Mac and Windows, everything else is installed automatically. However on Ubuntu, you must install HandbrakeCLI manually with this command:
 
 \`\`\`
 $ sudo apt install handbrake-cli
@@ -73,7 +73,7 @@ From any directory run the following:
 $ npm install -g handbrake-js
 \`\`\`
 
-Now, you can call \`handbrake\` as you would HandbrakeCLI, using all the usual [options](https://handbrake.fr/docs/en/latest/cli/cli-guide.html). By default, just statistics are output, passing \`--verbose\` prints the raw HandbrakeCLI output. This command will transcode an AVI to the more universal H.264 (mp4):
+Now, you can call \`handbrake\` as you would HandbrakeCLI, using all the usual [options](https://handbrake.fr/docs/en/latest/cli/cli-guide.html). By default, just statistics are output, passing \`--verbose\` prints the raw HandbrakeCLI output. The following example command transcodes an AVI to the more universally-compatible H.264 (mp4):
 
 \`\`\`
 $ handbrake --input 'some episode.avi' --output 'some episode.mp4' --preset Normal
