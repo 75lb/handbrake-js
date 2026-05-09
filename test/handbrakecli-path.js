@@ -1,12 +1,11 @@
 import hbjs from 'handbrake-js'
 import { strict as a } from 'assert'
-import path from 'path'
 import fs from 'fs'
 
 const test = new Map()
 
 if (process.platform === 'darwin') {
-  test.set('Copy HandbrakeCLI to a different location', async function() {
+  test.set('Copy HandbrakeCLI to a different location', async function () {
     try {
       fs.mkdirSync('./tmp')
     } catch (err) {
@@ -29,6 +28,5 @@ if (process.platform === 'darwin') {
     a.ok(/Encode done!/.test(result.stderr))
   })
 }
-
 
 export { test }

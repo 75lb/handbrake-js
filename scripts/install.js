@@ -121,4 +121,5 @@ https://handbrake.fr/docs/en/latest/get-handbrake/download-and-install.html
 Once the HandBrakeCLI binary is installed, you might need to specify its path to handbrake-js:
 https://github.com/75lb/handbrake-js/tree/master#handbrakecli-path
 `
-)}
+  )
+}
