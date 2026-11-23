@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-dcdoc io-read --inputs index.js \
+dcdoc io-read --inputs index.js lib/handbrake.js \
   parse --blocks ~/Documents/dcdoc-zone/dcdoc/parse/lib/block/js/plain-symbol.js \
   quick-table \
   combine-content \

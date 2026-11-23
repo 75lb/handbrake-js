@@ -210,6 +210,92 @@ async function start () {
 start().catch(console.error)
 ```
 
+## hbjs~Handbrake
+
+A handle on the HandbrakeCLI process. Emits events you can monitor to track progress. An instance of this class is returned by `hbjs.spawn()`.
+
+- **Type:** Internal Class
+- **Extends:** EventEmitter
+- **Emits:** start, begin, progress, output, error, end, complete, cancelled
+
+### handbrake.output : `string`
+
+A `string` containing all handbrakeCLI output
+
+- **Type:** `string`
+
+### handbrake.options : `object`
+
+A copy of the options passed to `hbjs.spawn()`.
+
+- **Type:** `object`
+
+### handbrake.cancel() : `void`
+
+Cancel the encode, kill the underlying HandbrakeCLI process then emit a `cancelled` event.
+
+- **Type:** Method
+
+### "start"
+
+Fired as HandbrakeCLI is launched. Nothing has happened yet.
+
+- **Type:** Event
+
+### "begin"
+
+Fired when encoding begins. If you're expecting an encode and this never fired, something went wrong.
+
+- **Type:** Event
+
+### "progress" (progress)
+
+Fired at regular intervals passing a `progress` object.
+
+- **Type:** Event
+
+| Property | Type | Description |
+| --- | --- | --- |
+| progress | `object` | details of encode progress |
+| progress.taskNumber | `number` | current task index |
+| progress.taskCount | `number` | total tasks in the queue |
+| progress.percentComplete | `number` | percent complete |
+| progress.fps | `number` | Frames per second |
+| progress.avgFps | `number` | Average frames per second |
+| progress.eta | `string` | Estimated time until completion |
+| progress.task | `string` | Task description, either "Encoding" or "Muxing" |
+
+### "output" (output)
+
+- **Type:** Event
+
+| Property | Type | Description |
+| --- | --- | --- |
+| output | `string` | An aggregate of `stdout` and `stderr` output from the underlying HandbrakeCLI process. |
+
+### "error" (error)
+
+- **Type:** Event
+
+| Property | Type | Description |
+| --- | --- | --- |
+| error | `Error | All operational exceptions are delivered via this event. |
+| error.name | `eError` | The unique error identifier |
+| error.message | `string` | Error description |
+| error.errno | `string` | The HandbrakeCLI return code |
+
+### handbrake.eError
+
+All operational errors are emitted via the {@link module:handbrake-js~Handbrake#event:error} event.
+
+| Enum | Description |
+| --- | --- |
+| `VALIDATION` | Thrown if you accidentally set identical input and output paths (which would clobber the input file), forget to specifiy an output path and other validation errors. |
+| `INVALID_INPUT` | Thrown when the input file specified does not appear to be a video file. |
+| `INVALID_PRESET` | Thrown when an invalid preset is specified. |
+| `OTHER` | Thrown if Handbrake crashes |
+| `NOT_FOUND` | Thrown if the installed HandbrakeCLI binary has gone missing |
+
 * * *
 
 &copy; 2013-26 Lloyd Brookes &lt;opensource@75lb.com&gt;.
