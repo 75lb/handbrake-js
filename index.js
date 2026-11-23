@@ -4,37 +4,36 @@
 Handbrake for node.js.
 
 - **Type:** Package
-- **Module type:** Package exports both JavaScript and CommonJS Modules
-- **Exported features:** Multiple individual functions.
-- **Supported runtimes:** Node.Js version >= 14
+- **Module type:** Both JavaScript and CommonJS
+- **Supported runtimes:** Node.Js >= v14, Deno >= v2
 
-#### Example
+**Example**
 
 ```js
 import hbjs from 'handbrake-js'
 const result = await hbjs.run({ input: 'input.mov', output: 'output.mp4' })
 ```
 
-#### API Surface
+**API Surface**
 
-* _exported features_
-  * spawn ([options]) : `Handbrake`
-  * exec (options, [onComplete]) : `void`
-  * run (options) : `Promise<{ stdout: string, stderr: string }>`
+* _Named exports_
+  * spawn ([options]) => `Handbrake`
+  * exec (options, [onComplete]) => `void`
+  * run (options) => `Promise<{ stdout: string, stderr: string }>`
 * _exposed inner features_
-  * ~Handbrake
+  * ~Handbrake : `class`
+    * .cancel() => `void`
     * .output : `string`
     * .options : `object`
     * .eError : `enum`
-    * .cancel() : `void`
-    * "start"
-    * "begin"
-    * "progress" (`progress`)
-    * "output" (`output`)
-    * "error" (`error`)
-    * "end"
-    * "complete"
-    * "cancelled"
+    * "start" : `event`
+    * "begin" : `event`
+    * "progress" (`progress`) : `event`
+    * "output" (`output`) : `event`
+    * "error" (`error`) : `event`
+    * "end" : `event`
+    * "complete" : `event`
+    * "cancelled" : `event`
 */
 
 import Handbrake from './lib/handbrake.js'
@@ -45,7 +44,7 @@ import { HandbrakeCLIPath } from './lib/config.js'
 import cliOptions from './lib/cli-options.js'
 
 /*☭
-### hbjs.spawn (options = {}, [mocks]) : `Handbrake`
+### hbjs.spawn (options = {}, [mocks]) => `Handbrake`
 
 Spawns a HandbrakeCLI process with the supplied [options](https://handbrake.fr/docs/en/latest/cli/cli-guide.html#options), returning an instance of `Handbrake` on which you can listen for progress events.
 
@@ -66,7 +65,7 @@ Spawns a HandbrakeCLI process with the supplied [options](https://handbrake.fr/d
   Override the built-in `HandbrakeCLI` binary path.
 ¬
 
-#### Example
+**Example**
 
 ```js
 import hbjs from 'handbrake-js'
@@ -101,7 +100,7 @@ function spawn (options = {}, mocks) {
 }
 
 /*☭
-### hbjs.exec (options = {}, onComplete) : void
+### hbjs.exec (options = {}, onComplete)
 
 Runs HandbrakeCLI with the supplied [options](https://handbrake.fr/docs/en/latest/cli/cli-guide.html#options) calling the supplied callback on completion. The exec method is best suited for short duration tasks where you can wait until completion for the output.
 
@@ -125,7 +124,7 @@ Runs HandbrakeCLI with the supplied [options](https://handbrake.fr/docs/en/lates
   If passed, `onComplete(err, stdout, stderr)` will be called on completion, `stdout` and `stderr` being strings containing the HandbrakeCLI output.
 ¬
 
-#### Example
+**Example**
 
 ```js
 import hbjs from 'handbrake-js'
@@ -149,13 +148,12 @@ function exec (options = {}, done) {
 }
 
 /*☭
-### hbjs.run (options) : Promise<{ stdout: string, stderr: string }>
+### hbjs.run (options) => `Promise<{ stdout: string, stderr: string }>`
 
 Identical to `hbjs.exec` except it returns a promise, rather than invoke a callback. Use this when you don't need the progress events reported by `hbjs.spawn`. Fulfils with an object containing the output in two properties: `stdout` and `stderr`.
 
 - **Type:** Exported, asynchronous function
-- **Returns:** `Promise`
-- **Fulfils:** `{ stdout, stderr }`
+- **Returns:** `Promise<{ stdout: string, stderr: string }>`
 
 ¬
   Param
@@ -171,7 +169,7 @@ Identical to `hbjs.exec` except it returns a promise, rather than invoke a callb
   Override the built-in `HandbrakeCLI` binary path.
 ¬
 
-#### Example
+**Example**
 
 ```js
 import hbjs from 'handbrake-js'

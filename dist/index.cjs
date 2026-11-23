@@ -583,20 +583,19 @@ var cliOptions = [
 Handbrake for node.js.
 
 - **Type:** Package
-- **Module type:** Package exports both JavaScript and CommonJS Modules
-- **Exported features:** Multiple individual functions.
-- **Supported runtimes:** Node.Js version >= 14
+- **Module type:** Both JavaScript and CommonJS
+- **Supported runtimes:** Node.Js >= v14, Deno >= v2
 
-#### Example
+**Example**
 
 ```js
 import hbjs from 'handbrake-js'
 const result = await hbjs.run({ input: 'input.mov', output: 'output.mp4' })
 ```
 
-#### API Surface
+**API Surface**
 
-* _exported features_
+* _Named exports_
   * spawn ([options]) : `Handbrake`
   * exec (options, [onComplete]) : `void`
   * run (options) : `Promise<{ stdout: string, stderr: string }>`

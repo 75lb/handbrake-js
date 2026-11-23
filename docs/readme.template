@@ -1,8 +1,4 @@
-[![view on npm](https://badgen.net/npm/v/handbrake-js)](https://www.npmjs.org/package/handbrake-js)
-[![npm module downloads](https://badgen.net/npm/dt/handbrake-js)](https://www.npmjs.org/package/handbrake-js)
-[![Gihub repo dependents](https://badgen.net/github/dependents-repo/75lb/handbrake-js)](https://github.com/75lb/handbrake-js/network/dependents?dependent_type=REPOSITORY)
-[![Gihub package dependents](https://badgen.net/github/dependents-pkg/75lb/handbrake-js)](https://github.com/75lb/handbrake-js/network/dependents?dependent_type=PACKAGE)
-[![Node.js CI](https://github.com/75lb/handbrake-js/actions/workflows/node.js.yml/badge.svg)](https://github.com/75lb/handbrake-js/actions/workflows/node.js.yml)
+${this.t.render('ReadMeHeader', { packageName: 'handbrake-js', repo: '75lb/handbrake-js' })}
 
 ***Upgraders, please read the [release notes](https://github.com/75lb/handbrake-js/releases).***
 
@@ -56,7 +52,7 @@ $ npm install handbrake-js --save
 Now you can begin encoding from your app.
 
 \`\`\`js
-const hbjs = require('handbrake-js')
+import hbjs from 'handbrake-js'
 
 hbjs.spawn({ input: 'something.avi', output: 'something.m4v' })
   .on('error', err => {
@@ -101,7 +97,7 @@ HANDBRAKECLI_PATH="./example/HandbrakeCLI"
 
 # API Reference
 
-${blocks.map(block => block.content).join('\n\n')}
+${data.body}
 
 * * *
 
