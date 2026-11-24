@@ -195,7 +195,7 @@ Identical to `hbjs.exec` except it returns a promise, rather than invoke a callb
 
 | Param | Type | Description |
 | --- | --- | --- |
-| options | `objec` | [Options](https://handbrake.fr/docs/en/latest/cli/cli-guide.html#options) to pass directly to HandbrakeCLI |
+| options | `object` | [Options](https://handbrake.fr/docs/en/latest/cli/cli-guide.html#options) to pass directly to HandbrakeCLI |
 | [options.HandbrakeCLIPath] | `string` | Override the built-in `HandbrakeCLI` binary path. |
 
 **Example**

@@ -1,8 +1,7 @@
 #!/usr/bin/bash
 
 dcdoc io-read --inputs index.js lib/handbrake.js \
-  parse --blocks ~/Documents/dcdoc-zone/dcdoc/parse/lib/block/js/plain-symbol.js \
-  quick-table \
+  parse --block-spec ~/Documents/dcdoc-zone/dcdoc/parse/lib/matcher/block/js/plain.js ~/Documents/dcdoc-zone/dcdoc/parse/lib/block/text-data-symbol.js \
   combine-content \
   insert-into-template \
     --template docs/readme.template \

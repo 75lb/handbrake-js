@@ -51,7 +51,7 @@ Spawns a HandbrakeCLI process with the supplied [options](https://handbrake.fr/d
 - **Type:** Exported, synchronous function
 - **Returns:** `Handbrake`
 
-¬
+¬~
   Param
   Type
   Description
@@ -63,7 +63,7 @@ Spawns a HandbrakeCLI process with the supplied [options](https://handbrake.fr/d
   [options.HandbrakeCLIPath]
   `string`
   Override the built-in `HandbrakeCLI` binary path.
-¬
+¬-
 
 **Example**
 
@@ -106,7 +106,7 @@ Runs HandbrakeCLI with the supplied [options](https://handbrake.fr/docs/en/lates
 
 - **Type:** Exported, synchronous function
 
-¬
+¬~
   Param
   Type
   Description
@@ -122,7 +122,7 @@ Runs HandbrakeCLI with the supplied [options](https://handbrake.fr/docs/en/lates
   [onComplete]
   `Function`
   If passed, `onComplete(err, stdout, stderr)` will be called on completion, `stdout` and `stderr` being strings containing the HandbrakeCLI output.
-¬
+¬-
 
 **Example**
 
@@ -155,19 +155,19 @@ Identical to `hbjs.exec` except it returns a promise, rather than invoke a callb
 - **Type:** Exported, asynchronous function
 - **Returns:** `Promise<{ stdout: string, stderr: string }>`
 
-¬
+¬~
   Param
   Type
   Description
 ¬
   options
-  `objec`
+  `object`
   [Options](https://handbrake.fr/docs/en/latest/cli/cli-guide.html#options) to pass directly to HandbrakeCLI
 ¬
   [options.HandbrakeCLIPath]
   `string`
   Override the built-in `HandbrakeCLI` binary path.
-¬
+¬-
 
 **Example**
 
